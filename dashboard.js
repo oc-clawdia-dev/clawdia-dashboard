@@ -5,904 +5,575 @@ let dashboardData = {
     wallet: null,
     tasks: [],
     dailyReports: [],
-    filteredTrades: []
 };
 
 let signalChart = null;
-let selectedTask = null;
+let portfolioChart = null;
 
-// Initialize dashboard
+// Initialize
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('🤖 Clawdia Dashboard V3 starting...');
-    
-    // Initialize tabs
     initializeTabs();
-    
-    // Set default date range (last 30 days)
-    const today = new Date();
-    const thirtyDaysAgo = new Date(today.getTime() - (30 * 24 * 60 * 60 * 1000));
-    
-    document.getElementById('date-from').value = formatDateForInput(thirtyDaysAgo);
-    document.getElementById('date-to').value = formatDateForInput(today);
-    
-    // Load data and update UI
     await loadAllData();
-    
-    // Setup event listeners
     setupEventListeners();
-    
-    console.log('✅ Dashboard V3 initialized');
 });
 
-// Tab System
+// ─── Tab System ───
 function initializeTabs() {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-    
-    // Handle tab clicks
-    tabBtns.forEach(btn => {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
-    
-    // Handle URL hash changes
-    window.addEventListener('hashchange', handleHashChange);
-    
-    // Initialize from URL hash or default to overview
-    const hash = window.location.hash.substring(1);
-    switchTab(hash || 'overview');
+    window.addEventListener('hashchange', () => {
+        const h = window.location.hash.substring(1);
+        if (h) switchTab(h);
+    });
+    switchTab(window.location.hash.substring(1) || 'overview');
 }
 
 function switchTab(tabName) {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-    
-    // Update active tab button
-    tabBtns.forEach(btn => {
-        if (btn.dataset.tab === tabName) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabName);
     });
-    
-    // Update active tab panel
-    tabPanels.forEach(panel => {
-        if (panel.id === `tab-${tabName}`) {
-            panel.classList.add('active');
-        } else {
-            panel.classList.remove('active');
-        }
+    document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === `tab-${tabName}`);
     });
-    
-    // Update URL hash
     window.history.replaceState(null, null, `#${tabName}`);
-    
-    // Tab-specific initialization
-    if (tabName === 'signals' && signalChart) {
-        signalChart.resize();
-    }
+    if (tabName === 'signals' && signalChart) signalChart.resize();
 }
 
-function handleHashChange() {
-    const hash = window.location.hash.substring(1);
-    if (hash) switchTab(hash);
-}
-
-// Data loading functions
+// ─── Data Loading ───
 async function loadAllData() {
     updateStatusIndicator('loading', 'データ読み込み中...');
-    
-    let loadErrors = 0;
-    
-    // Load all data sources (each independently)
-    await Promise.all([
-        loadWalletData().catch(e => { console.warn('Wallet load failed:', e); loadErrors++; }),
-        loadTradesData().catch(e => { console.warn('Trades load failed:', e); loadErrors++; }),
-        loadSignalsData().catch(e => { console.warn('Signals load failed:', e); loadErrors++; }),
-        loadTasksData().catch(e => { console.warn('Tasks load failed:', e); loadErrors++; }),
-        loadDailyReportsData().catch(e => { console.warn('Reports load failed:', e); loadErrors++; })
-    ]);
-    
-    // Update UI sections (each independently)
-    const sections = [
-        () => updatePortfolioSection(),
-        () => updateTasksSection(),
-        () => updateDailyReportsSection(),
-        () => updatePnLSummary(),
-        () => applyFilters(),
-        () => updateSignalStatus(),
-        () => setupSignalChart()
+    let errors = 0;
+
+    const loaders = [
+        ['wallet', './data/wallet.json'],
+        ['trades', './data/trades.json'],
+        ['signals', './data/signals.json'],
+        ['tasks', './data/tasks.json'],
+        ['dailyReports', './data/daily_reports.json'],
     ];
-    
+
+    await Promise.all(loaders.map(async ([key, url]) => {
+        try {
+            const r = await fetch(url);
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            dashboardData[key] = await r.json();
+        } catch (e) {
+            console.warn(`${key} load failed:`, e);
+            errors++;
+            if (key === 'tasks') dashboardData[key] = {members:{}, projects:[], statistics:{}};
+            else if (key === 'wallet') dashboardData[key] = null;
+            else if (key === 'dailyReports') dashboardData[key] = [];
+            else dashboardData[key] = [];
+        }
+    }));
+
+    // Update each section independently
+    const sections = [
+        updateOverviewSection,
+        updateTasksSection,
+        updateTradesSection,
+        updateSignalSection,
+        updateDailyReportsSection,
+    ];
     for (const fn of sections) {
-        try { fn(); } catch (e) { console.warn('Section update failed:', e); loadErrors++; }
+        try { fn(); } catch(e) { console.warn('Section error:', e); errors++; }
     }
-    
-    if (loadErrors === 0) {
-        updateStatusIndicator('online', '接続中');
+
+    updateStatusIndicator('online', errors ? `接続中 (${errors}件の警告)` : '接続中');
+}
+
+// ─── Overview Tab ───
+function updateOverviewSection() {
+    if (!dashboardData.wallet) return;
+    const w = dashboardData.wallet;
+
+    // Total assets
+    document.getElementById('total-balance').textContent = fmtCurrency(w.total_usd);
+
+    // Daily change (from wallet_history if available, else show --)
+    const changeAmt = document.getElementById('change-amount');
+    const changePct = document.getElementById('change-percent');
+    if (w.previous_total_usd && w.previous_total_usd > 0) {
+        const diff = w.total_usd - w.previous_total_usd;
+        const pct = (diff / w.previous_total_usd) * 100;
+        changeAmt.textContent = `${diff >= 0 ? '+' : ''}${fmtCurrency(diff)}`;
+        changePct.textContent = `(${diff >= 0 ? '+' : ''}${pct.toFixed(2)}%)`;
+        changeAmt.className = `change-amount ${diff >= 0 ? 'positive' : 'negative'}`;
+        changePct.className = `change-percent ${diff >= 0 ? 'positive' : 'negative'}`;
     } else {
-        updateStatusIndicator('online', `接続中 (${loadErrors}件の警告)`);
+        changeAmt.textContent = '--';
+        changePct.textContent = '';
     }
+
+    // Last updated
+    if (w.timestamp) {
+        document.getElementById('last-updated').textContent = `最終更新: ${fmtDateTime(w.timestamp)}`;
+    }
+
+    // Portfolio pie chart
+    buildPortfolioPieChart(w);
+
+    // PnL summary
+    updatePnLSummary();
 }
 
-async function loadWalletData() {
-    try {
-        const response = await fetch('./data/wallet.json');
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        dashboardData.wallet = await response.json();
-        console.log('✅ Wallet data loaded:', dashboardData.wallet);
-    } catch (error) {
-        console.error('Failed to load wallet data:', error);
-        dashboardData.wallet = null;
-    }
+function buildPortfolioPieChart(w) {
+    const items = [];
+    if (w.usdc_balance > 0) items.push({label: 'USDC', value: w.usdc_balance, color: '#2775ca'});
+    if (w.wbtc_value_usd > 0) items.push({label: 'WBTC', value: w.wbtc_value_usd, color: '#f7931a'});
+    if (w.bnb_value_usd > 0) items.push({label: 'BNB', value: w.bnb_value_usd, color: '#f0b90b'});
+    if (w.sol_value_usd > 0) items.push({label: 'SOL', value: w.sol_value_usd, color: '#9945ff'});
+    // Other tokens
+    if (w.other_tokens_usd > 0) items.push({label: 'Other', value: w.other_tokens_usd, color: '#666'});
+
+    const total = items.reduce((s, i) => s + i.value, 0) || 1;
+
+    // Breakdown list
+    const breakdown = document.getElementById('portfolio-breakdown');
+    breakdown.innerHTML = items.map(i => {
+        const pct = ((i.value / total) * 100).toFixed(1);
+        return `
+            <div class="breakdown-row">
+                <span class="breakdown-dot" style="background:${i.color}"></span>
+                <span class="breakdown-name">${i.label}</span>
+                <span class="breakdown-value">${fmtCurrency(i.value)}</span>
+                <span class="breakdown-pct">${pct}%</span>
+            </div>`;
+    }).join('');
+
+    // Chart
+    const ctx = document.getElementById('portfolioChart').getContext('2d');
+    if (portfolioChart) portfolioChart.destroy();
+    portfolioChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: items.map(i => i.label),
+            datasets: [{
+                data: items.map(i => i.value),
+                backgroundColor: items.map(i => i.color),
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            cutout: '65%',
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `${ctx.label}: ${fmtCurrency(ctx.raw)} (${((ctx.raw/total)*100).toFixed(1)}%)`
+                    }
+                }
+            }
+        }
+    });
 }
 
-async function loadTradesData() {
-    try {
-        const response = await fetch('./data/trades.json');
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        dashboardData.trades = await response.json();
-        console.log(`✅ ${dashboardData.trades.length} trades loaded`);
-        
-        // Populate token filter dropdown
-        populateTokenFilter();
-        
-    } catch (error) {
-        console.error('Failed to load trades data:', error);
-        dashboardData.trades = [];
-    }
+function updatePnLSummary() {
+    const trades = dashboardData.trades;
+    const total = trades.length;
+    const success = trades.filter(t => t.status === 'Success').length;
+    const rate = total > 0 ? Math.round((success / total) * 100) : 0;
+    const totalFees = trades.reduce((s, t) => s + (parseFloat(t.fee_sol) || 0), 0);
+    const solPrice = dashboardData.wallet?.sol_price_usd || 0;
+
+    document.getElementById('total-trades').textContent = total;
+    document.getElementById('successful-trades').textContent = success;
+    document.getElementById('success-rate').textContent = `${rate}%`;
+    document.getElementById('total-fees').textContent = fmtCurrency(totalFees * solPrice);
 }
 
-async function loadSignalsData() {
-    try {
-        const response = await fetch('./data/signals.json');
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        dashboardData.signals = await response.json();
-        console.log(`✅ ${dashboardData.signals.length} signals loaded`);
-    } catch (error) {
-        console.error('Failed to load signals data:', error);
-        dashboardData.signals = [];
-    }
-}
-
-async function loadTasksData() {
-    try {
-        const response = await fetch('./data/tasks.json');
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        dashboardData.tasks = await response.json();
-        
-        const projectCount = dashboardData.tasks.projects ? dashboardData.tasks.projects.length : 0;
-        const totalTasks = dashboardData.tasks.statistics ? dashboardData.tasks.statistics.total_tasks : 0;
-        console.log(`✅ ${projectCount} projects with ${totalTasks} total tasks loaded`);
-    } catch (error) {
-        console.error('Failed to load tasks data:', error);
-        dashboardData.tasks = {members: {}, projects: [], statistics: {total_tasks: 0, completed_tasks: 0}};
-    }
-}
-
-async function loadDailyReportsData() {
-    try {
-        const response = await fetch('./data/daily_reports.json');
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        dashboardData.dailyReports = await response.json();
-        console.log(`✅ ${dashboardData.dailyReports.length} daily reports loaded`);
-    } catch (error) {
-        console.error('Failed to load daily reports data:', error);
-        dashboardData.dailyReports = [];
-    }
-}
-
-// Portfolio Section Update
-function updatePortfolioSection() {
-    if (!dashboardData.wallet) {
-        console.warn('⚠️ No wallet data available');
-        return;
-    }
-
-    const wallet = dashboardData.wallet;
-    
-    // Update balance values
-    document.getElementById('total-balance').textContent = formatCurrency(wallet.total_usd || wallet.total_balance_usd || 0);
-    document.getElementById('sol-balance').textContent = `${formatNumber(wallet.sol_balance)} SOL`;
-    document.getElementById('usdc-balance').textContent = formatCurrency(wallet.usdc_balance);
-    document.getElementById('wbtc-balance').textContent = `${formatNumber(wallet.wbtc_balance, 6)} WBTC`;
-    document.getElementById('sol-price').textContent = formatCurrency(wallet.sol_price_usd);
-    
-    // Handle BNB balance (hide if 0)
-    const bnbItem = document.getElementById('bnb-item');
-    const bnbBalance = document.getElementById('bnb-balance');
-    if (wallet.bnb_balance > 0) {
-        bnbBalance.textContent = `${formatNumber(wallet.bnb_balance, 4)} BNB`;
-        bnbItem.style.display = 'block';
-    } else {
-        bnbItem.style.display = 'none';
-    }
-    
-    // Update last updated timestamp
-    const ts = wallet.timestamp || wallet.last_updated;
-    if (ts) {
-        document.getElementById('last-updated').textContent = 
-            `最終更新: ${formatDateTime(ts)}`;
-    }
-}
-
-// Signal Status Update (fixing BTC price source)
-function updateSignalStatus() {
-    if (!dashboardData.wallet || dashboardData.signals.length === 0) {
-        document.getElementById('signal-status').innerHTML = '<div class="loading">データ不足</div>';
-        return;
-    }
-    
-    // Get latest signal
-    const latestSignal = dashboardData.signals[dashboardData.signals.length - 1];
-    
-    // Use wallet.json for BTC price (more reliable than signals.json)
-    const btcPrice = dashboardData.wallet.btc_price_usd || 0;
-    const position = dashboardData.wallet.wbtc_balance > 0 ? 'IN' : 'OUT';
-    
-    const html = `
-        <div class="signal-grid">
-            <div class="signal-item">
-                <div class="value">${formatCurrency(btcPrice)}</div>
-                <div class="label">BTC価格 (USD)</div>
-            </div>
-            <div class="signal-item">
-                <div class="value ${position === 'IN' ? 'positive' : 'negative'}">${position}</div>
-                <div class="label">ポジション</div>
-            </div>
-            <div class="signal-item">
-                <div class="value">${latestSignal.ema_200 ? '✅' : '❌'}</div>
-                <div class="label">EMA200</div>
-            </div>
-            <div class="signal-item">
-                <div class="value">${latestSignal.cci_signal || '-'}</div>
-                <div class="label">CCI</div>
-            </div>
-            <div class="signal-item">
-                <div class="value">${latestSignal.trend || 'NEUTRAL'}</div>
-                <div class="label">トレンド</div>
-            </div>
-            <div class="signal-item">
-                <div class="value">${formatDateTime(latestSignal.timestamp)}</div>
-                <div class="label">最終更新</div>
-            </div>
-        </div>
-    `;
-    
-    document.getElementById('signal-status').innerHTML = html;
-}
-
-// Tasks Section Update with Enhanced Features
+// ─── Tasks Tab ───
 function updateTasksSection() {
-    if (!dashboardData.tasks.projects || dashboardData.tasks.projects.length === 0) {
-        document.getElementById('tasks-container').innerHTML = '<div class="loading">タスクデータがありません</div>';
+    if (!dashboardData.tasks.projects) {
+        document.getElementById('tasks-container').innerHTML = '<div class="loading">タスクデータなし</div>';
         return;
     }
-    
-    // Update task statistics
     updateTaskStatistics();
-    
-    // Render project accordion with tasks
     renderProjectAccordion();
 }
 
 function updateTaskStatistics() {
-    const tasksData = dashboardData.tasks;
+    const allTasks = flattenAllTasks();
     const today = new Date().toISOString().split('T')[0];
-    
-    // Flatten all tasks and subtasks for statistics
-    const allTasks = [];
-    
-    function flattenTasks(tasks, level = 0) {
-        tasks.forEach(task => {
-            allTasks.push({...task, level});
-            if (task.subtasks && task.subtasks.length > 0) {
-                flattenTasks(task.subtasks, level + 1);
-            }
-        });
-    }
-    
-    // Flatten all tasks from all projects
-    tasksData.projects.forEach(project => {
-        flattenTasks(project.tasks);
-    });
-    
-    // Calculate statistics
-    const completedToday = allTasks.filter(task => 
-        task.status === 'completed' && 
-        task.completed_at && 
-        task.completed_at.startsWith(today)
-    ).length;
-    
-    // Estimation accuracy
-    const completedWithEstimates = allTasks.filter(task => 
-        task.status === 'completed' && 
-        task.estimated_hours && 
-        task.actual_hours
-    );
-    
-    let estimationAccuracy = 0;
-    if (completedWithEstimates.length > 0) {
-        const accuracySum = completedWithEstimates.reduce((acc, task) => {
-            const accuracy = Math.min(task.actual_hours / task.estimated_hours, 2); // Cap at 200%
-            return acc + accuracy;
-        }, 0);
-        estimationAccuracy = Math.round((accuracySum / completedWithEstimates.length) * 100);
-    }
-    
-    // Progress by assignee (including hikarimaru)
-    const assignees = ['hikarimaru', 'clawdia', 'talon', 'velvet'];
-    const progressData = {};
-    
-    assignees.forEach(assignee => {
-        const assigneeTasks = allTasks.filter(task => task.assignee === assignee);
-        const completed = assigneeTasks.filter(task => task.status === 'completed').length;
-        progressData[assignee] = assigneeTasks.length > 0 ? 
-            Math.round((completed / assigneeTasks.length) * 100) : 0;
-    });
-    
-    // Count hikarimaru pending tasks (review/approval tasks)
-    const hikarimaruPendingTasks = allTasks.filter(task => 
-        task.assignee === 'hikarimaru' && task.status === 'pending'
-    ).length;
-    
-    // Update DOM
+
+    const hikPending = allTasks.filter(t => t.assignee === 'hikarimaru' && t.status === 'pending').length;
+    const inProgress = allTasks.filter(t => t.status === 'in_progress').length;
+    const completedToday = allTasks.filter(t => t.status === 'completed' && t.completed_at && t.completed_at.startsWith(today)).length;
+
+    document.getElementById('tasks-hikarimaru-pending').textContent = hikPending;
+    document.getElementById('tasks-in-progress').textContent = inProgress;
     document.getElementById('tasks-today-completed').textContent = completedToday;
-    document.getElementById('tasks-estimation-accuracy').textContent = `${estimationAccuracy}%`;
-    document.getElementById('tasks-clawdia-progress').textContent = `${progressData.clawdia}%`;
-    document.getElementById('tasks-talon-progress').textContent = `${progressData.talon}%`;
-    document.getElementById('tasks-velvet-progress').textContent = `${progressData.velvet}%`;
-    
-    // Add hikarimaru pending count as a special indicator
-    const hikarimaruStat = document.querySelector('.stat-item .value#tasks-hikarimaru-pending');
-    if (hikarimaruStat) {
-        hikarimaruStat.textContent = hikarimaruPendingTasks;
+}
+
+function flattenAllTasks() {
+    const result = [];
+    function walk(tasks) {
+        for (const t of tasks) {
+            result.push(t);
+            if (t.subtasks?.length) walk(t.subtasks);
+        }
     }
+    for (const p of dashboardData.tasks.projects || []) walk(p.tasks || []);
+    return result;
 }
 
 function renderProjectAccordion() {
     const container = document.getElementById('tasks-container');
-    
-    if (!dashboardData.tasks.projects || dashboardData.tasks.projects.length === 0) {
-        container.innerHTML = '<div class="no-data">プロジェクトがありません</div>';
-        return;
-    }
-    
+    const statusFilter = document.getElementById('task-status-filter')?.value || '';
+    const assigneeFilter = document.getElementById('task-assignee-filter')?.value || '';
+
     const html = dashboardData.tasks.projects.map(project => {
-        const projectStats = dashboardData.tasks.statistics?.projects?.find(p => p.id === project.id) || 
-            {total_tasks: 0, completed_tasks: 0, progress_percentage: 0};
-        
+        const stats = dashboardData.tasks.statistics?.projects?.find(p => p.id === project.id) || {};
+        const tasks = filterTasks(project.tasks || [], statusFilter, assigneeFilter);
+        if (tasks.length === 0 && (statusFilter || assigneeFilter)) return '';
+
         return `
             <div class="project-accordion">
                 <div class="project-header" onclick="toggleProject('${project.id}')">
                     <div class="project-info">
-                        <div class="project-title">
-                            ${escapeHtml(project.name)}
-                            <span class="project-id">${project.id}</span>
-                        </div>
-                        <div class="project-description">${escapeHtml(project.description || '')}</div>
+                        <div class="project-title">${esc(project.name)} <span class="project-id">${project.id}</span></div>
+                        <div class="project-description">${esc(project.description || '')}</div>
                     </div>
-                    <div class="project-stats">
-                        <div class="project-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: ${projectStats.progress_percentage}%"></div>
-                            </div>
-                            <span class="progress-text">${projectStats.completed_tasks}/${projectStats.total_tasks} (${projectStats.progress_percentage}%)</span>
-                        </div>
-                        <div class="project-status ${project.status}">${project.status}</div>
+                    <div class="project-stats-mini">
+                        <span class="progress-text">${stats.completed_tasks||0}/${stats.total_tasks||0}</span>
                     </div>
                     <div class="toggle-icon" id="toggle-${project.id}">▼</div>
                 </div>
-                <div class="project-tasks" id="project-${project.id}" style="display: none;">
-                    ${renderTaskTree(project.tasks, 0)}
+                <div class="project-tasks" id="project-${project.id}" style="display:none;">
+                    ${renderTaskList(tasks, 0)}
                 </div>
-            </div>
-        `;
+            </div>`;
     }).join('');
-    
-    container.innerHTML = html;
+
+    container.innerHTML = html || '<div class="loading">フィルター条件に一致するタスクがありません</div>';
 }
 
-function renderTaskTree(tasks, level) {
-    if (!tasks || tasks.length === 0) {
-        return '<div class="no-tasks">タスクがありません</div>';
-    }
-    
-    // Apply filters
-    const filteredTasks = getFilteredTasksHierarchy(tasks);
-    
-    return filteredTasks.map(task => {
-        const isHikarimaruPending = task.assignee === 'hikarimaru' && task.status === 'pending';
-        const hasSubtasks = task.subtasks && task.subtasks.length > 0;
-        const memberEmoji = dashboardData.tasks.members[task.assignee]?.emoji || '❓';
-        
+function filterTasks(tasks, statusFilter, assigneeFilter) {
+    return tasks.map(t => {
+        const subs = t.subtasks?.length ? filterTasks(t.subtasks, statusFilter, assigneeFilter) : [];
+        const match = (!statusFilter || t.status === statusFilter) && (!assigneeFilter || t.assignee === assigneeFilter);
+        if (match || subs.length > 0) return {...t, subtasks: subs};
+        return null;
+    }).filter(Boolean);
+}
+
+function renderTaskList(tasks, level) {
+    return tasks.map(t => {
+        const isHik = t.assignee === 'hikarimaru' && t.status === 'pending';
+        const emoji = dashboardData.tasks.members?.[t.assignee]?.emoji || '❓';
+        const hasSubs = t.subtasks?.length > 0;
+
         return `
-            <div class="task-tree-item ${isHikarimaruPending ? 'hikarimaru-pending' : ''}" style="margin-left: ${level * 20}px">
-                <div class="task-item ${selectedTask && selectedTask.id === task.id ? 'selected' : ''}" 
-                     onclick="selectTask('${task.id}')">
-                    <div class="task-header">
-                        <div class="task-info">
-                            <div class="task-title">
-                                ${hasSubtasks ? `<span class="subtask-toggle" onclick="toggleSubtasks(event, '${task.id}')">▶</span>` : ''}
-                                ${escapeHtml(task.title)}
-                                ${isHikarimaruPending ? '<span class="urgent-badge">👑 確認待ち</span>' : ''}
-                            </div>
-                            <div class="task-meta">
-                                <span class="task-id">${task.id}</span>
-                                <span class="task-member">${memberEmoji} ${getAssigneeDisplay(task.assignee)}</span>
-                                <span class="task-time">${formatDateTime(task.created_at)}</span>
-                            </div>
+            <div class="task-tree-item ${isHik ? 'hikarimaru-pending' : ''}" style="margin-left:${level*16}px">
+                <div class="task-item" onclick="toggleTaskDetail(this)">
+                    <div class="task-row-main">
+                        <div class="task-left">
+                            ${hasSubs ? `<span class="subtask-toggle" onclick="toggleSubtasks(event,'${t.id}')">▶</span>` : '<span class="subtask-spacer"></span>'}
+                            <span class="badge status-${t.status}">${statusLabel(t.status)}</span>
+                            <span class="task-title-text">${esc(t.title)}</span>
+                            ${isHik ? '<span class="urgent-badge">👑 要対応</span>' : ''}
                         </div>
-                        <div class="task-badges">
-                            <span class="badge status-${task.status}">${getStatusDisplay(task.status)}</span>
-                            ${task.priority ? `<span class="badge priority-${task.priority}">${getPriorityDisplay(task.priority)}</span>` : ''}
-                            ${task.depends_on && task.depends_on.length > 0 ? '<span class="badge depends">依存</span>' : ''}
+                        <div class="task-right">
+                            <span class="task-id-label">${t.id}</span>
+                            <span class="task-member-label">${emoji}</span>
                         </div>
                     </div>
-                    <div class="task-description">${escapeHtml(task.description || '')}</div>
-                    ${task.estimated_hours ? `
-                        <div class="task-estimate">
-                            見積: ${task.estimated_hours}h
-                            ${task.actual_hours ? ` / 実績: ${task.actual_hours}h` : ''}
-                        </div>
-                    ` : ''}
+                    <div class="task-detail-inline" style="display:none">
+                        <div class="task-detail-id"><strong>タスクID:</strong> ${t.id}</div>
+                        ${t.description ? `<div class="task-detail-desc">${esc(t.description)}</div>` : ''}
+                        ${t.assignee === 'hikarimaru' && t.status === 'pending' ? renderHikarimaruInstructions(t) : ''}
+                        ${t.estimated_hours ? `<div class="task-detail-meta">⏱ 見積: ${t.estimated_hours}h${t.actual_hours ? ` / 実績: ${t.actual_hours}h` : ''}</div>` : ''}
+                        ${t.depends_on?.length ? `<div class="task-detail-meta">🔗 依存: ${t.depends_on.join(', ')}</div>` : ''}
+                        ${t.notes?.length ? `<div class="task-detail-notes">${t.notes.map(n => `<div class="note-line"><span class="note-ts">${fmtTime(n.timestamp)}</span> ${esc(n.text)}</div>`).join('')}</div>` : ''}
+                    </div>
                 </div>
-                ${hasSubtasks ? `
-                    <div class="subtasks" id="subtasks-${task.id}" style="display: none;">
-                        ${renderTaskTree(task.subtasks, level + 1)}
-                    </div>
-                ` : ''}
-            </div>
-        `;
+                ${hasSubs ? `<div class="subtasks-container" id="subtasks-${t.id}" style="display:none">${renderTaskList(t.subtasks, level+1)}</div>` : ''}
+            </div>`;
     }).join('');
 }
 
-function getFilteredTasksHierarchy(tasks) {
-    if (!tasks) return [];
-    
-    function filterTaskRecursive(task) {
-        // Apply filters
-        const statusFilter = document.getElementById('task-status-filter')?.value;
-        const assigneeFilter = document.getElementById('task-assignee-filter')?.value;
-        const priorityFilter = document.getElementById('task-priority-filter')?.value;
-        
-        let matches = true;
-        
-        if (statusFilter && task.status !== statusFilter) {
-            matches = false;
-        }
-        
-        if (assigneeFilter && task.assignee !== assigneeFilter) {
-            matches = false;
-        }
-        
-        if (priorityFilter && task.priority !== priorityFilter) {
-            matches = false;
-        }
-        
-        // Filter subtasks recursively
-        let filteredSubtasks = [];
-        if (task.subtasks && task.subtasks.length > 0) {
-            filteredSubtasks = task.subtasks
-                .map(filterTaskRecursive)
-                .filter(Boolean);
-        }
-        
-        // Show task if it matches OR if any subtask matches
-        if (matches || filteredSubtasks.length > 0) {
-            return {
-                ...task,
-                subtasks: filteredSubtasks
-            };
-        }
-        
-        return null;
-    }
-    
-    const filtered = tasks
-        .map(filterTaskRecursive)
-        .filter(Boolean);
-    
-    // Sort by created_at desc
-    filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-    
-    return filtered;
-}
+function renderHikarimaruInstructions(task) {
+    // Generate specific instructions for hikarimaru's tasks
+    let instruction = '';
 
-// Project and subtask toggle functions
-function toggleProject(projectId) {
-    const tasksContainer = document.getElementById(`project-${projectId}`);
-    const toggleIcon = document.getElementById(`toggle-${projectId}`);
-    
-    if (tasksContainer.style.display === 'none' || !tasksContainer.style.display) {
-        tasksContainer.style.display = 'block';
-        toggleIcon.textContent = '▲';
+    if (task.id.includes('S01') && task.title.includes('リスク')) {
+        instruction = `<div class="hik-instruction">
+            📌 <strong>やること:</strong> 上の説明を読んで、リスクが許容できるか判断してください。<br>
+            💬 <strong>返答例:</strong> Discordで <code>${task.id} OK、段階的変更で進めて</code> と送信</div>`;
+    } else if (task.title.includes('レビュー') || task.title.includes('確認')) {
+        instruction = `<div class="hik-instruction">
+            📌 <strong>やること:</strong> Clawdiaが共有する結果を確認して承認/却下を判断<br>
+            💬 <strong>返答例:</strong> <code>${task.id} 承認</code> or <code>${task.id} 却下、理由は〜</code></div>`;
+    } else if (task.title.includes('判断') || task.title.includes('決定')) {
+        instruction = `<div class="hik-instruction">
+            📌 <strong>やること:</strong> 説明を読んで方針を決定<br>
+            💬 <strong>返答例:</strong> <code>${task.id} [選んだ方針]で進めて</code></div>`;
+    } else if (task.title.includes('アカウント') || task.title.includes('作成')) {
+        instruction = `<div class="hik-instruction">
+            📌 <strong>やること:</strong> 手動でアカウント作成/設定を実施<br>
+            💬 <strong>返答例:</strong> <code>${task.id} 完了</code></div>`;
     } else {
-        tasksContainer.style.display = 'none';
-        toggleIcon.textContent = '▼';
+        instruction = `<div class="hik-instruction">
+            📌 <strong>やること:</strong> ${esc(task.description || '内容を確認して判断')}<br>
+            💬 <strong>返答例:</strong> <code>${task.id} OK</code> or <code>${task.id} [指示内容]</code></div>`;
     }
+    return instruction;
 }
 
-function toggleSubtasks(event, taskId) {
-    event.stopPropagation(); // Prevent task selection
-    
-    const subtasksContainer = document.getElementById(`subtasks-${taskId}`);
+function toggleTaskDetail(el) {
+    const detail = el.querySelector('.task-detail-inline');
+    if (detail) detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
+}
+
+function toggleProject(id) {
+    const el = document.getElementById(`project-${id}`);
+    const icon = document.getElementById(`toggle-${id}`);
+    if (el.style.display === 'none') { el.style.display = 'block'; icon.textContent = '▲'; }
+    else { el.style.display = 'none'; icon.textContent = '▼'; }
+}
+
+function toggleSubtasks(event, id) {
+    event.stopPropagation();
+    const el = document.getElementById(`subtasks-${id}`);
     const toggle = event.target;
-    
-    if (subtasksContainer.style.display === 'none' || !subtasksContainer.style.display) {
-        subtasksContainer.style.display = 'block';
-        toggle.textContent = '▼';
-    } else {
-        subtasksContainer.style.display = 'none';
-        toggle.textContent = '▶';
-    }
-}
-
-function selectTask(taskId) {
-    const task = findTaskById(taskId);
-    if (!task) return;
-    
-    selectedTask = task;
-    
-    // Update project accordion selection
-    renderProjectAccordion();
-    
-    // Show task details
-    showTaskDetails(task);
-}
-
-function findTaskById(taskId) {
-    // Search through all projects and tasks recursively
-    function searchInTasks(tasks) {
-        for (const task of tasks) {
-            if (task.id === taskId) {
-                return task;
-            }
-            if (task.subtasks && task.subtasks.length > 0) {
-                const found = searchInTasks(task.subtasks);
-                if (found) return found;
-            }
-        }
-        return null;
-    }
-    
-    for (const project of dashboardData.tasks.projects || []) {
-        const found = searchInTasks(project.tasks || []);
-        if (found) return found;
-    }
-    
-    return null;
-}
-
-function showTaskDetails(task) {
-    const container = document.getElementById('task-detail-container');
-    
-    // Update header
-    document.getElementById('task-detail-title').textContent = task.title;
-    
-    // Update badges
-    document.getElementById('task-detail-status-badge').textContent = getStatusDisplay(task.status);
-    document.getElementById('task-detail-status-badge').className = `badge status-${task.status}`;
-    
-    document.getElementById('task-detail-priority-badge').textContent = getPriorityDisplay(task.priority);
-    document.getElementById('task-detail-priority-badge').className = `badge priority-${task.priority}`;
-    
-    const memberEmoji = dashboardData.tasks.members[task.assignee]?.emoji || '❓';
-    document.getElementById('task-detail-assignee-badge').textContent = `${memberEmoji} ${getAssigneeDisplay(task.assignee)}`;
-    
-    // Update timeline
-    document.getElementById('task-detail-created').textContent = formatDateTime(task.created_at);
-    document.getElementById('task-detail-started').textContent = 
-        task.started_at ? formatDateTime(task.started_at) : '-';
-    document.getElementById('task-detail-completed').textContent = 
-        task.completed_at ? formatDateTime(task.completed_at) : '-';
-    
-    // Update timeline dots
-    const createdDot = document.querySelector('.timeline-dot.created');
-    const startedDot = document.querySelector('.timeline-dot.started');
-    const completedDot = document.querySelector('.timeline-dot.completed');
-    
-    // Reset classes
-    [createdDot, startedDot, completedDot].forEach(dot => {
-        dot.classList.remove('active', 'completed');
-    });
-    
-    // Update timeline state
-    createdDot.classList.add('completed');
-    if (task.started_at) {
-        startedDot.classList.add('completed');
-    }
-    if (task.completed_at) {
-        completedDot.classList.add('completed');
-    }
-    
-    // Update hours visualization
-    const estimated = task.estimated_hours || 0;
-    const actual = task.actual_hours || 0;
-    
-    document.getElementById('task-detail-estimated').textContent = `${estimated}h`;
-    document.getElementById('task-detail-actual').textContent = `${actual}h`;
-    
-    const hoursBar = document.getElementById('task-detail-hours-bar');
-    if (estimated > 0) {
-        const percentage = Math.min((actual / estimated) * 100, 200); // Cap at 200%
-        hoursBar.style.width = `${percentage}%`;
-        
-        // Color based on efficiency
-        if (percentage <= 100) {
-            hoursBar.style.background = 'linear-gradient(90deg, var(--accent-green), var(--accent-blue))';
-        } else {
-            hoursBar.style.background = 'linear-gradient(90deg, var(--accent-yellow), var(--accent-red))';
-        }
-    } else {
-        hoursBar.style.width = '0%';
-    }
-    
-    // Update description
-    document.getElementById('task-detail-description-text').textContent = task.description || '説明がありません';
-    
-    // Update notes
-    const notesList = document.getElementById('task-detail-notes-list');
-    if (task.notes && task.notes.length > 0) {
-        const notesHtml = task.notes.map(note => `
-            <div class="task-note-item">
-                <div class="task-note-timestamp">${formatTime(note.timestamp)}</div>
-                <div class="task-note-text">${escapeHtml(note.text)}</div>
-            </div>
-        `).join('');
-        notesList.innerHTML = notesHtml;
-    } else {
-        notesList.innerHTML = '<div class="no-data">作業ノートがありません</div>';
-    }
-    
-    // Show container
-    container.classList.remove('hidden');
-    
-    // Scroll into view
-    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function closeTaskDetails() {
-    document.getElementById('task-detail-container').classList.add('hidden');
-    selectedTask = null;
-    renderProjectAccordion();
+    if (el.style.display === 'none') { el.style.display = 'block'; toggle.textContent = '▼'; }
+    else { el.style.display = 'none'; toggle.textContent = '▶'; }
 }
 
 function filterHikarimaruPending() {
-    // Collect all hikarimaru pending tasks/subtasks as flat list
-    const items = [];
-    function findHikarimaruTasks(tasks, projectName) {
-        for (const task of tasks) {
-            if (task.assignee === 'hikarimaru' && task.status === 'pending') {
-                items.push({...task, _project: projectName});
-            }
-            if (task.subtasks) findHikarimaruTasks(task.subtasks, projectName);
-        }
-    }
-    for (const project of dashboardData.tasks.projects || []) {
-        findHikarimaruTasks(project.tasks || [], project.name);
-    }
-    
-    const container = document.getElementById('tasks-container');
-    if (items.length === 0) {
-        container.innerHTML = '<div class="loading">確認待ちタスクはありません 🎉</div>';
-        return;
-    }
-    
-    const html = `
-        <h3 style="color:#ffaa00;margin-bottom:12px">👑 確認待ちタスク (${items.length}件)</h3>
-        ${items.map(t => `
-            <div class="task-card hikarimaru-pending" onclick="selectTask('${t.id}')" style="border-left:3px solid #ffaa00;padding:12px;margin-bottom:8px;background:#1a1500;border-radius:8px;cursor:pointer">
-                <div style="font-weight:bold;margin-bottom:4px">${escapeHtml(t.title)}</div>
-                <div style="font-size:0.85em;color:#999;margin-bottom:4px">📁 ${escapeHtml(t._project)} • ID: ${t.id}</div>
-                <div style="font-size:0.85em;color:#ccc">${escapeHtml(t.description || '')}</div>
-                ${t.estimated_hours ? `<div style="font-size:0.8em;color:#888;margin-top:4px">⏱ 見積: ${t.estimated_hours}h</div>` : ''}
-            </div>
-        `).join('')}
-        <button onclick="resetTaskFilters()" style="margin-top:12px;padding:8px 16px;background:#333;color:#fff;border:none;border-radius:6px;cursor:pointer">🔄 全タスク表示に戻る</button>
-    `;
-    container.innerHTML = html;
-    container.scrollIntoView({ behavior: 'smooth' });
-}
-
-function resetTaskFilters() {
-    const statusFilter = document.getElementById('task-status-filter');
-    const assigneeFilter = document.getElementById('task-assignee-filter');
-    const priorityFilter = document.getElementById('task-priority-filter');
-    if (statusFilter) statusFilter.value = '';
-    if (assigneeFilter) assigneeFilter.value = '';
-    if (priorityFilter) priorityFilter.value = '';
+    document.getElementById('task-assignee-filter').value = 'hikarimaru';
+    document.getElementById('task-status-filter').value = 'pending';
     renderProjectAccordion();
-}
-
-// P&L Summary Update (fixing success count)
-function updatePnLSummary() {
-    if (dashboardData.trades.length === 0) {
-        document.getElementById('total-trades').textContent = '0';
-        document.getElementById('successful-trades').textContent = '0';
-        document.getElementById('success-rate').textContent = '0%';
-        document.getElementById('total-fees').textContent = '0 SOL';
-        return;
-    }
-    
-    const trades = dashboardData.trades;
-    const totalTrades = trades.length;
-    
-    // Fix: Count status === 'Success' (not lowercase)
-    const successfulTrades = trades.filter(trade => trade.status === 'Success').length;
-    const successRate = totalTrades > 0 ? Math.round((successfulTrades / totalTrades) * 100) : 0;
-    
-    // Calculate total fees
-    const totalFees = trades.reduce((sum, trade) => {
-        return sum + (parseFloat(trade.fee_amount) || 0);
-    }, 0);
-    
-    // Update DOM
-    document.getElementById('total-trades').textContent = totalTrades;
-    document.getElementById('successful-trades').textContent = successfulTrades;
-    document.getElementById('success-rate').textContent = `${successRate}%`;
-    document.getElementById('total-fees').textContent = `${formatNumber(totalFees, 4)} SOL`;
-}
-
-// Daily Reports Section Update
-function updateDailyReportsSection() {
-    const container = document.getElementById('daily-reports-container');
-    
-    if (dashboardData.dailyReports.length === 0) {
-        container.innerHTML = '<div class="loading">日報データがありません</div>';
-        return;
-    }
-    
-    const html = dashboardData.dailyReports.slice(0, 10).map(report => `
-        <div class="report-item">
-            <div class="report-header" onclick="toggleReport('${report.date}')">
-                <div class="report-date">${formatDate(report.date)}</div>
-                <div class="report-summary">
-                    ${report.trades_count || 0}件のトレード
-                    ${report.pnl ? ` • P&L: <span class="pnl ${report.pnl >= 0 ? 'positive' : 'negative'}">${report.pnl >= 0 ? '+' : ''}${formatCurrency(report.pnl)}</span>` : ''}
-                </div>
-                <div class="toggle-icon">▼</div>
-            </div>
-            <div class="report-content" id="report-${report.date}">
-                ${simpleMarkdown(report.content || '詳細情報なし')}
-            </div>
-        </div>
-    `).join('');
-    
-    container.innerHTML = html;
-}
-
-// Filter and Export Functions
-function populateTokenFilter() {
-    const tokenSelect = document.getElementById('token-filter');
-    const tokens = [...new Set(dashboardData.trades.flatMap(trade => [trade.input_token, trade.output_token]).filter(Boolean))];
-    
-    // Clear existing options except "All"
-    const allOption = tokenSelect.querySelector('option[value=""]');
-    tokenSelect.innerHTML = '';
-    tokenSelect.appendChild(allOption);
-    
-    // Add token options
-    tokens.sort().forEach(token => {
-        const option = document.createElement('option');
-        option.value = token;
-        option.textContent = token;
-        tokenSelect.appendChild(option);
+    // Open all projects
+    dashboardData.tasks.projects.forEach(p => {
+        const el = document.getElementById(`project-${p.id}`);
+        const icon = document.getElementById(`toggle-${p.id}`);
+        if (el) { el.style.display = 'block'; if (icon) icon.textContent = '▲'; }
     });
 }
 
-function applyFilters() {
-    const fromDate = document.getElementById('date-from').value;
-    const toDate = document.getElementById('date-to').value;
-    const token = document.getElementById('token-filter').value;
-    const status = document.getElementById('status-filter').value;
-    
-    let filtered = [...dashboardData.trades];
-    
-    // Apply date filters
-    if (fromDate) {
-        filtered = filtered.filter(trade => trade.timestamp >= fromDate);
+function resetTaskFilters() {
+    document.getElementById('task-status-filter').value = '';
+    document.getElementById('task-assignee-filter').value = '';
+    renderProjectAccordion();
+}
+
+// ─── Trades Tab ───
+function updateTradesSection() {
+    const trades = dashboardData.trades;
+    const wallet = dashboardData.wallet;
+    if (!wallet) return;
+
+    // Categorize trades
+    // Open positions = tokens we currently hold (from wallet data)
+    const openPositions = [];
+    if (wallet.wbtc_balance > 0) {
+        // Find the buy trade for WBTC
+        const wbtcBuy = trades.filter(t => t.output_token === 'WBTC' && t.status === 'Success').slice(-1)[0];
+        openPositions.push({
+            token: 'WBTC',
+            amount: wallet.wbtc_balance,
+            currentValueUsd: wallet.wbtc_value_usd,
+            entryUsd: wbtcBuy ? wbtcBuy.input_amount : null,
+            entryDate: wbtcBuy?.timestamp,
+            pnlUsd: wbtcBuy ? (wallet.wbtc_value_usd - wbtcBuy.input_amount) : null
+        });
     }
-    if (toDate) {
-        filtered = filtered.filter(trade => trade.timestamp <= toDate + 'T23:59:59');
+    if (wallet.bnb_balance > 0) {
+        const bnbBuy = trades.filter(t => t.output_token === 'BNB' && t.status === 'Success').slice(-1)[0];
+        openPositions.push({
+            token: 'BNB',
+            amount: wallet.bnb_balance,
+            currentValueUsd: wallet.bnb_value_usd,
+            entryUsd: bnbBuy ? bnbBuy.input_amount : null,
+            entryDate: bnbBuy?.timestamp,
+            pnlUsd: bnbBuy ? (wallet.bnb_value_usd - bnbBuy.input_amount) : null
+        });
     }
-    
-    // Apply token filter
-    if (token) {
-        filtered = filtered.filter(trade => trade.input_token === token || trade.output_token === token);
+
+    // Open positions section
+    const openContainer = document.getElementById('open-positions-container');
+    if (openPositions.length === 0) {
+        openContainer.innerHTML = '<div class="no-position">ポジションなし — 全額USDC待機中</div>';
+    } else {
+        openContainer.innerHTML = openPositions.map(p => {
+            const pnlClass = p.pnlUsd != null ? (p.pnlUsd >= 0 ? 'positive' : 'negative') : '';
+            return `
+                <div class="position-card">
+                    <div class="position-header">
+                        <span class="position-token">${p.token}</span>
+                        <span class="position-value">${fmtCurrency(p.currentValueUsd)}</span>
+                    </div>
+                    <div class="position-details">
+                        <span>数量: ${fmtNum(p.amount, 8)}</span>
+                        ${p.entryUsd != null ? `<span>購入: ${fmtCurrency(p.entryUsd)}</span>` : ''}
+                        ${p.pnlUsd != null ? `<span class="${pnlClass}">損益: ${p.pnlUsd >= 0 ? '+' : ''}${fmtCurrency(p.pnlUsd)}</span>` : ''}
+                    </div>
+                    ${p.entryDate ? `<div class="position-date">エントリー: ${fmtDateTime(p.entryDate)}</div>` : ''}
+                </div>`;
+        }).join('');
     }
-    
-    // Apply status filter (fix case sensitivity)
-    if (status) {
-        if (status === 'Success') {
-            filtered = filtered.filter(trade => trade.status === 'Success');
-        } else {
-            filtered = filtered.filter(trade => trade.status !== 'Success');
+
+    // Completed round-trips: buy then sell of same token
+    // For now find sell-backs (e.g. SOL→USDC after USDC→SOL)
+    const completedContainer = document.getElementById('completed-trades-container');
+    const roundTrips = findRoundTrips(trades, wallet);
+    if (roundTrips.length === 0) {
+        completedContainer.innerHTML = '<div class="no-position">完了済みトレードはまだありません</div>';
+    } else {
+        completedContainer.innerHTML = roundTrips.map(rt => {
+            const pnlClass = rt.pnl >= 0 ? 'positive' : 'negative';
+            return `
+                <div class="roundtrip-card">
+                    <div class="rt-header">
+                        <span class="rt-token">${rt.token}</span>
+                        <span class="rt-pnl ${pnlClass}">${rt.pnl >= 0 ? '+' : ''}${fmtCurrency(rt.pnl)}</span>
+                    </div>
+                    <div class="rt-details">
+                        <div>買い: ${fmtCurrency(rt.buyUsd)} (${fmtDateTime(rt.buyDate)})</div>
+                        <div>売り: ${fmtCurrency(rt.sellUsd)} (${fmtDateTime(rt.sellDate)})</div>
+                    </div>
+                </div>`;
+        }).join('');
+    }
+
+    // Full trade table with USD amounts
+    updateTradeTable(trades, wallet);
+}
+
+function findRoundTrips(trades, wallet) {
+    // Match buy→sell pairs for the same token (simple FIFO)
+    const trips = [];
+    const successTrades = trades.filter(t => t.status === 'Success');
+
+    // SOL round-trip: USDC→SOL then SOL→USDC
+    const solBuys = successTrades.filter(t => t.input_token === 'USDC' && t.output_token === 'SOL');
+    const solSells = successTrades.filter(t => t.input_token === 'SOL' && t.output_token === 'USDC');
+
+    // Match pairs
+    const usedSells = new Set();
+    for (const buy of solBuys) {
+        for (let i = 0; i < solSells.length; i++) {
+            if (usedSells.has(i)) continue;
+            if (new Date(solSells[i].timestamp) > new Date(buy.timestamp)) {
+                trips.push({
+                    token: 'SOL',
+                    buyUsd: buy.input_amount,
+                    sellUsd: solSells[i].output_amount,
+                    buyDate: buy.timestamp,
+                    sellDate: solSells[i].timestamp,
+                    pnl: solSells[i].output_amount - buy.input_amount
+                });
+                usedSells.add(i);
+                break;
+            }
         }
     }
-    
-    dashboardData.filteredTrades = filtered;
-    updateTradeTable();
+
+    return trips;
 }
 
-function resetFilters() {
-    document.getElementById('date-from').value = '';
-    document.getElementById('date-to').value = '';
-    document.getElementById('token-filter').value = '';
-    document.getElementById('status-filter').value = '';
-    
-    dashboardData.filteredTrades = [...dashboardData.trades];
-    updateTradeTable();
-}
-
-function exportCSV() {
-    if (dashboardData.filteredTrades.length === 0) {
-        alert('エクスポートするデータがありません');
-        return;
-    }
-    
-    const headers = ['日時', 'トークン', 'ペア', 'タイプ', 'ステータス', '数量', '手数料'];
-    const rows = dashboardData.filteredTrades.map(trade => [
-        trade.timestamp,
-        trade.token_symbol || '',
-        trade.pair || '',
-        trade.type || '',
-        trade.status || '',
-        trade.amount || '',
-        trade.fee_amount || ''
-    ]);
-    
-    const csvContent = [headers, ...rows].map(row => 
-        row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
-    ).join('\n');
-    
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `trades_export_${new Date().toISOString().split('T')[0]}.csv`;
-    link.click();
-}
-
-function updateTradeTable() {
+function updateTradeTable(trades, wallet) {
     const tbody = document.getElementById('trade-table-body');
-    
-    if (dashboardData.filteredTrades.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="no-data">フィルター条件に一致するトレードがありません</td></tr>';
+    if (trades.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="no-data">トレードなし</td></tr>';
         return;
     }
-    
-    const html = dashboardData.filteredTrades.slice(0, 100).map(trade => {
-        const pair = `${trade.input_token || ''} → ${trade.output_token || ''}`;
-        const amount = trade.input_amount || trade.output_amount || 0;
-        const swapType = trade.swap_type || '-';
+
+    const solPrice = wallet?.sol_price_usd || 0;
+    const btcPrice = wallet?.btc_price_usd || 0;
+    const bnbPrice = wallet?.bnb_price_usd || 0;
+
+    tbody.innerHTML = [...trades].reverse().map(t => {
+        const direction = t.input_token === 'USDC' ? '🟢 買い' : '🔴 売り';
+        const pair = `${t.input_token} → ${t.output_token}`;
+        const inputUsd = estimateUsd(t.input_token, t.input_amount, solPrice, btcPrice, bnbPrice);
+        const outputUsd = estimateUsd(t.output_token, t.output_amount, solPrice, btcPrice, bnbPrice);
+        const usdDisplay = t.input_token === 'USDC' ? fmtCurrency(t.input_amount) : fmtCurrency(outputUsd);
+
         return `
-        <tr class="trade-row ${trade.status === 'Success' ? 'success' : 'failed'}">
-            <td class="trade-timestamp">${formatDateTime(trade.timestamp)}</td>
-            <td class="trade-pair">${escapeHtml(pair)}</td>
-            <td class="trade-type"><span class="type-badge">${escapeHtml(swapType)}</span></td>
-            <td class="trade-amount">${formatNumber(amount, 4)}</td>
-            <td class="trade-status">
-                <span class="status-badge ${trade.status === 'Success' ? 'success' : 'failed'}">
-                    ${trade.status === 'Success' ? '成功' : '失敗'}
-                </span>
-            </td>
-        </tr>`;
+            <tr class="trade-row ${t.status === 'Success' ? 'success' : 'failed'}">
+                <td>${fmtDateTime(t.timestamp)}</td>
+                <td>${direction}<br><small>${pair}</small></td>
+                <td>${fmtNum(t.input_amount, 6)} ${t.input_token}<br>→ ${fmtNum(t.output_amount, 6)} ${t.output_token}</td>
+                <td>${usdDisplay}</td>
+                <td><span class="status-badge ${t.status === 'Success' ? 'success' : 'failed'}">${t.status === 'Success' ? '✅' : '❌'}</span></td>
+            </tr>`;
     }).join('');
-    
-    tbody.innerHTML = html;
 }
 
-// Signal Chart Setup
+function estimateUsd(token, amount, solPrice, btcPrice, bnbPrice) {
+    if (token === 'USDC') return amount;
+    if (token === 'SOL') return amount * solPrice;
+    if (token === 'WBTC') return amount * btcPrice;
+    if (token === 'BNB') return amount * bnbPrice;
+    return 0;
+}
+
+// ─── Signals Tab ───
+function updateSignalSection() {
+    const signals = dashboardData.signals;
+    const wallet = dashboardData.wallet;
+
+    // Summary - what human should care about
+    const summaryEl = document.getElementById('signal-summary');
+    if (!signals.length) {
+        summaryEl.innerHTML = '<div class="loading">シグナルデータなし</div>';
+        return;
+    }
+
+    // Group by pair, show latest for each
+    const byPair = {};
+    for (const s of signals) {
+        const pair = s.pair || 'BTCUSDT';
+        byPair[pair] = s;
+    }
+
+    let html = '<div class="signal-cards">';
+    for (const [pair, s] of Object.entries(byPair)) {
+        const cci = s.cci ?? s.cci_value ?? 0;
+        const cciNum = parseFloat(cci);
+        const cciClass = cciNum < -100 ? 'signal-buy' : cciNum > 100 ? 'signal-sell' : 'signal-neutral';
+        const actionText = cciNum < -100 ? '🟢 買いシグナル圏内' : cciNum > 100 ? '🔴 売り圧力' : '⚪ 中立';
+        const price = s.btc_price || s.price || s.close || 0;
+
+        html += `
+            <div class="signal-card ${cciClass}">
+                <div class="signal-pair">${pair}</div>
+                <div class="signal-cci">CCI: <strong>${fmtNum(cciNum, 1)}</strong></div>
+                <div class="signal-action">${actionText}</div>
+                ${price ? `<div class="signal-price">価格: ${fmtCurrency(price)}</div>` : ''}
+                <div class="signal-time">${fmtTime(s.checked_at || s.timestamp)}</div>
+            </div>`;
+    }
+    html += '</div>';
+
+    // Key insight for human
+    const latestBTC = byPair['BTCUSDT'];
+    if (latestBTC) {
+        const cci = parseFloat(latestBTC.cci ?? latestBTC.cci_value ?? 0);
+        let insight = '';
+        if (cci < -100) insight = '⚠️ <strong>CCI買いシグナル発生中！</strong> Botが自動でエントリーを検討しています';
+        else if (cci < -50) insight = '📉 CCIが下降中。-100を下回ると買いシグナルが発生します';
+        else if (cci > 100) insight = '📈 CCIが高値圏。Donchianチャネルによるイグジットを監視中';
+        else insight = '😌 CCIは中立圏。特にアクション不要です';
+        html += `<div class="signal-insight">${insight}</div>`;
+    }
+
+    summaryEl.innerHTML = html;
+
+    // Chart
+    setupSignalChart();
+}
+
 function setupSignalChart() {
     const ctx = document.getElementById('signalChart').getContext('2d');
-    
-    if (signalChart) {
-        signalChart.destroy();
-    }
-    
-    // Prepare chart data
-    const chartData = prepareChartData('1d'); // Default to 1 day
-    
+    if (signalChart) signalChart.destroy();
+
+    const chartData = prepareChartData('1d');
     signalChart = new Chart(ctx, {
         type: 'line',
         data: chartData,
@@ -910,28 +581,20 @@ function setupSignalChart() {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: {
-                    labels: {
-                        color: '#ffffff'
-                    }
-                }
+                legend: { labels: { color: '#fff' } },
+                annotation: undefined
             },
             scales: {
-                x: {
-                    ticks: { color: '#888888', maxTicksLimit: 12 },
-                    grid: { color: '#333333' }
-                },
+                x: { ticks: { color: '#888', maxTicksLimit: 12 }, grid: { color: '#333' } },
                 y: {
-                    type: 'linear',
                     position: 'left',
                     title: { display: true, text: 'CCI', color: '#4488ff' },
                     ticks: { color: '#4488ff' },
-                    grid: { color: '#333333' }
+                    grid: { color: '#333' }
                 },
                 y1: {
-                    type: 'linear',
                     position: 'right',
-                    title: { display: true, text: 'BTC Price', color: '#ffaa00' },
+                    title: { display: true, text: 'Price (USD)', color: '#ffaa00' },
                     ticks: { color: '#ffaa00' },
                     grid: { drawOnChartArea: false }
                 }
@@ -941,248 +604,132 @@ function setupSignalChart() {
 }
 
 function prepareChartData(period) {
-    if (dashboardData.signals.length === 0) {
-        return {
-            labels: [],
-            datasets: [{
-                label: 'BTC価格',
-                data: [],
-                borderColor: '#4488ff',
-                backgroundColor: 'rgba(68, 136, 255, 0.1)',
-                fill: true
-            }]
-        };
-    }
-    
-    // Filter signals based on period
+    const signals = dashboardData.signals.filter(s => (s.pair || 'BTCUSDT') === 'BTCUSDT');
+    if (!signals.length) return { labels: [], datasets: [] };
+
     const now = new Date();
-    let cutoffDate;
-    
-    switch (period) {
-        case '1d':
-            cutoffDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-            break;
-        case '7d':
-            cutoffDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-            break;
-        case '30d':
-            cutoffDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-            break;
-        default:
-            cutoffDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-    }
-    
-    const filteredSignals = dashboardData.signals.filter(signal => 
-        new Date(signal.checked_at || signal.timestamp) >= cutoffDate
-    );
-    
+    const ms = period === '30d' ? 30*86400000 : period === '7d' ? 7*86400000 : 86400000;
+    const cutoff = new Date(now.getTime() - ms);
+    const filtered = signals.filter(s => new Date(s.checked_at || s.timestamp) >= cutoff);
+
     return {
-        labels: filteredSignals.map(signal => formatTime(signal.checked_at || signal.timestamp)),
+        labels: filtered.map(s => fmtTime(s.checked_at || s.timestamp)),
         datasets: [
             {
                 label: 'CCI',
-                data: filteredSignals.map(signal => signal.cci || 0),
+                data: filtered.map(s => s.cci ?? s.cci_value ?? 0),
                 borderColor: '#4488ff',
-                backgroundColor: 'rgba(68, 136, 255, 0.1)',
                 fill: false,
-                yAxisID: 'y'
+                yAxisID: 'y',
+                pointRadius: 1
             },
             {
-                label: 'BTC価格',
-                data: filteredSignals.map(signal => signal.btc_price || signal.price || 0),
+                label: 'BTC Price',
+                data: filtered.map(s => s.btc_price || s.price || s.close || 0),
                 borderColor: '#ffaa00',
-                backgroundColor: 'rgba(255, 170, 0, 0.1)',
                 fill: false,
-                yAxisID: 'y1'
+                yAxisID: 'y1',
+                pointRadius: 1
             }
         ]
     };
 }
 
-// Event Listeners Setup
-function setupEventListeners() {
-    // Filter controls
-    document.getElementById('apply-filter').addEventListener('click', applyFilters);
-    document.getElementById('reset-filter').addEventListener('click', resetFilters);
-    document.getElementById('export-csv').addEventListener('click', exportCSV);
-    
-    // Task filters
-    document.getElementById('task-status-filter').addEventListener('change', renderProjectAccordion);
-    document.getElementById('task-assignee-filter').addEventListener('change', renderProjectAccordion);
-    document.getElementById('task-priority-filter').addEventListener('change', renderProjectAccordion);
-    
-    // Show completed only button
-    document.getElementById('show-completed-only').addEventListener('click', () => {
-        document.getElementById('task-status-filter').value = 'completed';
-        renderProjectAccordion();
-    });
-    
-    // Task detail close button
-    document.getElementById('task-detail-close').addEventListener('click', closeTaskDetails);
-    
-    // Chart controls
-    document.getElementById('chart-1d').addEventListener('click', () => updateChart('1d'));
-    document.getElementById('chart-7d').addEventListener('click', () => updateChart('7d'));
-    document.getElementById('chart-30d').addEventListener('click', () => updateChart('30d'));
-}
+// ─── Daily Reports Tab ───
+function updateDailyReportsSection() {
+    const container = document.getElementById('daily-reports-container');
+    const today = new Date().toISOString().split('T')[0];
 
-function updateChart(period) {
-    // Update active button
-    document.querySelectorAll('.chart-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(`chart-${period}`).classList.add('active');
-    
-    // Update chart data
-    const chartData = prepareChartData(period);
-    signalChart.data = chartData;
-    signalChart.update();
-}
+    // Filter out future dates
+    const reports = dashboardData.dailyReports.filter(r => r.date <= today);
 
-// Utility Functions
-function updateStatusIndicator(status, message) {
-    const indicator = document.getElementById('status-indicator');
-    const dot = indicator.querySelector('.status-dot');
-    const text = document.getElementById('status-text');
-    
-    // Remove existing status classes
-    dot.classList.remove('online', 'loading', 'offline');
-    
-    // Add new status class
-    dot.classList.add(status);
-    text.textContent = message;
-}
-
-function showError(containerId, message) {
-    const container = document.getElementById(containerId);
-    if (container) {
-        container.innerHTML = `<div class="error">${message}</div>`;
+    if (!reports.length) {
+        container.innerHTML = '<div class="loading">日報データなし</div>';
+        return;
     }
+
+    container.innerHTML = reports.slice(0, 10).map(r => `
+        <div class="report-item">
+            <div class="report-header" onclick="toggleReport('${r.date}')">
+                <div class="report-date">${r.date}</div>
+                <div class="toggle-icon">▼</div>
+            </div>
+            <div class="report-content" id="report-${r.date}">
+                ${simpleMarkdown(r.content || '')}
+            </div>
+        </div>
+    `).join('');
 }
 
 function toggleReport(date) {
-    const content = document.getElementById(`report-${date}`);
-    const icon = content.parentElement.querySelector('.toggle-icon');
-    
-    if (content.classList.contains('expanded')) {
-        content.classList.remove('expanded');
+    const el = document.getElementById(`report-${date}`);
+    const icon = el.parentElement.querySelector('.toggle-icon');
+    if (el.classList.contains('expanded')) {
+        el.classList.remove('expanded');
         icon.textContent = '▼';
     } else {
-        content.classList.add('expanded');
+        el.classList.add('expanded');
         icon.textContent = '▲';
     }
 }
 
-// Helper Functions
-function getStatusDisplay(status) {
-    const statusMap = {
-        'pending': '未着手',
-        'in_progress': '進行中', 
-        'completed': '完了',
-        'blocked': 'ブロック'
-    };
-    return statusMap[status] || status;
-}
+// ─── Event Listeners ───
+function setupEventListeners() {
+    document.getElementById('task-status-filter')?.addEventListener('change', renderProjectAccordion);
+    document.getElementById('task-assignee-filter')?.addEventListener('change', renderProjectAccordion);
 
-function getPriorityDisplay(priority) {
-    const priorityMap = {
-        'high': '高',
-        'medium': '中',
-        'low': '低'
-    };
-    return priorityMap[priority] || priority;
-}
-
-function getAssigneeDisplay(assignee) {
-    const assigneeMap = {
-        'hikarimaru': 'Hikarimaru',
-        'clawdia': 'Clawdia',
-        'talon': 'Talon',
-        'velvet': 'Velvet'
-    };
-    return assigneeMap[assignee] || assignee;
-}
-
-function formatDateTime(dateString) {
-    if (!dateString) return '-';
-    
-    try {
-        const date = new Date(dateString);
-        return date.toLocaleString('ja-JP', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
+    ['chart-1d', 'chart-7d', 'chart-30d'].forEach(id => {
+        document.getElementById(id)?.addEventListener('click', () => {
+            document.querySelectorAll('.chart-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            const period = id.replace('chart-', '');
+            if (signalChart) {
+                signalChart.data = prepareChartData(period);
+                signalChart.update();
+            }
         });
-    } catch (e) {
-        return dateString;
-    }
+    });
 }
 
-function formatTime(dateString) {
-    if (!dateString) return '-';
-    
-    try {
-        const date = new Date(dateString);
-        return date.toLocaleString('ja-JP', {
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    } catch (e) {
-        return dateString;
-    }
+// ─── Utilities ───
+function updateStatusIndicator(status, message) {
+    const dot = document.querySelector('.status-dot');
+    dot.className = `status-dot ${status}`;
+    document.getElementById('status-text').textContent = message;
 }
 
-function formatDate(dateString) {
-    if (!dateString) return '-';
-    
-    try {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('ja-JP', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-        });
-    } catch (e) {
-        return dateString;
-    }
+function fmtCurrency(v) {
+    if (v == null || isNaN(v)) return '$0.00';
+    return `$${parseFloat(v).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 }
-
-function formatDateForInput(date) {
-    return date.toISOString().split('T')[0];
+function fmtNum(v, d=2) {
+    if (v == null || isNaN(v)) return '0';
+    return parseFloat(v).toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
 }
-
-function formatCurrency(value, decimals = 2) {
-    if (value === null || value === undefined || isNaN(value)) return '$0.00';
-    
-    const num = parseFloat(value);
-    return `$${num.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}`;
+function fmtDateTime(s) {
+    if (!s) return '-';
+    try { return new Date(s).toLocaleString('ja-JP', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}); }
+    catch(e) { return s; }
 }
-
-function formatNumber(value, decimals = 2) {
-    if (value === null || value === undefined || isNaN(value)) return '0';
-    
-    const num = parseFloat(value);
-    return num.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+function fmtTime(s) {
+    if (!s) return '-';
+    try { return new Date(s).toLocaleString('ja-JP', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}); }
+    catch(e) { return s; }
 }
-
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+function statusLabel(s) {
+    return {pending:'未着手',in_progress:'進行中',completed:'完了',blocked:'ブロック'}[s] || s;
 }
-
 function simpleMarkdown(text) {
     if (!text) return '';
     return text
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-        .replace(/^### (.+)$/gm, '<h4>$1</h4>')
-        .replace(/^## (.+)$/gm, '<h3>$1</h3>')
-        .replace(/^# (.+)$/gm, '<h2>$1</h2>')
-        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/^- (.+)$/gm, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
-        .replace(/\n\n/g, '<br><br>')
-        .replace(/\n/g, '<br>');
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/^### (.+)$/gm,'<h4>$1</h4>')
+        .replace(/^## (.+)$/gm,'<h3>$1</h3>')
+        .replace(/^# (.+)$/gm,'<h2>$1</h2>')
+        .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+        .replace(/^- (.+)$/gm,'<li>$1</li>')
+        .replace(/(<li>.*<\/li>)/gs,'<ul>$1</ul>')
+        .replace(/\n\n/g,'<br><br>')
+        .replace(/\n/g,'<br>');
 }

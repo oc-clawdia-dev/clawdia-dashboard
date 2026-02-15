@@ -346,6 +346,163 @@
               "description": "検証結果を基にhikarimaruが採用可否判断"
             }
           ]
+        },
+        {
+          "id": "P001-T008",
+          "title": "BNB CCI閾値変更判断",
+          "assignee": "clawdia",
+          "status": "pending",
+          "priority": "high",
+          "estimated_hours": 0.5,
+          "actual_hours": null,
+          "created_at": "2026-02-15T13:50:00",
+          "started_at": null,
+          "completed_at": null,
+          "description": "【hikarimaru権限委任】データ分析によりBNB CCI閾値-120が厳しすぎることが判明（エントリー機会0回）。hikarimaruよりClawdiaに判断権限委任。バックテスト必須、適切と判断すれば変更実行可。協力: Velvet（バックテスト管理）。判断材料: バックテスト結果＋Talon分析",
+          "notes": [
+            {
+              "timestamp": "2026-02-15T13:50:00",
+              "text": "Talon分析: 2026-02-15データでBNB CCI平均-9.0、エントリー機会0回"
+            }
+          ],
+          "tags": [
+            "decision",
+            "strategy",
+            "urgent"
+          ],
+          "subtasks": [
+            {
+              "id": "P001-T008-S01",
+              "title": "BNBバックテスト実施",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 1.5,
+              "description": "BNB CCI閾値(-100/-80/-50等)のバックテスト実施。Velvet協力可"
+            },
+            {
+              "id": "P001-T008-S02",
+              "title": "バックテスト結果レビュー",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 0.2,
+              "depends_on": [
+                "P001-T008-S01"
+              ],
+              "description": "バックテスト結果＋Talon分析を総合判断"
+            },
+            {
+              "id": "P001-T008-S03",
+              "title": "変更方針決定",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 0.1,
+              "depends_on": [
+                "P001-T008-S02"
+              ],
+              "description": "採用する閾値を決定（-120維持/-100/-80/-50等）"
+            },
+            {
+              "id": "P001-T008-S04",
+              "title": "実装指示",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 0.3,
+              "depends_on": [
+                "P001-T008-S03"
+              ],
+              "description": "hikarimaru決定事項をlive_trader.pyに反映"
+            }
+          ]
+        },
+        {
+          "id": "P001-T009",
+          "title": "トレード戦略定期レビュー",
+          "assignee": "hikarimaru",
+          "status": "pending",
+          "priority": "medium",
+          "estimated_hours": 1,
+          "actual_hours": null,
+          "created_at": "2026-02-15T13:50:00",
+          "started_at": null,
+          "completed_at": null,
+          "description": "Talon分析レポートを基に月次で戦略全体をレビュー。パラメータ調整、新ペア追加、リスク管理の見直し",
+          "notes": [],
+          "tags": [
+            "decision",
+            "strategy",
+            "monthly"
+          ],
+          "subtasks": [
+            {
+              "id": "P001-T009-S01",
+              "title": "月次パフォーマンス確認",
+              "assignee": "hikarimaru",
+              "status": "pending",
+              "estimated_hours": 0.3,
+              "description": "勝率、PnL、ドローダウンの確認"
+            },
+            {
+              "id": "P001-T009-S02",
+              "title": "戦略改善判断",
+              "assignee": "hikarimaru",
+              "status": "pending",
+              "estimated_hours": 0.5,
+              "description": "Talon提案の採用可否、新機能追加の判断"
+            },
+            {
+              "id": "P001-T009-S03",
+              "title": "次月方針決定",
+              "assignee": "hikarimaru",
+              "status": "pending",
+              "estimated_hours": 0.2,
+              "description": "運用継続・停止・拡大の判断"
+            }
+          ]
+        },
+        {
+          "id": "P001-T010",
+          "title": "MATON_API_KEY環境変数設定",
+          "assignee": "hikarimaru",
+          "status": "pending",
+          "priority": "medium",
+          "estimated_hours": 0.3,
+          "actual_hours": null,
+          "created_at": "2026-02-15T13:55:00",
+          "started_at": null,
+          "completed_at": null,
+          "description": "Google Sheetsログ機能のためにMATON_API_KEY環境変数の設定が必要。現在未設定によりSheetsログが失敗中（BUY_FAILED直接原因ではないが記録品質に影響）。手動作業: ~/.zshrcまたはシステム環境変数にMATON_API_KEYを設定後、Bot再起動",
+          "notes": [
+            {
+              "timestamp": "2026-02-15T13:55:00",
+              "text": "Talon調査: 環境変数未設定、~/.zshrc存在しない"
+            }
+          ],
+          "tags": [
+            "decision",
+            "manual",
+            "infra"
+          ],
+          "subtasks": [
+            {
+              "id": "P001-T010-S01",
+              "title": "API Key取得・設定",
+              "assignee": "hikarimaru",
+              "status": "pending",
+              "estimated_hours": 0.2,
+              "description": "MATON_API_KEYを環境変数に設定"
+            },
+            {
+              "id": "P001-T010-S02",
+              "title": "Bot再起動・動作確認",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 0.1,
+              "depends_on": [
+                "P001-T010-S01"
+              ],
+              "description": "環境変数設定後、live_trader再起動・Sheetsログ確認"
+            }
+          ]
         }
       ]
     },
@@ -597,16 +754,16 @@
     }
   ],
   "statistics": {
-    "total_tasks": 42,
+    "total_tasks": 54,
     "completed_tasks": 6,
-    "overall_progress": 14.3,
+    "overall_progress": 11.1,
     "projects": [
       {
         "id": "P001",
         "name": "CCI自動売買Bot",
-        "total_tasks": 28,
+        "total_tasks": 40,
         "completed_tasks": 3,
-        "progress_percentage": 10.7
+        "progress_percentage": 7.5
       },
       {
         "id": "P002",
