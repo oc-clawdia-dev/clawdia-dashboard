@@ -281,18 +281,35 @@ function updateTasksSection() {
 }
 
 function updateTaskStatistics() {
-    const tasks = dashboardData.tasks;
+    const tasksData = dashboardData.tasks;
     const today = new Date().toISOString().split('T')[0];
     
+    // Flatten all tasks and subtasks for statistics
+    const allTasks = [];
+    
+    function flattenTasks(tasks, level = 0) {
+        tasks.forEach(task => {
+            allTasks.push({...task, level});
+            if (task.subtasks && task.subtasks.length > 0) {
+                flattenTasks(task.subtasks, level + 1);
+            }
+        });
+    }
+    
+    // Flatten all tasks from all projects
+    tasksData.projects.forEach(project => {
+        flattenTasks(project.tasks);
+    });
+    
     // Calculate statistics
-    const completedToday = tasks.filter(task => 
+    const completedToday = allTasks.filter(task => 
         task.status === 'completed' && 
         task.completed_at && 
         task.completed_at.startsWith(today)
     ).length;
     
     // Estimation accuracy
-    const completedWithEstimates = tasks.filter(task => 
+    const completedWithEstimates = allTasks.filter(task => 
         task.status === 'completed' && 
         task.estimated_hours && 
         task.actual_hours
@@ -307,16 +324,21 @@ function updateTaskStatistics() {
         estimationAccuracy = Math.round((accuracySum / completedWithEstimates.length) * 100);
     }
     
-    // Progress by assignee
-    const assignees = ['clawdia', 'talon', 'velvet'];
+    // Progress by assignee (including hikarimaru)
+    const assignees = ['hikarimaru', 'clawdia', 'talon', 'velvet'];
     const progressData = {};
     
     assignees.forEach(assignee => {
-        const assigneeTasks = tasks.filter(task => task.assignee === assignee);
+        const assigneeTasks = allTasks.filter(task => task.assignee === assignee);
         const completed = assigneeTasks.filter(task => task.status === 'completed').length;
         progressData[assignee] = assigneeTasks.length > 0 ? 
             Math.round((completed / assigneeTasks.length) * 100) : 0;
     });
+    
+    // Count hikarimaru pending tasks (review/approval tasks)
+    const hikarimaruPendingTasks = allTasks.filter(task => 
+        task.assignee === 'hikarimaru' && task.status === 'pending'
+    ).length;
     
     // Update DOM
     document.getElementById('tasks-today-completed').textContent = completedToday;
@@ -324,69 +346,156 @@ function updateTaskStatistics() {
     document.getElementById('tasks-clawdia-progress').textContent = `${progressData.clawdia}%`;
     document.getElementById('tasks-talon-progress').textContent = `${progressData.talon}%`;
     document.getElementById('tasks-velvet-progress').textContent = `${progressData.velvet}%`;
+    
+    // Add hikarimaru pending count as a special indicator
+    const hikarimaruStat = document.querySelector('.stat-item .value#tasks-hikarimaru-pending');
+    if (hikarimaruStat) {
+        hikarimaruStat.textContent = hikarimaruPendingTasks;
+    }
 }
 
-function renderTaskList() {
+function renderProjectAccordion() {
     const container = document.getElementById('tasks-container');
     
-    if (dashboardData.tasks.length === 0) {
-        container.innerHTML = '<div class="no-data">タスクがありません</div>';
+    if (!dashboardData.tasks.projects || dashboardData.tasks.projects.length === 0) {
+        container.innerHTML = '<div class="no-data">プロジェクトがありません</div>';
         return;
     }
     
-    // Apply filters
-    const filteredTasks = getFilteredTasks();
-    
-    const html = filteredTasks.map(task => `
-        <div class="task-item ${selectedTask && selectedTask.id === task.id ? 'selected' : ''}" 
-             onclick="selectTask('${task.id}')">
-            <div class="task-header">
-                <div class="task-info">
-                    <div class="task-title">${escapeHtml(task.title)}</div>
-                    <div class="task-meta">
-                        <span class="task-id">${task.id}</span>
-                        <span class="task-time">${formatDateTime(task.created_at)}</span>
+    const html = dashboardData.tasks.projects.map(project => {
+        const projectStats = dashboardData.tasks.statistics?.projects?.find(p => p.id === project.id) || 
+            {total_tasks: 0, completed_tasks: 0, progress_percentage: 0};
+        
+        return `
+            <div class="project-accordion">
+                <div class="project-header" onclick="toggleProject('${project.id}')">
+                    <div class="project-info">
+                        <div class="project-title">
+                            ${escapeHtml(project.name)}
+                            <span class="project-id">${project.id}</span>
+                        </div>
+                        <div class="project-description">${escapeHtml(project.description || '')}</div>
                     </div>
+                    <div class="project-stats">
+                        <div class="project-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${projectStats.progress_percentage}%"></div>
+                            </div>
+                            <span class="progress-text">${projectStats.completed_tasks}/${projectStats.total_tasks} (${projectStats.progress_percentage}%)</span>
+                        </div>
+                        <div class="project-status ${project.status}">${project.status}</div>
+                    </div>
+                    <div class="toggle-icon" id="toggle-${project.id}">▼</div>
                 </div>
-                <div class="task-badges">
-                    <span class="badge status-${task.status}">${getStatusDisplay(task.status)}</span>
-                    <span class="badge priority-${task.priority}">${getPriorityDisplay(task.priority)}</span>
-                    <span class="badge assignee-badge">${getAssigneeDisplay(task.assignee)}</span>
+                <div class="project-tasks" id="project-${project.id}" style="display: none;">
+                    ${renderTaskTree(project.tasks, 0)}
                 </div>
             </div>
-            <div class="task-description">${escapeHtml(task.description || '')}</div>
-            ${task.estimated_hours ? `
-                <div class="task-estimate">
-                    見積: ${task.estimated_hours}h
-                    ${task.actual_hours ? ` / 実績: ${task.actual_hours}h` : ''}
-                </div>
-            ` : ''}
-        </div>
-    `).join('');
+        `;
+    }).join('');
     
     container.innerHTML = html;
 }
 
-function getFilteredTasks() {
-    let filtered = [...dashboardData.tasks];
-    
-    // Apply status filter
-    const statusFilter = document.getElementById('task-status-filter').value;
-    if (statusFilter) {
-        filtered = filtered.filter(task => task.status === statusFilter);
+function renderTaskTree(tasks, level) {
+    if (!tasks || tasks.length === 0) {
+        return '<div class="no-tasks">タスクがありません</div>';
     }
     
-    // Apply assignee filter
-    const assigneeFilter = document.getElementById('task-assignee-filter').value;
-    if (assigneeFilter) {
-        filtered = filtered.filter(task => task.assignee === assigneeFilter);
+    // Apply filters
+    const filteredTasks = getFilteredTasksHierarchy(tasks);
+    
+    return filteredTasks.map(task => {
+        const isHikarimaruPending = task.assignee === 'hikarimaru' && task.status === 'pending';
+        const hasSubtasks = task.subtasks && task.subtasks.length > 0;
+        const memberEmoji = dashboardData.tasks.members[task.assignee]?.emoji || '❓';
+        
+        return `
+            <div class="task-tree-item ${isHikarimaruPending ? 'hikarimaru-pending' : ''}" style="margin-left: ${level * 20}px">
+                <div class="task-item ${selectedTask && selectedTask.id === task.id ? 'selected' : ''}" 
+                     onclick="selectTask('${task.id}')">
+                    <div class="task-header">
+                        <div class="task-info">
+                            <div class="task-title">
+                                ${hasSubtasks ? `<span class="subtask-toggle" onclick="toggleSubtasks(event, '${task.id}')">▶</span>` : ''}
+                                ${escapeHtml(task.title)}
+                                ${isHikarimaruPending ? '<span class="urgent-badge">👑 確認待ち</span>' : ''}
+                            </div>
+                            <div class="task-meta">
+                                <span class="task-id">${task.id}</span>
+                                <span class="task-member">${memberEmoji} ${getAssigneeDisplay(task.assignee)}</span>
+                                <span class="task-time">${formatDateTime(task.created_at)}</span>
+                            </div>
+                        </div>
+                        <div class="task-badges">
+                            <span class="badge status-${task.status}">${getStatusDisplay(task.status)}</span>
+                            ${task.priority ? `<span class="badge priority-${task.priority}">${getPriorityDisplay(task.priority)}</span>` : ''}
+                            ${task.depends_on && task.depends_on.length > 0 ? '<span class="badge depends">依存</span>' : ''}
+                        </div>
+                    </div>
+                    <div class="task-description">${escapeHtml(task.description || '')}</div>
+                    ${task.estimated_hours ? `
+                        <div class="task-estimate">
+                            見積: ${task.estimated_hours}h
+                            ${task.actual_hours ? ` / 実績: ${task.actual_hours}h` : ''}
+                        </div>
+                    ` : ''}
+                </div>
+                ${hasSubtasks ? `
+                    <div class="subtasks" id="subtasks-${task.id}" style="display: none;">
+                        ${renderTaskTree(task.subtasks, level + 1)}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    }).join('');
+}
+
+function getFilteredTasksHierarchy(tasks) {
+    if (!tasks) return [];
+    
+    function filterTaskRecursive(task) {
+        // Apply filters
+        const statusFilter = document.getElementById('task-status-filter')?.value;
+        const assigneeFilter = document.getElementById('task-assignee-filter')?.value;
+        const priorityFilter = document.getElementById('task-priority-filter')?.value;
+        
+        let matches = true;
+        
+        if (statusFilter && task.status !== statusFilter) {
+            matches = false;
+        }
+        
+        if (assigneeFilter && task.assignee !== assigneeFilter) {
+            matches = false;
+        }
+        
+        if (priorityFilter && task.priority !== priorityFilter) {
+            matches = false;
+        }
+        
+        // Filter subtasks recursively
+        let filteredSubtasks = [];
+        if (task.subtasks && task.subtasks.length > 0) {
+            filteredSubtasks = task.subtasks
+                .map(filterTaskRecursive)
+                .filter(Boolean);
+        }
+        
+        // Show task if it matches OR if any subtask matches
+        if (matches || filteredSubtasks.length > 0) {
+            return {
+                ...task,
+                subtasks: filteredSubtasks
+            };
+        }
+        
+        return null;
     }
     
-    // Apply priority filter
-    const priorityFilter = document.getElementById('task-priority-filter').value;
-    if (priorityFilter) {
-        filtered = filtered.filter(task => task.priority === priorityFilter);
-    }
+    const filtered = tasks
+        .map(filterTaskRecursive)
+        .filter(Boolean);
     
     // Sort by created_at desc
     filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -394,17 +503,69 @@ function getFilteredTasks() {
     return filtered;
 }
 
+// Project and subtask toggle functions
+function toggleProject(projectId) {
+    const tasksContainer = document.getElementById(`project-${projectId}`);
+    const toggleIcon = document.getElementById(`toggle-${projectId}`);
+    
+    if (tasksContainer.style.display === 'none' || !tasksContainer.style.display) {
+        tasksContainer.style.display = 'block';
+        toggleIcon.textContent = '▲';
+    } else {
+        tasksContainer.style.display = 'none';
+        toggleIcon.textContent = '▼';
+    }
+}
+
+function toggleSubtasks(event, taskId) {
+    event.stopPropagation(); // Prevent task selection
+    
+    const subtasksContainer = document.getElementById(`subtasks-${taskId}`);
+    const toggle = event.target;
+    
+    if (subtasksContainer.style.display === 'none' || !subtasksContainer.style.display) {
+        subtasksContainer.style.display = 'block';
+        toggle.textContent = '▼';
+    } else {
+        subtasksContainer.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
 function selectTask(taskId) {
-    const task = dashboardData.tasks.find(t => t.id === taskId);
+    const task = findTaskById(taskId);
     if (!task) return;
     
     selectedTask = task;
     
-    // Update task list selection
-    renderTaskList();
+    // Update project accordion selection
+    renderProjectAccordion();
     
     // Show task details
     showTaskDetails(task);
+}
+
+function findTaskById(taskId) {
+    // Search through all projects and tasks recursively
+    function searchInTasks(tasks) {
+        for (const task of tasks) {
+            if (task.id === taskId) {
+                return task;
+            }
+            if (task.subtasks && task.subtasks.length > 0) {
+                const found = searchInTasks(task.subtasks);
+                if (found) return found;
+            }
+        }
+        return null;
+    }
+    
+    for (const project of dashboardData.tasks.projects || []) {
+        const found = searchInTasks(project.tasks || []);
+        if (found) return found;
+    }
+    
+    return null;
 }
 
 function showTaskDetails(task) {
@@ -420,7 +581,8 @@ function showTaskDetails(task) {
     document.getElementById('task-detail-priority-badge').textContent = getPriorityDisplay(task.priority);
     document.getElementById('task-detail-priority-badge').className = `badge priority-${task.priority}`;
     
-    document.getElementById('task-detail-assignee-badge').textContent = getAssigneeDisplay(task.assignee);
+    const memberEmoji = dashboardData.tasks.members[task.assignee]?.emoji || '❓';
+    document.getElementById('task-detail-assignee-badge').textContent = `${memberEmoji} ${getAssigneeDisplay(task.assignee)}`;
     
     // Update timeline
     document.getElementById('task-detail-created').textContent = formatDateTime(task.created_at);
@@ -497,7 +659,7 @@ function showTaskDetails(task) {
 function closeTaskDetails() {
     document.getElementById('task-detail-container').classList.add('hidden');
     selectedTask = null;
-    renderTaskList();
+    renderProjectAccordion();
 }
 
 // P&L Summary Update (fixing success count)
@@ -767,14 +929,14 @@ function setupEventListeners() {
     document.getElementById('export-csv').addEventListener('click', exportCSV);
     
     // Task filters
-    document.getElementById('task-status-filter').addEventListener('change', renderTaskList);
-    document.getElementById('task-assignee-filter').addEventListener('change', renderTaskList);
-    document.getElementById('task-priority-filter').addEventListener('change', renderTaskList);
+    document.getElementById('task-status-filter').addEventListener('change', renderProjectAccordion);
+    document.getElementById('task-assignee-filter').addEventListener('change', renderProjectAccordion);
+    document.getElementById('task-priority-filter').addEventListener('change', renderProjectAccordion);
     
     // Show completed only button
     document.getElementById('show-completed-only').addEventListener('click', () => {
         document.getElementById('task-status-filter').value = 'completed';
-        renderTaskList();
+        renderProjectAccordion();
     });
     
     // Task detail close button
@@ -853,6 +1015,7 @@ function getPriorityDisplay(priority) {
 
 function getAssigneeDisplay(assignee) {
     const assigneeMap = {
+        'hikarimaru': 'Hikarimaru',
         'clawdia': 'Clawdia',
         'talon': 'Talon',
         'velvet': 'Velvet'
