@@ -92,7 +92,9 @@
     "pre_balance_sol": 0,
     "post_balance_sol": 0,
     "reason": "integration_test_buy",
-    "error": ""
+    "error": "",
+    "input_amount": 10.0,
+    "output_amount": 0.11461507500000001
   },
   {
     "timestamp": "2026-02-15T23:38:18.226067+09:00",
@@ -124,7 +126,9 @@
     "pre_balance_sol": 0,
     "post_balance_sol": 0,
     "reason": "integration_test_buy",
-    "error": ""
+    "error": "",
+    "input_amount": 10,
+    "output_amount": 4439.511047
   },
   {
     "timestamp": "2026-02-15T23:43:11.068642+09:00",
@@ -156,7 +160,9 @@
     "pre_balance_sol": 0,
     "post_balance_sol": 0,
     "reason": "integration_test_sell",
-    "error": ""
+    "error": "",
+    "input_amount": 0.11482935699999999,
+    "output_amount": 10.027638999999965
   },
   {
     "timestamp": "2026-02-15T23:44:17.683939+09:00",
@@ -188,6 +194,8 @@
     "pre_balance_sol": 0,
     "post_balance_sol": 0,
     "reason": "integration_test_sell",
-    "error": ""
+    "error": "",
+    "input_amount": 4439.511047,
+    "output_amount": 9.981294999999989
   }
 ]

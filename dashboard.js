@@ -240,7 +240,7 @@ function updatePnLSummary() {
     const total = trades.length;
     const success = trades.filter(t => t.status === 'Success').length;
     const rate = total > 0 ? Math.round((success / total) * 100) : 0;
-    const totalFees = trades.reduce((s, t) => s + (parseFloat(t.fee_sol) || 0), 0);
+    const totalFees = trades.reduce((s, t) => s + (parseFloat(t.fee_sol) || parseFloat(t.fee_lamports || 0) / 1e9 || 0), 0);
     const solPrice = dashboardData.wallet?.sol_price_usd || 0;
 
     document.getElementById('total-trades').textContent = total;
@@ -517,6 +517,10 @@ function findRoundTrips(trades, wallet) {
     const solBuys = successTrades.filter(t => t.input_token === 'USDC' && t.output_token === 'SOL');
     const solSells = successTrades.filter(t => t.input_token === 'SOL' && t.output_token === 'USDC');
 
+    // Helper to get amounts from either old or new field names
+    const getInput = t => t.input_amount || t.actual_input_amount || t.order_input_amount || 0;
+    const getOutput = t => t.output_amount || t.actual_output_amount || t.order_output_amount || 0;
+
     // Match pairs
     const usedSells = new Set();
     for (const buy of solBuys) {
@@ -525,11 +529,11 @@ function findRoundTrips(trades, wallet) {
             if (new Date(solSells[i].timestamp) > new Date(buy.timestamp)) {
                 trips.push({
                     token: 'SOL',
-                    buyUsd: buy.input_amount,
-                    sellUsd: solSells[i].output_amount,
+                    buyUsd: getInput(buy),
+                    sellUsd: getOutput(solSells[i]),
                     buyDate: buy.timestamp,
                     sellDate: solSells[i].timestamp,
-                    pnl: solSells[i].output_amount - buy.input_amount
+                    pnl: getOutput(solSells[i]) - getInput(buy)
                 });
                 usedSells.add(i);
                 break;
@@ -554,10 +558,10 @@ function updateTradeTable(trades, wallet) {
     tbody.innerHTML = [...trades].reverse().map(t => {
         const inputToken = t.input_token || t.token || '?';
         const outputToken = t.output_token || (t.action === 'buy' ? t.token : 'USDC') || '?';
-        const direction = inputToken === 'USDC' || t.action === 'buy' ? '🟢 買い' : '🔴 売り';
+        const direction = inputToken === 'USDC' || t.action === 'buy' || t.direction === 'BUY' ? '🟢 買い' : '🔴 売り';
         const pair = `${inputToken} → ${outputToken}`;
-        const inputAmt = t.input_amount || t.usdc_spent || 0;
-        const outputAmt = t.output_amount || t.token_amount || 0;
+        const inputAmt = t.input_amount || t.actual_input_amount || t.order_input_amount || t.usdc_spent || 0;
+        const outputAmt = t.output_amount || t.actual_output_amount || t.order_output_amount || t.token_amount || 0;
         const inputUsd = estimateUsd(inputToken, inputAmt, solPrice, btcPrice, bnbPrice);
         const outputUsd = estimateUsd(outputToken, outputAmt, solPrice, btcPrice, bnbPrice);
         const usdDisplay = inputToken === 'USDC' ? fmtCurrency(inputAmt) : fmtCurrency(outputUsd);
