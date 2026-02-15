@@ -51,6 +51,7 @@ async function loadAllData() {
         ['signals', './data/signals.json'],
         ['tasks', './data/tasks.json'],
         ['dailyReports', './data/daily_reports.json'],
+        ['strategies', './data/strategies.json'],
     ];
 
     await Promise.all(loaders.map(async ([key, url]) => {
@@ -74,6 +75,7 @@ async function loadAllData() {
         updateTasksSection,
         updateTradesSection,
         updateSignalSection,
+        updateStrategiesSection,
         updateDailyReportsSection,
     ];
     for (const fn of sections) {
@@ -633,6 +635,63 @@ function prepareChartData(period) {
             }
         ]
     };
+}
+
+// ─── Strategies Tab ───
+function updateStrategiesSection() {
+    const container = document.getElementById('strategies-container');
+    if (!container) return;
+    
+    const strategies = dashboardData.strategies || [];
+    if (strategies.length === 0) {
+        container.innerHTML = '<p class="empty-state">戦略データがありません</p>';
+        return;
+    }
+    
+    let html = '<div class="strategies-grid">';
+    
+    for (const s of strategies) {
+        const statusClass = s.enabled ? 'status-active' : 'status-disabled';
+        const statusText = s.enabled ? '🟢 稼働中' : '⏸️ 停止中';
+        const strategyIcon = s.strategy === 'CCI' ? '📊' : s.strategy === 'BOLLINGER' ? '📉' : '🔧';
+        
+        html += `<div class="strategy-card ${statusClass}">`;
+        html += `<div class="strategy-header">`;
+        html += `<h3>${strategyIcon} ${s.pair_id}</h3>`;
+        html += `<span class="strategy-status">${statusText}</span>`;
+        html += `</div>`;
+        html += `<div class="strategy-body">`;
+        html += `<div class="strategy-info"><span class="label">取引銘柄</span><span class="value">${s.trade_symbol}</span></div>`;
+        html += `<div class="strategy-info"><span class="label">戦略タイプ</span><span class="value">${s.strategy}</span></div>`;
+        
+        // Strategy-specific params
+        const p = s.params || {};
+        if (s.strategy === 'CCI') {
+            html += `<div class="strategy-params">`;
+            html += `<div class="param"><span>CCI期間</span><span>${p.cci_period}</span></div>`;
+            html += `<div class="param"><span>CCI閾値</span><span>${p.cci_threshold}</span></div>`;
+            html += `<div class="param"><span>SL</span><span>${p.sl_pct}%</span></div>`;
+            html += `<div class="param"><span>Donchian</span><span>${p.donchian_period}</span></div>`;
+            if (p.ema_trend_period > 0) {
+                html += `<div class="param"><span>トレンドフィルター</span><span>EMA${p.ema_trend_period}</span></div>`;
+            } else {
+                html += `<div class="param"><span>トレンドフィルター</span><span>なし</span></div>`;
+            }
+            html += `</div>`;
+        } else if (s.strategy === 'BOLLINGER') {
+            html += `<div class="strategy-params">`;
+            html += `<div class="param"><span>BB期間/σ</span><span>${p.bb_period} / ${p.bb_std}</span></div>`;
+            html += `<div class="param"><span>EMA</span><span>${p.ema_fast}/${p.ema_slow}</span></div>`;
+            html += `<div class="param"><span>RSI Exit</span><span>${p.rsi_period} > ${p.rsi_exit}</span></div>`;
+            html += `<div class="param"><span>SL</span><span>${p.sl_pct}%</span></div>`;
+            html += `</div>`;
+        }
+        
+        html += `</div></div>`;
+    }
+    
+    html += '</div>';
+    container.innerHTML = html;
 }
 
 // ─── Daily Reports Tab ───

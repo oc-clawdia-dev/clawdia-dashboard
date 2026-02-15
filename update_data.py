@@ -363,6 +363,81 @@ def update_daily_reports_data():
     print(f"Saved {len(reports)} daily reports to {output_path}")
     return reports
 
+def update_portfolio_strategies():
+    """ライブBotの戦略設定一覧を生成"""
+    print("Updating portfolio strategies...")
+    
+    # live_trader.pyからTRADING_PAIRSを読み取る
+    live_trader_path = os.path.join(CONFIG['BOT_DATA_DIR'], '..', 'live_trader.py')
+    strategies = []
+    
+    try:
+        # Parse TRADING_PAIRS from live_trader.py
+        import ast
+        with open(live_trader_path, 'r') as f:
+            content = f.read()
+        
+        # Find TRADING_PAIRS dict
+        start = content.find('TRADING_PAIRS = {')
+        if start >= 0:
+            # Find matching closing brace
+            depth = 0
+            end = start + len('TRADING_PAIRS = ')
+            for i, ch in enumerate(content[end:], end):
+                if ch == '{':
+                    depth += 1
+                elif ch == '}':
+                    depth -= 1
+                    if depth == 0:
+                        end = i + 1
+                        break
+            
+            try:
+                pairs_str = content[start + len('TRADING_PAIRS = '):end]
+                pairs = ast.literal_eval(pairs_str)
+                
+                for pair_id, config in pairs.items():
+                    strat = {
+                        "pair_id": pair_id,
+                        "strategy": config.get("strategy", "?"),
+                        "enabled": config.get("enabled", True),
+                        "trade_symbol": config.get("trade_symbol", pair_id[:3]),
+                        "params": {},
+                    }
+                    
+                    if config.get("strategy") == "CCI":
+                        strat["params"] = {
+                            "cci_period": config.get("cci_period"),
+                            "cci_threshold": config.get("cci_threshold"),
+                            "sl_pct": config.get("sl_pct"),
+                            "donchian_period": config.get("donchian_period"),
+                            "ema_trend_period": config.get("ema_trend_period", 0),
+                        }
+                    elif config.get("strategy") == "BOLLINGER":
+                        strat["params"] = {
+                            "bb_period": config.get("bb_period"),
+                            "bb_std": config.get("bb_std"),
+                            "ema_fast": config.get("ema_fast"),
+                            "ema_slow": config.get("ema_slow"),
+                            "rsi_period": config.get("rsi_period"),
+                            "rsi_exit": config.get("rsi_exit"),
+                            "sl_pct": config.get("sl_pct"),
+                        }
+                    
+                    strategies.append(strat)
+            except Exception as e:
+                print(f"  Error parsing TRADING_PAIRS: {e}")
+    except Exception as e:
+        print(f"  Error reading live_trader.py: {e}")
+    
+    output_path = os.path.join(CONFIG['OUTPUT_DIR'], 'strategies.json')
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(strategies, f, ensure_ascii=False, indent=2)
+    
+    print(f"  Saved {len(strategies)} strategies to {output_path}")
+    return strategies
+
+
 def main():
     """メイン処理"""
     print("🤖 Clawdia Dashboard Data Updater")
@@ -378,6 +453,7 @@ def main():
         wallet = update_wallet_data()
         tasks = update_tasks_data()
         daily_reports = update_daily_reports_data()
+        strategies = update_portfolio_strategies()
         
         # サマリー作成
         summary = {

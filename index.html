@@ -25,6 +25,7 @@
                 <button class="tab-btn" data-tab="tasks">📋 タスク</button>
                 <button class="tab-btn" data-tab="trades">💹 トレード</button>
                 <button class="tab-btn" data-tab="signals">📈 シグナル</button>
+                <button class="tab-btn" data-tab="strategies">🎯 戦略</button>
                 <button class="tab-btn" data-tab="reports">📝 日報</button>
             </div>
         </nav>
@@ -195,6 +196,17 @@
                         <div class="legend-item"><span class="legend-dot" style="background:#ff4444"></span> CCI &lt; -100: 買いシグナル発生ゾーン</div>
                         <div class="legend-item"><span class="legend-dot" style="background:#00ff88"></span> CCI &gt; 100: 売り圧力ゾーン</div>
                         <div class="legend-item"><span class="legend-dot" style="background:#888"></span> -100〜100: 中立</div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 戦略タブ -->
+            <div id="tab-strategies" class="tab-panel">
+                <section class="card">
+                    <h2>🎯 ポートフォリオ戦略一覧</h2>
+                    <p class="subtitle">各銘柄のライブ取引ロジックとパラメータ</p>
+                    <div id="strategies-container">
+                        <div class="loading">データ読み込み中...</div>
                     </div>
                 </section>
             </div>

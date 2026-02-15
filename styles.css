@@ -305,3 +305,50 @@ header h1 {
     .chart-container { height: 250px; }
     .tab-btn { padding: 12px 14px; font-size: 0.85rem; }
 }
+
+/* Strategy Cards */
+.strategies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+.strategy-card {
+    background: var(--card-bg, #1e1e2e);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid var(--border, #333);
+}
+.strategy-card.status-active { border-left: 4px solid #4caf50; }
+.strategy-card.status-disabled { border-left: 4px solid #666; opacity: 0.6; }
+.strategy-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.strategy-header h3 { margin: 0; font-size: 1.1em; }
+.strategy-status { font-size: 0.85em; }
+.strategy-body .strategy-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border, #333);
+    font-size: 0.9em;
+}
+.strategy-info .label { color: var(--text-secondary, #888); }
+.strategy-info .value { font-weight: 600; }
+.strategy-params {
+    margin-top: 8px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    padding: 8px;
+}
+.strategy-params .param {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 0.85em;
+}
+.strategy-params .param span:first-child { color: var(--text-secondary, #999); }
+.subtitle { color: var(--text-secondary, #888); margin-top: -8px; font-size: 0.9em; }
+

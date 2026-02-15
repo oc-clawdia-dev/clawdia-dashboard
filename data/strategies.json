@@ -1,0 +1,43 @@
+[
+  {
+    "pair_id": "BTCUSDT",
+    "strategy": "CCI",
+    "enabled": true,
+    "trade_symbol": "WBTC",
+    "params": {
+      "cci_period": 14,
+      "cci_threshold": -100,
+      "sl_pct": 0.9,
+      "donchian_period": 15,
+      "ema_trend_period": 50
+    }
+  },
+  {
+    "pair_id": "BNBUSDT",
+    "strategy": "CCI",
+    "enabled": true,
+    "trade_symbol": "BNB",
+    "params": {
+      "cci_period": 20,
+      "cci_threshold": -130,
+      "sl_pct": 1.5,
+      "donchian_period": 20,
+      "ema_trend_period": 0
+    }
+  },
+  {
+    "pair_id": "BTCUSDT_BB",
+    "strategy": "BOLLINGER",
+    "enabled": false,
+    "trade_symbol": "WBTC",
+    "params": {
+      "bb_period": 15,
+      "bb_std": 1.5,
+      "ema_fast": 10,
+      "ema_slow": 50,
+      "rsi_period": 10,
+      "rsi_exit": 75,
+      "sl_pct": 3.0
+    }
+  }
+]
