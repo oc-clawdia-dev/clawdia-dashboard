@@ -15,6 +15,8 @@ CONFIG = {
     'SOLANA_RPC_URL': 'https://api.mainnet-beta.solana.com',
     'WALLET_ADDRESS': 'CdJSUeHX49eFK8hixbfDKNRLTakYcy59MbVEh8pDnn9U',
     'USDC_MINT': 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+    'WBTC_MINT': '3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh',
+    'BNB_MINT': '9gP2kCy3wA1ctvYWQk75guqXuHfrEomqydHLtcTCqiLa',
     'BOT_DATA_DIR': '../bot/data',
     'OUTPUT_DIR': './data'
 }
@@ -69,30 +71,48 @@ def get_solana_balance(wallet_address):
             print(f"SOL balance error: {sol_data}")
             sol_balance = 0
         
-        # USDCトークン残高取得
-        usdc_payload = {
+        # 全SPLトークン残高取得
+        token_payload = {
             "jsonrpc": "2.0",
             "id": 2,
             "method": "getTokenAccountsByOwner",
             "params": [
                 wallet_address,
-                {"mint": CONFIG['USDC_MINT']},
+                {"programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"},
                 {"encoding": "jsonParsed"}
             ]
         }
         
-        usdc_response = requests.post(CONFIG['SOLANA_RPC_URL'], json=usdc_payload, timeout=10)
-        usdc_data = usdc_response.json()
+        token_response = requests.post(CONFIG['SOLANA_RPC_URL'], json=token_payload, timeout=10)
+        token_data = token_response.json()
         
         usdc_balance = 0
-        if 'result' in usdc_data and 'value' in usdc_data['result']:
-            for account in usdc_data['result']['value']:
+        wbtc_balance = 0
+        bnb_balance = 0
+        other_tokens = []
+        
+        if 'result' in token_data and 'value' in token_data['result']:
+            for account in token_data['result']['value']:
                 token_info = account['account']['data']['parsed']['info']
-                usdc_balance += float(token_info['tokenAmount']['uiAmount'] or 0)
+                mint = token_info.get('mint', '')
+                amount = float(token_info['tokenAmount']['uiAmount'] or 0)
+                if amount == 0:
+                    continue
+                if mint == CONFIG['USDC_MINT']:
+                    usdc_balance = amount
+                elif mint == CONFIG['WBTC_MINT']:
+                    wbtc_balance = amount
+                elif mint == CONFIG['BNB_MINT']:
+                    bnb_balance = amount
+                else:
+                    other_tokens.append({'mint': mint, 'amount': amount})
         
         return {
             'sol_balance': sol_balance,
-            'usdc_balance': usdc_balance
+            'usdc_balance': usdc_balance,
+            'wbtc_balance': wbtc_balance,
+            'bnb_balance': bnb_balance,
+            'other_tokens': other_tokens
         }
         
     except Exception as e:
@@ -107,7 +127,7 @@ def get_crypto_prices():
     try:
         url = 'https://api.coingecko.com/api/v3/simple/price'
         params = {
-            'ids': 'solana,bitcoin',
+            'ids': 'solana,bitcoin,binancecoin',
             'vs_currencies': 'usd'
         }
         
@@ -116,7 +136,8 @@ def get_crypto_prices():
         
         return {
             'sol_price': data.get('solana', {}).get('usd', 0),
-            'btc_price': data.get('bitcoin', {}).get('usd', 0)
+            'btc_price': data.get('bitcoin', {}).get('usd', 0),
+            'bnb_price': data.get('binancecoin', {}).get('usd', 0)
         }
         
     except Exception as e:
@@ -185,16 +206,24 @@ def update_wallet_data():
     
     # 総資産計算（USD換算）
     sol_value_usd = balance_data['sol_balance'] * prices['sol_price']
-    total_usd = sol_value_usd + balance_data['usdc_balance']
+    wbtc_value_usd = balance_data['wbtc_balance'] * prices['btc_price']
+    bnb_value_usd = balance_data['bnb_balance'] * prices['bnb_price']
+    total_usd = sol_value_usd + balance_data['usdc_balance'] + wbtc_value_usd + bnb_value_usd
     
     wallet_data = {
         'timestamp': datetime.now().isoformat(),
         'wallet_address': CONFIG['WALLET_ADDRESS'],
         'sol_balance': balance_data['sol_balance'],
         'usdc_balance': balance_data['usdc_balance'],
+        'wbtc_balance': balance_data['wbtc_balance'],
+        'bnb_balance': balance_data['bnb_balance'],
+        'other_tokens': balance_data.get('other_tokens', []),
         'sol_price_usd': prices['sol_price'],
         'btc_price_usd': prices['btc_price'],
+        'bnb_price_usd': prices['bnb_price'],
         'sol_value_usd': sol_value_usd,
+        'wbtc_value_usd': wbtc_value_usd,
+        'bnb_value_usd': bnb_value_usd,
         'total_usd': total_usd
     }
     

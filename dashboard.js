@@ -105,6 +105,8 @@ function updatePortfolioSection() {
     document.getElementById('total-balance').textContent = formatCurrency(wallet.total_usd || 0);
     document.getElementById('sol-balance').textContent = `${(wallet.sol_balance || 0).toFixed(4)} SOL`;
     document.getElementById('usdc-balance').textContent = formatCurrency(wallet.usdc_balance || 0);
+    document.getElementById('wbtc-balance').textContent = `${(wallet.wbtc_balance || 0).toFixed(8)} WBTC ($${(wallet.wbtc_value_usd || 0).toFixed(2)})`;
+    document.getElementById('bnb-balance').textContent = `${(wallet.bnb_balance || 0).toFixed(6)} BNB ($${(wallet.bnb_value_usd || 0).toFixed(2)})`;
     document.getElementById('sol-price').textContent = formatCurrency(wallet.sol_price_usd || 0);
     
     if (wallet.timestamp) {
