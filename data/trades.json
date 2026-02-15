@@ -118,5 +118,21 @@
     "output_amount": 0.2245,
     "status": "Success",
     "source": "jupiter_grid"
+  },
+  {
+    "timestamp": "2026-02-15T21:55:42",
+    "action": "sell_sl",
+    "token": "SOL",
+    "token_amount": 0.2245,
+    "usdc_received": 22.54,
+    "price": 87.72,
+    "signature": "unknown_sl_sell",
+    "input_token": "SOL",
+    "output_token": "USDC",
+    "input_amount": 0.2245,
+    "output_amount": 22.54,
+    "status": "Success",
+    "note": "SL triggered, sell succeeded but state was not updated due to signer error on retry",
+    "source": "jupiter_grid"
   }
 ]

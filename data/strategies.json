@@ -46,7 +46,7 @@
       "position_size_usd": 20.0,
       "position_token": "BNB",
       "position_amount": 0.03184713375796178,
-      "donchian_low": 624.32
+      "donchian_low": 621.03
     },
     "stats": {
       "total_trades": 1,
@@ -82,17 +82,15 @@
     },
     "bot_type": "jupiter_grid",
     "stats": {
-      "total_trades": 1,
+      "total_trades": 2,
       "buys": 1,
       "tp_exits": 0,
-      "sl_exits": 0,
+      "sl_exits": 1,
       "win_rate": 0.0
     },
     "position": {
-      "in_position": true,
-      "entry_price": 89.07,
-      "usdc_spent": 20.0,
-      "ref_price": 90.46
+      "in_position": false,
+      "ref_price": 87.7
     }
   }
 ]
