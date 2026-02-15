@@ -9,6 +9,7 @@ let dashboardData = {
 
 let signalChart = null;
 let portfolioChart = null;
+let portfolioHistoryChart = null;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
@@ -52,6 +53,7 @@ async function loadAllData() {
         ['tasks', './data/tasks.json'],
         ['dailyReports', './data/daily_reports.json'],
         ['strategies', './data/strategies.json'],
+        ['portfolioHistory', './data/portfolio_history.json'],
     ];
 
     await Promise.all(loaders.map(async ([key, url]) => {
@@ -65,6 +67,7 @@ async function loadAllData() {
             if (key === 'tasks') dashboardData[key] = {members:{}, projects:[], statistics:{}};
             else if (key === 'wallet') dashboardData[key] = null;
             else if (key === 'dailyReports') dashboardData[key] = [];
+            else if (key === 'portfolioHistory') dashboardData[key] = {portfolio_history:[], price_history:[]};
             else dashboardData[key] = [];
         }
     }));
@@ -115,6 +118,9 @@ function updateOverviewSection() {
 
     // Portfolio pie chart
     buildPortfolioPieChart(w);
+
+    // Portfolio history chart
+    buildPortfolioHistoryChart();
 
     // PnL summary
     updatePnLSummary();
@@ -170,6 +176,62 @@ function buildPortfolioPieChart(w) {
                 }
             }
         }
+    });
+}
+
+function buildPortfolioHistoryChart() {
+    const histData = dashboardData.portfolioHistory?.portfolio_history || [];
+    if (histData.length < 2) return;
+
+    const ctx = document.getElementById('portfolioHistoryChart')?.getContext('2d');
+    if (!ctx) return;
+    if (portfolioHistoryChart) portfolioHistoryChart.destroy();
+
+    const labels = histData.map(h => fmtTime(h.timestamp));
+    const totals = histData.map(h => h.total_usd);
+    const usdcData = histData.map(h => h.usdc || 0);
+
+    portfolioHistoryChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [
+                {
+                    label: '総資産 (USD)',
+                    data: totals,
+                    borderColor: '#4488ff',
+                    backgroundColor: 'rgba(68,136,255,0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 2,
+                },
+                {
+                    label: 'USDC',
+                    data: usdcData,
+                    borderColor: '#2775ca',
+                    borderDash: [5, 5],
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 0,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#fff' } },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `${ctx.dataset.label}: ${fmtCurrency(ctx.raw)}`
+                    }
+                }
+            },
+            scales: {
+                x: { ticks: { color: '#888', maxTicksLimit: 10 }, grid: { color: '#333' } },
+                y: { ticks: { color: '#4488ff', callback: v => '$' + v }, grid: { color: '#333' } },
+            },
+        },
     });
 }
 

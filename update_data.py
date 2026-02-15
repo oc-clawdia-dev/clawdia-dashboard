@@ -597,6 +597,70 @@ def update_portfolio_strategies():
     return strategies
 
 
+def update_portfolio_history():
+    """ポートフォリオ履歴データを生成（スナップショットJSONLから）"""
+    print("Updating portfolio history...")
+    
+    snapshots_dir = os.path.join(CONFIG['BOT_DATA_DIR'], 'portfolio_snapshots')
+    history = []
+    
+    if os.path.exists(snapshots_dir):
+        pattern = os.path.join(snapshots_dir, 'snapshots_*.jsonl')
+        files = sorted(glob.glob(pattern))
+        
+        for file_path in files:
+            try:
+                with open(file_path, 'r') as f:
+                    for line in f:
+                        line = line.strip()
+                        if not line:
+                            continue
+                        try:
+                            snap = json.loads(line)
+                            history.append({
+                                'timestamp': snap.get('timestamp', ''),
+                                'total_usd': snap.get('total_usd', 0),
+                                'usdc': snap.get('usdc_balance', 0),
+                                'sol': snap.get('sol_balance', 0),
+                                'tokens': snap.get('token_balances', {}),
+                                'prices': snap.get('prices', {}),
+                            })
+                        except json.JSONDecodeError:
+                            pass
+            except Exception as e:
+                print(f"Error reading {file_path}: {e}")
+    
+    # 価格履歴も追加
+    prices_dir = os.path.join(CONFIG['BOT_DATA_DIR'], 'prices')
+    price_history = []
+    if os.path.exists(prices_dir):
+        pattern = os.path.join(prices_dir, 'prices_*.jsonl')
+        for file_path in sorted(glob.glob(pattern)):
+            try:
+                with open(file_path, 'r') as f:
+                    for line in f:
+                        line = line.strip()
+                        if line:
+                            try:
+                                price_history.append(json.loads(line))
+                            except json.JSONDecodeError:
+                                pass
+            except Exception as e:
+                print(f"Error reading {file_path}: {e}")
+    
+    output = {
+        'portfolio_history': history,
+        'price_history': price_history,
+    }
+    
+    output_path = os.path.join(CONFIG['OUTPUT_DIR'], 'portfolio_history.json')
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(output, f, ensure_ascii=False)
+    
+    print(f"Saved {len(history)} portfolio snapshots + {len(price_history)} price records")
+    return output
+
+
 def main():
     """メイン処理"""
     print("🤖 Clawdia Dashboard Data Updater")
@@ -613,6 +677,7 @@ def main():
         tasks = update_tasks_data()
         daily_reports = update_daily_reports_data()
         strategies = update_portfolio_strategies()
+        portfolio_history = update_portfolio_history()
         
         # サマリー作成
         summary = {
