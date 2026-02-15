@@ -32,11 +32,18 @@
       "ema_trend_period": 0
     },
     "position": {
-      "in_position": false
+      "in_position": true,
+      "entry_price": 610.5,
+      "entry_time": "2026-02-15T19:12:53.168009+00:00",
+      "stop_loss_price": 601.3425,
+      "position_size_usd": 20.0,
+      "position_token": "BNB",
+      "position_amount": 0.03265507,
+      "donchian_low": 608.82
     },
     "stats": {
-      "total_trades": 3,
-      "last_7d_trades": 3
+      "total_trades": 4,
+      "last_7d_trades": 4
     }
   },
   {
