@@ -287,3 +287,55 @@ header h1 {
         gap: 4px;
     }
 }
+
+/* Link buttons */
+.link-button {
+    display: inline-block;
+    background: var(--bg-secondary);
+    color: var(--accent-blue);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-size: 12px;
+    transition: all 0.2s ease;
+    margin: 4px;
+}
+
+.link-button:hover {
+    background: var(--accent-blue);
+    color: var(--text-primary);
+    border-color: var(--accent-blue);
+}
+
+.no-data {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-muted);
+}
+
+.no-data p {
+    margin-bottom: 10px;
+}
+
+.trade-header {
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.report-content {
+    position: relative;
+}
+
+.report-links {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.report-links .link-button {
+    margin: 0 5px;
+}

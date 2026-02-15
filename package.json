@@ -1,0 +1,13 @@
+{
+  "name": "clawdia-dashboard",
+  "version": "1.0.0",
+  "description": "Clawdia Trading Bot Dashboard",
+  "main": "dashboard.js",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step needed'"
+  },
+  "keywords": ["trading", "dashboard", "netlify"],
+  "author": "Clawdia",
+  "license": "MIT"
+}

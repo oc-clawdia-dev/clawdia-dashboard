@@ -1,12 +1,11 @@
 // Configuration
 const CONFIG = {
-    MATON_API_KEY: 'Z22mQgIRI3XJEBmlW_sknmvU_bu7f9VPYlBQ8jl9fBbxmL1wkbsXqB7-klAfXpA7XjHnRcZMMbsZQvQdaizjh1i7JmA_vE37L2YimutUiA',
-    MATON_BASE_URL: 'https://gateway.maton.ai/google-sheets/v4/spreadsheets',
     SOLANA_RPC_URL: 'https://api.mainnet-beta.solana.com',
     WALLET_ADDRESS: 'CdJSUeHX49eFK8hixbfDKNRLTakYcy59MbVEh8pDnn9U',
     USDC_MINT: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
     TRADING_LOG_SHEET_ID: '1_08wUlbcDSMVdQN_DN6CzCzMYQQhRHhUtxt0N5MRBM4',
-    DAILY_REPORT_SHEET_ID: '1Yquzd8icvINBFFLhMbg1YSfo16Yf1_SIasGEx_w0L00'
+    DAILY_REPORT_SHEET_ID: '1Yquzd8icvINBFFLhMbg1YSfo16Yf1_SIasGEx_w0L00',
+    PROJECT_OVERVIEW_DOC_ID: '10NyFE-AdHMxFcDU1Y2godseURs7PFAfMYw_BgTsz5Hg'
 };
 
 // Global state
@@ -38,15 +37,11 @@ function showError(elementId, message) {
     }
 }
 
-// API functions
-async function fetchMatonData(sheetId, range) {
+// API functions - Using Netlify Functions as proxies
+async function fetchSheetsData(sheetId, range) {
     try {
-        const url = `${CONFIG.MATON_BASE_URL}/${sheetId}/values/${range}`;
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `Bearer ${CONFIG.MATON_API_KEY}`
-            }
-        });
+        const url = `/.netlify/functions/sheets?sheetId=${encodeURIComponent(sheetId)}&range=${encodeURIComponent(range)}`;
+        const response = await fetch(url);
         
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -55,96 +50,98 @@ async function fetchMatonData(sheetId, range) {
         const data = await response.json();
         return data.values || [];
     } catch (error) {
-        console.error('Maton API error:', error);
+        console.error('Sheets proxy error:', error);
         throw error;
     }
 }
 
 async function fetchSolanaBalance() {
     try {
-        const response = await fetch(CONFIG.SOLANA_RPC_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                jsonrpc: '2.0',
-                id: 1,
-                method: 'getBalance',
-                params: [CONFIG.WALLET_ADDRESS]
-            })
-        });
+        const response = await fetch('/.netlify/functions/wallet?type=sol');
         
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
         
         const data = await response.json();
-        return data.result ? data.result.value / 1000000000 : 0; // Convert lamports to SOL
+        return data.balance || 0;
     } catch (error) {
-        console.error('Solana RPC error:', error);
+        console.error('SOL balance error:', error);
         return 0;
     }
 }
 
 async function fetchUSDCBalance() {
     try {
-        const response = await fetch(CONFIG.SOLANA_RPC_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                jsonrpc: '2.0',
-                id: 1,
-                method: 'getTokenAccountsByOwner',
-                params: [
-                    CONFIG.WALLET_ADDRESS,
-                    { mint: CONFIG.USDC_MINT },
-                    { encoding: 'jsonParsed' }
-                ]
-            })
-        });
+        const response = await fetch('/.netlify/functions/wallet?type=usdc');
         
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
         
         const data = await response.json();
-        if (data.result && data.result.value.length > 0) {
-            const balance = data.result.value[0].account.data.parsed.info.tokenAmount.uiAmount;
-            return balance || 0;
-        }
-        return 0;
+        return data.balance || 0;
     } catch (error) {
         console.error('USDC balance error:', error);
         return 0;
     }
 }
 
+// Fetch SOL price from a public API
+async function fetchSOLPrice() {
+    try {
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data.solana?.usd || 100; // Fallback to 100 if API fails
+    } catch (error) {
+        console.error('SOL price error:', error);
+        return 100; // Fallback price
+    }
+}
+
 // Data loading functions
 async function loadPortfolioData() {
     try {
-        const [solBalance, usdcBalance] = await Promise.all([
+        const [solBalance, usdcBalance, solPrice] = await Promise.all([
             fetchSolanaBalance(),
-            fetchUSDCBalance()
+            fetchUSDCBalance(),
+            fetchSOLPrice()
         ]);
         
-        // Rough SOL price estimation (in real app, you'd fetch from price API)
-        const solPrice = 100; // Placeholder
-        const totalBalance = (solBalance * solPrice) + usdcBalance;
+        const solValueUSD = solBalance * solPrice;
+        const totalBalance = solValueUSD + usdcBalance;
         
         document.getElementById('sol-balance').textContent = formatCurrency(solBalance, 'SOL');
         document.getElementById('usdc-balance').textContent = formatCurrency(usdcBalance);
         document.getElementById('total-balance').textContent = formatCurrency(totalBalance);
         
-        // Mock P&L calculation
-        const pnl = totalBalance * 0.05; // 5% gain example
-        document.getElementById('total-pnl').textContent = formatCurrency(pnl);
-        document.getElementById('total-pnl').className = `value ${pnl >= 0 ? 'positive' : 'negative'}`;
+        // Try to get P&L from trading log sheet (last entry)
+        try {
+            const tradingData = await fetchSheetsData(CONFIG.TRADING_LOG_SHEET_ID, 'A1:F10');
+            let pnl = 0;
+            
+            if (tradingData.length > 1) {
+                // Calculate total P&L from recent trades
+                for (let i = 1; i < tradingData.length; i++) {
+                    const tradeP&L = parseFloat(tradingData[i][4]) || 0;
+                    pnl += tradeP&L;
+                }
+            }
+            
+            document.getElementById('total-pnl').textContent = formatCurrency(pnl);
+            document.getElementById('total-pnl').className = `value ${pnl >= 0 ? 'positive' : 'negative'}`;
+        } catch (pnlError) {
+            console.error('P&L calculation error:', pnlError);
+            document.getElementById('total-pnl').textContent = '$0.00';
+        }
         
         // Update portfolio chart
-        updatePortfolioChart(solBalance * solPrice, usdcBalance);
+        updatePortfolioChart(solValueUSD, usdcBalance);
         
         updateStatus('connected', 'オンライン');
         
@@ -156,10 +153,18 @@ async function loadPortfolioData() {
 
 async function loadTradingHistory() {
     try {
-        const data = await fetchMatonData(CONFIG.TRADING_LOG_SHEET_ID, 'A1:Z100');
+        const data = await fetchSheetsData(CONFIG.TRADING_LOG_SHEET_ID, 'A1:Z100');
         
         if (data.length < 2) {
-            document.getElementById('trade-list').innerHTML = '<div class="error">取引データがありません</div>';
+            document.getElementById('trade-list').innerHTML = `
+                <div class="no-data">
+                    <p>取引データがありません</p>
+                    <a href="https://docs.google.com/spreadsheets/d/${CONFIG.TRADING_LOG_SHEET_ID}/edit" 
+                       target="_blank" class="link-button">
+                        📊 Trading Logを見る
+                    </a>
+                </div>
+            `;
             return;
         }
         
@@ -167,25 +172,33 @@ async function loadTradingHistory() {
         const rows = data.slice(1, 11); // Show last 10 trades
         
         const tradeList = document.getElementById('trade-list');
-        tradeList.innerHTML = rows.map(row => {
-            const symbol = row[0] || 'N/A';
-            const side = row[1] || 'N/A';
-            const pnl = parseFloat(row[4]) || 0;
-            const date = row[2] || '';
-            
-            return `
-                <div class="trade-item">
-                    <div>
-                        <div class="trade-symbol">${symbol}</div>
-                        <div class="trade-side ${side.toLowerCase()}">${side}</div>
+        tradeList.innerHTML = `
+            <div class="trade-header">
+                <a href="https://docs.google.com/spreadsheets/d/${CONFIG.TRADING_LOG_SHEET_ID}/edit" 
+                   target="_blank" class="link-button">
+                    📊 全取引履歴を見る
+                </a>
+            </div>
+            ${rows.map(row => {
+                const symbol = row[0] || 'N/A';
+                const side = row[1] || 'N/A';
+                const pnl = parseFloat(row[4]) || 0;
+                const date = row[2] || '';
+                
+                return `
+                    <div class="trade-item">
+                        <div>
+                            <div class="trade-symbol">${symbol}</div>
+                            <div class="trade-side ${side.toLowerCase()}">${side}</div>
+                        </div>
+                        <div>
+                            <div class="trade-pnl ${pnl >= 0 ? 'positive' : 'negative'}">${formatCurrency(pnl)}</div>
+                            <div style="font-size: 12px; color: var(--text-muted)">${formatDate(date)}</div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="trade-pnl ${pnl >= 0 ? 'positive' : 'negative'}">${formatCurrency(pnl)}</div>
-                        <div style="font-size: 12px; color: var(--text-muted)">${formatDate(date)}</div>
-                    </div>
-                </div>
-            `;
-        }).join('');
+                `;
+            }).join('')}
+        `;
         
     } catch (error) {
         console.error('Trading history error:', error);
@@ -222,10 +235,18 @@ async function loadBacktestResults() {
 
 async function loadDailyReport() {
     try {
-        const data = await fetchMatonData(CONFIG.DAILY_REPORT_SHEET_ID, 'A1:Z10');
+        const data = await fetchSheetsData(CONFIG.DAILY_REPORT_SHEET_ID, 'A1:Z10');
         
         if (data.length < 2) {
-            document.getElementById('daily-report').innerHTML = '<div class="error">日報データがありません</div>';
+            document.getElementById('daily-report').innerHTML = `
+                <div class="no-data">
+                    <p>日報データがありません</p>
+                    <a href="https://docs.google.com/spreadsheets/d/${CONFIG.DAILY_REPORT_SHEET_ID}/edit" 
+                       target="_blank" class="link-button">
+                        📝 Clawdia日報を見る
+                    </a>
+                </div>
+            `;
             return;
         }
         
@@ -233,7 +254,19 @@ async function loadDailyReport() {
         const latestReport = data[1].join(' ') || '日報データがありません';
         
         document.getElementById('daily-report').innerHTML = `
-            <div style="white-space: pre-wrap; line-height: 1.6;">${latestReport}</div>
+            <div class="report-content">
+                <div style="white-space: pre-wrap; line-height: 1.6; margin-bottom: 15px;">${latestReport}</div>
+                <div class="report-links">
+                    <a href="https://docs.google.com/spreadsheets/d/${CONFIG.DAILY_REPORT_SHEET_ID}/edit" 
+                       target="_blank" class="link-button">
+                        📝 全日報を見る
+                    </a>
+                    <a href="https://docs.google.com/document/d/${CONFIG.PROJECT_OVERVIEW_DOC_ID}/edit" 
+                       target="_blank" class="link-button">
+                        📋 Project Overview
+                    </a>
+                </div>
+            </div>
         `;
         
     } catch (error) {
@@ -248,6 +281,30 @@ function updatePortfolioChart(solValue, usdcValue) {
     
     if (portfolioChart) {
         portfolioChart.destroy();
+    }
+    
+    const total = solValue + usdcValue;
+    if (total === 0) {
+        portfolioChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['No Data'],
+                datasets: [{
+                    data: [1],
+                    backgroundColor: ['#333333'],
+                    borderColor: '#333333',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+        return;
     }
     
     portfolioChart = new Chart(ctx, {
