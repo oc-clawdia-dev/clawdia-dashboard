@@ -223,21 +223,6 @@
               "completed_at": "2026-02-15T13:15:00"
             },
             {
-              "id": "P001-T005-S02",
-              "title": "MATON_API_KEY未設定問題調査",
-              "assignee": "talon",
-              "status": "completed",
-              "estimated_hours": 0.5,
-              "actual_hours": 0.3,
-              "completed_at": "2026-02-15T13:20:00",
-              "notes": [
-                {
-                  "timestamp": "2026-02-15T14:00:00",
-                  "text": "対応不要・Maton廃止決定。Google Sheetsログ不要、ローカルJSONLで十分"
-                }
-              ]
-            },
-            {
               "id": "P001-T005-S03",
               "title": "次回発生時の詳細ログ取得",
               "assignee": "talon",
@@ -814,16 +799,16 @@
     }
   ],
   "statistics": {
-    "total_tasks": 62,
-    "completed_tasks": 20,
-    "overall_progress": 32.3,
+    "total_tasks": 61,
+    "completed_tasks": 19,
+    "overall_progress": 31.1,
     "projects": [
       {
         "id": "P001",
         "name": "CCI自動売買Bot",
-        "total_tasks": 37,
-        "completed_tasks": 17,
-        "progress_percentage": 45.9
+        "total_tasks": 36,
+        "completed_tasks": 16,
+        "progress_percentage": 44.4
       },
       {
         "id": "P002",
