@@ -61,36 +61,5 @@
     "pre_balance_sol": 0,
     "post_balance_sol": 0,
     "error": ""
-  },
-  {
-    "timestamp": "2026-02-15T20:54:17",
-    "action": "buy",
-    "token": "SOL",
-    "input_token": "USDC",
-    "output_token": "SOL",
-    "input_amount": 20.0,
-    "output_amount": 0.2224,
-    "usdc_spent": 20.0,
-    "token_amount": 0.2224,
-    "price": 89.07,
-    "signature": "3Lw5hCNcnvqyBUYQghg8FFhuUypS7vrpLTkD7J3cwNmaoBtjbfjWSz5Dwe6XescQbw3kzTgUVHo2Pwj7mRJSVDSR",
-    "status": "Success",
-    "source": "jupiter_grid"
-  },
-  {
-    "timestamp": "2026-02-15T21:55:42",
-    "action": "sell_sl",
-    "token": "SOL",
-    "input_token": "SOL",
-    "output_token": "USDC",
-    "input_amount": 0.2575,
-    "output_amount": 22.55,
-    "token_amount": 0.2575,
-    "usdc_received": 22.55,
-    "price": 87.6,
-    "signature": "auto_sl_sell",
-    "status": "Success",
-    "note": "SL -1.5% triggered. BUG: sold 0.2575 SOL but only bought 0.2224 — extra 0.0351 SOL eaten from gas reserve",
-    "source": "jupiter_grid"
   }
 ]

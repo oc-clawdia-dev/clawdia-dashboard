@@ -154,27 +154,8 @@ def update_trades_data():
     pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'trades_*.jsonl')
     trades = read_jsonl_files(pattern)
     
-    # Jupiter Grid trades — convert to standard format
-    jgrid_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'jgrid_*.jsonl')
-    jgrid_trades = read_jsonl_files(jgrid_pattern)
-    for t in jgrid_trades:
-        t['source'] = 'jupiter_grid'
-        token = t.get('token', 'SOL')
-        action = t.get('action', '')
-        if 'input_token' not in t:
-            if action == 'buy':
-                t['input_token'] = 'USDC'
-                t['output_token'] = token
-                t['input_amount'] = t.get('usdc_spent', 0)
-                t['output_amount'] = t.get('token_amount', 0)
-            elif action in ('sell_tp', 'sell_sl', 'sell'):
-                t['input_token'] = token
-                t['output_token'] = 'USDC'
-                t['input_amount'] = t.get('token_amount', 0)
-                t['output_amount'] = t.get('usdc_received', 0)
-        if 'status' not in t:
-            t['status'] = 'Success'
-    trades.extend(jgrid_trades)
+    # Note: Grid trades now use unified tracker (trades_*.jsonl) with strategy="GRID"
+    # Legacy jgrid_*.jsonl files are no longer written by the bot
     
     # データの整形（必要に応じて）
     for trade in trades:
@@ -218,32 +199,63 @@ def update_signals_data():
     return signals
 
 def update_wallet_data():
-    """ウォレットデータを更新"""
+    """ウォレットデータを更新 — portfolio_recorder.pyが書いたlatest_snapshot.jsonを優先使用"""
     print("Updating wallet data...")
     
-    # 残高取得
-    balance_data = get_solana_balance(CONFIG['WALLET_ADDRESS'])
+    snapshot_path = os.path.join(CONFIG['BOT_DATA_DIR'], 'latest_snapshot.json')
     
-    # 価格情報取得
-    prices = get_crypto_prices()
-    
-    # 総資産計算（USD換算）
-    sol_value_usd = balance_data['sol_balance'] * prices['sol_price']
-    wbtc_value_usd = balance_data['wbtc_balance'] * prices['btc_price']
-    bnb_value_usd = balance_data['bnb_balance'] * prices['bnb_price']
-    total_usd = sol_value_usd + balance_data['usdc_balance'] + wbtc_value_usd + bnb_value_usd
+    if os.path.exists(snapshot_path):
+        # Use code-generated snapshot (preferred — no AI involvement)
+        with open(snapshot_path, 'r') as f:
+            snap = json.load(f)
+        
+        prices = snap.get('prices', {})
+        sol_balance = snap.get('sol_balance', 0)
+        usdc_balance = snap.get('usdc_balance', 0)
+        token_balances = snap.get('token_balances', {})
+        
+        wbtc_balance = token_balances.get('WBTC', 0)
+        bnb_balance = token_balances.get('BNB', 0)
+        
+        sol_price = prices.get('SOL', 0)
+        btc_price = prices.get('BTC', 0)
+        bnb_price = prices.get('BNB', 0)
+        
+        sol_value_usd = sol_balance * sol_price
+        wbtc_value_usd = wbtc_balance * btc_price
+        bnb_value_usd = bnb_balance * bnb_price
+        total_usd = snap.get('total_usd', sol_value_usd + usdc_balance + wbtc_value_usd + bnb_value_usd)
+        
+        print(f"Using snapshot from {snap.get('timestamp', '?')}")
+    else:
+        # Fallback: direct RPC query (only if snapshot not available)
+        print("⚠️ No snapshot found, falling back to direct RPC query")
+        balance_data = get_solana_balance(CONFIG['WALLET_ADDRESS'])
+        prices_raw = get_crypto_prices()
+        
+        sol_balance = balance_data['sol_balance']
+        usdc_balance = balance_data['usdc_balance']
+        wbtc_balance = balance_data.get('wbtc_balance', 0)
+        bnb_balance = balance_data.get('bnb_balance', 0)
+        sol_price = prices_raw['sol_price']
+        btc_price = prices_raw['btc_price']
+        bnb_price = prices_raw['bnb_price']
+        
+        sol_value_usd = sol_balance * sol_price
+        wbtc_value_usd = wbtc_balance * btc_price
+        bnb_value_usd = bnb_balance * bnb_price
+        total_usd = sol_value_usd + usdc_balance + wbtc_value_usd + bnb_value_usd
     
     wallet_data = {
         'timestamp': datetime.now().isoformat(),
         'wallet_address': CONFIG['WALLET_ADDRESS'],
-        'sol_balance': balance_data['sol_balance'],
-        'usdc_balance': balance_data['usdc_balance'],
-        'wbtc_balance': balance_data['wbtc_balance'],
-        'bnb_balance': balance_data['bnb_balance'],
-        'other_tokens': balance_data.get('other_tokens', []),
-        'sol_price_usd': prices['sol_price'],
-        'btc_price_usd': prices['btc_price'],
-        'bnb_price_usd': prices['bnb_price'],
+        'sol_balance': sol_balance,
+        'usdc_balance': usdc_balance,
+        'wbtc_balance': wbtc_balance,
+        'bnb_balance': bnb_balance,
+        'sol_price_usd': sol_price,
+        'btc_price_usd': btc_price,
+        'bnb_price_usd': bnb_price,
         'sol_value_usd': sol_value_usd,
         'wbtc_value_usd': wbtc_value_usd,
         'bnb_value_usd': bnb_value_usd,
@@ -255,8 +267,8 @@ def update_wallet_data():
         json.dump(wallet_data, f, ensure_ascii=False, indent=2)
     
     print(f"Saved wallet data to {output_path}")
-    print(f"SOL: {balance_data['sol_balance']:.4f} (${sol_value_usd:.2f})")
-    print(f"USDC: ${balance_data['usdc_balance']:.2f}")
+    print(f"SOL: {sol_balance:.4f} (${sol_value_usd:.2f})")
+    print(f"USDC: ${usdc_balance:.2f}")
     print(f"Total: ${total_usd:.2f}")
     
     return wallet_data
