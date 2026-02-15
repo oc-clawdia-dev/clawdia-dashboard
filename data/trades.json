@@ -105,11 +105,12 @@
     "error": ""
   },
   {
-    "timestamp": "2026-02-15T20:54:17.986255",
+    "timestamp": "2026-02-15T20:54:17",
     "action": "buy",
     "token": "SOL",
     "usdc_spent": 20.0,
-    "signature": "3Lw5hCNcnvqyBUYQghg8FFhuUypS7vrpLTkD7J3cwNmaoBtjbfjWSz5Dwe6XescQbw3kzTgUVHo2Pwj7mRJSVDSR",
+    "signature": "manual_restore",
+    "note": "restored from grid_state.json - original log missing",
     "source": "jupiter_grid"
   }
 ]
