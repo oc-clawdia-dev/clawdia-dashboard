@@ -796,12 +796,59 @@
           "notes": "Binance開設待ちの間、Jupiterで実行可能な高頻度戦略を実装。ロングオンリー制約あり。"
         }
       ]
+    },
+    {
+      "id": "P005",
+      "name": "今夜の緊急タスク（2/16朝まで）",
+      "status": "in_progress",
+      "tasks": [
+        {
+          "id": "P005-T001",
+          "name": "ダッシュボード完全自動化検証",
+          "assignee": "clawdia",
+          "status": "in_progress",
+          "priority": "high",
+          "notes": "update_data.py→git push→GitHub Pagesの全フロー確認。wallet/trades/portfolio全て正確か"
+        },
+        {
+          "id": "P005-T002",
+          "name": "日報自動作成コード化",
+          "assignee": "clawdia",
+          "status": "pending",
+          "priority": "high",
+          "notes": "memory/YYYY-MM-DD.mdテンプレ自動生成。cronで毎日0時に翌日分作成+前日分整理"
+        },
+        {
+          "id": "P005-T003",
+          "name": "テストトレード検証（×2、max10回）",
+          "assignee": "clawdia",
+          "status": "pending",
+          "priority": "high",
+          "notes": "buy→record→dashboard反映→sell→record→P&L計算の全パイプライン検証"
+        },
+        {
+          "id": "P005-T004",
+          "name": "検証後ワークフロー可視化",
+          "assignee": "clawdia",
+          "status": "pending",
+          "priority": "medium",
+          "notes": "テスト成功後に正確なワークフロー図を作成"
+        },
+        {
+          "id": "P005-T005",
+          "name": "ファイル構造化・コンテキスト整理",
+          "assignee": "clawdia",
+          "status": "pending",
+          "priority": "high",
+          "notes": "MEMORY.md圧縮、不要ファイルをarchive/へ、参照頻度低いデータを整理"
+        }
+      ]
     }
   ],
   "statistics": {
-    "total_tasks": 61,
+    "total_tasks": 66,
     "completed_tasks": 19,
-    "overall_progress": 31.1,
+    "overall_progress": 28.8,
     "projects": [
       {
         "id": "P001",
@@ -828,6 +875,13 @@
         "id": "P004",
         "name": "短期高頻度取引Bot",
         "total_tasks": 11,
+        "completed_tasks": 0,
+        "progress_percentage": 0.0
+      },
+      {
+        "id": "P005",
+        "name": "今夜の緊急タスク（2/16朝まで）",
+        "total_tasks": 5,
         "completed_tasks": 0,
         "progress_percentage": 0.0
       }
