@@ -1,388 +1,493 @@
-// Configuration
-const CONFIG = {
-    SOLANA_RPC_URL: 'https://api.mainnet-beta.solana.com',
-    WALLET_ADDRESS: 'CdJSUeHX49eFK8hixbfDKNRLTakYcy59MbVEh8pDnn9U',
-    USDC_MINT: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
-    TRADING_LOG_SHEET_ID: '1_08wUlbcDSMVdQN_DN6CzCzMYQQhRHhUtxt0N5MRBM4',
-    DAILY_REPORT_SHEET_ID: '1Yquzd8icvINBFFLhMbg1YSfo16Yf1_SIasGEx_w0L00',
-    PROJECT_OVERVIEW_DOC_ID: '10NyFE-AdHMxFcDU1Y2godseURs7PFAfMYw_BgTsz5Hg'
+// Dashboard State
+let dashboardData = {
+    trades: [],
+    signals: [],
+    wallet: null,
+    filteredTrades: []
 };
 
-// Global state
-let portfolioChart = null;
+let signalChart = null;
 
-// Utility functions
-function formatCurrency(amount, currency = 'USD') {
-    if (currency === 'USD') {
-        return '$' + amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    } else if (currency === 'SOL') {
-        return amount.toLocaleString(undefined, { minimumFractionDigits: 4, maximumFractionDigits: 4 }) + ' SOL';
-    }
-    return amount.toString();
-}
-
-function formatDate(dateStr) {
-    return new Date(dateStr).toLocaleDateString('ja-JP', {
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
-}
-
-function showError(elementId, message) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.innerHTML = `<div class="error">エラー: ${message}</div>`;
-    }
-}
-
-// API functions - Using Netlify Functions as proxies
-async function fetchSheetsData(sheetId, range) {
-    try {
-        const url = `/.netlify/functions/sheets?sheetId=${encodeURIComponent(sheetId)}&range=${encodeURIComponent(range)}`;
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        
-        const data = await response.json();
-        return data.values || [];
-    } catch (error) {
-        console.error('Sheets proxy error:', error);
-        throw error;
-    }
-}
-
-async function fetchSolanaBalance() {
-    try {
-        const response = await fetch('/.netlify/functions/wallet?type=sol');
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-        
-        const data = await response.json();
-        return data.balance || 0;
-    } catch (error) {
-        console.error('SOL balance error:', error);
-        return 0;
-    }
-}
-
-async function fetchUSDCBalance() {
-    try {
-        const response = await fetch('/.netlify/functions/wallet?type=usdc');
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-        
-        const data = await response.json();
-        return data.balance || 0;
-    } catch (error) {
-        console.error('USDC balance error:', error);
-        return 0;
-    }
-}
-
-// Fetch SOL price from a public API
-async function fetchSOLPrice() {
-    try {
-        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd');
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-        
-        const data = await response.json();
-        return data.solana?.usd || 100; // Fallback to 100 if API fails
-    } catch (error) {
-        console.error('SOL price error:', error);
-        return 100; // Fallback price
-    }
-}
+// Initialize dashboard
+document.addEventListener('DOMContentLoaded', async () => {
+    console.log('🤖 Clawdia Dashboard starting...');
+    
+    // Set default date range (last 30 days)
+    const today = new Date();
+    const thirtyDaysAgo = new Date(today.getTime() - (30 * 24 * 60 * 60 * 1000));
+    
+    document.getElementById('date-from').value = formatDateForInput(thirtyDaysAgo);
+    document.getElementById('date-to').value = formatDateForInput(today);
+    
+    // Load data and update UI
+    await loadAllData();
+    
+    // Setup event listeners
+    setupEventListeners();
+    
+    console.log('✅ Dashboard initialized');
+});
 
 // Data loading functions
-async function loadPortfolioData() {
+async function loadAllData() {
+    updateStatusIndicator('loading', 'データ読み込み中...');
+    
     try {
-        const [solBalance, usdcBalance, solPrice] = await Promise.all([
-            fetchSolanaBalance(),
-            fetchUSDCBalance(),
-            fetchSOLPrice()
+        // Load all data sources
+        await Promise.all([
+            loadWalletData(),
+            loadTradesData(),
+            loadSignalsData()
         ]);
         
-        const solValueUSD = solBalance * solPrice;
-        const totalBalance = solValueUSD + usdcBalance;
+        // Update UI with loaded data
+        updatePortfolioSection();
+        updatePnLSummary();
+        applyFilters();
+        updateSignalStatus();
+        setupSignalChart();
         
-        document.getElementById('sol-balance').textContent = formatCurrency(solBalance, 'SOL');
-        document.getElementById('usdc-balance').textContent = formatCurrency(usdcBalance);
-        document.getElementById('total-balance').textContent = formatCurrency(totalBalance);
-        
-        // Try to get P&L from trading log sheet (last entry)
-        try {
-            const tradingData = await fetchSheetsData(CONFIG.TRADING_LOG_SHEET_ID, 'A1:F10');
-            let pnl = 0;
-            
-            if (tradingData.length > 1) {
-                // Calculate total P&L from recent trades
-                for (let i = 1; i < tradingData.length; i++) {
-                    const tradeP&L = parseFloat(tradingData[i][4]) || 0;
-                    pnl += tradeP&L;
-                }
-            }
-            
-            document.getElementById('total-pnl').textContent = formatCurrency(pnl);
-            document.getElementById('total-pnl').className = `value ${pnl >= 0 ? 'positive' : 'negative'}`;
-        } catch (pnlError) {
-            console.error('P&L calculation error:', pnlError);
-            document.getElementById('total-pnl').textContent = '$0.00';
-        }
-        
-        // Update portfolio chart
-        updatePortfolioChart(solValueUSD, usdcBalance);
-        
-        updateStatus('connected', 'オンライン');
+        updateStatusIndicator('online', '接続中');
         
     } catch (error) {
-        console.error('Portfolio data error:', error);
-        showError('total-balance', '残高データの取得に失敗しました');
+        console.error('Data loading error:', error);
+        updateStatusIndicator('offline', 'データ読み込みエラー');
+        showError('trade-table-body', 'データの読み込みに失敗しました');
     }
 }
 
-async function loadTradingHistory() {
+async function loadWalletData() {
     try {
-        const data = await fetchSheetsData(CONFIG.TRADING_LOG_SHEET_ID, 'A1:Z100');
-        
-        if (data.length < 2) {
-            document.getElementById('trade-list').innerHTML = `
-                <div class="no-data">
-                    <p>取引データがありません</p>
-                    <a href="https://docs.google.com/spreadsheets/d/${CONFIG.TRADING_LOG_SHEET_ID}/edit" 
-                       target="_blank" class="link-button">
-                        📊 Trading Logを見る
-                    </a>
-                </div>
-            `;
-            return;
-        }
-        
-        const headers = data[0];
-        const rows = data.slice(1, 11); // Show last 10 trades
-        
-        const tradeList = document.getElementById('trade-list');
-        tradeList.innerHTML = `
-            <div class="trade-header">
-                <a href="https://docs.google.com/spreadsheets/d/${CONFIG.TRADING_LOG_SHEET_ID}/edit" 
-                   target="_blank" class="link-button">
-                    📊 全取引履歴を見る
-                </a>
-            </div>
-            ${rows.map(row => {
-                const symbol = row[0] || 'N/A';
-                const side = row[1] || 'N/A';
-                const pnl = parseFloat(row[4]) || 0;
-                const date = row[2] || '';
-                
-                return `
-                    <div class="trade-item">
-                        <div>
-                            <div class="trade-symbol">${symbol}</div>
-                            <div class="trade-side ${side.toLowerCase()}">${side}</div>
-                        </div>
-                        <div>
-                            <div class="trade-pnl ${pnl >= 0 ? 'positive' : 'negative'}">${formatCurrency(pnl)}</div>
-                            <div style="font-size: 12px; color: var(--text-muted)">${formatDate(date)}</div>
-                        </div>
-                    </div>
-                `;
-            }).join('')}
-        `;
-        
+        const response = await fetch('./data/wallet.json');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        dashboardData.wallet = await response.json();
+        console.log('✅ Wallet data loaded:', dashboardData.wallet);
     } catch (error) {
-        console.error('Trading history error:', error);
-        showError('trade-list', '取引履歴の取得に失敗しました');
+        console.error('Failed to load wallet data:', error);
+        dashboardData.wallet = null;
     }
 }
 
-async function loadBacktestResults() {
+async function loadTradesData() {
     try {
-        // Mock backtest data (in real app, you'd load from bot/data/backtest_results/)
-        const mockResults = [
-            { strategy: 'RSI Scalping', return: 15.2, winrate: 68 },
-            { strategy: 'MA Cross', return: 8.7, winrate: 45 },
-            { strategy: 'Bollinger Bands', return: -2.1, winrate: 38 },
-            { strategy: 'MACD Signal', return: 12.4, winrate: 52 }
-        ];
+        const response = await fetch('./data/trades.json');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        dashboardData.trades = await response.json();
+        console.log(`✅ ${dashboardData.trades.length} trades loaded`);
         
-        const backtestGrid = document.getElementById('backtest-grid');
-        backtestGrid.innerHTML = mockResults.map(result => `
-            <div class="backtest-item">
-                <div class="backtest-strategy">${result.strategy}</div>
-                <div class="backtest-return ${result.return >= 0 ? 'positive' : 'negative'}">
-                    ${result.return >= 0 ? '+' : ''}${result.return}%
-                </div>
-                <div class="backtest-winrate">勝率: ${result.winrate}%</div>
-            </div>
-        `).join('');
+        // Populate token filter dropdown
+        populateTokenFilter();
         
     } catch (error) {
-        console.error('Backtest results error:', error);
-        showError('backtest-grid', 'バックテスト結果の取得に失敗しました');
+        console.error('Failed to load trades data:', error);
+        dashboardData.trades = [];
     }
 }
 
-async function loadDailyReport() {
+async function loadSignalsData() {
     try {
-        const data = await fetchSheetsData(CONFIG.DAILY_REPORT_SHEET_ID, 'A1:Z10');
-        
-        if (data.length < 2) {
-            document.getElementById('daily-report').innerHTML = `
-                <div class="no-data">
-                    <p>日報データがありません</p>
-                    <a href="https://docs.google.com/spreadsheets/d/${CONFIG.DAILY_REPORT_SHEET_ID}/edit" 
-                       target="_blank" class="link-button">
-                        📝 Clawdia日報を見る
-                    </a>
-                </div>
-            `;
-            return;
-        }
-        
-        // Get the latest report (assuming it's in the second row)
-        const latestReport = data[1].join(' ') || '日報データがありません';
-        
-        document.getElementById('daily-report').innerHTML = `
-            <div class="report-content">
-                <div style="white-space: pre-wrap; line-height: 1.6; margin-bottom: 15px;">${latestReport}</div>
-                <div class="report-links">
-                    <a href="https://docs.google.com/spreadsheets/d/${CONFIG.DAILY_REPORT_SHEET_ID}/edit" 
-                       target="_blank" class="link-button">
-                        📝 全日報を見る
-                    </a>
-                    <a href="https://docs.google.com/document/d/${CONFIG.PROJECT_OVERVIEW_DOC_ID}/edit" 
-                       target="_blank" class="link-button">
-                        📋 Project Overview
-                    </a>
-                </div>
-            </div>
-        `;
-        
+        const response = await fetch('./data/signals.json');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        dashboardData.signals = await response.json();
+        console.log(`✅ ${dashboardData.signals.length} signals loaded`);
     } catch (error) {
-        console.error('Daily report error:', error);
-        showError('daily-report', '日報の取得に失敗しました');
+        console.error('Failed to load signals data:', error);
+        dashboardData.signals = [];
     }
 }
 
-// Chart functions
-function updatePortfolioChart(solValue, usdcValue) {
-    const ctx = document.getElementById('portfolioChart').getContext('2d');
+// UI Update functions
+function updatePortfolioSection() {
+    if (!dashboardData.wallet) return;
     
-    if (portfolioChart) {
-        portfolioChart.destroy();
-    }
+    const wallet = dashboardData.wallet;
     
-    const total = solValue + usdcValue;
-    if (total === 0) {
-        portfolioChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['No Data'],
-                datasets: [{
-                    data: [1],
-                    backgroundColor: ['#333333'],
-                    borderColor: '#333333',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                }
-            }
-        });
+    document.getElementById('total-balance').textContent = formatCurrency(wallet.total_usd || 0);
+    document.getElementById('sol-balance').textContent = `${(wallet.sol_balance || 0).toFixed(4)} SOL`;
+    document.getElementById('usdc-balance').textContent = formatCurrency(wallet.usdc_balance || 0);
+    document.getElementById('sol-price').textContent = formatCurrency(wallet.sol_price_usd || 0);
+    
+    if (wallet.timestamp) {
+        document.getElementById('last-updated').textContent = 
+            `最終更新: ${formatDateTime(wallet.timestamp)}`;
+    }
+}
+
+function updatePnLSummary() {
+    const trades = dashboardData.filteredTrades.length > 0 ? dashboardData.filteredTrades : dashboardData.trades;
+    const totalTrades = trades.length;
+    const successfulTrades = trades.filter(t => t.status === 'success').length;
+    const successRate = totalTrades > 0 ? (successfulTrades / totalTrades * 100).toFixed(1) : '0';
+    const totalFees = trades.reduce((sum, t) => sum + (parseFloat(t.fee_sol) || 0), 0);
+    
+    document.getElementById('total-trades').textContent = totalTrades.toLocaleString();
+    document.getElementById('successful-trades').textContent = successfulTrades.toLocaleString();
+    document.getElementById('success-rate').textContent = `${successRate}%`;
+    document.getElementById('total-fees').textContent = `${totalFees.toFixed(4)} SOL`;
+}
+
+function updateTradeTable() {
+    const tbody = document.getElementById('trade-table-body');
+    const trades = dashboardData.filteredTrades.length > 0 ? dashboardData.filteredTrades : dashboardData.trades;
+    
+    if (trades.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="loading">トレードデータがありません</td></tr>';
         return;
     }
     
-    portfolioChart = new Chart(ctx, {
-        type: 'doughnut',
+    // Sort by timestamp (newest first)
+    const sortedTrades = [...trades].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    
+    tbody.innerHTML = sortedTrades.map(trade => {
+        const pair = `${trade.input_token || 'SOL'} → ${trade.output_token || 'USDC'}`;
+        const amount = trade.input_amount ? `${parseFloat(trade.input_amount).toFixed(4)}` : '-';
+        
+        return `
+            <tr>
+                <td>${formatDateTime(trade.timestamp)}</td>
+                <td><span class="token-pair">${pair}</span></td>
+                <td><span class="trade-type">${trade.swap_type || 'swap'}</span></td>
+                <td>${amount}</td>
+                <td><span class="trade-status ${trade.status || 'unknown'}">${getStatusText(trade.status)}</span></td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function updateSignalStatus() {
+    const container = document.getElementById('signal-status');
+    
+    if (dashboardData.signals.length === 0) {
+        container.innerHTML = '<div class="loading">シグナルデータがありません</div>';
+        return;
+    }
+    
+    // Get latest signal
+    const latestSignal = dashboardData.signals
+        .sort((a, b) => new Date(b.checked_at) - new Date(a.checked_at))[0];
+    
+    if (!latestSignal) {
+        container.innerHTML = '<div class="loading">最新のシグナルがありません</div>';
+        return;
+    }
+    
+    container.innerHTML = `
+        <div class="signal-item">
+            <span class="signal-label">BTC価格</span>
+            <span class="signal-value">${formatCurrency(latestSignal.btc_price || 0)}</span>
+        </div>
+        <div class="signal-item">
+            <span class="signal-label">CCI値</span>
+            <span class="signal-value ${getCciClass(latestSignal.cci)}">${(latestSignal.cci || 0).toFixed(2)}</span>
+        </div>
+        <div class="signal-item">
+            <span class="signal-label">ポジション</span>
+            <span class="signal-value ${latestSignal.in_position ? 'positive' : 'neutral'}">${latestSignal.in_position ? 'IN' : 'OUT'}</span>
+        </div>
+        <div class="signal-item">
+            <span class="signal-label">最新アクション</span>
+            <span class="signal-value">${latestSignal.action || '-'}</span>
+        </div>
+        <div class="signal-item">
+            <span class="signal-label">最終確認</span>
+            <span class="signal-value">${formatDateTime(latestSignal.checked_at)}</span>
+        </div>
+    `;
+}
+
+function setupSignalChart() {
+    if (!dashboardData.signals.length) return;
+    
+    const ctx = document.getElementById('signalChart').getContext('2d');
+    
+    // Get data for the last 7 days by default
+    const chartData = getSignalChartData(7);
+    
+    if (signalChart) {
+        signalChart.destroy();
+    }
+    
+    signalChart = new Chart(ctx, {
+        type: 'line',
         data: {
-            labels: ['SOL', 'USDC'],
-            datasets: [{
-                data: [solValue, usdcValue],
-                backgroundColor: [
-                    '#4488ff',
-                    '#00ff88'
-                ],
-                borderColor: '#333333',
-                borderWidth: 2
-            }]
+            labels: chartData.labels,
+            datasets: [
+                {
+                    label: 'CCI',
+                    data: chartData.cci,
+                    borderColor: '#4488ff',
+                    backgroundColor: 'rgba(68, 136, 255, 0.1)',
+                    tension: 0.1,
+                    yAxisID: 'y'
+                },
+                {
+                    label: 'BTC Price',
+                    data: chartData.btc,
+                    borderColor: '#ffaa00',
+                    backgroundColor: 'rgba(255, 170, 0, 0.1)',
+                    tension: 0.1,
+                    yAxisID: 'y1'
+                }
+            ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    position: 'bottom',
                     labels: {
-                        color: '#cccccc',
-                        font: { size: 12 }
+                        color: '#cccccc'
                     }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#888888' },
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                },
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    ticks: { color: '#4488ff' },
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    ticks: { color: '#ffaa00' },
+                    grid: { drawOnChartArea: false }
                 }
             }
         }
     });
 }
 
-// Status functions
-function updateStatus(status, text) {
-    const indicator = document.querySelector('.status-dot');
-    const statusText = document.getElementById('status-text');
-    const lastUpdate = document.getElementById('last-update');
+// Event handlers
+function setupEventListeners() {
+    // Filter buttons
+    document.getElementById('apply-filter').addEventListener('click', applyFilters);
+    document.getElementById('reset-filter').addEventListener('click', resetFilters);
+    document.getElementById('export-csv').addEventListener('click', exportToCSV);
     
-    indicator.className = status === 'connected' ? 'status-dot connected' : 'status-dot';
-    statusText.textContent = text;
-    lastUpdate.textContent = new Date().toLocaleTimeString('ja-JP', { 
-        hour: '2-digit', 
-        minute: '2-digit' 
-    });
+    // Chart period buttons
+    document.getElementById('chart-1d').addEventListener('click', () => updateSignalChart(1));
+    document.getElementById('chart-7d').addEventListener('click', () => updateSignalChart(7));
+    document.getElementById('chart-30d').addEventListener('click', () => updateSignalChart(30));
 }
 
-// Mock system status updates
-function updateSystemStatus() {
-    document.getElementById('bot-status').textContent = '稼働中';
-    document.getElementById('bot-status').className = 'value positive';
-    document.getElementById('scan-progress').textContent = '73/100';
+function applyFilters() {
+    const dateFrom = document.getElementById('date-from').value;
+    const dateTo = document.getElementById('date-to').value;
+    const tokenFilter = document.getElementById('token-filter').value;
+    const statusFilter = document.getElementById('status-filter').value;
+    
+    let filtered = [...dashboardData.trades];
+    
+    // Date filter
+    if (dateFrom) {
+        filtered = filtered.filter(trade => new Date(trade.timestamp) >= new Date(dateFrom));
+    }
+    if (dateTo) {
+        const toDate = new Date(dateTo);
+        toDate.setHours(23, 59, 59, 999); // End of day
+        filtered = filtered.filter(trade => new Date(trade.timestamp) <= toDate);
+    }
+    
+    // Token filter
+    if (tokenFilter) {
+        filtered = filtered.filter(trade => 
+            trade.input_token === tokenFilter || trade.output_token === tokenFilter
+        );
+    }
+    
+    // Status filter
+    if (statusFilter) {
+        filtered = filtered.filter(trade => trade.status === statusFilter);
+    }
+    
+    dashboardData.filteredTrades = filtered;
+    updateTradeTable();
+    updatePnLSummary();
+    
+    console.log(`Filtered ${filtered.length} trades from ${dashboardData.trades.length} total`);
 }
 
-// Initialize dashboard
-async function initDashboard() {
-    updateStatus('connecting', '接続中...');
+function resetFilters() {
+    document.getElementById('date-from').value = '';
+    document.getElementById('date-to').value = '';
+    document.getElementById('token-filter').value = '';
+    document.getElementById('status-filter').value = '';
     
-    try {
-        await Promise.allSettled([
-            loadPortfolioData(),
-            loadTradingHistory(),
-            loadBacktestResults(),
-            loadDailyReport()
-        ]);
-        
-        updateSystemStatus();
-        
-    } catch (error) {
-        console.error('Dashboard initialization error:', error);
-        updateStatus('error', 'エラー');
+    dashboardData.filteredTrades = [];
+    updateTradeTable();
+    updatePnLSummary();
+}
+
+function exportToCSV() {
+    const trades = dashboardData.filteredTrades.length > 0 ? dashboardData.filteredTrades : dashboardData.trades;
+    
+    if (trades.length === 0) {
+        alert('エクスポートするデータがありません');
+        return;
+    }
+    
+    const headers = ['日時', 'シグネチャ', 'ステータス', 'インプットトークン', 'アウトプットトークン', 'インプット量', 'アウトプット量', '手数料(SOL)', 'スワップタイプ', 'エラー'];
+    
+    const csvContent = [
+        headers.join(','),
+        ...trades.map(trade => [
+            `"${formatDateTime(trade.timestamp)}"`,
+            `"${trade.signature || ''}"`,
+            `"${trade.status || ''}"`,
+            `"${trade.input_token || ''}"`,
+            `"${trade.output_token || ''}"`,
+            trade.input_amount || 0,
+            trade.output_amount || 0,
+            trade.fee_sol || 0,
+            `"${trade.swap_type || ''}"`,
+            `"${trade.error || ''}"`
+        ].join(','))
+    ].join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    
+    if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `clawdia_trades_${formatDateForFilename(new Date())}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 }
 
-// Auto refresh every 5 minutes
-setInterval(() => {
-    loadPortfolioData();
-    updateSystemStatus();
-}, 5 * 60 * 1000);
+function updateSignalChart(days) {
+    if (!signalChart) return;
+    
+    // Update active button
+    document.querySelectorAll('.chart-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`chart-${days}d`).classList.add('active');
+    
+    const chartData = getSignalChartData(days);
+    signalChart.data.labels = chartData.labels;
+    signalChart.data.datasets[0].data = chartData.cci;
+    signalChart.data.datasets[1].data = chartData.btc;
+    signalChart.update();
+}
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', initDashboard);
+// Utility functions
+function getSignalChartData(days) {
+    const cutoff = new Date(Date.now() - (days * 24 * 60 * 60 * 1000));
+    const filtered = dashboardData.signals
+        .filter(signal => new Date(signal.checked_at) >= cutoff)
+        .sort((a, b) => new Date(a.checked_at) - new Date(b.checked_at));
+    
+    return {
+        labels: filtered.map(s => formatTimeForChart(s.checked_at)),
+        cci: filtered.map(s => s.cci || 0),
+        btc: filtered.map(s => s.btc_price || 0)
+    };
+}
+
+function populateTokenFilter() {
+    const tokenSet = new Set();
+    dashboardData.trades.forEach(trade => {
+        if (trade.input_token) tokenSet.add(trade.input_token);
+        if (trade.output_token) tokenSet.add(trade.output_token);
+    });
+    
+    const select = document.getElementById('token-filter');
+    const currentValue = select.value;
+    
+    // Clear existing options except "All"
+    select.innerHTML = '<option value="">全て</option>';
+    
+    // Add token options
+    Array.from(tokenSet).sort().forEach(token => {
+        const option = document.createElement('option');
+        option.value = token;
+        option.textContent = token;
+        select.appendChild(option);
+    });
+    
+    // Restore selection
+    select.value = currentValue;
+}
+
+function updateStatusIndicator(status, text) {
+    const indicator = document.querySelector('.status-dot');
+    const textElement = document.getElementById('status-text');
+    
+    indicator.className = `status-dot ${status}`;
+    textElement.textContent = text;
+}
+
+function showError(elementId, message) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.innerHTML = `<tr><td colspan="5" class="error">${message}</td></tr>`;
+    }
+}
+
+// Formatting functions
+function formatCurrency(amount, currency = 'USD') {
+    if (typeof amount !== 'number') return '$0.00';
+    
+    if (currency === 'USD') {
+        return '$' + amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    return amount.toFixed(2);
+}
+
+function formatDateTime(dateStr) {
+    if (!dateStr) return '-';
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return '-';
+    
+    return date.toLocaleDateString('ja-JP', {
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+function formatTimeForChart(dateStr) {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return '';
+    
+    return date.toLocaleDateString('ja-JP', {
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit'
+    });
+}
+
+function formatDateForInput(date) {
+    return date.toISOString().split('T')[0];
+}
+
+function formatDateForFilename(date) {
+    return date.toISOString().split('T')[0].replace(/-/g, '');
+}
+
+function getStatusText(status) {
+    const statusMap = {
+        'success': '成功',
+        'failed': '失敗',
+        'error': 'エラー',
+        'pending': '処理中'
+    };
+    return statusMap[status] || status || '不明';
+}
+
+function getCciClass(cci) {
+    if (cci > 100) return 'positive';
+    if (cci < -100) return 'negative';
+    return 'neutral';
+}

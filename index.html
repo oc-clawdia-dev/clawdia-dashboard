@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Clawdia Trading Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>🤖 Clawdia Trading Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
             <h1>🤖 Clawdia Trading Dashboard</h1>
             <div class="status-indicator" id="status-indicator">
                 <span class="status-dot"></span>
-                <span id="status-text">接続中...</span>
+                <span id="status-text">データ読み込み中...</span>
             </div>
         </header>
 
@@ -24,11 +25,7 @@
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <div class="value" id="total-balance">$0.00</div>
-                    <div class="label">総残高</div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="value" id="total-pnl">$0.00</div>
-                    <div class="label">総損益</div>
+                    <div class="label">総資産 (USD)</div>
                 </div>
                 <div class="portfolio-item">
                     <div class="value" id="sol-balance">0 SOL</div>
@@ -38,51 +35,113 @@
                     <div class="value" id="usdc-balance">$0.00</div>
                     <div class="label">USDC残高</div>
                 </div>
+                <div class="portfolio-item">
+                    <div class="value" id="sol-price">$0.00</div>
+                    <div class="label">SOL価格</div>
+                </div>
+            </div>
+            <div class="last-updated" id="last-updated">
+                最終更新: -
+            </div>
+        </section>
+
+        <!-- フィルタとエクスポート -->
+        <section class="card">
+            <h2>🔍 トレード履歴フィルタ</h2>
+            <div class="filter-grid">
+                <div class="filter-item">
+                    <label for="date-from">開始日</label>
+                    <input type="date" id="date-from" class="filter-input">
+                </div>
+                <div class="filter-item">
+                    <label for="date-to">終了日</label>
+                    <input type="date" id="date-to" class="filter-input">
+                </div>
+                <div class="filter-item">
+                    <label for="token-filter">トークン</label>
+                    <select id="token-filter" class="filter-input">
+                        <option value="">全て</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="status-filter">ステータス</label>
+                    <select id="status-filter" class="filter-input">
+                        <option value="">全て</option>
+                        <option value="success">成功</option>
+                        <option value="failed">失敗</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button id="apply-filter" class="btn btn-primary">フィルタ適用</button>
+                <button id="reset-filter" class="btn btn-secondary">リセット</button>
+                <button id="export-csv" class="btn btn-accent">CSVエクスポート</button>
+            </div>
+        </section>
+
+        <!-- 損益サマリー -->
+        <section class="card">
+            <h2>📊 損益サマリー</h2>
+            <div class="pnl-grid">
+                <div class="pnl-item">
+                    <div class="value" id="total-trades">0</div>
+                    <div class="label">総トレード数</div>
+                </div>
+                <div class="pnl-item">
+                    <div class="value" id="successful-trades">0</div>
+                    <div class="label">成功トレード</div>
+                </div>
+                <div class="pnl-item">
+                    <div class="value" id="success-rate">0%</div>
+                    <div class="label">成功率</div>
+                </div>
+                <div class="pnl-item">
+                    <div class="value" id="total-fees">0 SOL</div>
+                    <div class="label">総手数料</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- トレード一覧 -->
+        <section class="card">
+            <h2>📈 トレード履歴</h2>
+            <div class="trade-table-container">
+                <table class="trade-table" id="trade-table">
+                    <thead>
+                        <tr>
+                            <th>日時</th>
+                            <th>ペア</th>
+                            <th>タイプ</th>
+                            <th>数量</th>
+                            <th>ステータス</th>
+                        </tr>
+                    </thead>
+                    <tbody id="trade-table-body">
+                        <tr>
+                            <td colspan="5" class="loading">データ読み込み中...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- シグナルログチャート -->
+        <section class="card">
+            <h2>📡 シグナル分析</h2>
+            <div class="chart-controls">
+                <button id="chart-1d" class="chart-btn active">1日</button>
+                <button id="chart-7d" class="chart-btn">7日</button>
+                <button id="chart-30d" class="chart-btn">30日</button>
             </div>
             <div class="chart-container">
-                <canvas id="portfolioChart"></canvas>
+                <canvas id="signalChart"></canvas>
             </div>
         </section>
 
-        <!-- システム状態 -->
+        <!-- 最新シグナル状態 -->
         <section class="card">
-            <h2>🔧 システム状態</h2>
-            <div class="system-grid">
-                <div class="system-item">
-                    <div class="value" id="bot-status">停止中</div>
-                    <div class="label">ボット状態</div>
-                </div>
-                <div class="system-item">
-                    <div class="value" id="scan-progress">0/100</div>
-                    <div class="label">スキャン進捗</div>
-                </div>
-                <div class="system-item">
-                    <div class="value" id="last-update">-</div>
-                    <div class="label">最終更新</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- トレード履歴 -->
-        <section class="card">
-            <h2>📊 最新トレード</h2>
-            <div class="trade-list" id="trade-list">
-                <div class="loading">データ読み込み中...</div>
-            </div>
-        </section>
-
-        <!-- バックテスト結果 -->
-        <section class="card">
-            <h2>🎯 バックテスト結果</h2>
-            <div class="backtest-grid" id="backtest-grid">
-                <div class="loading">データ読み込み中...</div>
-            </div>
-        </section>
-
-        <!-- 日報 -->
-        <section class="card">
-            <h2>📝 最新日報</h2>
-            <div class="daily-report" id="daily-report">
+            <h2>🎯 現在の状態</h2>
+            <div class="signal-status" id="signal-status">
                 <div class="loading">データ読み込み中...</div>
             </div>
         </section>
