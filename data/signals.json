@@ -5592,5 +5592,77 @@
     "entry_condition_met": false,
     "sl_triggered": false,
     "donchian_triggered": false
+  },
+  {
+    "checked_at": "2026-02-16T02:41:28.635935+09:00",
+    "pair": "BTCUSDT",
+    "price": 68980.0,
+    "cci": -94.48680919646041,
+    "donchian_low": 68658.0,
+    "in_position": true,
+    "action": "NONE",
+    "entry_condition_met": false,
+    "sl_triggered": false,
+    "donchian_triggered": false
+  },
+  {
+    "checked_at": "2026-02-16T02:41:28.821906+09:00",
+    "pair": "BNBUSDT",
+    "price": 618.05,
+    "cci": -129.52065425208912,
+    "donchian_low": 615.71,
+    "in_position": true,
+    "action": "NONE",
+    "entry_condition_met": false,
+    "sl_triggered": false,
+    "donchian_triggered": false
+  },
+  {
+    "checked_at": "2026-02-16T02:46:54.304529+09:00",
+    "pair": "BTCUSDT",
+    "price": 68488.73,
+    "cci": -125.74128558991605,
+    "donchian_low": 68280.0,
+    "in_position": true,
+    "action": "SELL_STOP_LOSS",
+    "entry_condition_met": true,
+    "sl_triggered": true,
+    "donchian_triggered": false
+  },
+  {
+    "checked_at": "2026-02-16T02:46:54.542008+09:00",
+    "pair": "BNBUSDT",
+    "price": 613.39,
+    "cci": -167.83494285959625,
+    "donchian_low": 610.54,
+    "in_position": true,
+    "action": "NONE",
+    "entry_condition_met": true,
+    "sl_triggered": false,
+    "donchian_triggered": false
+  },
+  {
+    "checked_at": "2026-02-16T02:51:55.067391+09:00",
+    "pair": "BTCUSDT",
+    "price": 68506.66,
+    "cci": -127.29832364700816,
+    "donchian_low": 68203.6,
+    "in_position": false,
+    "action": "NONE",
+    "entry_condition_met": true,
+    "sl_triggered": false,
+    "donchian_triggered": false
+  },
+  {
+    "checked_at": "2026-02-16T02:51:55.363979+09:00",
+    "pair": "BNBUSDT",
+    "price": 613.08,
+    "cci": -169.94081814896884,
+    "donchian_low": 610.17,
+    "in_position": true,
+    "action": "NONE",
+    "entry_condition_met": true,
+    "sl_triggered": false,
+    "donchian_triggered": false
   }
 ]
