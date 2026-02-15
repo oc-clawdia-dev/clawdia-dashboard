@@ -109,13 +109,14 @@
     "action": "buy",
     "token": "SOL",
     "usdc_spent": 20.0,
-    "signature": "manual_restore",
-    "note": "restored from grid_state.json - original log missing",
-    "source": "jupiter_grid",
+    "token_amount": 0.2245,
+    "price": 89.07,
+    "signature": "3Lw5hCNcnvqyBUYQghg8FFhuUypS7vrpLTkD7J3cwNmaoBtjbfjWSz5Dwe6XescQbw3kzTgUVHo2Pwj7mRJSVDSR",
     "input_token": "USDC",
     "output_token": "SOL",
     "input_amount": 20.0,
-    "output_amount": 0,
-    "status": "Success"
+    "output_amount": 0.2245,
+    "status": "Success",
+    "source": "jupiter_grid"
   }
 ]
