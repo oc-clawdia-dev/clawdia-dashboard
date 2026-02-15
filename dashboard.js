@@ -564,7 +564,15 @@ function updateTradeTable(trades, wallet) {
         const outputAmt = t.output_amount || t.actual_output_amount || t.order_output_amount || t.token_amount || 0;
         const inputUsd = estimateUsd(inputToken, inputAmt, solPrice, btcPrice, bnbPrice);
         const outputUsd = estimateUsd(outputToken, outputAmt, solPrice, btcPrice, bnbPrice);
-        const usdDisplay = inputToken === 'USDC' ? fmtCurrency(inputAmt) : fmtCurrency(outputUsd);
+        // For buys: show input USDC amount. For sells: show output USDC or estimate from input token value
+        let usdDisplay;
+        if (inputToken === 'USDC') {
+            usdDisplay = fmtCurrency(inputAmt);
+        } else if (outputToken === 'USDC' && outputAmt > 0) {
+            usdDisplay = fmtCurrency(outputAmt);
+        } else {
+            usdDisplay = fmtCurrency(inputUsd);
+        }
         const status = t.status || 'Success';
 
         return `

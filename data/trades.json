@@ -49,7 +49,7 @@
     "input_token": "BNB",
     "output_token": "USDC",
     "input_amount": 0.03175978,
-    "output_amount": 0,
+    "output_amount": 19.6,
     "input_amount_raw": 3175978,
     "output_amount_raw": 0,
     "fee_lamports": 5000,
@@ -60,7 +60,9 @@
     "latency_ms": 0,
     "pre_balance_sol": 0,
     "post_balance_sol": 0,
-    "error": ""
+    "error": "",
+    "direction": "SELL",
+    "strategy": "CCI"
   },
   {
     "timestamp": "2026-02-15T23:37:30.593388+09:00",
