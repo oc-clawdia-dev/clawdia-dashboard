@@ -955,3 +955,82 @@ function simpleMarkdown(text) {
         .replace(/\n\n/g,'<br><br>')
         .replace(/\n/g,'<br>');
 }
+
+// ─── Memory Tab ───
+let memoryData = null;
+let currentMemoryAgent = 'clawdia';
+let currentMemoryFile = 'MEMORY.md';
+
+async function loadMemories() {
+    try {
+        const resp = await fetch('data/memories.json?' + Date.now());
+        memoryData = await resp.json();
+        setupMemoryTabs();
+        renderMemory();
+    } catch (e) {
+        document.getElementById('memory-content').textContent = 'メモリデータ読み込み失敗: ' + e.message;
+    }
+}
+
+function setupMemoryTabs() {
+    // Agent tab clicks
+    document.querySelectorAll('.memory-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.memory-tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentMemoryAgent = btn.dataset.agent;
+            currentMemoryFile = null; // auto-select first
+            renderMemoryFileTabs();
+            renderMemory();
+        });
+    });
+    renderMemoryFileTabs();
+}
+
+function renderMemoryFileTabs() {
+    const container = document.getElementById('memory-file-tabs');
+    if (!memoryData || !memoryData[currentMemoryAgent]) {
+        container.innerHTML = '';
+        return;
+    }
+    const files = Object.keys(memoryData[currentMemoryAgent].files || {});
+    if (!currentMemoryFile || !files.includes(currentMemoryFile)) {
+        currentMemoryFile = files[0] || null;
+    }
+    container.innerHTML = files.map(f => 
+        `<button class="memory-file-btn ${f === currentMemoryFile ? 'active' : ''}" data-file="${f}">${f.replace('.md','')}</button>`
+    ).join('');
+    container.querySelectorAll('.memory-file-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentMemoryFile = btn.dataset.file;
+            container.querySelectorAll('.memory-file-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderMemory();
+        });
+    });
+}
+
+function renderMemory() {
+    const el = document.getElementById('memory-content');
+    if (!memoryData || !memoryData[currentMemoryAgent]) {
+        el.innerHTML = '<div class="loading">このエージェントのデータなし</div>';
+        return;
+    }
+    const agent = memoryData[currentMemoryAgent];
+    const content = agent.files?.[currentMemoryFile];
+    if (!content) {
+        el.innerHTML = `<div class="loading">${currentMemoryFile || 'ファイル'} が見つかりません</div>`;
+        return;
+    }
+    el.innerHTML = simpleMarkdown(content);
+}
+
+// Load memories when memory tab is shown
+const origTabHandler = document.querySelectorAll('.tab-btn');
+origTabHandler.forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (btn.dataset.tab === 'memories' && !memoryData) {
+            loadMemories();
+        }
+    });
+});

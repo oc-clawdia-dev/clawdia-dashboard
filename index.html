@@ -27,6 +27,7 @@
                 <button class="tab-btn" data-tab="signals">📈 シグナル</button>
                 <button class="tab-btn" data-tab="strategies">🎯 戦略</button>
                 <button class="tab-btn" data-tab="reports">📝 日報</button>
+                <button class="tab-btn" data-tab="memories">🧠 メモリ</button>
             </div>
         </nav>
 
@@ -228,9 +229,25 @@
                     </div>
                 </section>
             </div>
+
+            <!-- メモリタブ -->
+            <div id="tab-memories" class="tab-panel">
+                <section class="card">
+                    <h2>🧠 エージェントメモリ</h2>
+                    <div class="memory-agent-tabs">
+                        <button class="memory-tab-btn active" data-agent="clawdia">🩶 Clawdia</button>
+                        <button class="memory-tab-btn" data-agent="talon">🦅 Talon</button>
+                        <button class="memory-tab-btn" data-agent="velvet">🌙 Velvet</button>
+                    </div>
+                    <div class="memory-file-tabs" id="memory-file-tabs"></div>
+                    <div id="memory-content" class="memory-content">
+                        <div class="loading">データ読み込み中...</div>
+                    </div>
+                </section>
+            </div>
         </div>
     </div>
 
-    <script src="dashboard.js?v=20260216d"></script>
+    <script src="dashboard.js?v=20260216e"></script>
 </body>
 </html>

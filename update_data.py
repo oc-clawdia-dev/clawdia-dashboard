@@ -661,6 +661,57 @@ def update_portfolio_history():
     return output
 
 
+def update_agent_memories():
+    """全エージェントのメモリファイルを収集"""
+    print("Updating agent memories...")
+    
+    agents = {
+        'clawdia': {
+            'name': 'Clawdia 🩶',
+            'workspace': os.path.join(os.path.dirname(CONFIG['BOT_DATA_DIR']), ''),  # parent of bot/
+            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md']
+        },
+        'talon': {
+            'name': 'Talon 🦅',
+            'workspace': os.path.expanduser('~/.openclaw/workspace-talon/'),
+            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md']
+        },
+        'velvet': {
+            'name': 'Velvet 🌙',
+            'workspace': os.path.expanduser('~/.openclaw/workspace-velvet/'),
+            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md']
+        }
+    }
+    
+    # Fix clawdia workspace path
+    agents['clawdia']['workspace'] = os.path.expanduser('~/.openclaw/workspace/')
+    
+    result = {}
+    for agent_id, agent in agents.items():
+        agent_data = {'name': agent['name'], 'files': {}}
+        for fname in agent['files']:
+            fpath = os.path.join(agent['workspace'], fname)
+            if os.path.exists(fpath):
+                with open(fpath, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                # Redact secrets
+                import re
+                content = re.sub(r'ghp_[A-Za-z0-9]{36}', 'ghp_***REDACTED***', content)
+                content = re.sub(r'MTQ3[A-Za-z0-9._\-]{50,}', 'MTQ3***REDACTED***', content)
+                content = re.sub(r'sk-ant-[A-Za-z0-9\-]+', 'sk-ant-***REDACTED***', content)
+                content = re.sub(r'daughter insect.*?file', '***SEED_REDACTED***', content)
+                agent_data['files'][fname] = content
+        result[agent_id] = agent_data
+    
+    output_path = os.path.join(CONFIG['OUTPUT_DIR'], 'memories.json')
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(result, f, ensure_ascii=False, indent=2)
+    
+    total_files = sum(len(a['files']) for a in result.values())
+    print(f"  Saved {total_files} memory files from {len(result)} agents")
+    return result
+
+
 def main():
     """メイン処理"""
     print("🤖 Clawdia Dashboard Data Updater")
@@ -678,6 +729,7 @@ def main():
         daily_reports = update_daily_reports_data()
         strategies = update_portfolio_strategies()
         portfolio_history = update_portfolio_history()
+        memories = update_agent_memories()
         
         # サマリー作成
         summary = {
