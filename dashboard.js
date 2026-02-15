@@ -431,31 +431,67 @@ function updateTradesSection() {
     const wallet = dashboardData.wallet;
     if (!wallet) return;
 
+    // Helper to get amounts from either old or new field names
+    const getInputAmt = t => t.actual_input_amount || t.input_amount || t.order_input_amount || 0;
+    const getOutputAmt = t => t.actual_output_amount || t.output_amount || t.order_output_amount || 0;
+
     // Categorize trades
     // Open positions = tokens we currently hold (from wallet data)
+    // Dust filter: ignore balances worth less than $0.01
+    const DUST_THRESHOLD_USD = 0.01;
     const openPositions = [];
-    if (wallet.wbtc_balance > 0) {
-        // Find the buy trade for WBTC
-        const wbtcBuy = trades.filter(t => t.output_token === 'WBTC' && t.status === 'Success').slice(-1)[0];
-        openPositions.push({
-            token: 'WBTC',
-            amount: wallet.wbtc_balance,
-            currentValueUsd: wallet.wbtc_value_usd,
-            entryUsd: wbtcBuy ? wbtcBuy.input_amount : null,
-            entryDate: wbtcBuy?.timestamp,
-            pnlUsd: wbtcBuy ? (wallet.wbtc_value_usd - wbtcBuy.input_amount) : null
-        });
+    if (wallet.wbtc_value_usd > DUST_THRESHOLD_USD) {
+        // Find the LAST buy trade for WBTC that doesn't have a matching sell after it
+        const wbtcBuys = trades.filter(t => t.output_token === 'WBTC' && t.status === 'Success');
+        const wbtcSells = trades.filter(t => t.input_token === 'WBTC' && t.status === 'Success');
+        const lastSellTime = wbtcSells.length > 0 ? new Date(wbtcSells[wbtcSells.length-1].timestamp) : new Date(0);
+        const activeBuy = wbtcBuys.filter(t => new Date(t.timestamp) > lastSellTime).slice(-1)[0];
+        if (activeBuy) {
+            const entryUsd = getInputAmt(activeBuy);
+            openPositions.push({
+                token: 'WBTC',
+                amount: wallet.wbtc_balance,
+                currentValueUsd: wallet.wbtc_value_usd,
+                entryUsd: entryUsd,
+                entryDate: activeBuy.timestamp,
+                pnlUsd: wallet.wbtc_value_usd - entryUsd
+            });
+        }
     }
-    if (wallet.bnb_balance > 0) {
-        const bnbBuy = trades.filter(t => t.output_token === 'BNB' && t.status === 'Success').slice(-1)[0];
-        openPositions.push({
-            token: 'BNB',
-            amount: wallet.bnb_balance,
-            currentValueUsd: wallet.bnb_value_usd,
-            entryUsd: bnbBuy ? bnbBuy.input_amount : null,
-            entryDate: bnbBuy?.timestamp,
-            pnlUsd: bnbBuy ? (wallet.bnb_value_usd - bnbBuy.input_amount) : null
-        });
+    if (wallet.bnb_value_usd > DUST_THRESHOLD_USD) {
+        const bnbBuys = trades.filter(t => t.output_token === 'BNB' && t.status === 'Success');
+        const bnbSells = trades.filter(t => t.input_token === 'BNB' && t.status === 'Success');
+        const lastSellTime = bnbSells.length > 0 ? new Date(bnbSells[bnbSells.length-1].timestamp) : new Date(0);
+        const activeBuy = bnbBuys.filter(t => new Date(t.timestamp) > lastSellTime).slice(-1)[0];
+        if (activeBuy) {
+            const entryUsd = getInputAmt(activeBuy);
+            openPositions.push({
+                token: 'BNB',
+                amount: wallet.bnb_balance,
+                currentValueUsd: wallet.bnb_value_usd,
+                entryUsd: entryUsd,
+                entryDate: activeBuy.timestamp,
+                pnlUsd: wallet.bnb_value_usd - entryUsd
+            });
+        }
+    }
+    // SOL position (from Grid Bot) — only if significant
+    if (wallet.sol_value_usd > 1.0) {
+        const solBuys = trades.filter(t => t.output_token === 'SOL' && t.status === 'Success' && t.strategy !== 'TEST' && t.strategy !== 'PIPELINE_TEST');
+        const solSells = trades.filter(t => t.input_token === 'SOL' && t.status === 'Success' && t.strategy !== 'TEST' && t.strategy !== 'PIPELINE_TEST');
+        const lastSellTime = solSells.length > 0 ? new Date(solSells[solSells.length-1].timestamp) : new Date(0);
+        const activeBuy = solBuys.filter(t => new Date(t.timestamp) > lastSellTime).slice(-1)[0];
+        if (activeBuy) {
+            const entryUsd = getInputAmt(activeBuy);
+            openPositions.push({
+                token: 'SOL',
+                amount: wallet.sol_balance,
+                currentValueUsd: wallet.sol_value_usd,
+                entryUsd: entryUsd,
+                entryDate: activeBuy.timestamp,
+                pnlUsd: wallet.sol_value_usd - entryUsd
+            });
+        }
     }
 
     // Open positions section
@@ -513,34 +549,45 @@ function findRoundTrips(trades, wallet) {
     const trips = [];
     const successTrades = trades.filter(t => t.status === 'Success');
 
-    // SOL round-trip: USDC→SOL then SOL→USDC
-    const solBuys = successTrades.filter(t => t.input_token === 'USDC' && t.output_token === 'SOL');
-    const solSells = successTrades.filter(t => t.input_token === 'SOL' && t.output_token === 'USDC');
+    const getInput = t => t.actual_input_amount || t.input_amount || t.order_input_amount || 0;
+    const getOutput = t => t.actual_output_amount || t.output_amount || t.order_output_amount || 0;
 
-    // Helper to get amounts from either old or new field names
-    const getInput = t => t.input_amount || t.actual_input_amount || t.order_input_amount || 0;
-    const getOutput = t => t.output_amount || t.actual_output_amount || t.order_output_amount || 0;
+    // Generic round-trip matcher for any token
+    function matchToken(tokenName) {
+        const buys = successTrades.filter(t => t.input_token === 'USDC' && t.output_token === tokenName);
+        const sells = successTrades.filter(t => t.input_token === tokenName && t.output_token === 'USDC');
 
-    // Match pairs
-    const usedSells = new Set();
-    for (const buy of solBuys) {
-        for (let i = 0; i < solSells.length; i++) {
-            if (usedSells.has(i)) continue;
-            if (new Date(solSells[i].timestamp) > new Date(buy.timestamp)) {
-                trips.push({
-                    token: 'SOL',
-                    buyUsd: getInput(buy),
-                    sellUsd: getOutput(solSells[i]),
-                    buyDate: buy.timestamp,
-                    sellDate: solSells[i].timestamp,
-                    pnl: getOutput(solSells[i]) - getInput(buy)
-                });
-                usedSells.add(i);
-                break;
+        const usedSells = new Set();
+        for (const buy of buys) {
+            for (let i = 0; i < sells.length; i++) {
+                if (usedSells.has(i)) continue;
+                if (new Date(sells[i].timestamp) > new Date(buy.timestamp)) {
+                    const sellUsd = getOutput(sells[i]);
+                    const buyUsd = getInput(buy);
+                    // Skip trades with $0 sell (data recording error)
+                    if (sellUsd <= 0.01) continue;
+                    trips.push({
+                        token: tokenName,
+                        buyUsd: buyUsd,
+                        sellUsd: sellUsd,
+                        buyDate: buy.timestamp,
+                        sellDate: sells[i].timestamp,
+                        pnl: sellUsd - buyUsd
+                    });
+                    usedSells.add(i);
+                    break;
+                }
             }
         }
     }
 
+    matchToken('SOL');
+    matchToken('WBTC');
+    matchToken('BNB');
+    matchToken('PUMP');
+
+    // Sort by sell date descending
+    trips.sort((a, b) => new Date(b.sellDate) - new Date(a.sellDate));
     return trips;
 }
 
