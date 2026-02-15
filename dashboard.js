@@ -289,7 +289,7 @@ function renderTaskList(tasks, level) {
                         ${t.assignee === 'hikarimaru' && t.status === 'pending' ? renderHikarimaruInstructions(t) : ''}
                         ${t.estimated_hours ? `<div class="task-detail-meta">⏱ 見積: ${t.estimated_hours}h${t.actual_hours ? ` / 実績: ${t.actual_hours}h` : ''}</div>` : ''}
                         ${t.depends_on?.length ? `<div class="task-detail-meta">🔗 依存: ${t.depends_on.join(', ')}</div>` : ''}
-                        ${t.notes?.length ? `<div class="task-detail-notes">${t.notes.map(n => `<div class="note-line"><span class="note-ts">${fmtTime(n.timestamp)}</span> ${esc(n.text)}</div>`).join('')}</div>` : ''}
+                        ${t.notes?.length ? `<div class="task-detail-notes">${(Array.isArray(t.notes) ? t.notes : [{text: String(t.notes), timestamp: ''}]).map(n => `<div class="note-line">${n.timestamp ? `<span class="note-ts">${fmtTime(n.timestamp)}</span> ` : ''}${esc(n.text || String(n))}</div>`).join('')}</div>` : ''}
                     </div>
                 </div>
                 ${hasSubs ? `<div class="subtasks-container" id="subtasks-${t.id}" style="display:none">${renderTaskList(t.subtasks, level+1)}</div>` : ''}
