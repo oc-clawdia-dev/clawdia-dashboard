@@ -669,20 +669,50 @@ function closeTaskDetails() {
 }
 
 function filterHikarimaruPending() {
-    // Set filters to show hikarimaru's pending tasks
+    // Collect all hikarimaru pending tasks/subtasks as flat list
+    const items = [];
+    function findHikarimaruTasks(tasks, projectName) {
+        for (const task of tasks) {
+            if (task.assignee === 'hikarimaru' && task.status === 'pending') {
+                items.push({...task, _project: projectName});
+            }
+            if (task.subtasks) findHikarimaruTasks(task.subtasks, projectName);
+        }
+    }
+    for (const project of dashboardData.tasks.projects || []) {
+        findHikarimaruTasks(project.tasks || [], project.name);
+    }
+    
+    const container = document.getElementById('tasks-container');
+    if (items.length === 0) {
+        container.innerHTML = '<div class="loading">確認待ちタスクはありません 🎉</div>';
+        return;
+    }
+    
+    const html = `
+        <h3 style="color:#ffaa00;margin-bottom:12px">👑 確認待ちタスク (${items.length}件)</h3>
+        ${items.map(t => `
+            <div class="task-card hikarimaru-pending" onclick="selectTask('${t.id}')" style="border-left:3px solid #ffaa00;padding:12px;margin-bottom:8px;background:#1a1500;border-radius:8px;cursor:pointer">
+                <div style="font-weight:bold;margin-bottom:4px">${escapeHtml(t.title)}</div>
+                <div style="font-size:0.85em;color:#999;margin-bottom:4px">📁 ${escapeHtml(t._project)} • ID: ${t.id}</div>
+                <div style="font-size:0.85em;color:#ccc">${escapeHtml(t.description || '')}</div>
+                ${t.estimated_hours ? `<div style="font-size:0.8em;color:#888;margin-top:4px">⏱ 見積: ${t.estimated_hours}h</div>` : ''}
+            </div>
+        `).join('')}
+        <button onclick="resetTaskFilters()" style="margin-top:12px;padding:8px 16px;background:#333;color:#fff;border:none;border-radius:6px;cursor:pointer">🔄 全タスク表示に戻る</button>
+    `;
+    container.innerHTML = html;
+    container.scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetTaskFilters() {
     const statusFilter = document.getElementById('task-status-filter');
     const assigneeFilter = document.getElementById('task-assignee-filter');
     const priorityFilter = document.getElementById('task-priority-filter');
-    
-    if (statusFilter) statusFilter.value = 'pending';
-    if (assigneeFilter) assigneeFilter.value = 'hikarimaru';
+    if (statusFilter) statusFilter.value = '';
+    if (assigneeFilter) assigneeFilter.value = '';
     if (priorityFilter) priorityFilter.value = '';
-    
-    // Re-render with filters applied
     renderProjectAccordion();
-    
-    // Scroll to task list
-    document.getElementById('tasks-container')?.scrollIntoView({ behavior: 'smooth' });
 }
 
 // P&L Summary Update (fixing success count)
@@ -745,7 +775,7 @@ function updateDailyReportsSection() {
 // Filter and Export Functions
 function populateTokenFilter() {
     const tokenSelect = document.getElementById('token-filter');
-    const tokens = [...new Set(dashboardData.trades.map(trade => trade.token_symbol).filter(Boolean))];
+    const tokens = [...new Set(dashboardData.trades.flatMap(trade => [trade.input_token, trade.output_token]).filter(Boolean))];
     
     // Clear existing options except "All"
     const allOption = tokenSelect.querySelector('option[value=""]');
@@ -779,7 +809,7 @@ function applyFilters() {
     
     // Apply token filter
     if (token) {
-        filtered = filtered.filter(trade => trade.token_symbol === token);
+        filtered = filtered.filter(trade => trade.input_token === token || trade.output_token === token);
     }
     
     // Apply status filter (fix case sensitivity)
@@ -841,19 +871,23 @@ function updateTradeTable() {
         return;
     }
     
-    const html = dashboardData.filteredTrades.slice(0, 100).map(trade => `
+    const html = dashboardData.filteredTrades.slice(0, 100).map(trade => {
+        const pair = `${trade.input_token || ''} → ${trade.output_token || ''}`;
+        const amount = trade.input_amount || trade.output_amount || 0;
+        const swapType = trade.swap_type || '-';
+        return `
         <tr class="trade-row ${trade.status === 'Success' ? 'success' : 'failed'}">
             <td class="trade-timestamp">${formatDateTime(trade.timestamp)}</td>
-            <td class="trade-pair">${escapeHtml(trade.pair || trade.token_symbol || '-')}</td>
-            <td class="trade-type">${escapeHtml(trade.type || '-')}</td>
-            <td class="trade-amount">${trade.amount ? formatNumber(trade.amount, 4) : '-'}</td>
+            <td class="trade-pair">${escapeHtml(pair)}</td>
+            <td class="trade-type"><span class="type-badge">${escapeHtml(swapType)}</span></td>
+            <td class="trade-amount">${formatNumber(amount, 4)}</td>
             <td class="trade-status">
                 <span class="status-badge ${trade.status === 'Success' ? 'success' : 'failed'}">
                     ${trade.status === 'Success' ? '成功' : '失敗'}
                 </span>
             </td>
-        </tr>
-    `).join('');
+        </tr>`;
+    }).join('');
     
     tbody.innerHTML = html;
 }
