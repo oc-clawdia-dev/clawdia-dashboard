@@ -667,6 +667,23 @@ function closeTaskDetails() {
     renderProjectAccordion();
 }
 
+function filterHikarimaruPending() {
+    // Set filters to show hikarimaru's pending tasks
+    const statusFilter = document.getElementById('task-status-filter');
+    const assigneeFilter = document.getElementById('task-assignee-filter');
+    const priorityFilter = document.getElementById('task-priority-filter');
+    
+    if (statusFilter) statusFilter.value = 'pending';
+    if (assigneeFilter) assigneeFilter.value = 'hikarimaru';
+    if (priorityFilter) priorityFilter.value = '';
+    
+    // Re-render with filters applied
+    renderProjectAccordion();
+    
+    // Scroll to task list
+    document.getElementById('tasks-container')?.scrollIntoView({ behavior: 'smooth' });
+}
+
 // P&L Summary Update (fixing success count)
 function updatePnLSummary() {
     if (dashboardData.trades.length === 0) {

@@ -194,6 +194,158 @@
               "description": "KYC必要。hikarimaruが作成するか判断"
             }
           ]
+        },
+        {
+          "id": "P001-T005",
+          "title": "BUY_FAILED根本原因調査",
+          "assignee": "talon",
+          "status": "pending",
+          "priority": "high",
+          "estimated_hours": 3,
+          "actual_hours": null,
+          "created_at": "2026-02-15T13:00:00",
+          "started_at": null,
+          "completed_at": null,
+          "description": "execute_buy_orderのエラーログ強化、次回BUY_FAILED発生時に詳細キャプチャ。実害なしだが信頼性向上のため必要",
+          "notes": [],
+          "tags": [
+            "monitoring",
+            "reliability"
+          ],
+          "subtasks": [
+            {
+              "id": "P001-T005-S01",
+              "title": "execute_buy_orderエラーログ強化",
+              "assignee": "talon",
+              "status": "completed",
+              "estimated_hours": 1,
+              "actual_hours": 0.5,
+              "completed_at": "2026-02-15T13:15:00"
+            },
+            {
+              "id": "P001-T005-S02",
+              "title": "MATON_API_KEY未設定問題調査",
+              "assignee": "talon",
+              "status": "completed",
+              "estimated_hours": 0.5,
+              "actual_hours": 0.3,
+              "completed_at": "2026-02-15T13:20:00"
+            },
+            {
+              "id": "P001-T005-S03",
+              "title": "次回発生時の詳細ログ取得",
+              "assignee": "talon",
+              "status": "pending",
+              "estimated_hours": 1,
+              "description": "実際のBUY_FAILED発生まで待機監視"
+            },
+            {
+              "id": "P001-T005-S04",
+              "title": "根本原因特定と修正",
+              "assignee": "talon",
+              "status": "pending",
+              "estimated_hours": 0.5
+            }
+          ]
+        },
+        {
+          "id": "P001-T006",
+          "title": "トレード分析自動化",
+          "assignee": "talon",
+          "status": "pending",
+          "priority": "medium",
+          "estimated_hours": 4,
+          "actual_hours": null,
+          "created_at": "2026-02-15T13:00:00",
+          "started_at": null,
+          "completed_at": null,
+          "description": "シグナルログからエントリー精度・勝率の定期分析。数値ベースの戦略改善提案を自動化",
+          "notes": [],
+          "tags": [
+            "analysis",
+            "automation"
+          ],
+          "subtasks": [
+            {
+              "id": "P001-T006-S01",
+              "title": "シグナルログ分析スクリプト作成",
+              "assignee": "talon",
+              "status": "completed",
+              "estimated_hours": 2,
+              "actual_hours": 1.5,
+              "completed_at": "2026-02-15T13:30:00"
+            },
+            {
+              "id": "P001-T006-S02",
+              "title": "勝率・精度指標の計算ロジック",
+              "assignee": "talon",
+              "status": "pending",
+              "estimated_hours": 1
+            },
+            {
+              "id": "P001-T006-S03",
+              "title": "定期レポートに分析結果組み込み",
+              "assignee": "talon",
+              "status": "pending",
+              "estimated_hours": 0.5
+            },
+            {
+              "id": "P001-T006-S04",
+              "title": "週次詳細分析レポート作成",
+              "assignee": "talon",
+              "status": "pending",
+              "estimated_hours": 0.5
+            }
+          ]
+        },
+        {
+          "id": "P001-T007",
+          "title": "戦略パラメータ最適化検証",
+          "assignee": "talon",
+          "status": "pending",
+          "priority": "medium",
+          "estimated_hours": 5,
+          "actual_hours": null,
+          "created_at": "2026-02-15T13:00:00",
+          "started_at": null,
+          "completed_at": null,
+          "description": "BNBのCCI閾値-120が最適か、BTCの-100も含めてデータ駆動で検証。バックテスト+ライブデータ分析",
+          "notes": [],
+          "tags": [
+            "optimization",
+            "backtest"
+          ],
+          "subtasks": [
+            {
+              "id": "P001-T007-S01",
+              "title": "現在パラメータの有効性検証",
+              "assignee": "talon",
+              "status": "pending",
+              "estimated_hours": 1.5
+            },
+            {
+              "id": "P001-T007-S02",
+              "title": "CCI閾値範囲テスト(-80～-150)",
+              "assignee": "talon",
+              "status": "pending",
+              "estimated_hours": 2
+            },
+            {
+              "id": "P001-T007-S03",
+              "title": "Donchian期間最適化(10-20)",
+              "assignee": "talon",
+              "status": "pending",
+              "estimated_hours": 1.5
+            },
+            {
+              "id": "P001-T007-S04",
+              "title": "最適パラメータ提案・適用判断",
+              "assignee": "hikarimaru",
+              "status": "pending",
+              "estimated_hours": 0.5,
+              "description": "検証結果を基にhikarimaruが採用可否判断"
+            }
+          ]
         }
       ]
     },
@@ -445,16 +597,16 @@
     }
   ],
   "statistics": {
-    "total_tasks": 27,
-    "completed_tasks": 3,
-    "overall_progress": 11.1,
+    "total_tasks": 42,
+    "completed_tasks": 6,
+    "overall_progress": 14.3,
     "projects": [
       {
         "id": "P001",
         "name": "CCI自動売買Bot",
-        "total_tasks": 13,
-        "completed_tasks": 0,
-        "progress_percentage": 0.0
+        "total_tasks": 28,
+        "completed_tasks": 3,
+        "progress_percentage": 10.7
       },
       {
         "id": "P002",
