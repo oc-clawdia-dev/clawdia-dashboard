@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Clawdia Trading Dashboard - Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Clawdia Trading Dashboard</h1>
+            <div class="status-indicator" id="status-indicator">
+                <span class="status-dot"></span>
+                <span id="status-text">接続中...</span>
+            </div>
+        </header>
+
+        <!-- ポートフォリオ概要 -->
+        <section class="card">
+            <h2>💰 ポートフォリオ概要</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="value" id="total-balance">$0.00</div>
+                    <div class="label">総残高</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="value" id="total-pnl">$0.00</div>
+                    <div class="label">総損益</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="value" id="sol-balance">0 SOL</div>
+                    <div class="label">SOL残高</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="value" id="usdc-balance">$0.00</div>
+                    <div class="label">USDC残高</div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="portfolioChart"></canvas>
+            </div>
+        </section>
+
+        <!-- システム状態 -->
+        <section class="card">
+            <h2>🔧 システム状態</h2>
+            <div class="system-grid">
+                <div class="system-item">
+                    <div class="value" id="bot-status">停止中</div>
+                    <div class="label">ボット状態</div>
+                </div>
+                <div class="system-item">
+                    <div class="value" id="scan-progress">0/100</div>
+                    <div class="label">スキャン進捗</div>
+                </div>
+                <div class="system-item">
+                    <div class="value" id="last-update">-</div>
+                    <div class="label">最終更新</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- トレード履歴 -->
+        <section class="card">
+            <h2>📊 最新トレード</h2>
+            <div class="trade-list" id="trade-list">
+                <div class="loading">データ読み込み中...</div>
+            </div>
+        </section>
+
+        <!-- バックテスト結果 -->
+        <section class="card">
+            <h2>🎯 バックテスト結果</h2>
+            <div class="backtest-grid" id="backtest-grid">
+                <div class="loading">データ読み込み中...</div>
+            </div>
+        </section>
+
+        <!-- 日報 -->
+        <section class="card">
+            <h2>📝 最新日報</h2>
+            <div class="daily-report" id="daily-report">
+                <div class="loading">データ読み込み中...</div>
+            </div>
+        </section>
+
+        <!-- GitHub Link -->
+        <section class="card" style="text-align: center; background: var(--bg-secondary); border: 1px solid var(--accent-blue);">
+            <h2>🚀 完全版を見る</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 15px;">
+                この Demo は一部機能が制限されています。<br>
+                完全版はNetlifyで環境変数を設定してデプロイしてください。
+            </p>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <a href="https://github.com/oc-clawdia/clawdia-dashboard" 
+                   target="_blank" class="link-button" style="background: var(--accent-blue);">
+                    📂 GitHub Repository
+                </a>
+                <a href="https://docs.netlify.com/functions/deploy/" 
+                   target="_blank" class="link-button">
+                    📖 Netlify Functions Setup
+                </a>
+                <a href="https://docs.google.com/document/d/10NyFE-AdHMxFcDU1Y2godseURs7PFAfMYw_BgTsz5Hg/edit" 
+                   target="_blank" class="link-button">
+                    📋 Project Documentation
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <script src="demo-dashboard.js"></script>
+</body>
+</html>
