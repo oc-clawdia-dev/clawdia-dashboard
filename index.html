@@ -19,156 +19,292 @@
             </div>
         </header>
 
-        <!-- ポートフォリオ概要 -->
-        <section class="card">
-            <h2>💰 ポートフォリオ概要</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="value" id="total-balance">$0.00</div>
-                    <div class="label">総資産 (USD)</div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="value" id="sol-balance">0 SOL</div>
-                    <div class="label">SOL残高</div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="value" id="usdc-balance">$0.00</div>
-                    <div class="label">USDC残高</div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="value" id="wbtc-balance">0 WBTC</div>
-                    <div class="label">WBTC残高</div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="value" id="bnb-balance">0 BNB</div>
-                    <div class="label">BNB残高</div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="value" id="sol-price">$0.00</div>
-                    <div class="label">SOL価格</div>
-                </div>
+        <!-- タブナビゲーション -->
+        <nav class="tab-nav">
+            <div class="tab-container">
+                <button class="tab-btn active" data-tab="overview">📊 概要</button>
+                <button class="tab-btn" data-tab="tasks">📋 タスク</button>
+                <button class="tab-btn" data-tab="trades">💹 トレード</button>
+                <button class="tab-btn" data-tab="signals">📈 シグナル</button>
+                <button class="tab-btn" data-tab="reports">📝 日報</button>
             </div>
-            <div class="last-updated" id="last-updated">
-                最終更新: -
-            </div>
-        </section>
+        </nav>
 
-        <!-- タスク一覧 -->
-        <section class="card">
-            <h2>📋 タスク一覧</h2>
-            <div id="tasks-container">
-                <div class="loading">データ読み込み中...</div>
-            </div>
-        </section>
+        <!-- タブコンテンツ -->
+        <div class="tab-content">
+            <!-- 概要タブ -->
+            <div id="tab-overview" class="tab-panel active">
+                <!-- ポートフォリオ概要 -->
+                <section class="card">
+                    <h2>💰 ポートフォリオ概要</h2>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item">
+                            <div class="value" id="total-balance">$0.00</div>
+                            <div class="label">総資産 (USD)</div>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="value" id="sol-balance">0 SOL</div>
+                            <div class="label">SOL残高</div>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="value" id="usdc-balance">$0.00</div>
+                            <div class="label">USDC残高</div>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="value" id="wbtc-balance">0 WBTC</div>
+                            <div class="label">WBTC残高</div>
+                        </div>
+                        <div class="portfolio-item" id="bnb-item">
+                            <div class="value" id="bnb-balance">0 BNB</div>
+                            <div class="label">BNB残高</div>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="value" id="sol-price">$0.00</div>
+                            <div class="label">SOL価格</div>
+                        </div>
+                    </div>
+                    <div class="last-updated" id="last-updated">
+                        最終更新: -
+                    </div>
+                </section>
 
-        <!-- 日報 -->
-        <section class="card">
-            <h2>📝 日報</h2>
-            <div id="daily-reports-container">
-                <div class="loading">データ読み込み中...</div>
-            </div>
-        </section>
+                <!-- 現在の状態 -->
+                <section class="card">
+                    <h2>🎯 現在の状態</h2>
+                    <div class="signal-status" id="signal-status">
+                        <div class="loading">データ読み込み中...</div>
+                    </div>
+                </section>
 
-        <!-- フィルタとエクスポート -->
-        <section class="card">
-            <h2>🔍 トレード履歴フィルタ</h2>
-            <div class="filter-grid">
-                <div class="filter-item">
-                    <label for="date-from">開始日</label>
-                    <input type="date" id="date-from" class="filter-input">
-                </div>
-                <div class="filter-item">
-                    <label for="date-to">終了日</label>
-                    <input type="date" id="date-to" class="filter-input">
-                </div>
-                <div class="filter-item">
-                    <label for="token-filter">トークン</label>
-                    <select id="token-filter" class="filter-input">
-                        <option value="">全て</option>
-                    </select>
-                </div>
-                <div class="filter-item">
-                    <label for="status-filter">ステータス</label>
-                    <select id="status-filter" class="filter-input">
-                        <option value="">全て</option>
-                        <option value="success">成功</option>
-                        <option value="failed">失敗</option>
-                    </select>
-                </div>
+                <!-- 損益サマリー -->
+                <section class="card">
+                    <h2>📊 損益サマリー</h2>
+                    <div class="pnl-grid">
+                        <div class="pnl-item">
+                            <div class="value" id="total-trades">0</div>
+                            <div class="label">総トレード数</div>
+                        </div>
+                        <div class="pnl-item">
+                            <div class="value" id="successful-trades">0</div>
+                            <div class="label">成功トレード</div>
+                        </div>
+                        <div class="pnl-item">
+                            <div class="value" id="success-rate">0%</div>
+                            <div class="label">成功率</div>
+                        </div>
+                        <div class="pnl-item">
+                            <div class="value" id="total-fees">0 SOL</div>
+                            <div class="label">総手数料</div>
+                        </div>
+                    </div>
+                </section>
             </div>
-            <div class="filter-actions">
-                <button id="apply-filter" class="btn btn-primary">フィルタ適用</button>
-                <button id="reset-filter" class="btn btn-secondary">リセット</button>
-                <button id="export-csv" class="btn btn-accent">CSVエクスポート</button>
-            </div>
-        </section>
 
-        <!-- 損益サマリー -->
-        <section class="card">
-            <h2>📊 損益サマリー</h2>
-            <div class="pnl-grid">
-                <div class="pnl-item">
-                    <div class="value" id="total-trades">0</div>
-                    <div class="label">総トレード数</div>
-                </div>
-                <div class="pnl-item">
-                    <div class="value" id="successful-trades">0</div>
-                    <div class="label">成功トレード</div>
-                </div>
-                <div class="pnl-item">
-                    <div class="value" id="success-rate">0%</div>
-                    <div class="label">成功率</div>
-                </div>
-                <div class="pnl-item">
-                    <div class="value" id="total-fees">0 SOL</div>
-                    <div class="label">総手数料</div>
-                </div>
-            </div>
-        </section>
+            <!-- タスクタブ -->
+            <div id="tab-tasks" class="tab-panel">
+                <section class="card">
+                    <h2>📋 タスク管理</h2>
+                    
+                    <!-- タスク統計 -->
+                    <div class="task-stats">
+                        <div class="stat-item">
+                            <div class="value" id="tasks-today-completed">0</div>
+                            <div class="label">今日完了</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="value" id="tasks-estimation-accuracy">0%</div>
+                            <div class="label">見積精度</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="value" id="tasks-clawdia-progress">0%</div>
+                            <div class="label">Clawdia進捗</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="value" id="tasks-talon-progress">0%</div>
+                            <div class="label">Talon進捗</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="value" id="tasks-velvet-progress">0%</div>
+                            <div class="label">Velvet進捗</div>
+                        </div>
+                    </div>
 
-        <!-- トレード一覧 -->
-        <section class="card">
-            <h2>📈 トレード履歴</h2>
-            <div class="trade-table-container">
-                <table class="trade-table" id="trade-table">
-                    <thead>
-                        <tr>
-                            <th>日時</th>
-                            <th>ペア</th>
-                            <th>タイプ</th>
-                            <th>数量</th>
-                            <th>ステータス</th>
-                        </tr>
-                    </thead>
-                    <tbody id="trade-table-body">
-                        <tr>
-                            <td colspan="5" class="loading">データ読み込み中...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+                    <!-- タスクフィルター -->
+                    <div class="task-filters">
+                        <select id="task-status-filter" class="filter-select">
+                            <option value="">全ステータス</option>
+                            <option value="pending">未着手</option>
+                            <option value="in_progress">進行中</option>
+                            <option value="completed">完了</option>
+                            <option value="blocked">ブロック</option>
+                        </select>
+                        <select id="task-assignee-filter" class="filter-select">
+                            <option value="">全担当者</option>
+                            <option value="clawdia">Clawdia</option>
+                            <option value="talon">Talon</option>
+                            <option value="velvet">Velvet</option>
+                        </select>
+                        <select id="task-priority-filter" class="filter-select">
+                            <option value="">全優先度</option>
+                            <option value="high">高</option>
+                            <option value="medium">中</option>
+                            <option value="low">低</option>
+                        </select>
+                        <button id="show-completed-only" class="btn btn-secondary">完了済みのみ</button>
+                    </div>
 
-        <!-- シグナルログチャート -->
-        <section class="card">
-            <h2>📡 シグナル分析</h2>
-            <div class="chart-controls">
-                <button id="chart-1d" class="chart-btn active">1日</button>
-                <button id="chart-7d" class="chart-btn">7日</button>
-                <button id="chart-30d" class="chart-btn">30日</button>
-            </div>
-            <div class="chart-container">
-                <canvas id="signalChart"></canvas>
-            </div>
-        </section>
+                    <!-- タスク一覧 -->
+                    <div id="tasks-container">
+                        <div class="loading">データ読み込み中...</div>
+                    </div>
 
-        <!-- 最新シグナル状態 -->
-        <section class="card">
-            <h2>🎯 現在の状態</h2>
-            <div class="signal-status" id="signal-status">
-                <div class="loading">データ読み込み中...</div>
+                    <!-- タスク詳細（インライン展開） -->
+                    <div id="task-detail-container" class="task-detail-container hidden">
+                        <div class="task-detail-header">
+                            <button id="task-detail-close" class="btn-close">&times;</button>
+                            <h3 id="task-detail-title"></h3>
+                        </div>
+                        <div class="task-detail-content">
+                            <div class="task-detail-badges">
+                                <span id="task-detail-status-badge" class="badge"></span>
+                                <span id="task-detail-priority-badge" class="badge"></span>
+                                <span id="task-detail-assignee-badge" class="badge assignee-badge"></span>
+                            </div>
+                            <div class="task-detail-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot created"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">作成</div>
+                                        <div class="timeline-date" id="task-detail-created"></div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot started"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">開始</div>
+                                        <div class="timeline-date" id="task-detail-started">-</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot completed"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">完了</div>
+                                        <div class="timeline-date" id="task-detail-completed">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="task-detail-hours">
+                                <div class="hours-bar">
+                                    <div class="hours-label">時間見積</div>
+                                    <div class="hours-visualization">
+                                        <div class="hours-bar-bg">
+                                            <div class="hours-bar-fill" id="task-detail-hours-bar"></div>
+                                        </div>
+                                        <div class="hours-text">
+                                            <span id="task-detail-estimated">0h</span> / 
+                                            <span id="task-detail-actual">0h</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="task-detail-description">
+                                <h4>説明</h4>
+                                <p id="task-detail-description-text"></p>
+                            </div>
+                            <div class="task-detail-notes">
+                                <h4>作業ノート</h4>
+                                <div id="task-detail-notes-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </section>
+
+            <!-- トレードタブ -->
+            <div id="tab-trades" class="tab-panel">
+                <!-- フィルタとエクスポート -->
+                <section class="card">
+                    <h2>🔍 トレード履歴フィルタ</h2>
+                    <div class="filter-grid">
+                        <div class="filter-item">
+                            <label for="date-from">開始日</label>
+                            <input type="date" id="date-from" class="filter-input">
+                        </div>
+                        <div class="filter-item">
+                            <label for="date-to">終了日</label>
+                            <input type="date" id="date-to" class="filter-input">
+                        </div>
+                        <div class="filter-item">
+                            <label for="token-filter">トークン</label>
+                            <select id="token-filter" class="filter-input">
+                                <option value="">全て</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label for="status-filter">ステータス</label>
+                            <select id="status-filter" class="filter-input">
+                                <option value="">全て</option>
+                                <option value="Success">成功</option>
+                                <option value="failed">失敗</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter-actions">
+                        <button id="apply-filter" class="btn btn-primary">フィルタ適用</button>
+                        <button id="reset-filter" class="btn btn-secondary">リセット</button>
+                        <button id="export-csv" class="btn btn-accent">CSVエクスポート</button>
+                    </div>
+                </section>
+
+                <!-- トレード一覧 -->
+                <section class="card">
+                    <h2>📈 トレード履歴</h2>
+                    <div class="trade-table-container">
+                        <table class="trade-table" id="trade-table">
+                            <thead>
+                                <tr>
+                                    <th>日時</th>
+                                    <th>ペア</th>
+                                    <th>タイプ</th>
+                                    <th>数量</th>
+                                    <th>ステータス</th>
+                                </tr>
+                            </thead>
+                            <tbody id="trade-table-body">
+                                <tr>
+                                    <td colspan="5" class="loading">データ読み込み中...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- シグナルタブ -->
+            <div id="tab-signals" class="tab-panel">
+                <section class="card">
+                    <h2>📡 シグナル分析</h2>
+                    <div class="chart-controls">
+                        <button id="chart-1d" class="chart-btn active">1日</button>
+                        <button id="chart-7d" class="chart-btn">7日</button>
+                        <button id="chart-30d" class="chart-btn">30日</button>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="signalChart"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 日報タブ -->
+            <div id="tab-reports" class="tab-panel">
+                <section class="card">
+                    <h2>📝 日報</h2>
+                    <div id="daily-reports-container">
+                        <div class="loading">データ読み込み中...</div>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 
     <script src="dashboard.js"></script>

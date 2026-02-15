@@ -9,10 +9,14 @@ let dashboardData = {
 };
 
 let signalChart = null;
+let selectedTask = null;
 
 // Initialize dashboard
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('🤖 Clawdia Dashboard starting...');
+    console.log('🤖 Clawdia Dashboard V3 starting...');
+    
+    // Initialize tabs
+    initializeTabs();
     
     // Set default date range (last 30 days)
     const today = new Date();
@@ -27,8 +31,62 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Setup event listeners
     setupEventListeners();
     
-    console.log('✅ Dashboard initialized');
+    console.log('✅ Dashboard V3 initialized');
 });
+
+// Tab System
+function initializeTabs() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    
+    // Handle tab clicks
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+    
+    // Handle URL hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Initialize from URL hash or default to overview
+    const hash = window.location.hash.substring(1);
+    switchTab(hash || 'overview');
+}
+
+function switchTab(tabName) {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    
+    // Update active tab button
+    tabBtns.forEach(btn => {
+        if (btn.dataset.tab === tabName) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+    
+    // Update active tab panel
+    tabPanels.forEach(panel => {
+        if (panel.id === `tab-${tabName}`) {
+            panel.classList.add('active');
+        } else {
+            panel.classList.remove('active');
+        }
+    });
+    
+    // Update URL hash
+    window.history.replaceState(null, null, `#${tabName}`);
+    
+    // Tab-specific initialization
+    if (tabName === 'signals' && signalChart) {
+        signalChart.resize();
+    }
+}
+
+function handleHashChange() {
+    const hash = window.location.hash.substring(1);
+    if (hash) switchTab(hash);
+}
 
 // Data loading functions
 async function loadAllData() {
@@ -104,7 +162,7 @@ async function loadSignalsData() {
 
 async function loadTasksData() {
     try {
-        const response = await fetch('./data/tasks.json');
+        const response = await fetch('../tasks.json');
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         dashboardData.tasks = await response.json();
         console.log(`✅ ${dashboardData.tasks.length} tasks loaded`);
@@ -126,212 +184,349 @@ async function loadDailyReportsData() {
     }
 }
 
-// UI Update functions
+// Portfolio Section Update
 function updatePortfolioSection() {
-    if (!dashboardData.wallet) return;
-    
-    const wallet = dashboardData.wallet;
-    
-    document.getElementById('total-balance').textContent = formatCurrency(wallet.total_usd || 0);
-    document.getElementById('sol-balance').textContent = `${(wallet.sol_balance || 0).toFixed(4)} SOL`;
-    document.getElementById('usdc-balance').textContent = formatCurrency(wallet.usdc_balance || 0);
-    document.getElementById('wbtc-balance').textContent = `${(wallet.wbtc_balance || 0).toFixed(8)} WBTC ($${(wallet.wbtc_value_usd || 0).toFixed(2)})`;
-    // Hide BNB balance if 0
-    const bnbBalanceElement = document.getElementById('bnb-balance');
-    const bnbBalance = wallet.bnb_balance || 0;
-    if (bnbBalance > 0) {
-        bnbBalanceElement.textContent = `${bnbBalance.toFixed(6)} BNB ($${(wallet.bnb_value_usd || 0).toFixed(2)})`;
-        bnbBalanceElement.parentElement.style.display = 'block';
-    } else {
-        bnbBalanceElement.parentElement.style.display = 'none';
-    }
-    document.getElementById('sol-price').textContent = formatCurrency(wallet.sol_price_usd || 0);
-    
-    if (wallet.timestamp) {
-        document.getElementById('last-updated').textContent = 
-            `最終更新: ${formatDateTime(wallet.timestamp)}`;
-    }
-}
-
-function updatePnLSummary() {
-    const trades = dashboardData.filteredTrades.length > 0 ? dashboardData.filteredTrades : dashboardData.trades;
-    const totalTrades = trades.length;
-    const successfulTrades = trades.filter(t => t.status === 'Success').length;
-    const successRate = totalTrades > 0 ? (successfulTrades / totalTrades * 100).toFixed(1) : '0';
-    const totalFees = trades.reduce((sum, t) => sum + (parseFloat(t.fee_sol) || 0), 0);
-    
-    document.getElementById('total-trades').textContent = totalTrades.toLocaleString();
-    document.getElementById('successful-trades').textContent = successfulTrades.toLocaleString();
-    document.getElementById('success-rate').textContent = `${successRate}%`;
-    document.getElementById('total-fees').textContent = `${totalFees.toFixed(4)} SOL`;
-}
-
-function updateTradeTable() {
-    const tbody = document.getElementById('trade-table-body');
-    const trades = dashboardData.filteredTrades.length > 0 ? dashboardData.filteredTrades : dashboardData.trades;
-    
-    if (trades.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="loading">トレードデータがありません</td></tr>';
+    if (!dashboardData.wallet) {
+        console.warn('⚠️ No wallet data available');
         return;
     }
+
+    const wallet = dashboardData.wallet;
     
-    // Sort by timestamp (newest first)
-    const sortedTrades = [...trades].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    // Update balance values
+    document.getElementById('total-balance').textContent = formatCurrency(wallet.total_balance_usd);
+    document.getElementById('sol-balance').textContent = `${formatNumber(wallet.sol_balance)} SOL`;
+    document.getElementById('usdc-balance').textContent = formatCurrency(wallet.usdc_balance);
+    document.getElementById('wbtc-balance').textContent = `${formatNumber(wallet.wbtc_balance, 6)} WBTC`;
+    document.getElementById('sol-price').textContent = formatCurrency(wallet.sol_price_usd);
     
-    tbody.innerHTML = sortedTrades.map(trade => {
-        const pair = `${trade.input_token || 'SOL'} → ${trade.output_token || 'USDC'}`;
-        const amount = trade.input_amount ? `${parseFloat(trade.input_amount).toFixed(4)}` : '-';
-        
-        // Calculate P&L if possible
-        let pnlInfo = '';
-        if (dashboardData.wallet && trade.output_token === 'WBTC' && trade.output_amount) {
-            const currentWBTCValue = parseFloat(trade.output_amount) * dashboardData.wallet.btc_price_usd;
-            const originalUSDCValue = parseFloat(trade.input_amount) || 0;
-            const pnl = currentWBTCValue - originalUSDCValue;
-            const pnlPercent = originalUSDCValue > 0 ? ((pnl / originalUSDCValue) * 100).toFixed(2) : 0;
-            const pnlClass = pnl >= 0 ? 'positive' : 'negative';
-            pnlInfo = `<br><small class="pnl ${pnlClass}">P&L: ${formatCurrency(pnl)} (${pnlPercent}%)</small>`;
-        }
-        
-        return `
-            <tr>
-                <td>${formatDateTime(trade.timestamp)}</td>
-                <td><span class="token-pair">${pair}</span></td>
-                <td><span class="trade-type">${trade.swap_type || 'swap'}</span></td>
-                <td>${amount}${pnlInfo}</td>
-                <td><span class="trade-status ${trade.status || 'unknown'}">${getTradeStatusText(trade.status)}</span></td>
-            </tr>
-        `;
-    }).join('');
+    // Handle BNB balance (hide if 0)
+    const bnbItem = document.getElementById('bnb-item');
+    const bnbBalance = document.getElementById('bnb-balance');
+    if (wallet.bnb_balance > 0) {
+        bnbBalance.textContent = `${formatNumber(wallet.bnb_balance, 4)} BNB`;
+        bnbItem.style.display = 'block';
+    } else {
+        bnbItem.style.display = 'none';
+    }
+    
+    // Update last updated timestamp
+    if (wallet.last_updated) {
+        document.getElementById('last-updated').textContent = 
+            `最終更新: ${formatDateTime(wallet.last_updated)}`;
+    }
 }
 
+// Signal Status Update (fixing BTC price source)
 function updateSignalStatus() {
-    const container = document.getElementById('signal-status');
-    
-    if (dashboardData.signals.length === 0) {
-        container.innerHTML = '<div class="loading">シグナルデータがありません</div>';
+    if (!dashboardData.wallet || dashboardData.signals.length === 0) {
+        document.getElementById('signal-status').innerHTML = '<div class="loading">データ不足</div>';
         return;
     }
     
     // Get latest signal
-    const latestSignal = dashboardData.signals
-        .sort((a, b) => new Date(b.checked_at) - new Date(a.checked_at))[0];
+    const latestSignal = dashboardData.signals[dashboardData.signals.length - 1];
     
-    if (!latestSignal) {
-        container.innerHTML = '<div class="loading">最新のシグナルがありません</div>';
+    // Use wallet.json for BTC price (more reliable than signals.json)
+    const btcPrice = dashboardData.wallet.btc_price_usd || 0;
+    const position = dashboardData.wallet.wbtc_balance > 0 ? 'IN' : 'OUT';
+    
+    const html = `
+        <div class="signal-grid">
+            <div class="signal-item">
+                <div class="value">${formatCurrency(btcPrice)}</div>
+                <div class="label">BTC価格 (USD)</div>
+            </div>
+            <div class="signal-item">
+                <div class="value ${position === 'IN' ? 'positive' : 'negative'}">${position}</div>
+                <div class="label">ポジション</div>
+            </div>
+            <div class="signal-item">
+                <div class="value">${latestSignal.ema_200 ? '✅' : '❌'}</div>
+                <div class="label">EMA200</div>
+            </div>
+            <div class="signal-item">
+                <div class="value">${latestSignal.cci_signal || '-'}</div>
+                <div class="label">CCI</div>
+            </div>
+            <div class="signal-item">
+                <div class="value">${latestSignal.trend || 'NEUTRAL'}</div>
+                <div class="label">トレンド</div>
+            </div>
+            <div class="signal-item">
+                <div class="value">${formatDateTime(latestSignal.timestamp)}</div>
+                <div class="label">最終更新</div>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('signal-status').innerHTML = html;
+}
+
+// Tasks Section Update with Enhanced Features
+function updateTasksSection() {
+    if (dashboardData.tasks.length === 0) {
+        document.getElementById('tasks-container').innerHTML = '<div class="loading">タスクデータがありません</div>';
         return;
     }
     
-    // Use wallet BTC price instead of signal btc_price (which might be incorrect)
-    const btcPrice = dashboardData.wallet ? dashboardData.wallet.btc_price_usd : (latestSignal.btc_price || 0);
+    // Update task statistics
+    updateTaskStatistics();
     
-    // Check if in position based on WBTC balance
-    const inPosition = dashboardData.wallet && dashboardData.wallet.wbtc_balance > 0;
-    
-    container.innerHTML = `
-        <div class="signal-item">
-            <span class="signal-label">BTC価格</span>
-            <span class="signal-value">${formatCurrency(btcPrice)}</span>
-        </div>
-        <div class="signal-item">
-            <span class="signal-label">CCI値</span>
-            <span class="signal-value ${getCciClass(latestSignal.cci)}">${(latestSignal.cci || 0).toFixed(2)}</span>
-        </div>
-        <div class="signal-item">
-            <span class="signal-label">ポジション</span>
-            <span class="signal-value ${inPosition ? 'positive' : 'neutral'}">${inPosition ? 'IN' : 'OUT'}</span>
-        </div>
-        <div class="signal-item">
-            <span class="signal-label">最新アクション</span>
-            <span class="signal-value">${latestSignal.action || '-'}</span>
-        </div>
-        <div class="signal-item">
-            <span class="signal-label">最終確認</span>
-            <span class="signal-value">${formatDateTime(latestSignal.checked_at)}</span>
-        </div>
-    `;
+    // Render task list
+    renderTaskList();
 }
 
-function updateTasksSection() {
+function updateTaskStatistics() {
+    const tasks = dashboardData.tasks;
+    const today = new Date().toISOString().split('T')[0];
+    
+    // Calculate statistics
+    const completedToday = tasks.filter(task => 
+        task.status === 'completed' && 
+        task.completed_at && 
+        task.completed_at.startsWith(today)
+    ).length;
+    
+    // Estimation accuracy
+    const completedWithEstimates = tasks.filter(task => 
+        task.status === 'completed' && 
+        task.estimated_hours && 
+        task.actual_hours
+    );
+    
+    let estimationAccuracy = 0;
+    if (completedWithEstimates.length > 0) {
+        const accuracySum = completedWithEstimates.reduce((acc, task) => {
+            const accuracy = Math.min(task.actual_hours / task.estimated_hours, 2); // Cap at 200%
+            return acc + accuracy;
+        }, 0);
+        estimationAccuracy = Math.round((accuracySum / completedWithEstimates.length) * 100);
+    }
+    
+    // Progress by assignee
+    const assignees = ['clawdia', 'talon', 'velvet'];
+    const progressData = {};
+    
+    assignees.forEach(assignee => {
+        const assigneeTasks = tasks.filter(task => task.assignee === assignee);
+        const completed = assigneeTasks.filter(task => task.status === 'completed').length;
+        progressData[assignee] = assigneeTasks.length > 0 ? 
+            Math.round((completed / assigneeTasks.length) * 100) : 0;
+    });
+    
+    // Update DOM
+    document.getElementById('tasks-today-completed').textContent = completedToday;
+    document.getElementById('tasks-estimation-accuracy').textContent = `${estimationAccuracy}%`;
+    document.getElementById('tasks-clawdia-progress').textContent = `${progressData.clawdia}%`;
+    document.getElementById('tasks-talon-progress').textContent = `${progressData.talon}%`;
+    document.getElementById('tasks-velvet-progress').textContent = `${progressData.velvet}%`;
+}
+
+function renderTaskList() {
     const container = document.getElementById('tasks-container');
     
     if (dashboardData.tasks.length === 0) {
-        container.innerHTML = '<div class="loading">タスクデータがありません</div>';
+        container.innerHTML = '<div class="no-data">タスクがありません</div>';
         return;
     }
     
-    // Group by assignee
-    const tasksByAssignee = dashboardData.tasks.reduce((groups, task) => {
-        const assignee = task.assignee || 'unknown';
-        if (!groups[assignee]) groups[assignee] = [];
-        groups[assignee].push(task);
-        return groups;
-    }, {});
+    // Apply filters
+    const filteredTasks = getFilteredTasks();
     
-    // Calculate overall progress
-    const completedTasks = dashboardData.tasks.filter(t => t.status === 'completed').length;
-    const totalTasks = dashboardData.tasks.length;
-    const progressPercent = totalTasks > 0 ? ((completedTasks / totalTasks) * 100).toFixed(1) : 0;
-    
-    let html = `
-        <div class="progress-overview">
-            <div class="progress-bar-container">
-                <div class="progress-bar" style="width: ${progressPercent}%"></div>
-                <span class="progress-text">${completedTasks}/${totalTasks} 完了 (${progressPercent}%)</span>
-            </div>
-        </div>
-    `;
-    
-    // Assignee emojis
-    const assigneeEmojis = {
-        'clawdia': '🩶',
-        'talon': '🦅', 
-        'velvet': '🌙'
-    };
-    
-    Object.keys(tasksByAssignee).forEach(assignee => {
-        const emoji = assigneeEmojis[assignee] || '👤';
-        const tasks = tasksByAssignee[assignee];
-        
-        html += `
-            <div class="assignee-group">
-                <h4 class="assignee-title">${assignee.charAt(0).toUpperCase() + assignee.slice(1)} ${emoji}</h4>
-                <div class="tasks-grid">
-        `;
-        
-        tasks.forEach(task => {
-            const statusClass = getStatusClass(task.status);
-            const priorityClass = getPriorityClass(task.priority);
-            const estimatedHours = task.estimated_hours ? `見積: ${task.estimated_hours}h` : '見積: -';
-            const actualHours = task.actual_hours ? `実績: ${task.actual_hours}h` : '';
-            
-            html += `
-                <div class="task-card">
-                    <div class="task-header">
-                        <h5 class="task-title">${task.title}</h5>
-                        <div class="task-badges">
-                            <span class="status-badge ${statusClass}">${getStatusText(task.status)}</span>
-                            <span class="priority-badge ${priorityClass}">${task.priority}</span>
-                        </div>
-                    </div>
-                    <p class="task-description">${task.description || ''}</p>
+    const html = filteredTasks.map(task => `
+        <div class="task-item ${selectedTask && selectedTask.id === task.id ? 'selected' : ''}" 
+             onclick="selectTask('${task.id}')">
+            <div class="task-header">
+                <div class="task-info">
+                    <div class="task-title">${escapeHtml(task.title)}</div>
                     <div class="task-meta">
-                        <small class="task-hours">${estimatedHours} ${actualHours}</small>
-                        <small class="task-date">${formatDate(task.created_at)}</small>
+                        <span class="task-id">${task.id}</span>
+                        <span class="task-time">${formatDateTime(task.created_at)}</span>
                     </div>
                 </div>
-            `;
-        });
-        
-        html += `
+                <div class="task-badges">
+                    <span class="badge status-${task.status}">${getStatusDisplay(task.status)}</span>
+                    <span class="badge priority-${task.priority}">${getPriorityDisplay(task.priority)}</span>
+                    <span class="badge assignee-badge">${getAssigneeDisplay(task.assignee)}</span>
                 </div>
             </div>
-        `;
-    });
+            <div class="task-description">${escapeHtml(task.description || '')}</div>
+            ${task.estimated_hours ? `
+                <div class="task-estimate">
+                    見積: ${task.estimated_hours}h
+                    ${task.actual_hours ? ` / 実績: ${task.actual_hours}h` : ''}
+                </div>
+            ` : ''}
+        </div>
+    `).join('');
     
     container.innerHTML = html;
 }
 
+function getFilteredTasks() {
+    let filtered = [...dashboardData.tasks];
+    
+    // Apply status filter
+    const statusFilter = document.getElementById('task-status-filter').value;
+    if (statusFilter) {
+        filtered = filtered.filter(task => task.status === statusFilter);
+    }
+    
+    // Apply assignee filter
+    const assigneeFilter = document.getElementById('task-assignee-filter').value;
+    if (assigneeFilter) {
+        filtered = filtered.filter(task => task.assignee === assigneeFilter);
+    }
+    
+    // Apply priority filter
+    const priorityFilter = document.getElementById('task-priority-filter').value;
+    if (priorityFilter) {
+        filtered = filtered.filter(task => task.priority === priorityFilter);
+    }
+    
+    // Sort by created_at desc
+    filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    
+    return filtered;
+}
+
+function selectTask(taskId) {
+    const task = dashboardData.tasks.find(t => t.id === taskId);
+    if (!task) return;
+    
+    selectedTask = task;
+    
+    // Update task list selection
+    renderTaskList();
+    
+    // Show task details
+    showTaskDetails(task);
+}
+
+function showTaskDetails(task) {
+    const container = document.getElementById('task-detail-container');
+    
+    // Update header
+    document.getElementById('task-detail-title').textContent = task.title;
+    
+    // Update badges
+    document.getElementById('task-detail-status-badge').textContent = getStatusDisplay(task.status);
+    document.getElementById('task-detail-status-badge').className = `badge status-${task.status}`;
+    
+    document.getElementById('task-detail-priority-badge').textContent = getPriorityDisplay(task.priority);
+    document.getElementById('task-detail-priority-badge').className = `badge priority-${task.priority}`;
+    
+    document.getElementById('task-detail-assignee-badge').textContent = getAssigneeDisplay(task.assignee);
+    
+    // Update timeline
+    document.getElementById('task-detail-created').textContent = formatDateTime(task.created_at);
+    document.getElementById('task-detail-started').textContent = 
+        task.started_at ? formatDateTime(task.started_at) : '-';
+    document.getElementById('task-detail-completed').textContent = 
+        task.completed_at ? formatDateTime(task.completed_at) : '-';
+    
+    // Update timeline dots
+    const createdDot = document.querySelector('.timeline-dot.created');
+    const startedDot = document.querySelector('.timeline-dot.started');
+    const completedDot = document.querySelector('.timeline-dot.completed');
+    
+    // Reset classes
+    [createdDot, startedDot, completedDot].forEach(dot => {
+        dot.classList.remove('active', 'completed');
+    });
+    
+    // Update timeline state
+    createdDot.classList.add('completed');
+    if (task.started_at) {
+        startedDot.classList.add('completed');
+    }
+    if (task.completed_at) {
+        completedDot.classList.add('completed');
+    }
+    
+    // Update hours visualization
+    const estimated = task.estimated_hours || 0;
+    const actual = task.actual_hours || 0;
+    
+    document.getElementById('task-detail-estimated').textContent = `${estimated}h`;
+    document.getElementById('task-detail-actual').textContent = `${actual}h`;
+    
+    const hoursBar = document.getElementById('task-detail-hours-bar');
+    if (estimated > 0) {
+        const percentage = Math.min((actual / estimated) * 100, 200); // Cap at 200%
+        hoursBar.style.width = `${percentage}%`;
+        
+        // Color based on efficiency
+        if (percentage <= 100) {
+            hoursBar.style.background = 'linear-gradient(90deg, var(--accent-green), var(--accent-blue))';
+        } else {
+            hoursBar.style.background = 'linear-gradient(90deg, var(--accent-yellow), var(--accent-red))';
+        }
+    } else {
+        hoursBar.style.width = '0%';
+    }
+    
+    // Update description
+    document.getElementById('task-detail-description-text').textContent = task.description || '説明がありません';
+    
+    // Update notes
+    const notesList = document.getElementById('task-detail-notes-list');
+    if (task.notes && task.notes.length > 0) {
+        const notesHtml = task.notes.map(note => `
+            <div class="task-note-item">
+                <div class="task-note-timestamp">${formatTime(note.timestamp)}</div>
+                <div class="task-note-text">${escapeHtml(note.text)}</div>
+            </div>
+        `).join('');
+        notesList.innerHTML = notesHtml;
+    } else {
+        notesList.innerHTML = '<div class="no-data">作業ノートがありません</div>';
+    }
+    
+    // Show container
+    container.classList.remove('hidden');
+    
+    // Scroll into view
+    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeTaskDetails() {
+    document.getElementById('task-detail-container').classList.add('hidden');
+    selectedTask = null;
+    renderTaskList();
+}
+
+// P&L Summary Update (fixing success count)
+function updatePnLSummary() {
+    if (dashboardData.trades.length === 0) {
+        document.getElementById('total-trades').textContent = '0';
+        document.getElementById('successful-trades').textContent = '0';
+        document.getElementById('success-rate').textContent = '0%';
+        document.getElementById('total-fees').textContent = '0 SOL';
+        return;
+    }
+    
+    const trades = dashboardData.trades;
+    const totalTrades = trades.length;
+    
+    // Fix: Count status === 'Success' (not lowercase)
+    const successfulTrades = trades.filter(trade => trade.status === 'Success').length;
+    const successRate = totalTrades > 0 ? Math.round((successfulTrades / totalTrades) * 100) : 0;
+    
+    // Calculate total fees
+    const totalFees = trades.reduce((sum, trade) => {
+        return sum + (parseFloat(trade.fee_amount) || 0);
+    }, 0);
+    
+    // Update DOM
+    document.getElementById('total-trades').textContent = totalTrades;
+    document.getElementById('successful-trades').textContent = successfulTrades;
+    document.getElementById('success-rate').textContent = `${successRate}%`;
+    document.getElementById('total-fees').textContent = `${formatNumber(totalFees, 4)} SOL`;
+}
+
+// Daily Reports Section Update
 function updateDailyReportsSection() {
     const container = document.getElementById('daily-reports-container');
     
@@ -340,150 +535,76 @@ function updateDailyReportsSection() {
         return;
     }
     
-    // Sort by date (newest first)
-    const sortedReports = [...dashboardData.dailyReports].sort((a, b) => new Date(b.date) - new Date(a.date));
-    
-    let html = '';
-    sortedReports.forEach((report, index) => {
-        const isExpanded = index === 0; // Latest report is expanded by default
-        
-        html += `
-            <div class="report-accordion">
-                <div class="report-header" onclick="toggleReport('report-${index}')">
-                    <h4>${formatDate(report.date)}</h4>
-                    <span class="expand-icon ${isExpanded ? 'expanded' : ''}">${isExpanded ? '−' : '+'}</span>
+    const html = dashboardData.dailyReports.slice(0, 10).map(report => `
+        <div class="report-item">
+            <div class="report-header" onclick="toggleReport('${report.date}')">
+                <div class="report-date">${formatDate(report.date)}</div>
+                <div class="report-summary">
+                    ${report.trades_count || 0}件のトレード
+                    ${report.pnl ? ` • P&L: <span class="pnl ${report.pnl >= 0 ? 'positive' : 'negative'}">${report.pnl >= 0 ? '+' : ''}${formatCurrency(report.pnl)}</span>` : ''}
                 </div>
-                <div class="report-content ${isExpanded ? 'expanded' : ''}" id="report-${index}">
-                    ${markdownToHtml(report.content)}
-                </div>
+                <div class="toggle-icon">▼</div>
             </div>
-        `;
-    });
+            <div class="report-content" id="report-${report.date}">
+                ${report.content || '詳細情報なし'}
+            </div>
+        </div>
+    `).join('');
     
     container.innerHTML = html;
 }
 
-function setupSignalChart() {
-    if (!dashboardData.signals.length) return;
+// Filter and Export Functions
+function populateTokenFilter() {
+    const tokenSelect = document.getElementById('token-filter');
+    const tokens = [...new Set(dashboardData.trades.map(trade => trade.token_symbol).filter(Boolean))];
     
-    const ctx = document.getElementById('signalChart').getContext('2d');
+    // Clear existing options except "All"
+    const allOption = tokenSelect.querySelector('option[value=""]');
+    tokenSelect.innerHTML = '';
+    tokenSelect.appendChild(allOption);
     
-    // Get data for the last 7 days by default
-    const chartData = getSignalChartData(7);
-    
-    if (signalChart) {
-        signalChart.destroy();
-    }
-    
-    signalChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: chartData.labels,
-            datasets: [
-                {
-                    label: 'CCI',
-                    data: chartData.cci,
-                    borderColor: '#4488ff',
-                    backgroundColor: 'rgba(68, 136, 255, 0.1)',
-                    tension: 0.1,
-                    yAxisID: 'y'
-                },
-                {
-                    label: 'BTC Price',
-                    data: chartData.btc,
-                    borderColor: '#ffaa00',
-                    backgroundColor: 'rgba(255, 170, 0, 0.1)',
-                    tension: 0.1,
-                    yAxisID: 'y1'
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#cccccc'
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: { 
-                        color: '#888888',
-                        maxTicksLimit: 10,
-                        maxRotation: 45
-                    },
-                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
-                },
-                y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    ticks: { color: '#4488ff' },
-                    grid: { color: 'rgba(255, 255, 255, 0.1)' }
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    ticks: { color: '#ffaa00' },
-                    grid: { drawOnChartArea: false }
-                }
-            }
-        }
+    // Add token options
+    tokens.sort().forEach(token => {
+        const option = document.createElement('option');
+        option.value = token;
+        option.textContent = token;
+        tokenSelect.appendChild(option);
     });
 }
 
-// Event handlers
-function setupEventListeners() {
-    // Filter buttons
-    document.getElementById('apply-filter').addEventListener('click', applyFilters);
-    document.getElementById('reset-filter').addEventListener('click', resetFilters);
-    document.getElementById('export-csv').addEventListener('click', exportToCSV);
-    
-    // Chart period buttons
-    document.getElementById('chart-1d').addEventListener('click', () => updateSignalChart(1));
-    document.getElementById('chart-7d').addEventListener('click', () => updateSignalChart(7));
-    document.getElementById('chart-30d').addEventListener('click', () => updateSignalChart(30));
-}
-
 function applyFilters() {
-    const dateFrom = document.getElementById('date-from').value;
-    const dateTo = document.getElementById('date-to').value;
-    const tokenFilter = document.getElementById('token-filter').value;
-    const statusFilter = document.getElementById('status-filter').value;
+    const fromDate = document.getElementById('date-from').value;
+    const toDate = document.getElementById('date-to').value;
+    const token = document.getElementById('token-filter').value;
+    const status = document.getElementById('status-filter').value;
     
     let filtered = [...dashboardData.trades];
     
-    // Date filter
-    if (dateFrom) {
-        filtered = filtered.filter(trade => new Date(trade.timestamp) >= new Date(dateFrom));
+    // Apply date filters
+    if (fromDate) {
+        filtered = filtered.filter(trade => trade.timestamp >= fromDate);
     }
-    if (dateTo) {
-        const toDate = new Date(dateTo);
-        toDate.setHours(23, 59, 59, 999); // End of day
-        filtered = filtered.filter(trade => new Date(trade.timestamp) <= toDate);
+    if (toDate) {
+        filtered = filtered.filter(trade => trade.timestamp <= toDate + 'T23:59:59');
     }
     
-    // Token filter
-    if (tokenFilter) {
-        filtered = filtered.filter(trade => 
-            trade.input_token === tokenFilter || trade.output_token === tokenFilter
-        );
+    // Apply token filter
+    if (token) {
+        filtered = filtered.filter(trade => trade.token_symbol === token);
     }
     
-    // Status filter
-    if (statusFilter) {
-        filtered = filtered.filter(trade => trade.status === statusFilter);
+    // Apply status filter (fix case sensitivity)
+    if (status) {
+        if (status === 'Success') {
+            filtered = filtered.filter(trade => trade.status === 'Success');
+        } else {
+            filtered = filtered.filter(trade => trade.status !== 'Success');
+        }
     }
     
     dashboardData.filteredTrades = filtered;
     updateTradeTable();
-    updatePnLSummary();
-    
-    console.log(`Filtered ${filtered.length} trades from ${dashboardData.trades.length} total`);
 }
 
 function resetFilters() {
@@ -492,258 +613,318 @@ function resetFilters() {
     document.getElementById('token-filter').value = '';
     document.getElementById('status-filter').value = '';
     
-    dashboardData.filteredTrades = [];
+    dashboardData.filteredTrades = [...dashboardData.trades];
     updateTradeTable();
-    updatePnLSummary();
 }
 
-function exportToCSV() {
-    const trades = dashboardData.filteredTrades.length > 0 ? dashboardData.filteredTrades : dashboardData.trades;
-    
-    if (trades.length === 0) {
+function exportCSV() {
+    if (dashboardData.filteredTrades.length === 0) {
         alert('エクスポートするデータがありません');
         return;
     }
     
-    const headers = ['日時', 'シグネチャ', 'ステータス', 'インプットトークン', 'アウトプットトークン', 'インプット量', 'アウトプット量', '手数料(SOL)', 'スワップタイプ', 'エラー'];
+    const headers = ['日時', 'トークン', 'ペア', 'タイプ', 'ステータス', '数量', '手数料'];
+    const rows = dashboardData.filteredTrades.map(trade => [
+        trade.timestamp,
+        trade.token_symbol || '',
+        trade.pair || '',
+        trade.type || '',
+        trade.status || '',
+        trade.amount || '',
+        trade.fee_amount || ''
+    ]);
     
-    const csvContent = [
-        headers.join(','),
-        ...trades.map(trade => [
-            `"${formatDateTime(trade.timestamp)}"`,
-            `"${trade.signature || ''}"`,
-            `"${trade.status || ''}"`,
-            `"${trade.input_token || ''}"`,
-            `"${trade.output_token || ''}"`,
-            trade.input_amount || 0,
-            trade.output_amount || 0,
-            trade.fee_sol || 0,
-            `"${trade.swap_type || ''}"`,
-            `"${trade.error || ''}"`
-        ].join(','))
-    ].join('\n');
+    const csvContent = [headers, ...rows].map(row => 
+        row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+    ).join('\n');
     
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
-    
-    if (link.download !== undefined) {
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', `clawdia_trades_${formatDateForFilename(new Date())}.csv`);
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
+    link.href = URL.createObjectURL(blob);
+    link.download = `trades_export_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
 }
 
-function updateSignalChart(days) {
-    if (!signalChart) return;
+function updateTradeTable() {
+    const tbody = document.getElementById('trade-table-body');
     
+    if (dashboardData.filteredTrades.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="no-data">フィルター条件に一致するトレードがありません</td></tr>';
+        return;
+    }
+    
+    const html = dashboardData.filteredTrades.slice(0, 100).map(trade => `
+        <tr class="trade-row ${trade.status === 'Success' ? 'success' : 'failed'}">
+            <td class="trade-timestamp">${formatDateTime(trade.timestamp)}</td>
+            <td class="trade-pair">${escapeHtml(trade.pair || trade.token_symbol || '-')}</td>
+            <td class="trade-type">${escapeHtml(trade.type || '-')}</td>
+            <td class="trade-amount">${trade.amount ? formatNumber(trade.amount, 4) : '-'}</td>
+            <td class="trade-status">
+                <span class="status-badge ${trade.status === 'Success' ? 'success' : 'failed'}">
+                    ${trade.status === 'Success' ? '成功' : '失敗'}
+                </span>
+            </td>
+        </tr>
+    `).join('');
+    
+    tbody.innerHTML = html;
+}
+
+// Signal Chart Setup
+function setupSignalChart() {
+    const ctx = document.getElementById('signalChart').getContext('2d');
+    
+    if (signalChart) {
+        signalChart.destroy();
+    }
+    
+    // Prepare chart data
+    const chartData = prepareChartData('1d'); // Default to 1 day
+    
+    signalChart = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#888888' },
+                    grid: { color: '#333333' }
+                },
+                y: {
+                    ticks: { color: '#888888' },
+                    grid: { color: '#333333' }
+                }
+            }
+        }
+    });
+}
+
+function prepareChartData(period) {
+    if (dashboardData.signals.length === 0) {
+        return {
+            labels: [],
+            datasets: [{
+                label: 'BTC価格',
+                data: [],
+                borderColor: '#4488ff',
+                backgroundColor: 'rgba(68, 136, 255, 0.1)',
+                fill: true
+            }]
+        };
+    }
+    
+    // Filter signals based on period
+    const now = new Date();
+    let cutoffDate;
+    
+    switch (period) {
+        case '1d':
+            cutoffDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+            break;
+        case '7d':
+            cutoffDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+            break;
+        case '30d':
+            cutoffDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+            break;
+        default:
+            cutoffDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    }
+    
+    const filteredSignals = dashboardData.signals.filter(signal => 
+        new Date(signal.timestamp) >= cutoffDate
+    );
+    
+    return {
+        labels: filteredSignals.map(signal => formatTime(signal.timestamp)),
+        datasets: [{
+            label: 'BTC価格',
+            data: filteredSignals.map(signal => signal.btc_price || 0),
+            borderColor: '#4488ff',
+            backgroundColor: 'rgba(68, 136, 255, 0.1)',
+            fill: true
+        }]
+    };
+}
+
+// Event Listeners Setup
+function setupEventListeners() {
+    // Filter controls
+    document.getElementById('apply-filter').addEventListener('click', applyFilters);
+    document.getElementById('reset-filter').addEventListener('click', resetFilters);
+    document.getElementById('export-csv').addEventListener('click', exportCSV);
+    
+    // Task filters
+    document.getElementById('task-status-filter').addEventListener('change', renderTaskList);
+    document.getElementById('task-assignee-filter').addEventListener('change', renderTaskList);
+    document.getElementById('task-priority-filter').addEventListener('change', renderTaskList);
+    
+    // Show completed only button
+    document.getElementById('show-completed-only').addEventListener('click', () => {
+        document.getElementById('task-status-filter').value = 'completed';
+        renderTaskList();
+    });
+    
+    // Task detail close button
+    document.getElementById('task-detail-close').addEventListener('click', closeTaskDetails);
+    
+    // Chart controls
+    document.getElementById('chart-1d').addEventListener('click', () => updateChart('1d'));
+    document.getElementById('chart-7d').addEventListener('click', () => updateChart('7d'));
+    document.getElementById('chart-30d').addEventListener('click', () => updateChart('30d'));
+}
+
+function updateChart(period) {
     // Update active button
     document.querySelectorAll('.chart-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(`chart-${days}d`).classList.add('active');
+    document.getElementById(`chart-${period}`).classList.add('active');
     
-    const chartData = getSignalChartData(days);
-    signalChart.data.labels = chartData.labels;
-    signalChart.data.datasets[0].data = chartData.cci;
-    signalChart.data.datasets[1].data = chartData.btc;
+    // Update chart data
+    const chartData = prepareChartData(period);
+    signalChart.data = chartData;
     signalChart.update();
 }
 
-// New utility functions for tasks and reports
-function getStatusClass(status) {
-    const statusMap = {
-        'pending': 'status-pending',
-        'in_progress': 'status-in-progress', 
-        'completed': 'status-completed',
-        'blocked': 'status-blocked'
-    };
-    return statusMap[status] || 'status-unknown';
-}
-
-function getPriorityClass(priority) {
-    const priorityMap = {
-        'high': 'priority-high',
-        'medium': 'priority-medium',
-        'low': 'priority-low'
-    };
-    return priorityMap[priority] || 'priority-unknown';
-}
-
-function getStatusText(status) {
-    const statusMap = {
-        'pending': '保留',
-        'in_progress': '進行中',
-        'completed': '完了',
-        'blocked': '待機'
-    };
-    return statusMap[status] || status || '不明';
-}
-
-function formatDate(dateStr) {
-    if (!dateStr) return '-';
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return dateStr;
+// Utility Functions
+function updateStatusIndicator(status, message) {
+    const indicator = document.getElementById('status-indicator');
+    const dot = indicator.querySelector('.status-dot');
+    const text = document.getElementById('status-text');
     
-    return date.toLocaleDateString('ja-JP', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-    });
-}
-
-function markdownToHtml(markdown) {
-    if (!markdown) return '';
+    // Remove existing status classes
+    dot.classList.remove('online', 'loading', 'offline');
     
-    return markdown
-        // Headers
-        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-        // Bold
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        // Lists
-        .replace(/^\- (.*$)/gim, '<li>$1</li>')
-        .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
-        // Line breaks
-        .replace(/\n/g, '<br>');
+    // Add new status class
+    dot.classList.add(status);
+    text.textContent = message;
 }
 
-function toggleReport(reportId) {
-    const content = document.getElementById(reportId);
-    const icon = content.previousElementSibling.querySelector('.expand-icon');
+function showError(containerId, message) {
+    const container = document.getElementById(containerId);
+    if (container) {
+        container.innerHTML = `<div class="error">${message}</div>`;
+    }
+}
+
+function toggleReport(date) {
+    const content = document.getElementById(`report-${date}`);
+    const icon = content.parentElement.querySelector('.toggle-icon');
     
     if (content.classList.contains('expanded')) {
         content.classList.remove('expanded');
-        icon.classList.remove('expanded');
-        icon.textContent = '+';
+        icon.textContent = '▼';
     } else {
         content.classList.add('expanded');
-        icon.classList.add('expanded');
-        icon.textContent = '−';
+        icon.textContent = '▲';
     }
 }
 
-// Utility functions
-function getSignalChartData(days) {
-    const cutoff = new Date(Date.now() - (days * 24 * 60 * 60 * 1000));
-    const filtered = dashboardData.signals
-        .filter(signal => new Date(signal.checked_at) >= cutoff)
-        .sort((a, b) => new Date(a.checked_at) - new Date(b.checked_at));
-    
-    return {
-        labels: filtered.map(s => formatTimeForChart(s.checked_at)),
-        cci: filtered.map(s => s.cci || 0),
-        btc: filtered.map(s => s.btc_price || 0)
+// Helper Functions
+function getStatusDisplay(status) {
+    const statusMap = {
+        'pending': '未着手',
+        'in_progress': '進行中', 
+        'completed': '完了',
+        'blocked': 'ブロック'
     };
+    return statusMap[status] || status;
 }
 
-function populateTokenFilter() {
-    const tokenSet = new Set();
-    dashboardData.trades.forEach(trade => {
-        if (trade.input_token) tokenSet.add(trade.input_token);
-        if (trade.output_token) tokenSet.add(trade.output_token);
-    });
-    
-    const select = document.getElementById('token-filter');
-    const currentValue = select.value;
-    
-    // Clear existing options except "All"
-    select.innerHTML = '<option value="">全て</option>';
-    
-    // Add token options
-    Array.from(tokenSet).sort().forEach(token => {
-        const option = document.createElement('option');
-        option.value = token;
-        option.textContent = token;
-        select.appendChild(option);
-    });
-    
-    // Restore selection
-    select.value = currentValue;
+function getPriorityDisplay(priority) {
+    const priorityMap = {
+        'high': '高',
+        'medium': '中',
+        'low': '低'
+    };
+    return priorityMap[priority] || priority;
 }
 
-function updateStatusIndicator(status, text) {
-    const indicator = document.querySelector('.status-dot');
-    const textElement = document.getElementById('status-text');
-    
-    indicator.className = `status-dot ${status}`;
-    textElement.textContent = text;
+function getAssigneeDisplay(assignee) {
+    const assigneeMap = {
+        'clawdia': 'Clawdia',
+        'talon': 'Talon',
+        'velvet': 'Velvet'
+    };
+    return assigneeMap[assignee] || assignee;
 }
 
-function showError(elementId, message) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.innerHTML = `<tr><td colspan="5" class="error">${message}</td></tr>`;
+function formatDateTime(dateString) {
+    if (!dateString) return '-';
+    
+    try {
+        const date = new Date(dateString);
+        return date.toLocaleString('ja-JP', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    } catch (e) {
+        return dateString;
     }
 }
 
-// Formatting functions
-function formatCurrency(amount, currency = 'USD') {
-    if (typeof amount !== 'number') return '$0.00';
+function formatTime(dateString) {
+    if (!dateString) return '-';
     
-    if (currency === 'USD') {
-        return '$' + amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    try {
+        const date = new Date(dateString);
+        return date.toLocaleString('ja-JP', {
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    } catch (e) {
+        return dateString;
     }
-    return amount.toFixed(2);
 }
 
-function formatDateTime(dateStr) {
-    if (!dateStr) return '-';
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return '-';
+function formatDate(dateString) {
+    if (!dateString) return '-';
     
-    return date.toLocaleDateString('ja-JP', {
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
-}
-
-function formatTimeForChart(dateStr) {
-    if (!dateStr) return '';
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return '';
-    
-    return date.toLocaleDateString('ja-JP', {
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit'
-    });
+    try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('ja-JP', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+    } catch (e) {
+        return dateString;
+    }
 }
 
 function formatDateForInput(date) {
     return date.toISOString().split('T')[0];
 }
 
-function formatDateForFilename(date) {
-    return date.toISOString().split('T')[0].replace(/-/g, '');
+function formatCurrency(value, decimals = 2) {
+    if (value === null || value === undefined || isNaN(value)) return '$0.00';
+    
+    const num = parseFloat(value);
+    return `$${num.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}`;
 }
 
-function getStatusText(status) {
-    const statusMap = {
-        'success': '成功',
-        'failed': '失敗',
-        'error': 'エラー',
-        'pending': '処理中'
-    };
-    return statusMap[status] || status || '不明';
+function formatNumber(value, decimals = 2) {
+    if (value === null || value === undefined || isNaN(value)) return '0';
+    
+    const num = parseFloat(value);
+    return num.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 }
 
-function getTradeStatusText(status) {
-    const statusMap = {
-        'Success': '成功',
-        'Failed': '失敗',
-        'Error': 'エラー',
-        'Pending': '処理中'
-    };
-    return statusMap[status] || status || '不明';
-}
-
-function getCciClass(cci) {
-    if (cci > 100) return 'positive';
-    if (cci < -100) return 'negative';
-    return 'neutral';
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }

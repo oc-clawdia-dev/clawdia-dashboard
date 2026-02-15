@@ -1,91 +1,447 @@
-[
-  {
-    "id": "t001",
-    "title": "トレンドフィルター(200EMA)実装",
-    "assignee": "clawdia",
-    "status": "pending",
-    "priority": "high",
-    "estimated_hours": 4,
-    "actual_hours": null,
-    "created_at": "2026-02-15",
-    "description": "ベア相場での損失防止"
+{
+  "members": {
+    "hikarimaru": {
+      "emoji": "👑",
+      "role": "owner"
+    },
+    "clawdia": {
+      "emoji": "🩶",
+      "role": "manager"
+    },
+    "talon": {
+      "emoji": "🦅",
+      "role": "agent"
+    },
+    "velvet": {
+      "emoji": "🌙",
+      "role": "agent"
+    }
   },
-  {
-    "id": "t002",
-    "title": "CCI実装差異の調査",
-    "assignee": "clawdia",
-    "status": "pending",
-    "priority": "high",
-    "estimated_hours": 2,
-    "actual_hours": null,
-    "created_at": "2026-02-15",
-    "description": "scannerとbatch testでCCI結果が異なる問題"
-  },
-  {
-    "id": "t003",
-    "title": "ミームコインモニター改善",
-    "assignee": "clawdia",
-    "status": "pending",
-    "priority": "medium",
-    "estimated_hours": 6,
-    "actual_hours": null,
-    "created_at": "2026-02-15",
-    "description": "小額ライブテスト開始"
-  },
-  {
-    "id": "t004",
-    "title": "CEX連携調査(Binance API)",
-    "assignee": "clawdia",
-    "status": "pending",
-    "priority": "medium",
-    "estimated_hours": 3,
-    "actual_hours": null,
-    "created_at": "2026-02-15",
-    "description": "TRX/BCH/ZEC取引のため"
-  },
-  {
-    "id": "t005",
-    "title": "ライブBot Discord通知改善",
-    "assignee": "talon",
-    "status": "in_progress",
-    "priority": "high",
-    "estimated_hours": 1,
-    "actual_hours": null,
-    "created_at": "2026-02-15",
-    "description": "トレード通知が来ない問題の修正"
-  },
-  {
-    "id": "t006",
-    "title": "10分定期レポート",
-    "assignee": "velvet",
-    "status": "in_progress",
-    "priority": "medium",
-    "estimated_hours": null,
-    "actual_hours": null,
-    "created_at": "2026-02-15",
-    "description": "#infraへの定期システム報告"
-  },
-  {
-    "id": "t007",
-    "title": "ダッシュボード改善",
-    "assignee": "clawdia",
-    "status": "in_progress",
-    "priority": "high",
-    "estimated_hours": 3,
-    "actual_hours": null,
-    "created_at": "2026-02-15",
-    "description": "V2.2 バグ修正+機能追加"
-  },
-  {
-    "id": "t008",
-    "title": "GitHub Pagesデプロイ自動化",
-    "assignee": "clawdia",
-    "status": "completed",
-    "priority": "medium",
-    "estimated_hours": 1,
-    "actual_hours": 0.5,
-    "created_at": "2026-02-15",
-    "completed_at": "2026-02-15",
-    "description": "15分毎の自動更新+push"
-  }
-]
+  "projects": [
+    {
+      "id": "P001",
+      "name": "CCI自動売買Bot",
+      "description": "CCI(14)戦略によるBTC/BNBの自動売買。バックテスト→ライブ運用→継続改善",
+      "status": "active",
+      "tasks": [
+        {
+          "id": "P001-T001",
+          "title": "トレンドフィルター(200EMA)実装",
+          "assignee": "clawdia",
+          "status": "pending",
+          "priority": "high",
+          "estimated_hours": 4,
+          "actual_hours": null,
+          "created_at": "2026-02-15T10:00:00",
+          "started_at": null,
+          "completed_at": null,
+          "description": "ベア相場での損失防止。2022年-52.9%の損失を軽減するため必須",
+          "depends_on": [
+            "P001-T002"
+          ],
+          "notes": [],
+          "tags": [
+            "strategy",
+            "backtest"
+          ],
+          "subtasks": [
+            {
+              "id": "P001-T001-S01",
+              "title": "200EMA計算ロジック実装",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 1
+            },
+            {
+              "id": "P001-T001-S02",
+              "title": "バックテスト（2022-2025全年）",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 2
+            },
+            {
+              "id": "P001-T001-S03",
+              "title": "結果レビュー・パラメータ確定",
+              "assignee": "hikarimaru",
+              "status": "pending",
+              "estimated_hours": 0.5,
+              "description": "hikarimaruがバックテスト結果を確認して採用可否を判断"
+            },
+            {
+              "id": "P001-T001-S04",
+              "title": "ライブBotに組み込み",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 0.5,
+              "depends_on": [
+                "P001-T001-S03"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "P001-T002",
+          "title": "CCI実装差異の調査",
+          "assignee": "clawdia",
+          "status": "pending",
+          "priority": "high",
+          "estimated_hours": 2,
+          "actual_hours": null,
+          "created_at": "2026-02-15T10:00:00",
+          "started_at": null,
+          "completed_at": null,
+          "description": "scannerのcheck()とbatch testのcompute_signals()でCCI結果が異なる問題。ライブBotの信頼性に直結",
+          "notes": [],
+          "tags": [
+            "bugfix",
+            "backtest"
+          ],
+          "subtasks": [
+            {
+              "id": "P001-T002-S01",
+              "title": "両実装のCCI計算ロジック比較",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 1
+            },
+            {
+              "id": "P001-T002-S02",
+              "title": "差異の原因特定・修正",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 0.5
+            },
+            {
+              "id": "P001-T002-S03",
+              "title": "修正後の全ペア再テスト",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 0.5
+            }
+          ]
+        },
+        {
+          "id": "P001-T003",
+          "title": "ライブBot安定運用",
+          "assignee": "clawdia",
+          "status": "in_progress",
+          "priority": "high",
+          "estimated_hours": null,
+          "actual_hours": null,
+          "created_at": "2026-02-14T16:00:00",
+          "started_at": "2026-02-14T16:00:00",
+          "completed_at": null,
+          "description": "BTC+BNB 2ペア、$20 cap、5min interval。継続監視",
+          "notes": [
+            {
+              "timestamp": "2026-02-14T16:59:00",
+              "text": "初回テストスワップ成功"
+            },
+            {
+              "timestamp": "2026-02-15T08:12:00",
+              "text": "TRX誤買い→SOL購入→売り戻し"
+            },
+            {
+              "timestamp": "2026-02-15T10:44:00",
+              "text": "WBTC $20購入（CCIシグナル）— 底値で掴めた"
+            },
+            {
+              "timestamp": "2026-02-15T11:32:00",
+              "text": "Discord通知修正、Bot再起動"
+            },
+            {
+              "timestamp": "2026-02-15T11:40:00",
+              "text": "シグナルログにpairフィールド追加"
+            }
+          ],
+          "tags": [
+            "live",
+            "ongoing"
+          ],
+          "subtasks": []
+        },
+        {
+          "id": "P001-T004",
+          "title": "CEX連携調査(Binance API)",
+          "assignee": "clawdia",
+          "status": "pending",
+          "priority": "medium",
+          "estimated_hours": 3,
+          "actual_hours": null,
+          "created_at": "2026-02-15T10:00:00",
+          "started_at": null,
+          "completed_at": null,
+          "description": "TRX/BCH/ZECはSolana上で取引不可。CEX APIで取引する道を調査",
+          "notes": [],
+          "tags": [
+            "research",
+            "cex"
+          ],
+          "subtasks": [
+            {
+              "id": "P001-T004-S01",
+              "title": "Binance API調査・サンプル実装",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 2
+            },
+            {
+              "id": "P001-T004-S02",
+              "title": "Binanceアカウント作成判断",
+              "assignee": "hikarimaru",
+              "status": "pending",
+              "estimated_hours": 0.5,
+              "description": "KYC必要。hikarimaruが作成するか判断"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P002",
+      "name": "ミームコイン探索",
+      "description": "30%枠のミームコイン投資。スキャナー+安全性チェック+小額テスト",
+      "status": "active",
+      "tasks": [
+        {
+          "id": "P002-T001",
+          "title": "ミームコインモニター改善",
+          "assignee": "clawdia",
+          "status": "pending",
+          "priority": "medium",
+          "estimated_hours": 6,
+          "actual_hours": null,
+          "created_at": "2026-02-15T10:00:00",
+          "started_at": null,
+          "completed_at": null,
+          "description": "既存のscanner/safety/scorerを改善し、小額ライブテスト開始",
+          "notes": [],
+          "tags": [
+            "meme",
+            "live"
+          ],
+          "subtasks": [
+            {
+              "id": "P002-T001-S01",
+              "title": "スキャナーのフィルタ精度向上",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 2
+            },
+            {
+              "id": "P002-T001-S02",
+              "title": "小額($5)自動テスト実装",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 2
+            },
+            {
+              "id": "P002-T001-S03",
+              "title": "1週間テスト結果レビュー",
+              "assignee": "hikarimaru",
+              "status": "pending",
+              "estimated_hours": 0.5,
+              "description": "テスト結果を確認して本格運用可否を判断"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P003",
+      "name": "インフラ・ツール",
+      "description": "ダッシュボード、監視、自動化などの基盤整備",
+      "status": "active",
+      "tasks": [
+        {
+          "id": "P003-T001",
+          "title": "ダッシュボードV3（タブUI+タスク詳細）",
+          "assignee": "clawdia",
+          "status": "in_progress",
+          "priority": "high",
+          "estimated_hours": 4,
+          "actual_hours": null,
+          "created_at": "2026-02-15T10:00:00",
+          "started_at": "2026-02-15T11:52:00",
+          "completed_at": null,
+          "description": "タブ分離、タスク詳細画面、プロジェクト階層表示",
+          "notes": [
+            {
+              "timestamp": "2026-02-15T10:00:00",
+              "text": "V1作成"
+            },
+            {
+              "timestamp": "2026-02-15T11:07:00",
+              "text": "V2: ローカルCSVベース移行"
+            },
+            {
+              "timestamp": "2026-02-15T11:28:00",
+              "text": "V2.1: WBTC/BNB残高追加"
+            },
+            {
+              "timestamp": "2026-02-15T11:43:00",
+              "text": "V2.2: バグ修正+タスク/日報セクション"
+            },
+            {
+              "timestamp": "2026-02-15T11:52:00",
+              "text": "V3着手: タブUI+タスク詳細+プロジェクト階層"
+            }
+          ],
+          "tags": [
+            "dashboard",
+            "frontend"
+          ],
+          "subtasks": [
+            {
+              "id": "P003-T001-S01",
+              "title": "タブUI実装",
+              "assignee": "clawdia",
+              "status": "in_progress",
+              "estimated_hours": 1
+            },
+            {
+              "id": "P003-T001-S02",
+              "title": "タスク詳細画面（モーダル/展開）",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 1.5
+            },
+            {
+              "id": "P003-T001-S03",
+              "title": "プロジェクト階層表示",
+              "assignee": "clawdia",
+              "status": "pending",
+              "estimated_hours": 1
+            },
+            {
+              "id": "P003-T001-S04",
+              "title": "hikarimaruレビュー",
+              "assignee": "hikarimaru",
+              "status": "pending",
+              "estimated_hours": 0.5,
+              "description": "ダッシュボードの使い勝手確認、フィードバック"
+            }
+          ]
+        },
+        {
+          "id": "P003-T002",
+          "title": "GitHub Pagesデプロイ自動化",
+          "assignee": "clawdia",
+          "status": "completed",
+          "priority": "medium",
+          "estimated_hours": 1,
+          "actual_hours": 0.5,
+          "created_at": "2026-02-15T11:00:00",
+          "started_at": "2026-02-15T11:10:00",
+          "completed_at": "2026-02-15T11:20:00",
+          "description": "launchdで15分毎にupdate_data.py→git push→Pages反映",
+          "notes": [
+            {
+              "timestamp": "2026-02-15T11:10:00",
+              "text": "crontabはmacOS不安定→launchd採用"
+            },
+            {
+              "timestamp": "2026-02-15T11:20:00",
+              "text": "完了、動作確認OK"
+            }
+          ],
+          "tags": [
+            "infra",
+            "automation"
+          ],
+          "subtasks": []
+        },
+        {
+          "id": "P003-T003",
+          "title": "Googleアカウント復旧対応",
+          "assignee": "clawdia",
+          "status": "completed",
+          "priority": "high",
+          "estimated_hours": 1,
+          "actual_hours": 0.5,
+          "created_at": "2026-02-15T10:50:00",
+          "started_at": "2026-02-15T10:50:00",
+          "completed_at": "2026-02-15T11:05:00",
+          "description": "oc.hikarimaru BAN→oc.clawdia移行",
+          "notes": [
+            {
+              "timestamp": "2026-02-15T10:50:00",
+              "text": "BAN検知、影響範囲調査"
+            },
+            {
+              "timestamp": "2026-02-15T11:05:00",
+              "text": "新アカウントログイン、Maton削除、教訓記録"
+            }
+          ],
+          "tags": [
+            "incident",
+            "recovery"
+          ],
+          "subtasks": []
+        },
+        {
+          "id": "P003-T004",
+          "title": "10分定期レポート運用",
+          "assignee": "velvet",
+          "status": "in_progress",
+          "priority": "medium",
+          "estimated_hours": null,
+          "actual_hours": null,
+          "created_at": "2026-02-15T09:00:00",
+          "started_at": "2026-02-15T09:00:00",
+          "description": "#infraへの定期システム報告。cron ID: 6fbb1f33",
+          "tags": [
+            "monitoring",
+            "ongoing"
+          ],
+          "subtasks": []
+        },
+        {
+          "id": "P003-T005",
+          "title": "6h定期トレードレポート",
+          "assignee": "talon",
+          "status": "in_progress",
+          "priority": "medium",
+          "estimated_hours": null,
+          "actual_hours": null,
+          "created_at": "2026-02-15T09:00:00",
+          "started_at": "2026-02-15T09:00:00",
+          "description": "#traderへの6時間毎レポート。cron ID: b3ac1c52",
+          "tags": [
+            "monitoring",
+            "ongoing"
+          ],
+          "subtasks": []
+        },
+        {
+          "id": "P003-T006",
+          "title": "Discord通知修正",
+          "assignee": "clawdia",
+          "status": "completed",
+          "priority": "high",
+          "estimated_hours": 1,
+          "actual_hours": 0.3,
+          "created_at": "2026-02-15T10:30:00",
+          "started_at": "2026-02-15T11:25:00",
+          "completed_at": "2026-02-15T11:40:00",
+          "description": "TALON_BOT_TOKEN未設定でDiscord通知が来ない問題",
+          "notes": [
+            {
+              "timestamp": "2026-02-15T11:25:00",
+              "text": "原因: env未読み込み"
+            },
+            {
+              "timestamp": "2026-02-15T11:40:00",
+              "text": "Bot再起動+signal_loggerにpair追加"
+            }
+          ],
+          "tags": [
+            "bugfix",
+            "live"
+          ],
+          "subtasks": []
+        }
+      ]
+    }
+  ]
+}
