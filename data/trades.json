@@ -111,6 +111,11 @@
     "usdc_spent": 20.0,
     "signature": "manual_restore",
     "note": "restored from grid_state.json - original log missing",
-    "source": "jupiter_grid"
+    "source": "jupiter_grid",
+    "input_token": "USDC",
+    "output_token": "SOL",
+    "input_amount": 20.0,
+    "output_amount": 0,
+    "status": "Success"
   }
 ]

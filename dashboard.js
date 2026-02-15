@@ -490,19 +490,24 @@ function updateTradeTable(trades, wallet) {
     const bnbPrice = wallet?.bnb_price_usd || 0;
 
     tbody.innerHTML = [...trades].reverse().map(t => {
-        const direction = t.input_token === 'USDC' ? '🟢 買い' : '🔴 売り';
-        const pair = `${t.input_token} → ${t.output_token}`;
-        const inputUsd = estimateUsd(t.input_token, t.input_amount, solPrice, btcPrice, bnbPrice);
-        const outputUsd = estimateUsd(t.output_token, t.output_amount, solPrice, btcPrice, bnbPrice);
-        const usdDisplay = t.input_token === 'USDC' ? fmtCurrency(t.input_amount) : fmtCurrency(outputUsd);
+        const inputToken = t.input_token || t.token || '?';
+        const outputToken = t.output_token || (t.action === 'buy' ? t.token : 'USDC') || '?';
+        const direction = inputToken === 'USDC' || t.action === 'buy' ? '🟢 買い' : '🔴 売り';
+        const pair = `${inputToken} → ${outputToken}`;
+        const inputAmt = t.input_amount || t.usdc_spent || 0;
+        const outputAmt = t.output_amount || t.token_amount || 0;
+        const inputUsd = estimateUsd(inputToken, inputAmt, solPrice, btcPrice, bnbPrice);
+        const outputUsd = estimateUsd(outputToken, outputAmt, solPrice, btcPrice, bnbPrice);
+        const usdDisplay = inputToken === 'USDC' ? fmtCurrency(inputAmt) : fmtCurrency(outputUsd);
+        const status = t.status || 'Success';
 
         return `
-            <tr class="trade-row ${t.status === 'Success' ? 'success' : 'failed'}">
+            <tr class="trade-row ${status === 'Success' ? 'success' : 'failed'}">
                 <td>${fmtDateTime(t.timestamp)}</td>
                 <td>${direction}<br><small>${pair}</small></td>
-                <td>${fmtNum(t.input_amount, 6)} ${t.input_token}<br>→ ${fmtNum(t.output_amount, 6)} ${t.output_token}</td>
+                <td>${fmtNum(inputAmt, 6)} ${inputToken}<br>→ ${fmtNum(outputAmt, 6)} ${outputToken}</td>
                 <td>${usdDisplay}</td>
-                <td><span class="status-badge ${t.status === 'Success' ? 'success' : 'failed'}">${t.status === 'Success' ? '✅' : '❌'}</span></td>
+                <td><span class="status-badge ${status === 'Success' ? 'success' : 'failed'}">${status === 'Success' ? '✅' : '❌'}</span></td>
             </tr>`;
     }).join('');
 }

@@ -154,11 +154,26 @@ def update_trades_data():
     pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'trades_*.jsonl')
     trades = read_jsonl_files(pattern)
     
-    # Jupiter Grid trades
+    # Jupiter Grid trades — convert to standard format
     jgrid_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'jgrid_*.jsonl')
     jgrid_trades = read_jsonl_files(jgrid_pattern)
     for t in jgrid_trades:
         t['source'] = 'jupiter_grid'
+        token = t.get('token', 'SOL')
+        action = t.get('action', '')
+        if 'input_token' not in t:
+            if action == 'buy':
+                t['input_token'] = 'USDC'
+                t['output_token'] = token
+                t['input_amount'] = t.get('usdc_spent', 0)
+                t['output_amount'] = t.get('token_amount', 0)
+            elif action in ('sell_tp', 'sell_sl', 'sell'):
+                t['input_token'] = token
+                t['output_token'] = 'USDC'
+                t['input_amount'] = t.get('token_amount', 0)
+                t['output_amount'] = t.get('usdc_received', 0)
+        if 'status' not in t:
+            t['status'] = 'Success'
     trades.extend(jgrid_trades)
     
     # データの整形（必要に応じて）
@@ -350,6 +365,12 @@ def update_daily_reports_data():
                         content = f.read().strip()
                     
                     if content:  # 空でないファイルのみ
+                        # Filter out secrets (tokens, API keys, passwords)
+                        import re
+                        content = re.sub(r'ghp_[A-Za-z0-9]{36}', '[REDACTED]', content)
+                        content = re.sub(r'MTQ3[A-Za-z0-9._\-]{50,}', '[REDACTED]', content)
+                        content = re.sub(r'sk-ant-[A-Za-z0-9\-]{50,}', '[REDACTED]', content)
+                        content = re.sub(r'MATON_API_KEY[^\n]*', '[REDACTED]', content)
                         reports.append({
                             'date': date_str,
                             'content': content
