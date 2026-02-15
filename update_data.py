@@ -487,17 +487,35 @@ def update_portfolio_strategies():
     except Exception as e:
         print(f"  Error reading grid bot info: {e}")
     
-    # Add positions info from live_trader signal logs
+    # Add positions from live_state_*.json files
     try:
-        # Read recent signal logs for CCI positions
-        signal_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'signal_logs', 'signals_*.jsonl')
-        signal_files = sorted(glob.glob(signal_pattern))
+        state_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'live_state_*.json')
+        for state_file in glob.glob(state_pattern):
+            with open(state_file, 'r') as fh:
+                state = json.load(fh)
+            pair_id = state.get('pair', os.path.basename(state_file).replace('live_state_', '').replace('.json', ''))
+            for strat in strategies:
+                if strat.get('pair_id') == pair_id:
+                    if state.get('in_position'):
+                        strat['position'] = {
+                            'in_position': True,
+                            'entry_price': state.get('entry_price'),
+                            'entry_time': state.get('entry_time'),
+                            'stop_loss_price': state.get('stop_loss_price'),
+                            'position_size_usd': state.get('position_size_usd'),
+                            'position_token': state.get('position_token'),
+                            'position_amount': state.get('position_amount'),
+                            'donchian_low': state.get('donchian_low'),
+                        }
+                    else:
+                        strat['position'] = {'in_position': False}
+                    break
         
-        # Read trade logs for position tracking
+        # Read trade logs for stats
         trade_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'trades_*.jsonl')
         trade_files = sorted(glob.glob(trade_pattern))
         all_trades = []
-        for f in trade_files[-7:]:  # Last 7 days
+        for f in trade_files[-7:]:
             with open(f) as fh:
                 for line in fh:
                     try:
@@ -505,11 +523,10 @@ def update_portfolio_strategies():
                     except:
                         pass
         
-        # Calculate per-strategy stats
         for strat in strategies:
             if strat.get('strategy') == 'CCI':
                 symbol = strat.get('trade_symbol', '')
-                strat_trades = [t for t in all_trades if symbol.upper() in str(t.get('output_token', '')).upper() 
+                strat_trades = [t for t in all_trades if symbol.upper() in str(t.get('output_token', '')).upper()
                                or symbol.upper() in str(t.get('input_token', '')).upper()]
                 strat["stats"] = {
                     "total_trades": len(strat_trades),

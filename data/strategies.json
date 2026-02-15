@@ -11,6 +11,16 @@
       "donchian_period": 15,
       "ema_trend_period": 50
     },
+    "position": {
+      "in_position": true,
+      "entry_price": 69391.3,
+      "entry_time": "2026-02-15T01:44:35.064171+00:00",
+      "stop_loss_price": 68766.7783,
+      "position_size_usd": 20.0,
+      "position_token": "WBTC",
+      "position_amount": 0.00028822056943737903,
+      "donchian_low": 69251.5
+    },
     "stats": {
       "total_trades": 1,
       "last_7d_trades": 1
@@ -28,9 +38,19 @@
       "donchian_period": 20,
       "ema_trend_period": 0
     },
+    "position": {
+      "in_position": true,
+      "entry_price": 628.0,
+      "entry_time": "2026-02-15T10:10:17.184007+00:00",
+      "stop_loss_price": 618.58,
+      "position_size_usd": 20.0,
+      "position_token": "BNB",
+      "position_amount": 0.03184713375796178,
+      "donchian_low": 626.21
+    },
     "stats": {
-      "total_trades": 0,
-      "last_7d_trades": 0
+      "total_trades": 1,
+      "last_7d_trades": 1
     }
   },
   {
