@@ -154,6 +154,13 @@ def update_trades_data():
     pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'trades_*.jsonl')
     trades = read_jsonl_files(pattern)
     
+    # Jupiter Grid trades
+    jgrid_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'jgrid_*.jsonl')
+    jgrid_trades = read_jsonl_files(jgrid_pattern)
+    for t in jgrid_trades:
+        t['source'] = 'jupiter_grid'
+    trades.extend(jgrid_trades)
+    
     # データの整形（必要に応じて）
     for trade in trades:
         # timestampをISO形式に統一
@@ -475,10 +482,24 @@ def update_portfolio_strategies():
                 "win_rate": round(len(sells_tp) / max(len(sells_tp) + len(sells_sl), 1) * 100, 1),
             }
             
-            # Check if currently holding position (pid file + recent buy without sell)
-            if buys and len(buys) > len(sells_tp) + len(sells_sl):
+            # Check position from grid_state.json
+            grid_state_file = os.path.join(CONFIG['BOT_DATA_DIR'], 'grid_state.json')
+            if os.path.exists(grid_state_file):
+                with open(grid_state_file) as gsf:
+                    grid_state = json.load(gsf)
+                if grid_state.get('position'):
+                    grid_strat["position"] = {
+                        "in_position": True,
+                        "entry_price": grid_state['position'].get('entry_price'),
+                        "usdc_spent": grid_state['position'].get('usdc_spent'),
+                        "ref_price": grid_state.get('ref_price'),
+                    }
+                else:
+                    grid_strat["position"] = {"in_position": False, "ref_price": grid_state.get('ref_price')}
+            elif buys and len(buys) > len(sells_tp) + len(sells_sl):
                 last_buy = buys[-1]
                 grid_strat["position"] = {
+                    "in_position": True,
                     "entry_time": last_buy.get('timestamp', ''),
                     "usdc_spent": last_buy.get('usdc_spent', 0),
                 }
