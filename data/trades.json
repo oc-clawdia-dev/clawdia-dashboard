@@ -4587,5 +4587,47 @@
       "hold_minutes": 2.8,
       "score_at_entry": 75.19664319060651
     }
+  },
+  {
+    "timestamp": "2026-02-17T00:00:10.631965+09:00",
+    "unix_time": 1771254010,
+    "strategy": "MEME",
+    "direction": "sell",
+    "pair": "UPSCALP/USDC",
+    "input_token": "UPSCALP",
+    "output_token": "USDC",
+    "order_input_amount": 467075.061065,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 21.60615685984,
+    "input_amount": 467075.061065,
+    "output_amount": 21.60615685984,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 4.6258425381511004e-05,
+    "effective_price": 4.6258425381511004e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "5WRESymacroWtx5EJH5q9MMVRzRDU5iXQqDmEHQqMNUhn3SmhMTETjCjmUewQddKZyb9RLDd29Yo2CNLCGoiLxMw",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "TRAIL (+6.9%, peak +13.1%)",
+    "error": "",
+    "extra": {
+      "token_address": "2nKNuDniEeAs44oCT1niwzXGNNiEh4N7pfZJJ3t4pump",
+      "entry_price": 4.28196700427487e-05,
+      "pnl_usd": 1.6062,
+      "pnl_pct": 8.03,
+      "hold_minutes": 5.9,
+      "score_at_entry": 70.76008963057772
+    }
   }
 ]
