@@ -5969,5 +5969,50 @@
         "demand": 55
       }
     }
+  },
+  {
+    "timestamp": "2026-02-17T01:54:24.362935+09:00",
+    "unix_time": 1771260864,
+    "strategy": "MEME",
+    "direction": "sell",
+    "pair": "STASH/USDC",
+    "input_token": "STASH",
+    "output_token": "USDC",
+    "order_input_amount": 547107.224895,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 21.111445,
+    "input_amount": 547107.224895,
+    "output_amount": 21.111445,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 3.8587399396985985e-05,
+    "effective_price": 3.8587399396985985e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "3Xtg74av85uDaBiiAixSq4iyNBJesMgDBdS8uzUMEMKkCwxPPo4GS9wkmxBsWfr4Ha6VFCbpjwxwfSWs3VkB2BqJ",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "TRAIL (+8.8%, peak +12.7%)",
+    "error": "",
+    "extra": {
+      "token_address": "EWMfSJgDCE7CXDAYz3hbCaA7NsFHTnddySXx3shco2Hs",
+      "entry_price": 3.655590547874481e-05,
+      "pnl_usd": 1.1114,
+      "pnl_pct": 5.56,
+      "hold_minutes": 10.6,
+      "score_at_entry": 70.26734950692861,
+      "dexscreener_pnl_pct": 8.79,
+      "actual_pnl_pct": 5.56,
+      "price_divergence": true
+    }
   }
 ]
