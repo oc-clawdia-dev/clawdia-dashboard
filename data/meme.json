@@ -922,7 +922,7 @@
         "address": "5BtNNse2pZuZWt8z"
       }
     ],
-    "last_scan": "2026-02-17T00:38:36.409785"
+    "last_scan": "2026-02-17T00:39:37.996916"
   },
   "survey": [],
   "trades": [
@@ -5202,6 +5202,49 @@
         "pnl_pct": -22.17,
         "hold_minutes": 1.0,
         "score_at_entry": 71.13697905118161
+      }
+    },
+    {
+      "timestamp": "2026-02-17T00:39:36.651509+09:00",
+      "unix_time": 1771256376,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "TEDDY/USDC",
+      "input_token": "USDC",
+      "output_token": "TEDDY",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 359771.668118,
+      "input_amount": 20.0,
+      "output_amount": 359771.668118,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 5.559081432015454e-05,
+      "effective_price": 5.559081432015454e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "2n7o6JSxRgTwA28VzfWjVRA5pdawFymkTw1rMWoLpxEZ2K7vqPh9eMRVqpwVpMxLSHMnfmsEjsLTkNyzBf384iMS",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=74 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "AdJSR8QaustnW2MupTy6TqzHWMmd8AVqgWE27VKtpump",
+        "score_detail": {
+          "total": 74.00983056293279,
+          "momentum": 66.28072671729157,
+          "volume": 87.86747640176378,
+          "demand": 65
+        }
       }
     }
   ]
