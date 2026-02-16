@@ -6454,5 +6454,48 @@
         "demand": 55
       }
     }
+  },
+  {
+    "timestamp": "2026-02-17T02:16:35.935619+09:00",
+    "unix_time": 1771262195,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "QUANTIX/USDC",
+    "input_token": "USDC",
+    "output_token": "QUANTIX",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 488793.875046,
+    "input_amount": 20.0,
+    "output_amount": 488793.875046,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 4.091704299305677e-05,
+    "effective_price": 4.091704299305677e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "48vxsMTMwP3jHtBBCai4oYMNESUgx9k8rhWqWkBxFk9BR8i2P6vtHGtTpNbpn9ED5GoPLuERqfooApWaDeS6cFsG",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=68 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "CRNjUJn2xQoEwJj2N16WJSMcZ5Eti8xHuoSpW6r6pump",
+      "score_detail": {
+        "total": 68.43302135443587,
+        "momentum": 56.31672126714314,
+        "volume": 81.46633548443131,
+        "demand": 55
+      }
+    }
   }
 ]
