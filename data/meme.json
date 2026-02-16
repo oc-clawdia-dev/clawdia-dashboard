@@ -932,7 +932,7 @@
         "address": "AdJSR8QaustnW2Mu"
       }
     ],
-    "last_scan": "2026-02-17T00:42:43.234358"
+    "last_scan": "2026-02-17T00:43:44.751462"
   },
   "survey": [],
   "trades": [
@@ -5255,6 +5255,51 @@
           "volume": 87.86747640176378,
           "demand": 65
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T00:43:14.239306+09:00",
+      "unix_time": 1771256594,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "TEDDY/USDC",
+      "input_token": "TEDDY",
+      "output_token": "USDC",
+      "order_input_amount": 359771.668118,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 21.859172563119998,
+      "input_amount": 359771.668118,
+      "output_amount": 21.859172563119998,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 6.075846015743102e-05,
+      "effective_price": 6.075846015743102e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "52A8cuz1rtoAYyE9aHKS5SXwcuJVWC4wpfAH59cC2bwhtqeJduMbtRB8ANJmVRxdXhsaaQtibiir3xX8WgUSKmFk",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "TRAIL (+19.1%, peak +25.3%)",
+      "error": "",
+      "extra": {
+        "token_address": "AdJSR8QaustnW2MupTy6TqzHWMmd8AVqgWE27VKtpump",
+        "entry_price": 5.559081432015454e-05,
+        "pnl_usd": 1.8592,
+        "pnl_pct": 9.3,
+        "hold_minutes": 3.6,
+        "score_at_entry": 74.00983056293279,
+        "dexscreener_pnl_pct": 19.07,
+        "actual_pnl_pct": 9.3,
+        "price_divergence": true
       }
     }
   ]
