@@ -409,6 +409,27 @@
     "error": ""
   },
   {
+    "timestamp": "2026-02-16T03:30:00.000000+09:00",
+    "unix_time": 1771180200,
+    "strategy": "CCI",
+    "direction": "buy",
+    "pair": "BNBUSDT",
+    "input_token": "USDC",
+    "output_token": "BNB",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 20.0,
+    "actual_output_amount": 0.03222343,
+    "input_amount": 20.0,
+    "output_amount": 0.03222343,
+    "price_at_signal": 620.67,
+    "effective_price": 620.67,
+    "status": "Success",
+    "reason": "cci_signal",
+    "error": "",
+    "note": "Reconstructed: original log_trade failed due to time import bug. Amount inferred from subsequent sell."
+  },
+  {
     "timestamp": "2026-02-16T04:07:29.345404+09:00",
     "unix_time": 1771182449,
     "strategy": "CCI",
