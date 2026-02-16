@@ -1142,7 +1142,7 @@
         "address": "6VHXipL9pSV5MCYu"
       }
     ],
-    "last_scan": "2026-02-17T03:14:36.730676"
+    "last_scan": "2026-02-17T03:15:38.189194"
   },
   "survey": [],
   "trades": [
@@ -7532,6 +7532,51 @@
           "volume": 99.11971561931665,
           "demand": 55
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T03:15:16.725743+09:00",
+      "unix_time": 1771265716,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "MOMO/USDC",
+      "input_token": "MOMO",
+      "output_token": "USDC",
+      "order_input_amount": 56538.925572,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 14.53982626005,
+      "input_amount": 56538.925572,
+      "output_amount": 14.53982626005,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.00025716488442169153,
+      "effective_price": 0.00025716488442169153,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "3YneBXuGeEQEJmLuKnsiaWiPPKfSYps2CarVgCz54FQS4bDijMWnvWfywLRffBMfuzxbQ4UpXxiju7Wtc4x3Hv2R",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "SL (-17.6%)",
+      "error": "",
+      "extra": {
+        "token_address": "6VHXipL9pSV5MCYuB9tMR4xkwojhc1gQ51ku2GR7pump",
+        "entry_price": 0.0003537385933259524,
+        "pnl_usd": -5.4602,
+        "pnl_pct": -27.3,
+        "hold_minutes": 3.5,
+        "score_at_entry": 78.83086719287101,
+        "dexscreener_pnl_pct": -17.59,
+        "actual_pnl_pct": -27.3,
+        "price_divergence": true
       }
     }
   ]
