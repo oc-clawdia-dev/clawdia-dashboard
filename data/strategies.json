@@ -198,15 +198,15 @@
     }
   },
   "allocation": {
-    "total_portfolio": 505.01,
+    "total_portfolio": 505.13,
     "total_allocated": 100,
-    "total_in_positions": 39.95,
-    "cash_unallocated": 401.78,
+    "total_in_positions": 40.06,
+    "cash_unallocated": 401.9,
     "strategies": {
       "CCI": {
         "allocated_usd": 80,
-        "position_value": 20.02,
-        "dry_powder": 59.98,
+        "position_value": 20.09,
+        "dry_powder": 59.91,
         "realized_pnl": -1.1,
         "effective_value": 78.9,
         "note": "BTC$40(2枠) + BNB$40(2枠)。各ペア$20×2回分"
@@ -221,8 +221,8 @@
       },
       "GRID": {
         "allocated_usd": 20,
-        "position_value": 19.92,
-        "dry_powder": 0.08,
+        "position_value": 19.97,
+        "dry_powder": 0.03,
         "realized_pnl": 0,
         "effective_value": 20.0,
         "note": "SOL$20。1ポジション分"
