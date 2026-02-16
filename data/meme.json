@@ -882,7 +882,7 @@
         "address": "FVsMQf8KvAERdsi3"
       }
     ],
-    "last_scan": "2026-02-17T00:05:45.748982"
+    "last_scan": "2026-02-17T00:06:47.318211"
   },
   "survey": [],
   "trades": [
@@ -4949,6 +4949,49 @@
         "pnl_pct": 8.03,
         "hold_minutes": 5.9,
         "score_at_entry": 70.76008963057772
+      }
+    },
+    {
+      "timestamp": "2026-02-17T00:06:39.339153+09:00",
+      "unix_time": 1771254399,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "Amazon/USDC",
+      "input_token": "USDC",
+      "output_token": "Amazon",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 359942.405051,
+      "input_amount": 20.0,
+      "output_amount": 359942.405051,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 5.5564445087169464e-05,
+      "effective_price": 5.5564445087169464e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "3qcjh72iVVy7fX4bhg3YkNZp956cmgjz3XWMe1QHPNJpEhjvFHb27LZE9bgjyaQ8JTYKh9FMrMWi9UvPx7THVdV4",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=73 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "51rGr8WCwFWe5K8HaYQrpiE3GBZKkLnXB3K9AnTdpump",
+        "score_detail": {
+          "total": 73.34326261611476,
+          "momentum": 67.6568979748887,
+          "volume": 84.18703683293063,
+          "demand": 55
+        }
       }
     }
   ]
