@@ -1082,7 +1082,7 @@
         "address": "DcoeiMpqBG23AU8Z"
       }
     ],
-    "last_scan": "2026-02-17T02:13:03.456007"
+    "last_scan": "2026-02-17T02:14:05.020824"
   },
   "survey": [],
   "trades": [
@@ -6639,6 +6639,92 @@
         "dexscreener_pnl_pct": -15.07,
         "actual_pnl_pct": -17.09,
         "price_divergence": true
+      }
+    },
+    {
+      "timestamp": "2026-02-17T02:13:56.015627+09:00",
+      "unix_time": 1771262036,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "Clav/USDC",
+      "input_token": "USDC",
+      "output_token": "Clav",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 312284.135022,
+      "input_amount": 20.0,
+      "output_amount": 312284.135022,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 6.404423970686511e-05,
+      "effective_price": 6.404423970686511e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "5HnQHP3DVMbsmFzU7GehdvMYRVhH56AAJMhG6Cc6h5DgN19s37uiAz6UTFDcR8fieT4cvgEpMyenb2EP7QCjrzKA",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=69 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "DcoeiMpqBG23AU8Z8ribhGwr9PJenNh9bWXVpa1mpump",
+        "score_detail": {
+          "total": 69.36426887185637,
+          "momentum": 66.21001164423858,
+          "volume": 90.2645105525339,
+          "demand": 40
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T02:14:03.055831+09:00",
+      "unix_time": 1771262043,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "Clav/USDC",
+      "input_token": "USDC",
+      "output_token": "Clav",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 324020.325583,
+      "input_amount": 20.0,
+      "output_amount": 324020.325583,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 6.172452287989836e-05,
+      "effective_price": 6.172452287989836e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "3drksUDFhWXr8ZMrVB3Vv7GCHihXgixC1rzhBPVZdHozM4X5kgckL9eRom3kEiqw9HzwsG6MsZZCKVeK3Qw47QUK",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=69 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "DcoeiMpqBG23AU8Z8ribhGwr9PJenNh9bWXVpa1mpump",
+        "score_detail": {
+          "total": 69.36426887185637,
+          "momentum": 66.21001164423858,
+          "volume": 90.2645105525339,
+          "demand": 40
+        }
       }
     }
   ]
