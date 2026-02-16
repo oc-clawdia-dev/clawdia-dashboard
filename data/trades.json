@@ -8081,5 +8081,50 @@
         "demand": 55
       }
     }
+  },
+  {
+    "timestamp": "2026-02-17T04:35:07.714779+09:00",
+    "unix_time": 1771270507,
+    "strategy": "MEME",
+    "direction": "sell",
+    "pair": "YURI/USDC",
+    "input_token": "YURI",
+    "output_token": "USDC",
+    "order_input_amount": 423257.379892,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 14.59308065952,
+    "input_amount": 423257.379892,
+    "output_amount": 14.59308065952,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 3.447803004224906e-05,
+    "effective_price": 3.447803004224906e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "4ChN3i3wfCVQ59ygsK3MPHnunzu9aQy7YmYmyH43pQwZrawAYkEjEET1bPyCPRdfzYtH7pWDeZ4q5fkVkfQeKnUQ",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "SL (-27.0%)",
+    "error": "",
+    "extra": {
+      "token_address": "6kpSmDFpra8TFUk2XBAKzV9aKAg94e4LhmVS6TUcpump",
+      "entry_price": 4.7252572430286455e-05,
+      "pnl_usd": -5.4069,
+      "pnl_pct": -27.03,
+      "hold_minutes": 2.7,
+      "score_at_entry": 69.71444539807811,
+      "dexscreener_pnl_pct": -26.97,
+      "actual_pnl_pct": -27.03,
+      "price_divergence": true
+    }
   }
 ]
