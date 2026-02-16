@@ -6542,5 +6542,48 @@
       "actual_pnl_pct": 181.65,
       "price_divergence": true
     }
+  },
+  {
+    "timestamp": "2026-02-17T02:32:16.602710+09:00",
+    "unix_time": 1771263136,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "ClawTube/USDC",
+    "input_token": "USDC",
+    "output_token": "ClawTube",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 165460.418328,
+    "input_amount": 20.0,
+    "output_amount": 165460.418328,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.0001208748303799949,
+    "effective_price": 0.0001208748303799949,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "2NZ6HZtKwDrL3Wjn973D4FmDUksgZnNivbsL8nVzucfuCRnzNrd7XkDRhyocLRX6A9Mdj1W8H8NjH2pGAxhrWQuj",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=71 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "9dG3e3bUcY3qecPrGWFqQSEGyUDW7unvC6ZaAfdMCLAW",
+      "score_detail": {
+        "total": 70.85690813610461,
+        "momentum": 74.95620660023786,
+        "volume": 83.82997956074911,
+        "demand": 40
+      }
+    }
   }
 ]
