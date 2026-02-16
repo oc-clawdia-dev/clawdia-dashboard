@@ -972,7 +972,7 @@
         "address": "CxoaKHTGYAUkHwzK"
       }
     ],
-    "last_scan": "2026-02-17T01:12:29.797853"
+    "last_scan": "2026-02-17T01:13:31.459919"
   },
   "survey": [],
   "trades": [
@@ -5604,6 +5604,51 @@
           "volume": 80.14480099272758,
           "demand": 65
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T01:12:38.004478+09:00",
+      "unix_time": 1771258358,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "MOLLIE/USDC",
+      "input_token": "MOLLIE",
+      "output_token": "USDC",
+      "order_input_amount": 514348.77014,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 14.112611,
+      "input_amount": 514348.77014,
+      "output_amount": 14.112611,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 2.743782394222252e-05,
+      "effective_price": 2.743782394222252e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "4Xq4ZHpYwbRU8XE2kvZcYZ9qrNwLZNUa9a24V8Yd7QZrRcJi4N4VgheM4MpZ7ESqZM5uVATvzUEPqbtdn7j1VLHZ",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "SL (-16.1%)",
+      "error": "",
+      "extra": {
+        "token_address": "tT2WbGgwfMFgjaQz7TpU1hoLCtqLzPY1VZWTwaWpump",
+        "entry_price": 3.888412136099057e-05,
+        "pnl_usd": -5.8874,
+        "pnl_pct": -29.44,
+        "hold_minutes": 10.8,
+        "score_at_entry": 69.79590855768444,
+        "dexscreener_pnl_pct": -16.14,
+        "actual_pnl_pct": -29.44,
+        "price_divergence": true
       }
     }
   ]
