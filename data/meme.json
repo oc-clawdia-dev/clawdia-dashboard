@@ -1272,7 +1272,7 @@
         "address": "13akLGmNC2BnpJ1m"
       }
     ],
-    "last_scan": "2026-02-17T04:55:11.996149"
+    "last_scan": "2026-02-17T04:56:13.861619"
   },
   "survey": [],
   "trades": [
@@ -8939,6 +8939,49 @@
         "dexscreener_pnl_pct": -25.95,
         "actual_pnl_pct": -27.09,
         "price_divergence": true
+      }
+    },
+    {
+      "timestamp": "2026-02-17T04:55:23.487790+09:00",
+      "unix_time": 1771271723,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "Seedance/USDC",
+      "input_token": "USDC",
+      "output_token": "Seedance",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 141129.119004,
+      "input_amount": 20.0,
+      "output_amount": 141129.119004,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.00014171419860867368,
+      "effective_price": 0.00014171419860867368,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "jHtF5FBaGMAHtVw4uXnoE8CKj3a3E8NXUNFNeTeuUF9feGe7k1ZWqBzU7yaZ69YM1GcPsFbfc9h5cufDKw3XEKG",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=67 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "vg22WXeS483q1vsNgPwuE4iWdVbhVEw3MqSXTJNpump",
+        "score_detail": {
+          "total": 66.66842154322481,
+          "momentum": 60.85077244688481,
+          "volume": 44.03743715141089,
+          "demand": 65
+        }
       }
     }
   ]
