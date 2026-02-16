@@ -7641,5 +7641,48 @@
         "demand": 75
       }
     }
+  },
+  {
+    "timestamp": "2026-02-17T04:07:48.824204+09:00",
+    "unix_time": 1771268868,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "GADSDEN/USDC",
+    "input_token": "USDC",
+    "output_token": "GADSDEN",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 325479.133975,
+    "input_amount": 20.0,
+    "output_amount": 325479.133975,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 6.144787149868783e-05,
+    "effective_price": 6.144787149868783e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "4r95sukZXjVg3SzQt9EnQtBECpPdY61EwA9j6jv4dcABeY2rYGPkSsTn9hQaAP5w8njCvY7tNT8mQH7bDRBH1iqc",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=73 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "8xZNp4gAppSjHykyviCRuRGKKeiVSCpaEsjDbQSe2Thy",
+      "score_detail": {
+        "total": 73.32419399697955,
+        "momentum": 66.35524352096951,
+        "volume": 86.41692364515356,
+        "demand": 55
+      }
+    }
   }
 ]
