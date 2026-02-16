@@ -1263,6 +1263,56 @@ function renderMemeTab() {
         `;
     }
     
+    // Meme P&L Summary
+    const summaryEl = document.getElementById('meme-pnl-summary');
+    if (summaryEl) {
+        const allTrades = memeData.trades || [];
+        const byStrategy = {};
+        let totalSpent = 0, totalReceived = 0, txCount = 0;
+        allTrades.forEach(t => {
+            const s = t.strategy || 'MEME';
+            if (!byStrategy[s]) byStrategy[s] = {spent: 0, received: 0, count: 0};
+            byStrategy[s].count++;
+            txCount++;
+            if (t.input_token === 'USDC') {
+                const amt = parseFloat(t.order_input_amount || 0);
+                byStrategy[s].spent += amt;
+                totalSpent += amt;
+            }
+            if (t.output_token === 'USDC') {
+                const amt = parseFloat(t.actual_output_amount || t.order_output_amount || 0);
+                byStrategy[s].received += amt;
+                totalReceived += amt;
+            }
+        });
+        const pnl = totalReceived - totalSpent;
+        const gasCost = txCount * 0.18; // ~$0.18 per TX
+        const totalCost = pnl - gasCost;
+        
+        let html = `<div class="meme-pnl-card" style="background:${totalCost >= 0 ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)'}; border-radius:8px; padding:12px; margin:8px 0;">`;
+        html += `<div style="display:flex;justify-content:space-between;align-items:center;">`;
+        html += `<span><strong>ミーム総損益</strong></span>`;
+        html += `<span style="font-size:1.3em;font-weight:bold;color:${totalCost >= 0 ? '#22c55e' : '#ef4444'}">$${totalCost.toFixed(2)}</span>`;
+        html += `</div>`;
+        html += `<div style="font-size:0.85em;color:#999;margin-top:4px;">`;
+        html += `投入: $${totalSpent.toFixed(2)} | 回収: $${totalReceived.toFixed(2)} | `;
+        html += `トレード損益: $${pnl.toFixed(2)} | ガス代(推定): -$${gasCost.toFixed(2)} | ${txCount} TX`;
+        html += `</div>`;
+        
+        // Per strategy breakdown
+        const stratEntries = Object.entries(byStrategy);
+        if (stratEntries.length > 1) {
+            html += `<div style="font-size:0.8em;color:#888;margin-top:6px;">`;
+            stratEntries.forEach(([s, d]) => {
+                const sp = d.received - d.spent;
+                html += `<span style="margin-right:12px;">${s}: $${sp.toFixed(2)} (${d.count}件)</span>`;
+            });
+            html += `</div>`;
+        }
+        html += `</div>`;
+        summaryEl.innerHTML = html;
+    }
+    
     // Meme trades
     const tradeBody = document.getElementById('meme-trade-body');
     const trades = memeData.trades || [];
