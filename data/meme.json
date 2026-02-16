@@ -1202,7 +1202,7 @@
         "address": "5gS5McQ7UozWDWvr"
       }
     ],
-    "last_scan": "2026-02-17T04:18:15.540018"
+    "last_scan": "2026-02-17T04:19:16.988441"
   },
   "survey": [],
   "trades": [
@@ -8339,6 +8339,94 @@
           "volume": 78.18982456884255,
           "demand": 65
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T04:18:39.121634+09:00",
+      "unix_time": 1771269519,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "GhostLink/USDC",
+      "input_token": "USDC",
+      "output_token": "GhostLink",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 433974.376795,
+      "input_amount": 20.0,
+      "output_amount": 433974.376795,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 4.608567019026463e-05,
+      "effective_price": 4.608567019026463e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "4X34tEizAHwjh2JwWtyWxoNRKNBxKiDDdvwoaZsozvkWZR6CnPJaSCADMfMYSUFV2wevhPDumJyR3ygSteiS4RAt",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=71 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "5gS5McQ7UozWDWvrA1j9RUSMbeE9Vxt5mwaUTZbpump",
+        "score_detail": {
+          "total": 71.10089494121488,
+          "momentum": 63.512453366563335,
+          "volume": 86.68248065769268,
+          "demand": 55
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T04:18:52.562142+09:00",
+      "unix_time": 1771269532,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "POTUS/USDC",
+      "input_token": "POTUS",
+      "output_token": "USDC",
+      "order_input_amount": 83127.327794,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 21.345314,
+      "input_amount": 83127.327794,
+      "output_amount": 21.345314,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.0002567785416234764,
+      "effective_price": 0.0002567785416234764,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "5LWBstBcKZKanCTHG2Fn6ZnJbiTH9xQjYnaxGk8nGEeFm4hH3zPhTo3ts7H4Lmy5rCY8cnYSLiHfb2yST3ZxBDXJ",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "SL (-15.0%)",
+      "error": "",
+      "extra": {
+        "token_address": "2PCwdaEAg2LS8aEPwdr8Bcab8SohCrDB6aSAgg29YKRQ",
+        "entry_price": 0.00024059476625499767,
+        "pnl_usd": 1.3453,
+        "pnl_pct": 6.73,
+        "hold_minutes": 2.4,
+        "score_at_entry": 79.3654005827955,
+        "dexscreener_pnl_pct": -15.04,
+        "actual_pnl_pct": 6.73,
+        "price_divergence": true
       }
     }
   ]
