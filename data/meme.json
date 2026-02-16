@@ -1292,7 +1292,7 @@
         "address": "FmUxuXEucwJoZva3"
       }
     ],
-    "last_scan": "2026-02-17T05:06:31.131308"
+    "last_scan": "2026-02-17T05:07:32.574350"
   },
   "survey": [],
   "trades": [
@@ -9133,6 +9133,51 @@
           "volume": 85.58682541056118,
           "demand": 65
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T05:06:49.232922+09:00",
+      "unix_time": 1771272409,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "TAHLEQUAH/USDC",
+      "input_token": "TAHLEQUAH",
+      "output_token": "USDC",
+      "order_input_amount": 283593.094346,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 14.138542745650001,
+      "input_amount": 283593.094346,
+      "output_amount": 14.138542745650001,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 4.9855031830923784e-05,
+      "effective_price": 4.9855031830923784e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "61p8SqpZSNLsoTNVSCtDHvjSF3zYSPShAjbR5PqAtN9exz4zkCGJLkTNWBgdzYj7fDGVPRdW4uZfc9pRXTukpsJc",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "SL (-17.1%)",
+      "error": "",
+      "extra": {
+        "token_address": "FmUxuXEucwJoZva3MQ5WLZSHm1AdDPezAZnSti63pump",
+        "entry_price": 7.052357902480814e-05,
+        "pnl_usd": -5.8615,
+        "pnl_pct": -29.31,
+        "hold_minutes": 1.1,
+        "score_at_entry": 74.09671986162049,
+        "dexscreener_pnl_pct": -17.08,
+        "actual_pnl_pct": -29.31,
+        "price_divergence": true
       }
     }
   ]
