@@ -872,7 +872,7 @@
         "address": "2aYwyoNFHQvewt4e"
       }
     ],
-    "last_scan": "2026-02-16T23:51:23.228932"
+    "last_scan": "2026-02-16T23:52:25.204675"
   },
   "survey": [],
   "trades": [
@@ -4769,6 +4769,49 @@
         "pnl_pct": -10.18,
         "hold_minutes": 0.5,
         "score_at_entry": 71.37338927556361
+      }
+    },
+    {
+      "timestamp": "2026-02-16T23:52:17.301583+09:00",
+      "unix_time": 1771253537,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "Balloon/USDC",
+      "input_token": "USDC",
+      "output_token": "Balloon",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 420997.358809,
+      "input_amount": 20.0,
+      "output_amount": 420997.358809,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 4.750623627801354e-05,
+      "effective_price": 4.750623627801354e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "4xTjXzUnhS2wzc9bcws4BawrXmgE42PNxQ5NxBBjvk4Dzqp4PedTk8qbbhwMqgmCRRKimJvKgm4wGwzVTo9WYbmZ",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=75 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "FVsMQf8KvAERdsi35Fk1j6UhWoWBjssFJPDKZ8yopump",
+        "score_detail": {
+          "total": 75.19664319060651,
+          "momentum": 64.43655475265705,
+          "volume": 85.74355607011279,
+          "demand": 75
+        }
       }
     }
   ]
