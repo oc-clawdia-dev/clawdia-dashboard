@@ -839,22 +839,49 @@ function updateStrategiesSection() {
     
     let html = '';
     
-    // Portfolio allocation overview
+    // Portfolio allocation overview (dynamic)
+    const colors = {CCI: '#4488ff', GRID: '#9945ff', BOLLINGER: '#f0b90b', cash: '#2775ca'};
+    const totalPortfolio = allocation.total_portfolio || 0;
+    const cashUnalloc = allocation.cash_unallocated || 0;
+    const allocStrats = allocation.strategies || {};
+    
     html += `<div class="allocation-overview">
-        <h3>💰 資産配分</h3>
+        <h3>💰 資産配分 <span class="alloc-total">総額: $${totalPortfolio.toFixed(0)}</span></h3>
         <div class="allocation-bar">`;
-    const colors = {CCI: '#4488ff', GRID: '#9945ff', BOLLINGER: '#f0b90b'};
+    
+    // Bar segments based on actual values (position + dry powder)
     for (const [id, strat] of Object.entries(strategies)) {
-        if (strat.allocation_pct > 0) {
-            html += `<div class="alloc-segment" style="width:${strat.allocation_pct}%;background:${colors[id]||'#666'}" title="${strat.name} ${strat.allocation_pct}%"></div>`;
-        }
+        const a = allocStrats[id] || {};
+        const posVal = a.position_value || 0;
+        const dryVal = a.dry_powder || 0;
+        const posPct = totalPortfolio > 0 ? (posVal / totalPortfolio * 100) : 0;
+        const dryPct = totalPortfolio > 0 ? (dryVal / totalPortfolio * 100) : 0;
+        if (posPct > 0) html += `<div class="alloc-segment" style="width:${posPct}%;background:${colors[id]||'#666'}" title="${strat.name} ポジション $${posVal}"></div>`;
+        if (dryPct > 0) html += `<div class="alloc-segment" style="width:${dryPct}%;background:${colors[id]||'#666'};opacity:0.4" title="${strat.name} 待機 $${dryVal}"></div>`;
     }
-    html += `</div><div class="allocation-legend">`;
+    if (cashUnalloc > 0 && totalPortfolio > 0) {
+        const cashPct = cashUnalloc / totalPortfolio * 100;
+        html += `<div class="alloc-segment" style="width:${cashPct}%;background:${colors.cash}" title="未配分現金 $${cashUnalloc}"></div>`;
+    }
+    html += `</div>`;
+    
+    // Legend with allocated / positions / dry powder
+    html += `<div class="allocation-detail">`;
     for (const [id, strat] of Object.entries(strategies)) {
-        const cur = allocation[id]?.current_usd || 0;
-        html += `<span class="alloc-item"><span class="alloc-dot" style="background:${colors[id]||'#666'}"></span>${strat.name}: ${strat.allocation_pct}% ($${cur})</span>`;
+        const a = allocStrats[id] || {};
+        if ((a.allocated_usd || 0) === 0 && strat.status !== 'active') continue;
+        const pnlStr = a.realized_pnl ? ` (実現: ${a.realized_pnl >= 0 ? '+' : ''}$${a.realized_pnl.toFixed(2)})` : '';
+        html += `<div class="alloc-row">
+            <span class="alloc-dot" style="background:${colors[id]||'#666'}"></span>
+            <span class="alloc-name">${strat.name || id}</span>
+            <span class="alloc-vals">配分: $${a.allocated_usd || 0} → ポジション: $${(a.position_value || 0).toFixed(0)} / 待機: $${(a.dry_powder || 0).toFixed(0)}${pnlStr}</span>
+        </div>`;
     }
-    if (allocation.cash_usd) html += `<span class="alloc-item"><span class="alloc-dot" style="background:#2775ca"></span>現金: $${allocation.cash_usd}</span>`;
+    html += `<div class="alloc-row">
+        <span class="alloc-dot" style="background:${colors.cash}"></span>
+        <span class="alloc-name">未配分現金</span>
+        <span class="alloc-vals">$${cashUnalloc.toFixed(0)} (追加配分可能)</span>
+    </div>`;
     html += `</div></div>`;
     
     // Strategy cards

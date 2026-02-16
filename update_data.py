@@ -544,10 +544,81 @@ def update_portfolio_strategies():
         else:
             strat['bot_running'] = False
     
+    # Dynamic allocation calculation
+    # Read wallet for total portfolio value
+    wallet_path = os.path.join(CONFIG['OUTPUT_DIR'], 'wallet.json')
+    wallet_total = 0
+    usdc_balance = 0
+    try:
+        with open(wallet_path, 'r') as f:
+            w = json.load(f)
+        wallet_total = w.get('total_usd', 0)
+        usdc_balance = w.get('usdc_balance', 0)
+    except: pass
+    
+    alloc_config = strat_data.get('portfolio_allocation', {})
+    dynamic_alloc = {}
+    total_in_positions = 0
+    total_allocated = 0
+    
+    for strat_id, strat in strategies.items():
+        cfg = alloc_config.get(strat_id, {})
+        allocated = cfg.get('allocated_usd', 0)
+        total_allocated += allocated
+        
+        # Sum current position values across pairs
+        position_value = 0
+        for pair_id, pair in strat.get('pairs', {}).items():
+            pos = pair.get('position', {})
+            if pos.get('in_position'):
+                sym = pair.get('symbol', '')
+                try:
+                    if sym == 'SOL':
+                        amt = pos.get('token_amount', 0) or 0
+                        price = w.get('sol_price_usd', 0)
+                    elif sym == 'WBTC':
+                        amt = pos.get('position_amount', 0) or 0
+                        price = w.get('btc_price_usd', 0)
+                    elif sym == 'BNB':
+                        amt = pos.get('position_amount', 0) or 0
+                        price = w.get('bnb_price_usd', 0)
+                    else:
+                        amt = 0; price = 0
+                    position_value += amt * price if amt and price else 0
+                except:
+                    pass
+        
+        total_in_positions += position_value
+        
+        # Realized P&L from all pairs in this strategy
+        strat_realized = sum(p.get('live_stats', {}).get('realized_pnl', 0) or 0 for p in strat.get('pairs', {}).values())
+        
+        # Dry powder = allocated - positions currently held (what's available for next buy)
+        dry_powder = max(0, allocated - position_value)
+        
+        dynamic_alloc[strat_id] = {
+            'allocated_usd': allocated,
+            'position_value': round(position_value, 2),
+            'dry_powder': round(dry_powder, 2),
+            'realized_pnl': round(strat_realized, 2),
+            'effective_value': round(position_value + dry_powder + strat_realized, 2),
+            'note': cfg.get('note', ''),
+        }
+    
+    cash_usd = round(usdc_balance - sum(d.get('dry_powder', 0) for d in dynamic_alloc.values()), 2)
+    
+    allocation_summary = {
+        'total_portfolio': round(wallet_total, 2),
+        'total_allocated': round(total_allocated, 2),
+        'total_in_positions': round(total_in_positions, 2),
+        'cash_unallocated': round(max(0, cash_usd), 2),
+        'strategies': dynamic_alloc,
+    }
+    
     # Include allocation data
     output = {
         'strategies': strategies,
-        'allocation': strat_data.get('portfolio_allocation', {}),
+        'allocation': allocation_summary,
         'conclusions': strat_data.get('conclusions', {}),
     }
     

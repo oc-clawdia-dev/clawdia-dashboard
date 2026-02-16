@@ -505,3 +505,10 @@ header h1 {
 .trade-filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .filter-checkbox { display: flex; align-items: center; gap: 4px; font-size: 0.85em; color: #aaa; cursor: pointer; }
 .cumulative-pnl { margin-top: 8px; font-size: 0.95em; color: #ccc; }
+
+/* Dynamic allocation */
+.alloc-total { font-size: 0.8em; color: #888; font-weight: normal; margin-left: 8px; }
+.allocation-detail { margin-top: 8px; }
+.alloc-row { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 0.85em; }
+.alloc-name { min-width: 120px; color: #ccc; }
+.alloc-vals { color: #999; }
