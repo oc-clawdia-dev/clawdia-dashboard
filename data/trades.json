@@ -6147,5 +6147,50 @@
         "demand": 65
       }
     }
+  },
+  {
+    "timestamp": "2026-02-17T02:10:17.839913+09:00",
+    "unix_time": 1771261817,
+    "strategy": "MEME",
+    "direction": "sell",
+    "pair": "WIZPUNCH/USDC",
+    "input_token": "WIZPUNCH",
+    "output_token": "USDC",
+    "order_input_amount": 205212.413937,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 16.58291233236,
+    "input_amount": 205212.413937,
+    "output_amount": 16.58291233236,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 8.080852427110445e-05,
+    "effective_price": 8.080852427110445e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "59sf7Bfy15XUgaf5rvtV3QYezCygntbJpG6P6DUdbkBQbFugHFJ5jrqhmLmVyPF5ERTgCCNp39eqhGatTHQN1XTx",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "SL (-15.1%)",
+    "error": "",
+    "extra": {
+      "token_address": "ndbPV2nmoPZNcM2jM2LoqgdZSFaCdB19f5Zb19hpump",
+      "entry_price": 9.745999092501285e-05,
+      "pnl_usd": -3.4171,
+      "pnl_pct": -17.09,
+      "hold_minutes": 6.5,
+      "score_at_entry": 77.91813739995249,
+      "dexscreener_pnl_pct": -15.07,
+      "actual_pnl_pct": -17.09,
+      "price_divergence": true
+    }
   }
 ]
