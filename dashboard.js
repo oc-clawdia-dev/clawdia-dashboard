@@ -134,7 +134,7 @@ function updateOverviewSection() {
 function buildPortfolioPieChart(w) {
     const items = [];
     if (w.usdc_balance > 0) items.push({label: 'USDC', value: w.usdc_balance, color: '#2775ca'});
-    if (w.wbtc_value_usd > 0) items.push({label: 'WBTC', value: w.wbtc_value_usd, color: '#f7931a'});
+    if (w.wbtc_value_usd > 0.01) items.push({label: 'WBTC', value: w.wbtc_value_usd, color: '#f7931a'});
     if (w.bnb_value_usd > 0) items.push({label: 'BNB', value: w.bnb_value_usd, color: '#f0b90b'});
     if (w.sol_value_usd > 0) items.push({label: 'SOL', value: w.sol_value_usd, color: '#9945ff'});
     // Other tokens
