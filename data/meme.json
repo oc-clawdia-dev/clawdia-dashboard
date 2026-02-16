@@ -972,7 +972,7 @@
         "address": "CxoaKHTGYAUkHwzK"
       }
     ],
-    "last_scan": "2026-02-17T01:01:12.571362"
+    "last_scan": "2026-02-17T01:02:14.066062"
   },
   "survey": [],
   "trades": [
@@ -5561,6 +5561,49 @@
         "dexscreener_pnl_pct": -17.06,
         "actual_pnl_pct": -23.98,
         "price_divergence": true
+      }
+    },
+    {
+      "timestamp": "2026-02-17T01:01:51.548372+09:00",
+      "unix_time": 1771257711,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "MOLLIE/USDC",
+      "input_token": "USDC",
+      "output_token": "MOLLIE",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 514348.77014,
+      "input_amount": 20.0,
+      "output_amount": 514348.77014,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 3.888412136099057e-05,
+      "effective_price": 3.888412136099057e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "4DtVfhGbG1cxLZVqqfgV3oj12itpHDQLMUYYUbJSSGYQxWxZqyb8ga3LhZxmhNi9atCEkMv4fZGPK5qi6s7M8V5U",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=70 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "tT2WbGgwfMFgjaQz7TpU1hoLCtqLzPY1VZWTwaWpump",
+        "score_detail": {
+          "total": 69.79590855768444,
+          "momentum": 63.14272521813946,
+          "volume": 80.14480099272758,
+          "demand": 65
+        }
       }
     }
   ]
