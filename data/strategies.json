@@ -1,91 +1,190 @@
-[
-  {
-    "pair_id": "BTCUSDT",
-    "strategy": "CCI",
-    "enabled": true,
-    "trade_symbol": "WBTC",
-    "params": {
-      "cci_period": 14,
-      "cci_threshold": -100,
-      "sl_pct": 0.9,
-      "donchian_period": 15,
-      "ema_trend_period": 50
+{
+  "CCI": {
+    "name": "CCI Reversal",
+    "description": "CCI(Commodity Channel Index)の売られすぎシグナルで逆張りエントリー。Donchianチャネルでイグジット。",
+    "type": "mean_reversion",
+    "timeframe": "1h",
+    "status": "active",
+    "allocation_pct": 60,
+    "allocation_note": "安定資産(BTC/BNB)のスイングトレード",
+    "key_metrics": {
+      "total_backtests": 28000,
+      "best_annual": "+124.8% (BTC 2024)",
+      "worst_annual": "-7.6% (BTC 2025)",
+      "conclusion": "28,000テストでCCIが最強。シンプル>複雑。"
     },
-    "position": {
-      "in_position": false
+    "pairs": {
+      "BTCUSDT": {
+        "symbol": "WBTC",
+        "mint": "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh",
+        "decimals": 8,
+        "status": "enabled",
+        "max_usd": 20,
+        "params": {
+          "cci_period": 14,
+          "cci_threshold": -100,
+          "sl_pct": 0.9,
+          "donchian_period": 15,
+          "ema_trend_period": 50
+        },
+        "backtest": {
+          "2024": "+124.8%",
+          "2025": "-7.6%",
+          "4yr_cumulative": "+186% (EMA50込み)",
+          "note": "SL=0.9%最適(124テスト確認)"
+        },
+        "pair_id": "BTCUSDT",
+        "position": {
+          "in_position": false
+        },
+        "live_stats": {
+          "total_trades": 2,
+          "buys": 1,
+          "sells": 1,
+          "total_invested": 20.0,
+          "total_returned": 19.67,
+          "realized_pnl": -0.33
+        }
+      },
+      "BNBUSDT": {
+        "symbol": "BNB",
+        "mint": "9gP2kCy3wA1ctvYWQk75guqXuHfrEomqydHLtcTCqiLa",
+        "decimals": 8,
+        "status": "enabled",
+        "max_usd": 20,
+        "params": {
+          "cci_period": 20,
+          "cci_threshold": -130,
+          "sl_pct": 1.5,
+          "donchian_period": 20,
+          "ema_trend_period": 0
+        },
+        "backtest": {
+          "2024": "+48.9%",
+          "2025": "+4.7%",
+          "note": "240パターン最適化。フィルターなしが最良"
+        },
+        "pair_id": "BNBUSDT",
+        "position": {
+          "in_position": true,
+          "entry_price": 610.5,
+          "entry_time": "2026-02-15T19:12:53.168009+00:00",
+          "stop_loss_price": 601.3425,
+          "position_amount": 0.03265507,
+          "position_token": "BNB"
+        },
+        "live_stats": {
+          "total_trades": 5,
+          "buys": 3,
+          "sells": 2,
+          "total_invested": 60.0,
+          "total_returned": 39.23,
+          "realized_pnl": -20.77
+        }
+      }
     },
-    "stats": {
-      "total_trades": 2,
-      "last_7d_trades": 2
-    }
+    "id": "CCI",
+    "bot_running": true
   },
-  {
-    "pair_id": "BNBUSDT",
-    "strategy": "CCI",
-    "enabled": true,
-    "trade_symbol": "BNB",
-    "params": {
-      "cci_period": 20,
-      "cci_threshold": -130,
-      "sl_pct": 1.5,
-      "donchian_period": 20,
-      "ema_trend_period": 0
+  "BOLLINGER": {
+    "name": "Bollinger+RSI+Trend",
+    "description": "ボリンジャーバンド下抜け+EMAトレンド確認+RSI過熱でイグジット。高勝率型。",
+    "type": "mean_reversion",
+    "timeframe": "1h",
+    "status": "disabled",
+    "allocation_pct": 0,
+    "allocation_note": "有望だが未承認。hikarimaru承認後にBTCで開始予定",
+    "key_metrics": {
+      "win_rate": "80-89%",
+      "best_annual": "+102.3% (BTC 2024)",
+      "conclusion": "高勝率で安定。CCI補完として有望"
     },
-    "position": {
-      "in_position": true,
-      "entry_price": 610.5,
-      "entry_time": "2026-02-15T19:12:53.168009+00:00",
-      "stop_loss_price": 601.3425,
-      "position_size_usd": 20.0,
-      "position_token": "BNB",
-      "position_amount": 0.03265507,
-      "donchian_low": 608.82
+    "pairs": {
+      "BTCUSDT_BB": {
+        "symbol": "WBTC",
+        "mint": "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh",
+        "decimals": 8,
+        "status": "disabled",
+        "max_usd": 20,
+        "params": {
+          "bb_period": 15,
+          "bb_std": 1.5,
+          "ema_fast": 10,
+          "ema_slow": 50,
+          "rsi_period": 10,
+          "rsi_exit": 75,
+          "sl_pct": 3.0
+        },
+        "backtest": {
+          "2024": "+102.3%",
+          "2025": "+6.8%"
+        },
+        "pair_id": "BTCUSDT_BB",
+        "live_stats": {
+          "total_trades": 0,
+          "buys": 0,
+          "sells": 0,
+          "total_invested": 0,
+          "total_returned": 0,
+          "realized_pnl": null
+        }
+      }
     },
-    "stats": {
-      "total_trades": 5,
-      "last_7d_trades": 5
-    }
+    "id": "BOLLINGER",
+    "bot_running": false
   },
-  {
-    "pair_id": "BTCUSDT_BB",
-    "strategy": "BOLLINGER",
-    "enabled": false,
-    "trade_symbol": "WBTC",
-    "params": {
-      "bb_period": 15,
-      "bb_std": 1.5,
-      "ema_fast": 10,
-      "ema_slow": 50,
-      "rsi_period": 10,
-      "rsi_exit": 75,
-      "sl_pct": 3.0
-    }
-  },
-  {
-    "pair_id": "SOL_GRID",
-    "strategy": "GRID",
-    "enabled": true,
-    "trade_symbol": "SOL",
-    "params": {
-      "grid_spacing_pct": 1.5,
-      "tp_pct": 1.5,
-      "sl_pct": 1.5,
-      "budget": 20.0,
-      "exchange": "Jupiter (Solana)"
+  "GRID": {
+    "name": "Grid Trading",
+    "description": "価格下落時にグリッドレベルで段階的に買い、TP/SLで決済。レンジ/上昇相場向け。",
+    "type": "grid",
+    "timeframe": "30s",
+    "status": "active",
+    "allocation_pct": 40,
+    "allocation_note": "SOLのデイトレード。日次0.3%目標",
+    "key_metrics": {
+      "total_backtests": 20160,
+      "walk_forward_pass": "80.9% (8,152/10,080)",
+      "optimal_daily": "+1.05%/day (3ペア平均)",
+      "bear_2022": "壊滅(-26〜-45%)。EMA50フィルターで-1〜-4%に軽減可能",
+      "conclusion": "レンジ/上昇で強力。ベア対策にトレンドフィルター必須"
     },
-    "bot_type": "jupiter_grid",
-    "stats": {
-      "total_trades": 3,
-      "buys": 2,
-      "tp_exits": 0,
-      "sl_exits": 1,
-      "win_rate": 0.0
+    "pairs": {
+      "SOL_GRID": {
+        "symbol": "SOL",
+        "mint": "So11111111111111111111111111111111111111112",
+        "decimals": 9,
+        "status": "enabled",
+        "max_usd": 20,
+        "params": {
+          "grid_spacing_pct": 1.5,
+          "tp_pct": 1.5,
+          "sl_pct": 1.5,
+          "check_interval_sec": 30
+        },
+        "backtest": {
+          "live_vs_optimal": "ライブ1.5% vs 最適0.3% — 安全寄り設定",
+          "bear_2022_no_filter": "-26.6% (BTC)",
+          "bear_2022_ema50": "-1.4% (BTC) ← 提案中"
+        },
+        "pair_id": "SOL_GRID",
+        "position": {
+          "in_position": true,
+          "entry_price": 85.4,
+          "usdc_spent": 20.0,
+          "token_amount": 0.23422087500000002,
+          "ref_price": 86.81
+        },
+        "live_stats": {
+          "total_trades": 1,
+          "buys": 1,
+          "sells": 0,
+          "total_invested": 20.0,
+          "total_returned": 0,
+          "realized_pnl": null
+        }
+      }
     },
-    "position": {
-      "in_position": true,
-      "entry_price": 85.4,
-      "usdc_spent": 20.0,
-      "ref_price": 86.81
-    }
+    "id": "GRID",
+    "bot_running": true
   }
-]
+}
