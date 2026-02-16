@@ -1182,7 +1182,7 @@
         "address": "Eqipr2xFuZccQErc"
       }
     ],
-    "last_scan": "2026-02-17T03:53:37.386999"
+    "last_scan": "2026-02-17T03:54:38.933140"
   },
   "survey": [],
   "trades": [
@@ -7969,6 +7969,49 @@
         "dexscreener_pnl_pct": 9.06,
         "actual_pnl_pct": 0.92,
         "price_divergence": true
+      }
+    },
+    {
+      "timestamp": "2026-02-17T03:54:14.269492+09:00",
+      "unix_time": 1771268054,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "island/USDC",
+      "input_token": "USDC",
+      "output_token": "island",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 447061.734474,
+      "input_amount": 20.0,
+      "output_amount": 447061.734474,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 4.473655081111209e-05,
+      "effective_price": 4.473655081111209e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "AzqiWAbLmh21MHwng3ZeWvZktrQ9urkJa98uN9dcYgkunckAypyq8TRZYvgxTeFiLe2bEvoXA2KHoxZk2wmz2b2",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=74 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "HCLvzgBS2GVRzd71unrc7vw96qDjxePciTEZNzoVpump",
+        "score_detail": {
+          "total": 73.76499417658721,
+          "momentum": 64.77788903870423,
+          "volume": 89.26118790500303,
+          "demand": 65
+        }
       }
     }
   ]
