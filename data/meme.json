@@ -1112,7 +1112,7 @@
         "address": "HEYKwDJRoSsiLNQ9"
       }
     ],
-    "last_scan": "2026-02-17T02:33:33.982804"
+    "last_scan": "2026-02-17T02:34:35.538824"
   },
   "survey": [],
   "trades": [
@@ -7061,6 +7061,49 @@
           "momentum": 74.95620660023786,
           "volume": 83.82997956074911,
           "demand": 40
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T02:34:23.706624+09:00",
+      "unix_time": 1771263263,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "MANIFEST/USDC",
+      "input_token": "USDC",
+      "output_token": "MANIFEST",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 362033.368821,
+      "input_amount": 20.0,
+      "output_amount": 362033.368821,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 5.524352648799231e-05,
+      "effective_price": 5.524352648799231e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "3CqVb6tCfZJqNgqe4Esuy2JwkKfrU6CB8Qwu1epaW6ALdh4KygbneesDeuLhSRWahrt9exqX2XoqTmfMDSCzoNKe",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=71 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "449pYD2LdRB5p8ycyk2mcFzvbU1qZtVvd66dQ9xcpump",
+        "score_detail": {
+          "total": 70.89966424234933,
+          "momentum": 66.54176769103057,
+          "volume": 79.98252478605664,
+          "demand": 55
         }
       }
     }
