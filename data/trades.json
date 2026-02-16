@@ -5449,5 +5449,48 @@
       "actual_pnl_pct": 38.95,
       "price_divergence": true
     }
+  },
+  {
+    "timestamp": "2026-02-17T01:24:56.657597+09:00",
+    "unix_time": 1771259096,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "Peakychu/USDC",
+    "input_token": "USDC",
+    "output_token": "Peakychu",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 440425.812298,
+    "input_amount": 20.0,
+    "output_amount": 440425.812298,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 4.5410599110089495e-05,
+    "effective_price": 4.5410599110089495e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "JokicxwUhPP2oNEWdAJaSDy4E6pUc3CyNkhg9btbaeFxV8VLWTibtLGqpRqbNv2b1XmqxQpfxkAM5mky3YUH9Sf",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=71 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "9qy34YjzTCiRZwrtaDfVwx1S8j3cfh7tFgQUwQ9npump",
+      "score_detail": {
+        "total": 71.05626091743531,
+        "momentum": 64.19016877474752,
+        "volume": 98.58244969715898,
+        "demand": 55
+      }
+    }
   }
 ]
