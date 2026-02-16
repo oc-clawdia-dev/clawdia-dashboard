@@ -852,7 +852,7 @@
         "address": "7Fi817h8YaESdWf6"
       }
     ],
-    "last_scan": "2026-02-16T23:40:05.673586"
+    "last_scan": "2026-02-16T23:41:07.223492"
   },
   "survey": [],
   "trades": [
@@ -4622,6 +4622,48 @@
           "volume": 87.19438365786789,
           "demand": 55
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-16T23:40:12.549927+09:00",
+      "unix_time": 1771252812,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "pup/USDC",
+      "input_token": "pup",
+      "output_token": "USDC",
+      "order_input_amount": 388330.32438,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 14.6277340148,
+      "input_amount": 388330.32438,
+      "output_amount": 14.6277340148,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 3.766827645550043e-05,
+      "effective_price": 3.766827645550043e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "5SKffShrthnGKQU182TgEzKEzF18H58QZwK3uhjXgWoPsLrSgMm6WTJ9VagCaProKg1BAJwhyJkrshA51qbTyuYK",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "SL (-24.8%)",
+      "error": "",
+      "extra": {
+        "token_address": "7Fi817h8YaESdWf6HYmC6yCMWxW6krFrRAXTMovnpump",
+        "entry_price": 5.150254498391692e-05,
+        "pnl_usd": -5.3723,
+        "pnl_pct": -26.86,
+        "hold_minutes": 1.7,
+        "score_at_entry": 71.19971824522742
       }
     }
   ]
