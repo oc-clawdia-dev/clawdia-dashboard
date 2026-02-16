@@ -52,7 +52,7 @@ header h1 {
 .tab-nav {
     position: sticky; top: 0; z-index: 100;
     background: var(--bg-primary); border-bottom: 1px solid var(--border-color);
-    margin-bottom: 20px;
+    margin-bottom: 20px; padding-top: 5px;
 }
 .tab-container { display: flex; overflow-x: auto; scrollbar-width: none; }
 .tab-container::-webkit-scrollbar { display: none; }

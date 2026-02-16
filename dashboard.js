@@ -56,9 +56,10 @@ async function loadAllData() {
         ['portfolioHistory', './data/portfolio_history.json'],
     ];
 
+    const bust = '?t=' + Date.now();
     await Promise.all(loaders.map(async ([key, url]) => {
         try {
-            const r = await fetch(url);
+            const r = await fetch(url + bust);
             if (!r.ok) throw new Error(`HTTP ${r.status}`);
             dashboardData[key] = await r.json();
         } catch (e) {
@@ -100,7 +101,9 @@ function updateOverviewSection() {
     const changeAmt = document.getElementById('change-amount');
     const changePct = document.getElementById('change-percent');
     const histData = dashboardData.portfolioHistory?.portfolio_history || [];
-    const today = new Date().toISOString().split('T')[0];
+    // Use JST date (UTC+9) to match snapshot timestamps
+    const _now = new Date(); const _jst = new Date(_now.getTime() + 9*3600000);
+    const today = _jst.toISOString().split('T')[0];
     // Find first snapshot of today
     const todaySnapshots = histData.filter(h => h.timestamp && h.timestamp.startsWith(today));
     const firstToday = todaySnapshots.length > 0 ? todaySnapshots[0] : null;
@@ -255,14 +258,22 @@ function buildPortfolioHistoryChart() {
 function updatePnLSummary() {
     const trades = dashboardData.trades.filter(t => !isTestTrade(t));
     const total = trades.length;
-    const success = trades.filter(t => t.status === 'Success').length;
-    const rate = total > 0 ? Math.round((success / total) * 100) : 0;
     const totalFees = trades.reduce((s, t) => s + (parseFloat(t.fee_sol) || parseFloat(t.fee_lamports || 0) / 1e9 || 0), 0);
     const solPrice = dashboardData.wallet?.sol_price_usd || 0;
 
+    // Calculate realized P&L from sell trades
+    const sells = trades.filter(t => t.direction === 'sell' || t.direction === 'SELL');
+    let totalPnl = 0;
+    let wins = 0;
+    sells.forEach(t => {
+        const pnl = parseFloat(t.extra?.pnl_usd || 0);
+        if (pnl !== 0) { totalPnl += pnl; if (pnl > 0) wins++; }
+    });
+    const winRate = sells.length > 0 ? Math.round((wins / sells.length) * 100) : 0;
+
     document.getElementById('total-trades').textContent = total;
-    document.getElementById('successful-trades').textContent = success;
-    document.getElementById('success-rate').textContent = `${rate}%`;
+    document.getElementById('successful-trades').textContent = sells.length > 0 ? `${wins}/${sells.length}` : total;
+    document.getElementById('success-rate').textContent = sells.length > 0 ? `${winRate}%` : '--';
     document.getElementById('total-fees').textContent = fmtCurrency(totalFees * solPrice);
 }
 
