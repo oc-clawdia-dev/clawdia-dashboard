@@ -8697,5 +8697,48 @@
       "actual_pnl_pct": -11.81,
       "price_divergence": true
     }
+  },
+  {
+    "timestamp": "2026-02-17T05:54:13.108056+09:00",
+    "unix_time": 1771275253,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "remember/USDC",
+    "input_token": "USDC",
+    "output_token": "remember",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 413196.554775,
+    "input_amount": 20.0,
+    "output_amount": 413196.554775,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 4.840311413266913e-05,
+    "effective_price": 4.840311413266913e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "47F6SvkJspUsWxy8w7qTXJ8BiDA1wKTKY6JHfmAmoAFLkytSWznBo917J2s4zFdMYvDzEzFQGoTZQhg6HB48Hq9Z",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=71 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "CYfwS1vQfMtJgU8woviDXKhqPPkzoNzRxrPGQiRHpump",
+      "score_detail": {
+        "total": 70.83152901819489,
+        "momentum": 56.290055584275734,
+        "volume": 84.08329709891007,
+        "demand": 65
+      }
+    }
   }
 ]
