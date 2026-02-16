@@ -162,7 +162,7 @@
           "mint": "So11111111111111111111111111111111111111112",
           "decimals": 9,
           "status": "enabled",
-          "max_usd": 20,
+          "max_usd": 100,
           "params": {
             "grid_spacing_pct": 1.5,
             "tp_pct": 1.5,
@@ -191,17 +191,46 @@
             "total_returned": 0.0,
             "realized_pnl": null
           }
+        },
+        "ETH_GRID": {
+          "symbol": "ETH",
+          "mint": "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+          "decimals": 8,
+          "status": "enabled",
+          "max_usd": 100,
+          "params": {
+            "grid_spacing_pct": 1.5,
+            "tp_pct": 1.5,
+            "sl_pct": 1.5,
+            "check_interval_sec": 30
+          },
+          "backtest": {
+            "w1_daily": "0.772%",
+            "w2_daily": "1.343%",
+            "avg_daily": "1.057%",
+            "wr": "62-82%"
+          },
+          "pair_id": "ETH_GRID",
+          "live_stats": {
+            "total_trades": 0,
+            "buys": 0,
+            "sells": 0,
+            "completed_trips": 0,
+            "total_invested": 0.0,
+            "total_returned": 0.0,
+            "realized_pnl": null
+          }
         }
       },
       "id": "GRID",
-      "bot_running": false
+      "bot_running": true
     }
   },
   "allocation": {
     "total_portfolio": 505.06,
-    "total_allocated": 100,
+    "total_allocated": 280,
     "total_in_positions": 40.11,
-    "cash_unallocated": 401.83,
+    "cash_unallocated": 221.83,
     "strategies": {
       "CCI": {
         "allocated_usd": 80,
@@ -220,12 +249,12 @@
         "note": "未稼働"
       },
       "GRID": {
-        "allocated_usd": 20,
+        "allocated_usd": 200,
         "position_value": 20.0,
-        "dry_powder": 0.0,
+        "dry_powder": 180.0,
         "realized_pnl": 0,
-        "effective_value": 20.0,
-        "note": "SOL$20。1ポジション分"
+        "effective_value": 200.0,
+        "note": "SOL$100 + ETH$100。各1ポジション分"
       }
     }
   },
