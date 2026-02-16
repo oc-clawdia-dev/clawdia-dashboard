@@ -530,5 +530,43 @@
     "post_balance_sol": 0.277131777,
     "reason": "grid_buy",
     "error": ""
+  },
+  {
+    "timestamp": "2026-02-16T11:57:22.199387+09:00",
+    "unix_time": 1771210642,
+    "strategy": "MEME_TEST",
+    "direction": "buy",
+    "pair": "LIQUID/USDC",
+    "input_token": "USDC",
+    "output_token": "LIQUID",
+    "order_input_amount": 5.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 0,
+    "input_amount": 5.0,
+    "output_amount": 0,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0,
+    "effective_price": 0,
+    "slippage_pct": 0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "meme_test: mcap=$341,710",
+    "error": "",
+    "extra": {
+      "token_address": "71mfKdePwyWXtiF1mqu2aaCdMKnKuN664z2vEM2Xpump",
+      "name": "Meme Liquid"
+    }
   }
 ]
