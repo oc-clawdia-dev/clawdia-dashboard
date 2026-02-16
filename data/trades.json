@@ -1831,5 +1831,48 @@
       "hold_minutes": 4.6,
       "score_at_entry": 77.97213541033341
     }
+  },
+  {
+    "timestamp": "2026-02-16T15:33:14.614856+09:00",
+    "unix_time": 1771223594,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "AlienScan/USDC",
+    "input_token": "USDC",
+    "output_token": "AlienScan",
+    "order_input_amount": 3.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 251927.604705,
+    "input_amount": 3.0,
+    "output_amount": 251927.604705,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 1.1908182922284018e-05,
+    "effective_price": 1.1908182922284018e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "41dQ6EkdYbdLLJs6EESEwp9tkLGBJfKBhksyB7ne7biJjRjK5AC7nQoeobPz6J5oDfS2cbtTU6F6kFqzVrDPPHFJ",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=65 grade=B",
+    "error": "",
+    "extra": {
+      "token_address": "7Pb4PipLPr5kk2fJNpPKwG4uypA156cLoB2XpEQWpump",
+      "score_detail": {
+        "total": 64.76304090034284,
+        "momentum": 42.85424628581556,
+        "volume": 66.23628342961058,
+        "demand": 75
+      }
+    }
   }
 ]
