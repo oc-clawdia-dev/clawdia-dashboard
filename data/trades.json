@@ -568,5 +568,44 @@
       "token_address": "71mfKdePwyWXtiF1mqu2aaCdMKnKuN664z2vEM2Xpump",
       "name": "Meme Liquid"
     }
+  },
+  {
+    "timestamp": "2026-02-16T11:58:55.641198+09:00",
+    "unix_time": 1771210735,
+    "strategy": "MEME_TEST",
+    "direction": "sell",
+    "pair": "LIQUID/USDC",
+    "input_token": "LIQUID",
+    "output_token": "USDC",
+    "order_input_amount": 27981.728285,
+    "order_output_amount": 0,
+    "actual_input_amount": 27981.728285,
+    "actual_output_amount": 9.785055999999997,
+    "input_amount": 27981.728285,
+    "output_amount": 9.785055999999997,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0,
+    "effective_price": 0,
+    "slippage_pct": 0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 27981.728285,
+    "post_balance_input": 0,
+    "pre_balance_output": 452.057735,
+    "post_balance_output": 461.842791,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "meme_test_sell: P&L=$4.7851",
+    "error": "",
+    "extra": {
+      "token_address": "71mfKdePwyWXtiF1mqu2aaCdMKnKuN664z2vEM2Xpump",
+      "pnl": 4.785055999999997,
+      "signature": "3XWdmLiU26fC2ujqCghjjtUUjH2PmujuMfPKp6njUn14tDMoQdnNceeffqPCRp6kk8BQiSFKBs2g8C2hznPQqDDx"
+    }
   }
 ]
