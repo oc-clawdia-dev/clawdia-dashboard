@@ -7729,5 +7729,48 @@
       "actual_pnl_pct": 6.15,
       "price_divergence": true
     }
+  },
+  {
+    "timestamp": "2026-02-17T04:16:25.390517+09:00",
+    "unix_time": 1771269385,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "POTUS/USDC",
+    "input_token": "USDC",
+    "output_token": "POTUS",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 83127.327794,
+    "input_amount": 20.0,
+    "output_amount": 83127.327794,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.00024059476625499767,
+    "effective_price": 0.00024059476625499767,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "2aEqZYo1FM8F7TzABfZfnzeMCrTveKQs87AZ5Whq8GBZJsVH3wJQjioiRaAtaL4WzDoYqj7DEu8vE5nLuTGSEAQW",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=79 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "2PCwdaEAg2LS8aEPwdr8Bcab8SohCrDB6aSAgg29YKRQ",
+      "score_detail": {
+        "total": 79.3654005827955,
+        "momentum": 78.9158882556314,
+        "volume": 78.18982456884255,
+        "demand": 65
+      }
+    }
   }
 ]
