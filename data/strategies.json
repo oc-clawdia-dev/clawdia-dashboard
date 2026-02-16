@@ -75,13 +75,13 @@
             "in_position": true,
             "entry_price": 610.5,
             "entry_time": "2026-02-15T19:12:53.168009+00:00",
-            "stop_loss_price": 601.3425,
-            "position_amount": 0.03265507,
+            "stop_loss_price": 603.2391184747339,
+            "position_amount": 0.048985549999999996,
             "position_token": "BNB"
           },
           "live_stats": {
-            "total_trades": 5,
-            "buys": 3,
+            "total_trades": 6,
+            "buys": 4,
             "sells": 2,
             "completed_trips": 2,
             "total_invested": 40.0,
@@ -91,7 +91,7 @@
         }
       },
       "id": "CCI",
-      "bot_running": false
+      "bot_running": true
     },
     "BOLLINGER": {
       "name": "Bollinger+RSI+Trend",
@@ -220,15 +220,15 @@
     }
   },
   "allocation": {
-    "total_portfolio": 462.29,
+    "total_portfolio": 459.93,
     "total_allocated": 280,
-    "total_in_positions": 19.9,
-    "cash_unallocated": 17.9,
+    "total_in_positions": 29.92,
+    "cash_unallocated": 7.92,
     "strategies": {
       "CCI": {
         "allocated_usd": 80,
-        "position_value": 19.9,
-        "dry_powder": 60.1,
+        "position_value": 29.92,
+        "dry_powder": 50.08,
         "realized_pnl": -1.1,
         "effective_value": 78.9,
         "note": "BTC$40(2枠) + BNB$40(2枠)。各ペア$20×2回分"
