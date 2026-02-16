@@ -1576,5 +1576,47 @@
         "demand": 55
       }
     }
+  },
+  {
+    "timestamp": "2026-02-16T15:20:57.956767+09:00",
+    "unix_time": 1771222857,
+    "strategy": "MEME",
+    "direction": "sell",
+    "pair": "ANIMEPRO/USDC",
+    "input_token": "ANIMEPRO",
+    "output_token": "USDC",
+    "order_input_amount": 63478.219668,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 2.012027,
+    "input_amount": 63478.219668,
+    "output_amount": 2.012027,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 3.169633632643108e-05,
+    "effective_price": 3.169633632643108e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "4wVNzHUdjXQ4hxdyKtr7KvrzqU1JuySmJvc7K91Vqny7r5ZxxKMcV6ftFqGwau4bZfk5EJcnWuZ2RDV7aatFXgiP",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "SL (-19.2%)",
+    "error": "",
+    "extra": {
+      "token_address": "8TWr6Z4UZjWSLcboQRTxKSRgrCWkMWwk2DKQZ6Qepump",
+      "entry_price": 4.716622649101546e-05,
+      "pnl_usd": -0.988,
+      "pnl_pct": -32.93,
+      "hold_minutes": 4.1,
+      "score_at_entry": 73.90578650730184
+    }
   }
 ]
