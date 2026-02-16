@@ -1182,7 +1182,7 @@
         "address": "Eqipr2xFuZccQErc"
       }
     ],
-    "last_scan": "2026-02-17T04:05:56.502379"
+    "last_scan": "2026-02-17T04:06:57.979340"
   },
   "survey": [],
   "trades": [
@@ -8145,6 +8145,49 @@
         "dexscreener_pnl_pct": -31.47,
         "actual_pnl_pct": -34.6,
         "price_divergence": true
+      }
+    },
+    {
+      "timestamp": "2026-02-17T04:06:29.568114+09:00",
+      "unix_time": 1771268789,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "GROKBUILD/USDC",
+      "input_token": "USDC",
+      "output_token": "GROKBUILD",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 179617.252698,
+      "input_amount": 20.0,
+      "output_amount": 179617.252698,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.00011134787833341967,
+      "effective_price": 0.00011134787833341967,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "4cXEZxjUj9SMJKjJ8HJfkar1jFfJPEJRKzGQ7kzR4kd14giBj2dAkcaZPWG2B5UFM7yzSAVPfJi5g3Rp5mZ4kgCb",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=72 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "2YdBtHkaFrzNuBjyHMnhsTrf353VLHkuw7BV64Zr9o3d",
+        "score_detail": {
+          "total": 72.22506371633224,
+          "momentum": 66.3438347313135,
+          "volume": 60.136838883923794,
+          "demand": 75
+        }
       }
     }
   ]
