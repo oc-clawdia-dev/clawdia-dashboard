@@ -5052,5 +5052,48 @@
         "demand": 55
       }
     }
+  },
+  {
+    "timestamp": "2026-02-17T00:50:12.493342+09:00",
+    "unix_time": 1771257012,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "FIRST/USDC",
+    "input_token": "USDC",
+    "output_token": "FIRST",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 286527.299836,
+    "input_amount": 20.0,
+    "output_amount": 286527.299836,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 6.98013767325048e-05,
+    "effective_price": 6.98013767325048e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "r7kSvhMwXDczsEYFvw3vHZKf8H2C2XcDq1ux2t7CESdQHNdkmHTcQzx2ZPjde1SQSbqE3LesKzRnqJmWZkx87Kr",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=71 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "7t1CftyahqUAgd5bcnnqAQGAtSF5onzSTkcqpzWMpump",
+      "score_detail": {
+        "total": 71.14634967672778,
+        "momentum": 70.19255837057759,
+        "volume": 88.23645601016243,
+        "demand": 55
+      }
+    }
   }
 ]
