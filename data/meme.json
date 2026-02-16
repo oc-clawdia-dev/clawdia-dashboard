@@ -1022,7 +1022,7 @@
         "address": "54rpB2bJpqfFNDG4"
       }
     ],
-    "last_scan": "2026-02-17T01:44:19.283158"
+    "last_scan": "2026-02-17T01:45:20.816621"
   },
   "survey": [],
   "trades": [
@@ -6181,6 +6181,49 @@
           "momentum": 54.66510148239484,
           "volume": 84.27687607405366,
           "demand": 85
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T01:44:37.777937+09:00",
+      "unix_time": 1771260277,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "TapCap/USDC",
+      "input_token": "USDC",
+      "output_token": "TapCap",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 542849.820835,
+      "input_amount": 20.0,
+      "output_amount": 542849.820835,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 3.6842602193800905e-05,
+      "effective_price": 3.6842602193800905e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "67GAZfZXX6vfzZnBsYgugUDcLfAjWLsBdyVyY7Ucey2dGs2sB4jFtDvFBvMtJmarfV1cWJky8eEgd4TRS6zh2Mms",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=65 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "HEZf4cfw13K2p6xnrdcML9BbDbnpmd41KogvWjidLUnK",
+        "score_detail": {
+          "total": 65.3785179789071,
+          "momentum": 58.39643499144343,
+          "volume": 57.858597923100035,
+          "demand": 55
         }
       }
     }
