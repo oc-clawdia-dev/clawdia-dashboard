@@ -7993,5 +7993,50 @@
         "demand": 65
       }
     }
+  },
+  {
+    "timestamp": "2026-02-17T04:30:30.377278+09:00",
+    "unix_time": 1771270230,
+    "strategy": "MEME",
+    "direction": "sell",
+    "pair": "Dogs/USDC",
+    "input_token": "Dogs",
+    "output_token": "USDC",
+    "order_input_amount": 450681.800114,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 17.7004253349,
+    "input_amount": 450681.800114,
+    "output_amount": 17.7004253349,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 3.927477286729279e-05,
+    "effective_price": 3.927477286729279e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "58bCKhYe5Y9LN3g537DYsuf5BqDD2D5vDHDYpB9MzRkmTT8CfXKwQGQzgucQ7d9vE99T6JFcV8GynSqTBnPJzLVF",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "TRAIL (-1.6%, peak +12.4%)",
+    "error": "",
+    "extra": {
+      "token_address": "bDz6NVehx5mr8E1e5d2c8ZAqjDe7DQWZeEKPpyvdogs",
+      "entry_price": 4.43772080322325e-05,
+      "pnl_usd": -2.2996,
+      "pnl_pct": -11.5,
+      "hold_minutes": 2.8,
+      "score_at_entry": 73.54824644237466,
+      "dexscreener_pnl_pct": -1.57,
+      "actual_pnl_pct": -11.5,
+      "price_divergence": true
+    }
   }
 ]
