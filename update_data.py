@@ -725,7 +725,7 @@ def update_agent_memories():
         'clawdia': {
             'name': 'Clawdia 🩶',
             'workspace': os.path.join(os.path.dirname(CONFIG['BOT_DATA_DIR']), ''),  # parent of bot/
-            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md']
+            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md', 'recollection.md', 'emotion.md', 'persona.md']
         },
         'talon': {
             'name': 'Talon 🦅',
