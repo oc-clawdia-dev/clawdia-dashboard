@@ -110,11 +110,11 @@ def get_solana_balance(wallet_address):
                     if mint == CONFIG['USDC_MINT']:
                         usdc_balance = amount
                     elif mint == CONFIG['WBTC_MINT']:
-                    wbtc_balance = amount
-                elif mint == CONFIG['BNB_MINT']:
-                    bnb_balance = amount
-                else:
-                    other_tokens.append({'mint': mint, 'amount': amount})
+                        wbtc_balance = amount
+                    elif mint == CONFIG['BNB_MINT']:
+                        bnb_balance = amount
+                    else:
+                        other_tokens.append({'mint': mint, 'amount': amount})
         
         return {
             'sol_balance': sol_balance,
