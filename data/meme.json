@@ -1282,7 +1282,7 @@
         "address": "86FzZJJy2kEqDfZn"
       }
     ],
-    "last_scan": "2026-02-17T04:59:18.721151"
+    "last_scan": "2026-02-17T05:00:20.264593"
   },
   "survey": [],
   "trades": [
@@ -8991,6 +8991,49 @@
           "momentum": 60.85077244688481,
           "volume": 44.03743715141089,
           "demand": 65
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T04:59:38.651429+09:00",
+      "unix_time": 1771271978,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "Water/USDC",
+      "input_token": "USDC",
+      "output_token": "Water",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 348451.082271,
+      "input_amount": 20.0,
+      "output_amount": 348451.082271,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 5.739686577998758e-05,
+      "effective_price": 5.739686577998758e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "5nK3HJ9b5qteyv4Xm9TjUHTKXvr51HGGkkuUnV8yVszwb9GMXDi3JiH8CqfDRaeq8b4YTp3Pn1DPZhtpquDr9b2z",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=71 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "86FzZJJy2kEqDfZnPCC1zMcsiLZex9WZdUXePvF9pump",
+        "score_detail": {
+          "total": 70.54732306259928,
+          "momentum": 65.67457807348524,
+          "volume": 92.4172231220119,
+          "demand": 55
         }
       }
     }
