@@ -1661,5 +1661,48 @@
         "demand": 75
       }
     }
+  },
+  {
+    "timestamp": "2026-02-16T15:22:43.800864+09:00",
+    "unix_time": 1771222963,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "Hou/USDC",
+    "input_token": "USDC",
+    "output_token": "Hou",
+    "order_input_amount": 3.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 121134.184621,
+    "input_amount": 3.0,
+    "output_amount": 121134.184621,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 2.4765923916409603e-05,
+    "effective_price": 2.4765923916409603e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "4Hd9ZRQ4KsS4uiHZigyGXywkxEWhEvdxDhMUA56xxCdAhAKhjp8onr7vtxVDhQ3PJycnXLs3sZW5EuNhC69RQ1An",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=75 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "2fsYJPLJuJZAyAMQmt4322oWTC2otv6XND6LK6AE5ia6",
+      "score_detail": {
+        "total": 75.39798592714627,
+        "momentum": 68.43439296684713,
+        "volume": 68.76753195586302,
+        "demand": 75
+      }
+    }
   }
 ]
