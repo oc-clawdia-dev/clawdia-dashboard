@@ -8126,5 +8126,48 @@
       "actual_pnl_pct": -27.03,
       "price_divergence": true
     }
+  },
+  {
+    "timestamp": "2026-02-17T04:36:53.890987+09:00",
+    "unix_time": 1771270613,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "KNUCKLES/USDC",
+    "input_token": "USDC",
+    "output_token": "KNUCKLES",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 444617.938337,
+    "input_amount": 20.0,
+    "output_amount": 444617.938337,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 4.498244059788905e-05,
+    "effective_price": 4.498244059788905e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "2w2inC9NCKU1e3uVr9EzAq2YrCWqwnW3wLjU7HxCu2xAyfCfDdtk43G1qy5tuRWJrTGVxRHzJkA8GVodDKqkawhA",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=72 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "13akLGmNC2BnpJ1m1gNe8RaZZnSraw1jYHticgiMpump",
+      "score_detail": {
+        "total": 71.88903310779632,
+        "momentum": 61.08531680009166,
+        "volume": 82.89010900980948,
+        "demand": 55
+      }
+    }
   }
 ]
