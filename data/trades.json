@@ -4289,5 +4289,48 @@
       "hold_minutes": 1.1,
       "score_at_entry": 73.02221061983585
     }
+  },
+  {
+    "timestamp": "2026-02-16T23:38:32.519662+09:00",
+    "unix_time": 1771252712,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "pup/USDC",
+    "input_token": "USDC",
+    "output_token": "pup",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 388330.32438,
+    "input_amount": 20.0,
+    "output_amount": 388330.32438,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 5.150254498391692e-05,
+    "effective_price": 5.150254498391692e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "4KogAWQw5zsx1c35vx9bF7mqX7K6nRmwM9QCBUmwurHKEEFZtSSKAdJW4iQxt2mQ96K5EUSwLmaobamFdgxkzqxZ",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=71 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "7Fi817h8YaESdWf6HYmC6yCMWxW6krFrRAXTMovnpump",
+      "score_detail": {
+        "total": 71.19971824522742,
+        "momentum": 63.648575260979364,
+        "volume": 87.19438365786789,
+        "demand": 55
+      }
+    }
   }
 ]
