@@ -194,24 +194,36 @@
     }
   },
   "allocation": {
-    "total_budget": 500,
-    "CCI": {
-      "target_pct": 60,
-      "current_usd": 40,
-      "note": "BTC$20 + BNB$20"
-    },
-    "GRID": {
-      "target_pct": 40,
-      "current_usd": 20,
-      "note": "SOL$20"
-    },
-    "BOLLINGER": {
-      "target_pct": 0,
-      "current_usd": 0,
-      "note": "未稼働"
-    },
-    "cash_usd": 440,
-    "note": "初期検証段階。実績確認後に配分拡大"
+    "total_portfolio": 505.96,
+    "total_allocated": 100,
+    "total_in_positions": 40.22,
+    "cash_unallocated": 402.17,
+    "strategies": {
+      "CCI": {
+        "allocated_usd": 80,
+        "position_value": 20.11,
+        "dry_powder": 59.89,
+        "realized_pnl": -1.1,
+        "effective_value": 78.9,
+        "note": "BTC$40(2枠) + BNB$40(2枠)。各ペア$20×2回分"
+      },
+      "BOLLINGER": {
+        "allocated_usd": 0,
+        "position_value": 0,
+        "dry_powder": 0,
+        "realized_pnl": 0,
+        "effective_value": 0,
+        "note": "未稼働"
+      },
+      "GRID": {
+        "allocated_usd": 20,
+        "position_value": 20.11,
+        "dry_powder": 0,
+        "realized_pnl": 0,
+        "effective_value": 20.11,
+        "note": "SOL$20。1ポジション分"
+      }
+    }
   },
   "conclusions": {
     "28000_tests": "シンプル>複雑。CCI最強。Advanced/Adaptive/Meta全滅",
