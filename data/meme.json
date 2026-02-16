@@ -922,7 +922,7 @@
         "address": "5BtNNse2pZuZWt8z"
       }
     ],
-    "last_scan": "2026-02-17T00:26:17.570953"
+    "last_scan": "2026-02-17T00:27:19.232870"
   },
   "survey": [],
   "trades": [
@@ -5160,6 +5160,48 @@
           "volume": 89.68167849906952,
           "demand": 55
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T00:27:01.989343+09:00",
+      "unix_time": 1771255621,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "Dreamcore/USDC",
+      "input_token": "Dreamcore",
+      "output_token": "USDC",
+      "order_input_amount": 312860.953691,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 15.5663733744,
+      "input_amount": 312860.953691,
+      "output_amount": 15.5663733744,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 4.975492528151746e-05,
+      "effective_price": 4.975492528151746e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "7Ciia5K7J52psXgC1jtiAdXtZ7uttgZgz2QTuEVGGhgszLGvQYL186yrGbaqfMVo6c5b5n7QmTh9bV8m7vosFSN",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "SL (-30.2%)",
+      "error": "",
+      "extra": {
+        "token_address": "5BtNNse2pZuZWt8zo11sYSNYhE5RWfmQPn8WtRaXpump",
+        "entry_price": 6.392616197083252e-05,
+        "pnl_usd": -4.4336,
+        "pnl_pct": -22.17,
+        "hold_minutes": 1.0,
+        "score_at_entry": 71.13697905118161
       }
     }
   ]
