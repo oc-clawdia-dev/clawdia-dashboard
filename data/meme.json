@@ -992,7 +992,7 @@
         "address": "53ZWjRQvLDbKZsvB"
       }
     ],
-    "last_scan": "2026-02-17T01:25:50.376804"
+    "last_scan": "2026-02-17T01:26:52.016895"
   },
   "survey": [],
   "trades": [
@@ -5888,6 +5888,51 @@
           "volume": 98.58244969715898,
           "demand": 55
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T01:25:52.750588+09:00",
+      "unix_time": 1771259152,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "Peakychu/USDC",
+      "input_token": "Peakychu",
+      "output_token": "USDC",
+      "order_input_amount": 440425.812298,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 21.680020671319998,
+      "input_amount": 440425.812298,
+      "output_amount": 21.680020671319998,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 4.9225136370188285e-05,
+      "effective_price": 4.9225136370188285e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "2oE5ffPTZuQzxePPoYV5GDJHg21ziN5iqB64hf1FYo6KGqPRnkXb3Pxqu8SGuFz2vGrZe5RKsYnWSpYJywvhoChR",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "TRAIL (-2.9%, peak +6.3%)",
+      "error": "",
+      "extra": {
+        "token_address": "9qy34YjzTCiRZwrtaDfVwx1S8j3cfh7tFgQUwQ9npump",
+        "entry_price": 4.5410599110089495e-05,
+        "pnl_usd": 1.68,
+        "pnl_pct": 8.4,
+        "hold_minutes": 0.9,
+        "score_at_entry": 71.05626091743531,
+        "dexscreener_pnl_pct": -2.86,
+        "actual_pnl_pct": 8.4,
+        "price_divergence": true
       }
     }
   ]
