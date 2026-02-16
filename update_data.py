@@ -73,35 +73,43 @@ def get_solana_balance(wallet_address):
             sol_balance = 0
         
         # 全SPLトークン残高取得
-        token_payload = {
-            "jsonrpc": "2.0",
-            "id": 2,
-            "method": "getTokenAccountsByOwner",
-            "params": [
-                wallet_address,
-                {"programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"},
-                {"encoding": "jsonParsed"}
-            ]
-        }
-        
-        token_response = requests.post(CONFIG['SOLANA_RPC_URL'], json=token_payload, timeout=10)
-        token_data = token_response.json()
-        
         usdc_balance = 0
         wbtc_balance = 0
         bnb_balance = 0
         other_tokens = []
         
-        if 'result' in token_data and 'value' in token_data['result']:
-            for account in token_data['result']['value']:
-                token_info = account['account']['data']['parsed']['info']
-                mint = token_info.get('mint', '')
-                amount = float(token_info['tokenAmount']['uiAmount'] or 0)
-                if amount == 0:
-                    continue
-                if mint == CONFIG['USDC_MINT']:
-                    usdc_balance = amount
-                elif mint == CONFIG['WBTC_MINT']:
+        # Query BOTH token programs (standard + Token-2022)
+        for program_id in [
+            "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+            "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        ]:
+            token_payload = {
+                "jsonrpc": "2.0",
+                "id": 2,
+                "method": "getTokenAccountsByOwner",
+                "params": [
+                    wallet_address,
+                    {"programId": program_id},
+                    {"encoding": "jsonParsed"}
+                ]
+            }
+            
+            try:
+                token_response = requests.post(CONFIG['SOLANA_RPC_URL'], json=token_payload, timeout=10)
+                token_data = token_response.json()
+            except:
+                continue
+        
+            if 'result' in token_data and 'value' in token_data['result']:
+                for account in token_data['result']['value']:
+                    token_info = account['account']['data']['parsed']['info']
+                    mint = token_info.get('mint', '')
+                    amount = float(token_info['tokenAmount']['uiAmount'] or 0)
+                    if amount == 0:
+                        continue
+                    if mint == CONFIG['USDC_MINT']:
+                        usdc_balance = amount
+                    elif mint == CONFIG['WBTC_MINT']:
                     wbtc_balance = amount
                 elif mint == CONFIG['BNB_MINT']:
                     bnb_balance = amount
