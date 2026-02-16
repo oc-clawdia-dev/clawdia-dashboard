@@ -1112,7 +1112,7 @@
         "address": "HEYKwDJRoSsiLNQ9"
       }
     ],
-    "last_scan": "2026-02-17T02:43:50.042527"
+    "last_scan": "2026-02-17T02:44:51.510012"
   },
   "survey": [],
   "trades": [
@@ -7238,6 +7238,49 @@
         "dexscreener_pnl_pct": -3.44,
         "actual_pnl_pct": -6.3,
         "price_divergence": true
+      }
+    },
+    {
+      "timestamp": "2026-02-17T02:44:40.361562+09:00",
+      "unix_time": 1771263880,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "HORSES/USDC",
+      "input_token": "USDC",
+      "output_token": "HORSES",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 501233.723085,
+      "input_amount": 20.0,
+      "output_amount": 501233.723085,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 3.990154508540194e-05,
+      "effective_price": 3.990154508540194e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "3UKtunCdL8Y2gBJdYGJGxciWKChrs6AjzMmPVnPyNucnmsFdt3eFfqp8L2nvKB97S7qc42mwUz2yXF39eQUCdnwC",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=70 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "ci2W6krAYsfBHQwbqyYAPQJLmmUe75hao2WggGApump",
+        "score_detail": {
+          "total": 70.0827047138952,
+          "momentum": 59.16757499503071,
+          "volume": 87.57805141940538,
+          "demand": 55
+        }
       }
     }
   ]
