@@ -1402,7 +1402,7 @@
         "address": "B4K4GYu2PunhWFGC"
       }
     ],
-    "last_scan": "2026-02-17T06:57:24.031314"
+    "last_scan": "2026-02-17T06:58:25.671535"
   },
   "survey": [],
   "trades": [
@@ -9771,6 +9771,51 @@
           "volume": 100,
           "demand": 55
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T06:57:28.888936+09:00",
+      "unix_time": 1771279048,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "EGOD/USDC",
+      "input_token": "EGOD",
+      "output_token": "USDC",
+      "order_input_amount": 224897.182605,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 27.781421067960004,
+      "input_amount": 224897.182605,
+      "output_amount": 27.781421067960004,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.00012352943129907557,
+      "effective_price": 0.00012352943129907557,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "485phRKg7nTpZGuibQRTGrX6jrECgcdw86NjAr6ZQwcvy4iwFLpTxZXhC5gyfcSm9b8Qx4WdQmGdHYfuf2KnAK4V",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "TRAIL (+21.0%, peak +43.0%)",
+      "error": "",
+      "extra": {
+        "token_address": "B4K4GYu2PunhWFGCCMrHdNR18moaW4eoSNSdHPBMpump",
+        "entry_price": 8.892952667676217e-05,
+        "pnl_usd": 7.7814,
+        "pnl_pct": 38.91,
+        "hold_minutes": 1.6,
+        "score_at_entry": 76.81740623464573,
+        "dexscreener_pnl_pct": 20.99,
+        "actual_pnl_pct": 38.91,
+        "price_divergence": true
       }
     }
   ]
