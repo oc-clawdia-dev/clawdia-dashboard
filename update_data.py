@@ -191,12 +191,16 @@ def update_signals_data():
             except:
                 pass
     
+    # Limit to last 7 days to prevent JSON bloat (was 200KB+)
+    cutoff = (datetime.now() - timedelta(days=7)).isoformat()
+    recent_signals = [s for s in signals if (s.get('checked_at') or s.get('timestamp', '')) >= cutoff]
+    
     output_path = os.path.join(CONFIG['OUTPUT_DIR'], 'signals.json')
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(signals, f, ensure_ascii=False, indent=2)
+        json.dump(recent_signals, f, ensure_ascii=False, indent=2)
     
-    print(f"Saved {len(signals)} signals to {output_path}")
-    return signals
+    print(f"Saved {len(recent_signals)} signals (filtered from {len(signals)}, last 7 days) to {output_path}")
+    return recent_signals
 
 def update_wallet_data():
     """ウォレットデータを更新 — portfolio_recorder.pyが書いたlatest_snapshot.jsonを優先使用"""
@@ -246,6 +250,11 @@ def update_wallet_data():
         bnb_value_usd = bnb_balance * bnb_price
         total_usd = sol_value_usd + usdc_balance + wbtc_value_usd + bnb_value_usd
     
+    try:
+        eth_price = prices.get('ETH', 0)
+    except:
+        eth_price = 0
+    
     wallet_data = {
         'timestamp': datetime.now().isoformat(),
         'wallet_address': CONFIG['WALLET_ADDRESS'],
@@ -256,6 +265,7 @@ def update_wallet_data():
         'sol_price_usd': sol_price,
         'btc_price_usd': btc_price,
         'bnb_price_usd': bnb_price,
+        'eth_price_usd': eth_price,
         'sol_value_usd': sol_value_usd,
         'wbtc_value_usd': wbtc_value_usd,
         'bnb_value_usd': bnb_value_usd,
@@ -404,210 +414,130 @@ def update_daily_reports_data():
     return reports
 
 def update_portfolio_strategies():
-    """ライブBotの戦略設定一覧を生成"""
+    """戦略データを階層構造(strategies.json)から生成 + ライブ状態を付与"""
     print("Updating portfolio strategies...")
     
-    # live_trader.pyからTRADING_PAIRSを読み取る
-    live_trader_path = os.path.join(CONFIG['BOT_DATA_DIR'], '..', 'live_trader.py')
-    strategies = []
+    strategies = {}
     
+    # Read hierarchical strategies.json
+    strat_file = os.path.join(CONFIG['BOT_DATA_DIR'], '..', 'strategies.json')
     try:
-        # Parse TRADING_PAIRS from live_trader.py
-        import ast
-        with open(live_trader_path, 'r') as f:
-            content = f.read()
-        
-        # Find TRADING_PAIRS dict
-        start = content.find('TRADING_PAIRS = {')
-        if start >= 0:
-            # Find matching closing brace
-            depth = 0
-            end = start + len('TRADING_PAIRS = ')
-            for i, ch in enumerate(content[end:], end):
-                if ch == '{':
-                    depth += 1
-                elif ch == '}':
-                    depth -= 1
-                    if depth == 0:
-                        end = i + 1
-                        break
-            
-            try:
-                pairs_str = content[start + len('TRADING_PAIRS = '):end]
-                pairs = ast.literal_eval(pairs_str)
-                
-                for pair_id, config in pairs.items():
-                    strat = {
-                        "pair_id": pair_id,
-                        "strategy": config.get("strategy", "?"),
-                        "enabled": config.get("enabled", True),
-                        "trade_symbol": config.get("trade_symbol", pair_id[:3]),
-                        "params": {},
-                    }
-                    
-                    if config.get("strategy") == "CCI":
-                        strat["params"] = {
-                            "cci_period": config.get("cci_period"),
-                            "cci_threshold": config.get("cci_threshold"),
-                            "sl_pct": config.get("sl_pct"),
-                            "donchian_period": config.get("donchian_period"),
-                            "ema_trend_period": config.get("ema_trend_period", 0),
-                        }
-                    elif config.get("strategy") == "BOLLINGER":
-                        strat["params"] = {
-                            "bb_period": config.get("bb_period"),
-                            "bb_std": config.get("bb_std"),
-                            "ema_fast": config.get("ema_fast"),
-                            "ema_slow": config.get("ema_slow"),
-                            "rsi_period": config.get("rsi_period"),
-                            "rsi_exit": config.get("rsi_exit"),
-                            "sl_pct": config.get("sl_pct"),
-                        }
-                    
-                    strategies.append(strat)
-            except Exception as e:
-                print(f"  Error parsing TRADING_PAIRS: {e}")
+        with open(strat_file, 'r') as f:
+            strat_data = json.load(f)
+        strategies = strat_data.get('strategies', {})
     except Exception as e:
-        print(f"  Error reading live_trader.py: {e}")
+        print(f"  Error reading strategies.json: {e}")
+        strategies = {}
     
-    # Add Jupiter Grid Bot info
-    try:
-        import subprocess
-        grid_running = 'jupiter_grid' in subprocess.run(
-            ['ps', 'aux'], capture_output=True, text=True).stdout
+    # Read all recent trades for stats
+    all_trades = []
+    trade_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'trades_*.jsonl')
+    for f in sorted(glob.glob(trade_pattern)):
+        with open(f) as fh:
+            for line in fh:
+                try:
+                    t = json.loads(line.strip())
+                    if t.get('strategy', '').upper() not in ('TEST', 'PIPELINE_TEST'):
+                        all_trades.append(t)
+                except:
+                    pass
+    
+    # Read live states
+    live_states = {}
+    state_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'live_state_*.json')
+    for state_file in glob.glob(state_pattern):
+        with open(state_file, 'r') as fh:
+            state = json.load(fh)
+        pair_id = state.get('pair', os.path.basename(state_file).replace('live_state_', '').replace('.json', ''))
+        live_states[pair_id] = state
+    
+    # Read grid state
+    grid_state = {}
+    grid_state_file = os.path.join(CONFIG['BOT_DATA_DIR'], 'grid_state.json')
+    if os.path.exists(grid_state_file):
+        with open(grid_state_file) as f:
+            grid_state = json.load(f)
+    
+    # Check running processes
+    import subprocess
+    ps_out = subprocess.run(['ps', 'aux'], capture_output=True, text=True).stdout
+    cci_running = 'live_trader' in ps_out
+    grid_running = 'jupiter_grid' in ps_out
+    
+    # Enrich each strategy with live data
+    for strat_id, strat in strategies.items():
+        strat['id'] = strat_id
         
-        if grid_running or os.path.exists('/tmp/jupiter_grid.pid'):
-            grid_strat = {
-                "pair_id": "SOL_GRID",
-                "strategy": "GRID",
-                "enabled": grid_running,
-                "trade_symbol": "SOL",
-                "params": {
-                    "grid_spacing_pct": 1.5,
-                    "tp_pct": 1.5,
-                    "sl_pct": 1.5,
-                    "budget": 20.0,
-                    "exchange": "Jupiter (Solana)",
-                },
-                "bot_type": "jupiter_grid",
-            }
+        # Per-pair enrichment
+        for pair_id, pair in strat.get('pairs', {}).items():
+            pair['pair_id'] = pair_id
+            symbol = pair.get('symbol', '')
             
-            # Read grid trades from unified trades_*.jsonl (strategy="GRID")
-            grid_trades = []
-            trade_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'trades_*.jsonl')
-            for f in sorted(glob.glob(trade_pattern)):
-                with open(f) as fh:
-                    for line in fh:
-                        try:
-                            t = json.loads(line.strip())
-                            if t.get('strategy') == 'GRID':
-                                grid_trades.append(t)
-                        except:
-                            pass
-            
-            # Also check legacy jgrid files
-            grid_log_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'jgrid_*.jsonl')
-            for f in sorted(glob.glob(grid_log_pattern)):
-                with open(f) as fh:
-                    for line in fh:
-                        try:
-                            grid_trades.append(json.loads(line.strip()))
-                        except:
-                            pass
-            
-            buys = [t for t in grid_trades if t.get('direction', t.get('action', '')).lower() in ('buy', 'grid_buy')]
-            sells = [t for t in grid_trades if t.get('direction', t.get('action', '')).lower() in ('sell', 'sell_tp', 'sell_sl')]
-            sells_tp = [t for t in grid_trades if 'tp' in t.get('reason', t.get('action', '')).lower()]
-            sells_sl = [t for t in grid_trades if 'sl' in t.get('reason', t.get('action', '')).lower()]
-            
-            grid_strat["stats"] = {
-                "total_trades": len(buys) + len(sells),
-                "buys": len(buys),
-                "tp_exits": len(sells_tp),
-                "sl_exits": len(sells_sl),
-                "win_rate": round(len(sells_tp) / max(len(sells_tp) + len(sells_sl), 1) * 100, 1),
-            }
-            
-            # Check position from grid_state.json
-            grid_state_file = os.path.join(CONFIG['BOT_DATA_DIR'], 'grid_state.json')
-            if os.path.exists(grid_state_file):
-                with open(grid_state_file) as gsf:
-                    grid_state = json.load(gsf)
-                if grid_state.get('position'):
-                    grid_strat["position"] = {
-                        "in_position": True,
-                        "entry_price": grid_state['position'].get('entry_price'),
-                        "usdc_spent": grid_state['position'].get('usdc_spent'),
-                        "ref_price": grid_state.get('ref_price'),
+            # Live position from state files
+            if pair_id in live_states:
+                ls = live_states[pair_id]
+                if ls.get('in_position'):
+                    pair['position'] = {
+                        'in_position': True,
+                        'entry_price': ls.get('entry_price'),
+                        'entry_time': ls.get('entry_time'),
+                        'stop_loss_price': ls.get('stop_loss_price'),
+                        'position_amount': ls.get('position_amount'),
+                        'position_token': ls.get('position_token'),
                     }
                 else:
-                    grid_strat["position"] = {"in_position": False, "ref_price": grid_state.get('ref_price')}
-            elif buys and len(buys) > len(sells_tp) + len(sells_sl):
-                last_buy = buys[-1]
-                grid_strat["position"] = {
-                    "in_position": True,
-                    "entry_time": last_buy.get('timestamp', ''),
-                    "usdc_spent": last_buy.get('usdc_spent', 0),
+                    pair['position'] = {'in_position': False}
+            elif pair_id == 'SOL_GRID' and grid_state.get('position'):
+                pair['position'] = {
+                    'in_position': True,
+                    'entry_price': grid_state['position'].get('entry_price'),
+                    'usdc_spent': grid_state['position'].get('usdc_spent'),
+                    'token_amount': grid_state['position'].get('token_amount'),
+                    'ref_price': grid_state.get('ref_price'),
                 }
             
-            strategies.append(grid_strat)
-    except Exception as e:
-        print(f"  Error reading grid bot info: {e}")
+            # Trade stats per pair
+            pair_trades = [t for t in all_trades 
+                          if (symbol.upper() in str(t.get('output_token', '')).upper()
+                              or symbol.upper() in str(t.get('input_token', '')).upper())
+                          and t.get('strategy', '').upper() == strat_id.upper()]
+            buys = [t for t in pair_trades if t.get('direction', '').lower() == 'buy' or t.get('input_token') == 'USDC']
+            sells = [t for t in pair_trades if t.get('direction', '').lower() == 'sell' or t.get('output_token') == 'USDC']
+            
+            total_invested = sum(t.get('actual_input_amount', t.get('input_amount', 0)) for t in buys if t.get('input_token') == 'USDC')
+            total_returned = sum(t.get('actual_output_amount', t.get('output_amount', 0)) for t in sells if t.get('output_token') == 'USDC')
+            realized_pnl = total_returned - total_invested if total_invested > 0 and total_returned > 0 else None
+            
+            pair['live_stats'] = {
+                'total_trades': len(pair_trades),
+                'buys': len(buys),
+                'sells': len(sells),
+                'total_invested': round(total_invested, 2),
+                'total_returned': round(total_returned, 2),
+                'realized_pnl': round(realized_pnl, 2) if realized_pnl is not None else None,
+            }
+        
+        # Bot running status
+        if strat_id == 'CCI':
+            strat['bot_running'] = cci_running
+        elif strat_id == 'GRID':
+            strat['bot_running'] = grid_running
+        else:
+            strat['bot_running'] = False
     
-    # Add positions from live_state_*.json files
-    try:
-        state_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'live_state_*.json')
-        for state_file in glob.glob(state_pattern):
-            with open(state_file, 'r') as fh:
-                state = json.load(fh)
-            pair_id = state.get('pair', os.path.basename(state_file).replace('live_state_', '').replace('.json', ''))
-            for strat in strategies:
-                if strat.get('pair_id') == pair_id:
-                    if state.get('in_position'):
-                        strat['position'] = {
-                            'in_position': True,
-                            'entry_price': state.get('entry_price'),
-                            'entry_time': state.get('entry_time'),
-                            'stop_loss_price': state.get('stop_loss_price'),
-                            'position_size_usd': state.get('position_size_usd'),
-                            'position_token': state.get('position_token'),
-                            'position_amount': state.get('position_amount'),
-                            'donchian_low': state.get('donchian_low'),
-                        }
-                    else:
-                        strat['position'] = {'in_position': False}
-                    break
-        
-        # Read trade logs for stats
-        trade_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'trades_*.jsonl')
-        trade_files = sorted(glob.glob(trade_pattern))
-        all_trades = []
-        for f in trade_files[-7:]:
-            with open(f) as fh:
-                for line in fh:
-                    try:
-                        all_trades.append(json.loads(line.strip()))
-                    except:
-                        pass
-        
-        for strat in strategies:
-            if strat.get('strategy') == 'CCI':
-                symbol = strat.get('trade_symbol', '')
-                strat_trades = [t for t in all_trades if symbol.upper() in str(t.get('output_token', '')).upper()
-                               or symbol.upper() in str(t.get('input_token', '')).upper()]
-                strat["stats"] = {
-                    "total_trades": len(strat_trades),
-                    "last_7d_trades": len(strat_trades),
-                }
-    except Exception as e:
-        print(f"  Error reading position data: {e}")
+    # Include allocation data
+    output = {
+        'strategies': strategies,
+        'allocation': strat_data.get('portfolio_allocation', {}),
+        'conclusions': strat_data.get('conclusions', {}),
+    }
     
     output_path = os.path.join(CONFIG['OUTPUT_DIR'], 'strategies.json')
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(strategies, f, ensure_ascii=False, indent=2)
+        json.dump(output, f, ensure_ascii=False, indent=2)
     
     print(f"  Saved {len(strategies)} strategies to {output_path}")
-    return strategies
+    return output
 
 
 def update_portfolio_history():

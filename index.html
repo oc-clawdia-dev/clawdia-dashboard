@@ -142,6 +142,32 @@
 
             <!-- トレードタブ -->
             <div id="tab-trades" class="tab-panel">
+                <!-- フィルター -->
+                <section class="card">
+                    <div class="trade-filters">
+                        <select id="trade-strategy-filter" class="filter-select" onchange="applyTradeFilters()">
+                            <option value="">全戦略</option>
+                            <option value="CCI">CCI</option>
+                            <option value="GRID">GRID</option>
+                            <option value="BOLLINGER">BOLLINGER</option>
+                        </select>
+                        <select id="trade-symbol-filter" class="filter-select" onchange="applyTradeFilters()">
+                            <option value="">全銘柄</option>
+                            <option value="WBTC">WBTC</option>
+                            <option value="BNB">BNB</option>
+                            <option value="SOL">SOL</option>
+                        </select>
+                        <select id="trade-direction-filter" class="filter-select" onchange="applyTradeFilters()">
+                            <option value="">全方向</option>
+                            <option value="buy">買いのみ</option>
+                            <option value="sell">売りのみ</option>
+                        </select>
+                        <label class="filter-checkbox"><input type="checkbox" id="trade-hide-test" checked onchange="applyTradeFilters()"> テスト非表示</label>
+                        <button onclick="resetTradeFilters()" class="btn btn-secondary">リセット</button>
+                    </div>
+                    <div id="cumulative-pnl" class="cumulative-pnl"></div>
+                </section>
+
                 <!-- オープンポジション -->
                 <section class="card" id="open-positions-section">
                     <h2>🔥 保有中ポジション</h2>
@@ -248,6 +274,6 @@
         </div>
     </div>
 
-    <script src="dashboard.js?v=20260216f"></script>
+    <script src="dashboard.js?v=20260216g"></script>
 </body>
 </html>

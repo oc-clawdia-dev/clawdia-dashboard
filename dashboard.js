@@ -430,9 +430,56 @@ function resetTaskFilters() {
     renderProjectAccordion();
 }
 
+// ─── Trade Filtering ───
+let tradeFilters = { strategy: '', symbol: '', direction: '', hideTest: true };
+
+function filterTradesByStrategy(strategy, symbol) {
+    tradeFilters.strategy = strategy || '';
+    tradeFilters.symbol = symbol || '';
+    switchTab('trades');
+    updateTradesSection();
+    // Update filter UI
+    const sf = document.getElementById('trade-strategy-filter');
+    const symf = document.getElementById('trade-symbol-filter');
+    if (sf) sf.value = strategy || '';
+    if (symf) symf.value = symbol || '';
+}
+
+function resetTradeFilters() {
+    tradeFilters = { strategy: '', symbol: '', direction: '', hideTest: true };
+    document.getElementById('trade-strategy-filter').value = '';
+    document.getElementById('trade-symbol-filter').value = '';
+    document.getElementById('trade-direction-filter').value = '';
+    document.getElementById('trade-hide-test').checked = true;
+    updateTradesSection();
+}
+
+function applyTradeFilters() {
+    tradeFilters.strategy = document.getElementById('trade-strategy-filter')?.value || '';
+    tradeFilters.symbol = document.getElementById('trade-symbol-filter')?.value || '';
+    tradeFilters.direction = document.getElementById('trade-direction-filter')?.value || '';
+    tradeFilters.hideTest = document.getElementById('trade-hide-test')?.checked ?? true;
+    updateTradesSection();
+}
+
+function getFilteredTrades() {
+    let trades = dashboardData.trades || [];
+    if (tradeFilters.hideTest) trades = trades.filter(t => !isTestTrade(t));
+    if (tradeFilters.strategy) trades = trades.filter(t => (t.strategy || '').toUpperCase() === tradeFilters.strategy.toUpperCase());
+    if (tradeFilters.symbol) {
+        const sym = tradeFilters.symbol.toUpperCase();
+        trades = trades.filter(t => (t.input_token || '').toUpperCase() === sym || (t.output_token || '').toUpperCase() === sym);
+    }
+    if (tradeFilters.direction) {
+        if (tradeFilters.direction === 'buy') trades = trades.filter(t => t.input_token === 'USDC' || (t.direction || '').toLowerCase() === 'buy');
+        if (tradeFilters.direction === 'sell') trades = trades.filter(t => t.output_token === 'USDC' || (t.direction || '').toLowerCase() === 'sell');
+    }
+    return trades;
+}
+
 // ─── Trades Tab ───
 function updateTradesSection() {
-    const trades = dashboardData.trades;
+    const trades = getFilteredTrades();
     const wallet = dashboardData.wallet;
     if (!wallet) return;
 
@@ -550,8 +597,9 @@ function updateTradesSection() {
         }).join('');
     }
 
-    // Full trade table with USD amounts
+    // Full trade table with USD amounts + cumulative P&L
     updateTradeTable(trades, wallet);
+    updateCumulativePnL(dashboardData.trades.filter(t => !isTestTrade(t)), wallet);
 }
 
 function findRoundTrips(trades, wallet) {
@@ -780,89 +828,139 @@ function updateStrategiesSection() {
     const container = document.getElementById('strategies-container');
     if (!container) return;
     
-    const strategies = dashboardData.strategies || [];
-    if (strategies.length === 0) {
+    const data = dashboardData.strategies || {};
+    const strategies = data.strategies || {};
+    const allocation = data.allocation || {};
+    
+    if (Object.keys(strategies).length === 0) {
         container.innerHTML = '<p class="empty-state">戦略データがありません</p>';
         return;
     }
     
-    let html = '<div class="strategies-grid">';
+    let html = '';
     
-    for (const s of strategies) {
-        const statusClass = s.enabled ? 'status-active' : 'status-disabled';
-        const statusText = s.enabled ? '🟢 稼働中' : '⏸️ 停止中';
-        const strategyIcon = s.strategy === 'CCI' ? '📊' : s.strategy === 'BOLLINGER' ? '📉' : '🔧';
+    // Portfolio allocation overview
+    html += `<div class="allocation-overview">
+        <h3>💰 資産配分</h3>
+        <div class="allocation-bar">`;
+    const colors = {CCI: '#4488ff', GRID: '#9945ff', BOLLINGER: '#f0b90b'};
+    for (const [id, strat] of Object.entries(strategies)) {
+        if (strat.allocation_pct > 0) {
+            html += `<div class="alloc-segment" style="width:${strat.allocation_pct}%;background:${colors[id]||'#666'}" title="${strat.name} ${strat.allocation_pct}%"></div>`;
+        }
+    }
+    html += `</div><div class="allocation-legend">`;
+    for (const [id, strat] of Object.entries(strategies)) {
+        const cur = allocation[id]?.current_usd || 0;
+        html += `<span class="alloc-item"><span class="alloc-dot" style="background:${colors[id]||'#666'}"></span>${strat.name}: ${strat.allocation_pct}% ($${cur})</span>`;
+    }
+    if (allocation.cash_usd) html += `<span class="alloc-item"><span class="alloc-dot" style="background:#2775ca"></span>現金: $${allocation.cash_usd}</span>`;
+    html += `</div></div>`;
+    
+    // Strategy cards
+    html += '<div class="strategies-list">';
+    
+    for (const [stratId, strat] of Object.entries(strategies)) {
+        const isActive = strat.status === 'active';
+        const statusText = isActive ? (strat.bot_running ? '🟢 稼働中' : '🔴 Bot停止') : '⏸️ 無効';
+        const icon = {CCI: '📊', GRID: '🔧', BOLLINGER: '📉'}[stratId] || '📌';
         
-        html += `<div class="strategy-card ${statusClass}">`;
-        html += `<div class="strategy-header">`;
-        html += `<h3>${strategyIcon} ${s.pair_id}</h3>`;
-        html += `<span class="strategy-status">${statusText}</span>`;
+        html += `<div class="strategy-section ${isActive ? '' : 'disabled'}">`;
+        
+        // Strategy header
+        html += `<div class="strat-header" style="border-left: 4px solid ${colors[stratId]||'#666'}">
+            <div class="strat-title">
+                <h3>${icon} ${strat.name || stratId}</h3>
+                <span class="strat-status">${statusText}</span>
+            </div>
+            <p class="strat-desc">${esc(strat.description || '')}</p>
+            <div class="strat-meta">
+                <span>📐 ${strat.timeframe || '?'}</span>
+                <span>🎯 ${strat.type || '?'}</span>
+                <span>💰 配分 ${strat.allocation_pct || 0}%</span>
+            </div>
+        </div>`;
+        
+        // Key metrics
+        const km = strat.key_metrics || {};
+        if (Object.keys(km).length > 0) {
+            html += `<div class="strat-metrics">`;
+            if (km.total_backtests) html += `<div class="metric"><span class="metric-val">${km.total_backtests.toLocaleString()}</span><span class="metric-lbl">バックテスト数</span></div>`;
+            if (km.best_annual) html += `<div class="metric"><span class="metric-val positive">${km.best_annual}</span><span class="metric-lbl">最高年間</span></div>`;
+            if (km.worst_annual) html += `<div class="metric"><span class="metric-val negative">${km.worst_annual}</span><span class="metric-lbl">最低年間</span></div>`;
+            if (km.walk_forward_pass) html += `<div class="metric"><span class="metric-val">${km.walk_forward_pass}</span><span class="metric-lbl">WF通過率</span></div>`;
+            if (km.optimal_daily) html += `<div class="metric"><span class="metric-val positive">${km.optimal_daily}</span><span class="metric-lbl">最適日利</span></div>`;
+            if (km.win_rate) html += `<div class="metric"><span class="metric-val">${km.win_rate}</span><span class="metric-lbl">勝率</span></div>`;
+            if (km.bear_2022) html += `<div class="metric"><span class="metric-val negative">${km.bear_2022}</span><span class="metric-lbl">2022ベア</span></div>`;
+            html += `</div>`;
+            if (km.conclusion) html += `<div class="strat-conclusion">💡 ${esc(km.conclusion)}</div>`;
+        }
+        
+        // Pairs table
+        const pairs = strat.pairs || {};
+        if (Object.keys(pairs).length > 0) {
+            html += `<div class="pairs-section"><h4>📋 ペア一覧</h4><div class="pairs-grid">`;
+            for (const [pairId, pair] of Object.entries(pairs)) {
+                const pairActive = pair.status === 'enabled';
+                const pos = pair.position || {};
+                const stats = pair.live_stats || {};
+                const wallet = dashboardData.wallet || {};
+                
+                // Calculate current P&L for open positions
+                let currentPnl = null;
+                if (pos.in_position && pos.entry_price) {
+                    const sym = pair.symbol;
+                    const currentPrice = sym === 'SOL' ? wallet.sol_price_usd : sym === 'WBTC' ? wallet.btc_price_usd : sym === 'BNB' ? wallet.bnb_price_usd : 0;
+                    if (currentPrice > 0) {
+                        currentPnl = ((currentPrice - pos.entry_price) / pos.entry_price * 100);
+                    }
+                }
+                
+                html += `<div class="pair-card ${pairActive ? '' : 'disabled'}">
+                    <div class="pair-header">
+                        <span class="pair-name">${pair.symbol || pairId}</span>
+                        <span class="pair-status">${pairActive ? '✅' : '⏸️'}</span>
+                    </div>`;
+                
+                // Params
+                const p = pair.params || {};
+                html += `<div class="pair-params">`;
+                for (const [k, v] of Object.entries(p)) {
+                    const label = k.replace(/_/g, ' ').replace('pct', '%').replace('period', '期間');
+                    html += `<span class="pparam">${label}: <strong>${v}</strong></span>`;
+                }
+                html += `</div>`;
+                
+                // Position
+                if (pos.in_position) {
+                    const pnlClass = currentPnl >= 0 ? 'positive' : 'negative';
+                    html += `<div class="pair-position active">💼 ポジション保有中`;
+                    if (pos.entry_price) html += ` @ $${pos.entry_price}`;
+                    if (currentPnl !== null) html += ` <span class="${pnlClass}">(${currentPnl >= 0 ? '+' : ''}${currentPnl.toFixed(2)}%)</span>`;
+                    html += `</div>`;
+                } else {
+                    html += `<div class="pair-position">待機中</div>`;
+                }
+                
+                // Live stats
+                if (stats.total_trades > 0) {
+                    html += `<div class="pair-stats">取引: ${stats.total_trades}回`;
+                    if (stats.realized_pnl !== null && stats.realized_pnl !== undefined) {
+                        const pnlClass = stats.realized_pnl >= 0 ? 'positive' : 'negative';
+                        html += ` | 実現P&L: <span class="${pnlClass}">${stats.realized_pnl >= 0 ? '+' : ''}$${stats.realized_pnl.toFixed(2)}</span>`;
+                    }
+                    html += `</div>`;
+                }
+                
+                // View trades link
+                html += `<div class="pair-actions"><a href="#trades" onclick="filterTradesByStrategy('${stratId}','${pair.symbol}')" class="link-btn">📜 トレード一覧 →</a></div>`;
+                
+                html += `</div>`;
+            }
+            html += `</div></div>`;
+        }
+        
         html += `</div>`;
-        html += `<div class="strategy-body">`;
-        html += `<div class="strategy-info"><span class="label">取引銘柄</span><span class="value">${s.trade_symbol}</span></div>`;
-        html += `<div class="strategy-info"><span class="label">戦略タイプ</span><span class="value">${s.strategy}</span></div>`;
-        
-        // Strategy-specific params
-        const p = s.params || {};
-        if (s.strategy === 'CCI') {
-            html += `<div class="strategy-params">`;
-            html += `<div class="param"><span>CCI期間</span><span>${p.cci_period}</span></div>`;
-            html += `<div class="param"><span>CCI閾値</span><span>${p.cci_threshold}</span></div>`;
-            html += `<div class="param"><span>SL</span><span>${p.sl_pct}%</span></div>`;
-            html += `<div class="param"><span>Donchian</span><span>${p.donchian_period}</span></div>`;
-            if (p.ema_trend_period > 0) {
-                html += `<div class="param"><span>トレンドフィルター</span><span>EMA${p.ema_trend_period}</span></div>`;
-            } else {
-                html += `<div class="param"><span>トレンドフィルター</span><span>なし</span></div>`;
-            }
-            html += `</div>`;
-        } else if (s.strategy === 'BOLLINGER') {
-            html += `<div class="strategy-params">`;
-            html += `<div class="param"><span>BB期間/σ</span><span>${p.bb_period} / ${p.bb_std}</span></div>`;
-            html += `<div class="param"><span>EMA</span><span>${p.ema_fast}/${p.ema_slow}</span></div>`;
-            html += `<div class="param"><span>RSI Exit</span><span>${p.rsi_period} > ${p.rsi_exit}</span></div>`;
-            html += `<div class="param"><span>SL</span><span>${p.sl_pct}%</span></div>`;
-            html += `</div>`;
-        } else if (s.strategy === 'GRID') {
-            html += `<div class="strategy-params">`;
-            html += `<div class="param"><span>グリッド間隔</span><span>${p.grid_spacing_pct}%</span></div>`;
-            html += `<div class="param"><span>TP</span><span>${p.tp_pct}%</span></div>`;
-            html += `<div class="param"><span>SL</span><span>${p.sl_pct}%</span></div>`;
-            html += `<div class="param"><span>予算/回</span><span>$${p.budget}</span></div>`;
-            html += `<div class="param"><span>取引所</span><span>${p.exchange || 'Jupiter'}</span></div>`;
-            html += `</div>`;
-        }
-        
-        // Stats section
-        const stats = s.stats || {};
-        if (stats.total_trades !== undefined) {
-            html += `<div class="strategy-stats">`;
-            html += `<div class="stats-header">📈 成績</div>`;
-            html += `<div class="param"><span>総トレード</span><span>${stats.total_trades}</span></div>`;
-            if (stats.win_rate !== undefined) {
-                html += `<div class="param"><span>勝率</span><span>${stats.win_rate}%</span></div>`;
-            }
-            if (stats.tp_exits !== undefined) {
-                html += `<div class="param"><span>TP/SL</span><span>${stats.tp_exits} / ${stats.sl_exits}</span></div>`;
-            }
-            html += `</div>`;
-        }
-        
-        // Position section
-        if (s.position) {
-            html += `<div class="strategy-position">`;
-            html += `<div class="stats-header">💼 ポジション</div>`;
-            if (s.position.entry_time) {
-                const t = new Date(s.position.entry_time);
-                html += `<div class="param"><span>エントリー</span><span>${t.toLocaleString('ja-JP')}</span></div>`;
-            }
-            if (s.position.usdc_spent) {
-                html += `<div class="param"><span>投入額</span><span>$${s.position.usdc_spent}</span></div>`;
-            }
-            html += `</div>`;
-        }
-        
-        html += `</div></div>`;
     }
     
     html += '</div>';
@@ -923,6 +1021,15 @@ function setupEventListeners() {
             }
         });
     });
+}
+
+function updateCumulativePnL(trades, wallet) {
+    const el = document.getElementById('cumulative-pnl');
+    if (!el) return;
+    const trips = findRoundTrips(trades, wallet);
+    const totalPnl = trips.reduce((s, t) => s + t.pnl, 0);
+    const pnlClass = totalPnl >= 0 ? 'positive' : 'negative';
+    el.innerHTML = `累計実現損益: <span class="${pnlClass}">${totalPnl >= 0 ? '+' : ''}${fmtCurrency(totalPnl)}</span> (${trips.length}往復)`;
 }
 
 // ─── Helpers ───
