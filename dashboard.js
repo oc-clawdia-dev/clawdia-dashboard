@@ -1135,6 +1135,9 @@ function simpleMarkdown(text) {
 let memoryData = null;
 let currentMemoryAgent = 'clawdia';
 let currentMemoryFile = 'MEMORY.md';
+let currentMemoryMode = 'file'; // 'file' or 'folder'
+let currentFolderName = null;
+let currentFolderFile = null;
 
 async function loadMemories() {
     try {
@@ -1148,13 +1151,14 @@ async function loadMemories() {
 }
 
 function setupMemoryTabs() {
-    // Agent tab clicks
     document.querySelectorAll('.memory-tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.memory-tab-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentMemoryAgent = btn.dataset.agent;
-            currentMemoryFile = null; // auto-select first
+            currentMemoryFile = null;
+            currentMemoryMode = 'file';
+            currentFolderName = null;
             renderMemoryFileTabs();
             renderMemory();
         });
@@ -1162,25 +1166,144 @@ function setupMemoryTabs() {
     renderMemoryFileTabs();
 }
 
+const FOLDER_ICONS = {
+    'emotion': '💜',
+    'recollection': '✨', 
+    'persona': '🪞'
+};
+
+const FOLDER_LABELS = {
+    'emotion': 'Emotion',
+    'recollection': 'Recollection',
+    'persona': 'Persona'
+};
+
 function renderMemoryFileTabs() {
     const container = document.getElementById('memory-file-tabs');
     if (!memoryData || !memoryData[currentMemoryAgent]) {
         container.innerHTML = '';
         return;
     }
-    const files = Object.keys(memoryData[currentMemoryAgent].files || {});
-    if (!currentMemoryFile || !files.includes(currentMemoryFile)) {
+    const agent = memoryData[currentMemoryAgent];
+    const files = Object.keys(agent.files || {});
+    const folders = Object.keys(agent.folders || {});
+    
+    if (!currentMemoryFile && currentMemoryMode === 'file') {
         currentMemoryFile = files[0] || null;
     }
-    container.innerHTML = files.map(f => 
-        `<button class="memory-file-btn ${f === currentMemoryFile ? 'active' : ''}" data-file="${f}">${f.replace('.md','')}</button>`
+    
+    let html = files.map(f => 
+        `<button class="memory-file-btn ${currentMemoryMode === 'file' && f === currentMemoryFile ? 'active' : ''}" data-file="${f}" data-mode="file">${f.replace('.md','')}</button>`
     ).join('');
+    
+    if (folders.length > 0) {
+        html += '<span class="memory-tab-divider">│</span>';
+        html += folders.map(f =>
+            `<button class="memory-file-btn memory-folder-btn ${currentMemoryMode === 'folder' && f === currentFolderName ? 'active' : ''}" data-folder="${f}" data-mode="folder">${FOLDER_ICONS[f] || '📁'} ${FOLDER_LABELS[f] || f}</button>`
+        ).join('');
+    }
+    
+    container.innerHTML = html;
     container.querySelectorAll('.memory-file-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            currentMemoryFile = btn.dataset.file;
             container.querySelectorAll('.memory-file-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            renderMemory();
+            if (btn.dataset.mode === 'folder') {
+                currentMemoryMode = 'folder';
+                currentFolderName = btn.dataset.folder;
+                currentFolderFile = null;
+                renderMemory();
+            } else {
+                currentMemoryMode = 'file';
+                currentMemoryFile = btn.dataset.file;
+                renderMemory();
+            }
+        });
+    });
+}
+
+function flattenTree(tree, prefix) {
+    let files = [];
+    for (const [name, node] of Object.entries(tree)) {
+        if (node.type === 'file') {
+            files.push({ path: prefix ? prefix + '/' + name : name, name, content: node.content });
+        } else if (node.type === 'folder' && node.children) {
+            files = files.concat(flattenTree(node.children, prefix ? prefix + '/' + name.replace(/\/$/, '') : name.replace(/\/$/, '')));
+        }
+    }
+    return files;
+}
+
+function renderFolderView(folderName, tree) {
+    const files = flattenTree(tree, '');
+    const el = document.getElementById('memory-content');
+    
+    if (!currentFolderFile && files.length > 0) {
+        const readme = files.find(f => f.name === 'README.md');
+        currentFolderFile = readme ? readme.path : files[0].path;
+    }
+    
+    const icon = FOLDER_ICONS[folderName] || '📁';
+    const label = FOLDER_LABELS[folderName] || folderName;
+    
+    let html = `<div class="folder-view">`;
+    html += `<div class="folder-sidebar">`;
+    html += `<div class="folder-header">${icon} ${label}</div>`;
+    html += `<div class="folder-tree">`;
+    
+    // Group by directory
+    const dirs = {};
+    files.forEach(f => {
+        const parts = f.path.split('/');
+        if (parts.length === 1) {
+            if (!dirs['_root']) dirs['_root'] = [];
+            dirs['_root'].push(f);
+        } else {
+            const dir = parts.slice(0, -1).join('/');
+            if (!dirs[dir]) dirs[dir] = [];
+            dirs[dir].push(f);
+        }
+    });
+    
+    // Render root files first
+    if (dirs['_root']) {
+        dirs['_root'].forEach(f => {
+            const active = f.path === currentFolderFile ? 'active' : '';
+            const displayName = f.name.replace('.md', '');
+            html += `<div class="tree-item ${active}" data-path="${f.path}">${displayName}</div>`;
+        });
+    }
+    
+    // Render subdirectories
+    Object.entries(dirs).filter(([k]) => k !== '_root').sort().forEach(([dir, dirFiles]) => {
+        html += `<div class="tree-dir">📂 ${dir}</div>`;
+        dirFiles.forEach(f => {
+            const active = f.path === currentFolderFile ? 'active' : '';
+            const displayName = f.name.replace('.md', '');
+            html += `<div class="tree-item tree-item-nested ${active}" data-path="${f.path}">${displayName}</div>`;
+        });
+    });
+    
+    html += `</div></div>`;
+    
+    // Content area
+    const currentFile = files.find(f => f.path === currentFolderFile);
+    html += `<div class="folder-content">`;
+    if (currentFile) {
+        html += `<div class="folder-content-path">${folderName}/${currentFile.path}</div>`;
+        html += `<div class="folder-content-body">${simpleMarkdown(currentFile.content)}</div>`;
+    } else {
+        html += `<div class="loading">ファイルを選択してください</div>`;
+    }
+    html += `</div></div>`;
+    
+    el.innerHTML = html;
+    
+    // Bind clicks
+    el.querySelectorAll('.tree-item').forEach(item => {
+        item.addEventListener('click', () => {
+            currentFolderFile = item.dataset.path;
+            renderFolderView(folderName, tree);
         });
     });
 }
@@ -1192,6 +1315,15 @@ function renderMemory() {
         return;
     }
     const agent = memoryData[currentMemoryAgent];
+    
+    if (currentMemoryMode === 'folder' && currentFolderName) {
+        const tree = agent.folders?.[currentFolderName];
+        if (tree) {
+            renderFolderView(currentFolderName, tree);
+            return;
+        }
+    }
+    
     const content = agent.files?.[currentMemoryFile];
     if (!content) {
         el.innerHTML = `<div class="loading">${currentMemoryFile || 'ファイル'} が見つかりません</div>`;

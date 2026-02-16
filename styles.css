@@ -450,6 +450,131 @@ header h1 {
     color: #ddd;
 }
 
+/* ─── Folder View (Clawdia's Inner Files) ─── */
+.memory-folder-btn {
+    background: linear-gradient(135deg, #1a0a2e, #0a1a2e) !important;
+    border-color: #4a2a6e !important;
+    color: #c9a0dc !important;
+}
+.memory-folder-btn.active {
+    background: linear-gradient(135deg, #2a1040, #1a2a4e) !important;
+    border-color: #7b4a9e !important;
+    color: #e8c8f8 !important;
+    box-shadow: 0 0 12px rgba(123, 74, 158, 0.3);
+}
+.memory-tab-divider {
+    color: #333;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+}
+.folder-view {
+    display: flex;
+    gap: 0;
+    min-height: 50vh;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #2a1a3e;
+}
+.folder-sidebar {
+    width: 180px;
+    min-width: 180px;
+    background: linear-gradient(180deg, #0e0818, #0a0a14);
+    border-right: 1px solid #2a1a3e;
+    padding: 0;
+    overflow-y: auto;
+}
+.folder-header {
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #c9a0dc;
+    border-bottom: 1px solid #2a1a3e;
+    background: rgba(74, 42, 110, 0.15);
+    letter-spacing: 0.5px;
+}
+.folder-tree {
+    padding: 8px 0;
+}
+.tree-dir {
+    padding: 6px 12px;
+    font-size: 11px;
+    color: #7b6a8e;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.tree-item {
+    padding: 7px 16px;
+    font-size: 12px;
+    color: #8a7a9e;
+    cursor: pointer;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+}
+.tree-item:hover {
+    background: rgba(123, 74, 158, 0.1);
+    color: #c9a0dc;
+}
+.tree-item.active {
+    background: rgba(123, 74, 158, 0.2);
+    color: #e8c8f8;
+    border-left-color: #7b4a9e;
+}
+.tree-item-nested {
+    padding-left: 28px;
+}
+.folder-content {
+    flex: 1;
+    background: #0a0a14;
+    padding: 0;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+.folder-content-path {
+    padding: 10px 20px;
+    font-size: 11px;
+    color: #5a4a6e;
+    border-bottom: 1px solid #1a1028;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    background: rgba(74, 42, 110, 0.08);
+}
+.folder-content-body {
+    padding: 20px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #d8c8e8;
+    white-space: pre-wrap;
+}
+.folder-content-body h2,
+.folder-content-body h3,
+.folder-content-body h4 {
+    color: #c9a0dc;
+}
+.folder-content-body strong {
+    color: #e8c8f8;
+}
+.folder-content-body ul {
+    padding-left: 20px;
+}
+@media (max-width: 600px) {
+    .folder-view {
+        flex-direction: column;
+    }
+    .folder-sidebar {
+        width: 100%;
+        min-width: 100%;
+        max-height: 30vh;
+        border-right: none;
+        border-bottom: 1px solid #2a1a3e;
+    }
+    .folder-content {
+        max-height: 50vh;
+    }
+}
+
 /* Test trade styling */
 .trade-row.test-trade {
     opacity: 0.5;

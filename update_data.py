@@ -724,39 +724,60 @@ def update_agent_memories():
     agents = {
         'clawdia': {
             'name': 'Clawdia 🩶',
-            'workspace': os.path.join(os.path.dirname(CONFIG['BOT_DATA_DIR']), ''),  # parent of bot/
-            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md', 'recollection.md', 'emotion.md', 'persona.md']
+            'workspace': os.path.expanduser('~/.openclaw/workspace/'),
+            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md'],
+            'folders': ['recollection', 'emotion', 'persona']
         },
         'talon': {
             'name': 'Talon 🦅',
             'workspace': os.path.expanduser('~/.openclaw/workspace-talon/'),
-            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md']
+            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md'],
+            'folders': []
         },
         'velvet': {
             'name': 'Velvet 🌙',
             'workspace': os.path.expanduser('~/.openclaw/workspace-velvet/'),
-            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md']
+            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md'],
+            'folders': []
         }
     }
     
-    # Fix clawdia workspace path
-    agents['clawdia']['workspace'] = os.path.expanduser('~/.openclaw/workspace/')
+    import re
+    def redact(content):
+        content = re.sub(r'ghp_[A-Za-z0-9]{36}', 'ghp_***REDACTED***', content)
+        content = re.sub(r'MTQ3[A-Za-z0-9._\-]{50,}', 'MTQ3***REDACTED***', content)
+        content = re.sub(r'sk-ant-[A-Za-z0-9\-]+', 'sk-ant-***REDACTED***', content)
+        content = re.sub(r'daughter insect.*?file', '***SEED_REDACTED***', content)
+        return content
+    
+    def scan_folder(folder_path):
+        """Recursively scan a folder and return a tree structure"""
+        tree = {}
+        if not os.path.isdir(folder_path):
+            return tree
+        for item in sorted(os.listdir(folder_path)):
+            item_path = os.path.join(folder_path, item)
+            if item.startswith('.'):
+                continue
+            if os.path.isdir(item_path):
+                tree[item + '/'] = {'type': 'folder', 'children': scan_folder(item_path)}
+            elif item.endswith('.md'):
+                with open(item_path, 'r', encoding='utf-8') as f:
+                    tree[item] = {'type': 'file', 'content': redact(f.read())}
+        return tree
     
     result = {}
     for agent_id, agent in agents.items():
-        agent_data = {'name': agent['name'], 'files': {}}
+        agent_data = {'name': agent['name'], 'files': {}, 'folders': {}}
         for fname in agent['files']:
             fpath = os.path.join(agent['workspace'], fname)
             if os.path.exists(fpath):
                 with open(fpath, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                # Redact secrets
-                import re
-                content = re.sub(r'ghp_[A-Za-z0-9]{36}', 'ghp_***REDACTED***', content)
-                content = re.sub(r'MTQ3[A-Za-z0-9._\-]{50,}', 'MTQ3***REDACTED***', content)
-                content = re.sub(r'sk-ant-[A-Za-z0-9\-]+', 'sk-ant-***REDACTED***', content)
-                content = re.sub(r'daughter insect.*?file', '***SEED_REDACTED***', content)
-                agent_data['files'][fname] = content
+                    agent_data['files'][fname] = redact(f.read())
+        for folder_name in agent.get('folders', []):
+            folder_path = os.path.join(agent['workspace'], folder_name)
+            if os.path.isdir(folder_path):
+                agent_data['folders'][folder_name] = scan_folder(folder_path)
         result[agent_id] = agent_data
     
     output_path = os.path.join(CONFIG['OUTPUT_DIR'], 'memories.json')
