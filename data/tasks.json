@@ -567,7 +567,7 @@
               "id": "P003-T001-S01",
               "title": "タブUI実装",
               "assignee": "clawdia",
-              "status": "in_progress",
+              "status": "completed",
               "estimated_hours": 1
             },
             {
@@ -725,58 +725,68 @@
           "title": "短期戦略調査・バックテスト",
           "assignee": "clawdia",
           "priority": "high",
-          "status": "in_progress",
+          "status": "completed",
           "started_at": "2026-02-15T15:00:00+09:00",
           "estimated_hours": 1.5,
           "subtasks": [
             {
               "id": "P004-T001-S01",
               "title": "5分足データで有効なエントリーロジック選定",
-              "status": "pending"
+              "status": "completed"
             },
             {
               "id": "P004-T001-S02",
               "title": "マルチ銘柄バックテスト(BTC/BNB/ETH)",
-              "status": "pending"
+              "status": "completed"
             },
             {
               "id": "P004-T001-S03",
               "title": "最適パラメータ確定",
-              "status": "pending"
+              "status": "completed"
             }
-          ]
+          ],
+          "completed_at": "2026-02-16T04:00:00+09:00",
+          "notes": "5m/1mバックテスト全滅→Grid戦略にピボット→Jupiter Grid 20,160テスト完了。日利+1.05%達成。"
         },
         {
           "id": "P004-T002",
-          "title": "短期取引Bot実装",
+          "title": "Grid Bot実装・ライブ化",
           "assignee": "clawdia",
           "priority": "high",
-          "status": "pending",
+          "status": "completed",
           "estimated_hours": 1.0,
           "subtasks": [
             {
               "id": "P004-T002-S01",
-              "title": "short_trader.py作成",
-              "status": "pending"
+              "title": "jupiter_grid.py作成",
+              "assignee": "clawdia",
+              "status": "completed",
+              "estimated_hours": 2
             },
             {
               "id": "P004-T002-S02",
-              "title": "リスク管理(1トレード$10上限等)",
-              "status": "pending"
+              "title": "リスク管理(SL/TP/PIDロック)",
+              "assignee": "clawdia",
+              "status": "completed",
+              "estimated_hours": 1
             },
             {
               "id": "P004-T002-S03",
-              "title": "テスト実行・ライブ開始",
-              "status": "pending"
+              "title": "ライブ開始",
+              "assignee": "clawdia",
+              "status": "completed",
+              "estimated_hours": 0.5
             }
-          ]
+          ],
+          "completed_at": "2026-02-16T04:30:00+09:00"
         },
         {
           "id": "P004-T003",
-          "title": "日次パフォーマンスレビュー",
+          "title": "Grid戦略パラメータ最適化",
           "assignee": "clawdia",
           "priority": "medium",
-          "status": "pending"
+          "status": "pending",
+          "description": "現行gs=1.5%とバックテスト最適gs=0.3%の乖離。段階的にパラメータ調整。2022ベア相場テスト含む。"
         },
         {
           "id": "P004-T004",
@@ -796,59 +806,12 @@
           "notes": "Binance開設待ちの間、Jupiterで実行可能な高頻度戦略を実装。ロングオンリー制約あり。"
         }
       ]
-    },
-    {
-      "id": "P005",
-      "name": "今夜の緊急タスク（2/16朝まで）",
-      "status": "completed",
-      "tasks": [
-        {
-          "id": "P005-T001",
-          "name": "ダッシュボード完全自動化検証",
-          "assignee": "clawdia",
-          "status": "completed",
-          "priority": "high",
-          "notes": "update_data.py→git push→GitHub Pagesの全フロー確認。wallet/trades/portfolio全て正確か"
-        },
-        {
-          "id": "P005-T002",
-          "name": "日報自動作成コード化",
-          "assignee": "clawdia",
-          "status": "completed",
-          "priority": "high",
-          "notes": "memory/YYYY-MM-DD.mdテンプレ自動生成。cronで毎日0時に翌日分作成+前日分整理"
-        },
-        {
-          "id": "P005-T003",
-          "name": "テストトレード検証（×2、max10回）",
-          "assignee": "clawdia",
-          "status": "completed",
-          "priority": "high",
-          "notes": "buy→record→dashboard反映→sell→record→P&L計算の全パイプライン検証"
-        },
-        {
-          "id": "P005-T004",
-          "name": "検証後ワークフロー可視化",
-          "assignee": "clawdia",
-          "status": "completed",
-          "priority": "medium",
-          "notes": "テスト成功後に正確なワークフロー図を作成"
-        },
-        {
-          "id": "P005-T005",
-          "name": "ファイル構造化・コンテキスト整理",
-          "assignee": "clawdia",
-          "status": "completed",
-          "priority": "high",
-          "notes": "MEMORY.md圧縮、不要ファイルをarchive/へ、参照頻度低いデータを整理"
-        }
-      ]
     }
   ],
   "statistics": {
-    "total_tasks": 66,
-    "completed_tasks": 24,
-    "overall_progress": 36.4,
+    "total_tasks": 61,
+    "completed_tasks": 28,
+    "overall_progress": 45.9,
     "projects": [
       {
         "id": "P001",
@@ -868,22 +831,15 @@
         "id": "P003",
         "name": "インフラ・ツール",
         "total_tasks": 10,
-        "completed_tasks": 3,
-        "progress_percentage": 30.0
+        "completed_tasks": 4,
+        "progress_percentage": 40.0
       },
       {
         "id": "P004",
         "name": "短期高頻度取引Bot",
         "total_tasks": 11,
-        "completed_tasks": 0,
-        "progress_percentage": 0.0
-      },
-      {
-        "id": "P005",
-        "name": "今夜の緊急タスク（2/16朝まで）",
-        "total_tasks": 5,
-        "completed_tasks": 5,
-        "progress_percentage": 100.0
+        "completed_tasks": 8,
+        "progress_percentage": 72.7
       }
     ]
   }
