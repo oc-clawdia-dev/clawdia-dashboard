@@ -1312,7 +1312,7 @@
         "address": "834cLuM7UAgqBpsZ"
       }
     ],
-    "last_scan": "2026-02-17T05:26:01.221254"
+    "last_scan": "2026-02-17T05:27:02.646120"
   },
   "survey": [],
   "trades": [
@@ -9197,6 +9197,94 @@
         "score_at_entry": 74.09671986162049,
         "dexscreener_pnl_pct": -17.08,
         "actual_pnl_pct": -29.31,
+        "price_divergence": true
+      }
+    },
+    {
+      "timestamp": "2026-02-17T05:26:27.522495+09:00",
+      "unix_time": 1771273587,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "MOMO/USDC",
+      "input_token": "USDC",
+      "output_token": "MOMO",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 315606.870523,
+      "input_amount": 20.0,
+      "output_amount": 315606.870523,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 6.336997660050145e-05,
+      "effective_price": 6.336997660050145e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "5gQueBqTmDRL9KRyohpyzT1CdwxHM1hJxJuoVaWEuAVxvwbGtDAqBvY3XX3MK1Rmkm7HPeVtvPwGxnDooswoWouS",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=80 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "CecoJe9AxRKNmKtRdt4dQMDE1RyZmuD8G8ujU68Lpump",
+        "score_detail": {
+          "total": 79.85459685258553,
+          "momentum": 67.75509781875219,
+          "volume": 74.18807533513962,
+          "demand": 95
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T05:27:02.294641+09:00",
+      "unix_time": 1771273622,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "MOMO/USDC",
+      "input_token": "MOMO",
+      "output_token": "USDC",
+      "order_input_amount": 315606.870523,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 14.798235,
+      "input_amount": 315606.870523,
+      "output_amount": 14.798235,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 4.688819028393607e-05,
+      "effective_price": 4.688819028393607e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "Lf6eTmYrnGSjch3hCJVJBRtUDkzNVfLq3gDDqU6cGE8mLCCc6ShzpS9o3L9sBqCQDf41PNTu911Q7whNaowMWqM",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "SL (-19.8%)",
+      "error": "",
+      "extra": {
+        "token_address": "CecoJe9AxRKNmKtRdt4dQMDE1RyZmuD8G8ujU68Lpump",
+        "entry_price": 6.336997660050145e-05,
+        "pnl_usd": -5.2018,
+        "pnl_pct": -26.01,
+        "hold_minutes": 0.6,
+        "score_at_entry": 79.85459685258553,
+        "dexscreener_pnl_pct": -19.76,
+        "actual_pnl_pct": -26.01,
         "price_divergence": true
       }
     }
