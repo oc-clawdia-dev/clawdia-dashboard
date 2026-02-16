@@ -8038,5 +8038,48 @@
       "actual_pnl_pct": -11.5,
       "price_divergence": true
     }
+  },
+  {
+    "timestamp": "2026-02-17T04:32:27.802288+09:00",
+    "unix_time": 1771270347,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "YURI/USDC",
+    "input_token": "USDC",
+    "output_token": "YURI",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 423257.379892,
+    "input_amount": 20.0,
+    "output_amount": 423257.379892,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 4.7252572430286455e-05,
+    "effective_price": 4.7252572430286455e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "5JdZJtr5LdcHfr8LBcwyZSVDmN1d53tecXdHwhtMhJhGsaZYYeiGUcgh26cWtsGAq5qHPK2heEwgu2HHBERkVaYM",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=70 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "6kpSmDFpra8TFUk2XBAKzV9aKAg94e4LhmVS6TUcpump",
+      "score_detail": {
+        "total": 69.71444539807811,
+        "momentum": 61.14138803007165,
+        "volume": 94.92296338306511,
+        "demand": 55
+      }
+    }
   }
 ]
