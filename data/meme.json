@@ -272,7 +272,7 @@
         "address": "Gn5Yi8W7V9XuwSkZ"
       }
     ],
-    "last_scan": "2026-02-16T15:14:19.743331"
+    "last_scan": "2026-02-16T15:15:21.199823"
   },
   "survey": [],
   "trades": [
@@ -1235,6 +1235,48 @@
           "volume": 85.97763169441512,
           "demand": 65
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-16T15:14:30.784729+09:00",
+      "unix_time": 1771222470,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "SLOPCOIN/USDC",
+      "input_token": "SLOPCOIN",
+      "output_token": "USDC",
+      "order_input_amount": 16628.423170129,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 3.4795,
+      "input_amount": 16628.423170129,
+      "output_amount": 3.4795,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.00020925014743734154,
+      "effective_price": 0.00020925014743734154,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "4SNpx2sCj5zeLfoqmpXhwDodsDntqLUWarKheaYEFdY2UAPYB63KsdZuSiY7RLhLuzFfMkVi6mHhqo9LppumE1Lz",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "TP (+25.6%)",
+      "error": "",
+      "extra": {
+        "token_address": "Gn5Yi8W7V9XuwSkZWWxFfqXpy42jfJWpsDsR98faBAGS",
+        "entry_price": 0.00018045123249927085,
+        "pnl_usd": 0.4795,
+        "pnl_pct": 15.98,
+        "hold_minutes": 2.6,
+        "score_at_entry": 76.28966860216613
       }
     }
   ]
