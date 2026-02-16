@@ -96,12 +96,17 @@ function updateOverviewSection() {
     // Total assets
     document.getElementById('total-balance').textContent = fmtCurrency(w.total_usd);
 
-    // Daily change (from wallet_history if available, else show --)
+    // Daily change — calculate from portfolio history (first snapshot of the day vs current)
     const changeAmt = document.getElementById('change-amount');
     const changePct = document.getElementById('change-percent');
-    if (w.previous_total_usd && w.previous_total_usd > 0) {
-        const diff = w.total_usd - w.previous_total_usd;
-        const pct = (diff / w.previous_total_usd) * 100;
+    const histData = dashboardData.portfolioHistory?.portfolio_history || [];
+    const today = new Date().toISOString().split('T')[0];
+    // Find first snapshot of today
+    const todaySnapshots = histData.filter(h => h.timestamp && h.timestamp.startsWith(today));
+    const firstToday = todaySnapshots.length > 0 ? todaySnapshots[0] : null;
+    if (firstToday && firstToday.total_usd > 0) {
+        const diff = w.total_usd - firstToday.total_usd;
+        const pct = (diff / firstToday.total_usd) * 100;
         changeAmt.textContent = `${diff >= 0 ? '+' : ''}${fmtCurrency(diff)}`;
         changePct.textContent = `(${diff >= 0 ? '+' : ''}${pct.toFixed(2)}%)`;
         changeAmt.className = `change-amount ${diff >= 0 ? 'positive' : 'negative'}`;
@@ -236,7 +241,7 @@ function buildPortfolioHistoryChart() {
 }
 
 function updatePnLSummary() {
-    const trades = dashboardData.trades;
+    const trades = dashboardData.trades.filter(t => !isTestTrade(t));
     const total = trades.length;
     const success = trades.filter(t => t.status === 'Success').length;
     const rate = total > 0 ? Math.round((success / total) * 100) : 0;
@@ -475,7 +480,8 @@ function updateTradesSection() {
             });
         }
     }
-    // SOL position (from Grid Bot) — only if significant
+    // SOL position (from Grid Bot) — use tracked position amount, not total wallet balance
+    // Gas SOL (~0.04-0.05) must be excluded from position display
     if (wallet.sol_value_usd > 1.0) {
         const solBuys = trades.filter(t => t.output_token === 'SOL' && t.status === 'Success' && t.strategy !== 'TEST' && t.strategy !== 'PIPELINE_TEST');
         const solSells = trades.filter(t => t.input_token === 'SOL' && t.status === 'Success' && t.strategy !== 'TEST' && t.strategy !== 'PIPELINE_TEST');
@@ -483,13 +489,17 @@ function updateTradesSection() {
         const activeBuy = solBuys.filter(t => new Date(t.timestamp) > lastSellTime).slice(-1)[0];
         if (activeBuy) {
             const entryUsd = getInputAmt(activeBuy);
+            // Use the bought amount (not total wallet balance) to calculate position value
+            const positionAmount = getOutputAmt(activeBuy);
+            const solPrice = wallet.sol_price_usd || 0;
+            const positionValueUsd = positionAmount * solPrice;
             openPositions.push({
                 token: 'SOL',
-                amount: wallet.sol_balance,
-                currentValueUsd: wallet.sol_value_usd,
+                amount: positionAmount,
+                currentValueUsd: positionValueUsd,
                 entryUsd: entryUsd,
                 entryDate: activeBuy.timestamp,
-                pnlUsd: wallet.sol_value_usd - entryUsd
+                pnlUsd: positionValueUsd - entryUsd
             });
         }
     }
@@ -547,7 +557,7 @@ function updateTradesSection() {
 function findRoundTrips(trades, wallet) {
     // Match buy→sell pairs for the same token (simple FIFO)
     const trips = [];
-    const successTrades = trades.filter(t => t.status === 'Success');
+    const successTrades = trades.filter(t => t.status === 'Success' && !isTestTrade(t));
 
     const getInput = t => t.actual_input_amount || t.input_amount || t.order_input_amount || 0;
     const getOutput = t => t.actual_output_amount || t.output_amount || t.order_output_amount || 0;
@@ -603,9 +613,11 @@ function updateTradeTable(trades, wallet) {
     const bnbPrice = wallet?.bnb_price_usd || 0;
 
     tbody.innerHTML = [...trades].reverse().map(t => {
+        const isTest = isTestTrade(t);
         const inputToken = t.input_token || t.token || '?';
         const outputToken = t.output_token || (t.action === 'buy' ? t.token : 'USDC') || '?';
-        const direction = inputToken === 'USDC' || t.action === 'buy' || t.direction === 'BUY' ? '🟢 買い' : '🔴 売り';
+        const stratLabel = t.strategy ? ` [${t.strategy}]` : '';
+        const direction = inputToken === 'USDC' || t.action === 'buy' || t.direction === 'BUY' || (t.direction || '').toLowerCase() === 'buy' ? '🟢 買い' : '🔴 売り';
         const pair = `${inputToken} → ${outputToken}`;
         const inputAmt = t.input_amount || t.actual_input_amount || t.order_input_amount || t.usdc_spent || 0;
         const outputAmt = t.output_amount || t.actual_output_amount || t.order_output_amount || t.token_amount || 0;
@@ -623,9 +635,9 @@ function updateTradeTable(trades, wallet) {
         const status = t.status || 'Success';
 
         return `
-            <tr class="trade-row ${status === 'Success' ? 'success' : 'failed'}">
+            <tr class="trade-row ${status === 'Success' ? 'success' : 'failed'} ${isTest ? 'test-trade' : ''}">
                 <td>${fmtDateTime(t.timestamp)}</td>
-                <td>${direction}<br><small>${pair}</small></td>
+                <td>${direction}${isTest ? ' <span class="test-badge">TEST</span>' : ''}<br><small>${pair}${stratLabel}</small></td>
                 <td>${fmtNum(inputAmt, 6)} ${inputToken}<br>→ ${fmtNum(outputAmt, 6)} ${outputToken}</td>
                 <td>${usdDisplay}</td>
                 <td><span class="status-badge ${status === 'Success' ? 'success' : 'failed'}">${status === 'Success' ? '✅' : '❌'}</span></td>
@@ -911,6 +923,12 @@ function setupEventListeners() {
             }
         });
     });
+}
+
+// ─── Helpers ───
+function isTestTrade(t) {
+    const s = (t.strategy || '').toUpperCase();
+    return s === 'TEST' || s === 'PIPELINE_TEST';
 }
 
 // ─── Utilities ───

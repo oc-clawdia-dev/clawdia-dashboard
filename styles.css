@@ -449,3 +449,16 @@ header h1 {
     line-height: 1.6;
     color: #ddd;
 }
+
+/* Test trade styling */
+.trade-row.test-trade {
+    opacity: 0.5;
+}
+.test-badge {
+    background: #555;
+    color: #aaa;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    vertical-align: middle;
+}

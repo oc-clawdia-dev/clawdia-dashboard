@@ -492,8 +492,20 @@ def update_portfolio_strategies():
                 "bot_type": "jupiter_grid",
             }
             
-            # Read grid trade log for stats
+            # Read grid trades from unified trades_*.jsonl (strategy="GRID")
             grid_trades = []
+            trade_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'trades_*.jsonl')
+            for f in sorted(glob.glob(trade_pattern)):
+                with open(f) as fh:
+                    for line in fh:
+                        try:
+                            t = json.loads(line.strip())
+                            if t.get('strategy') == 'GRID':
+                                grid_trades.append(t)
+                        except:
+                            pass
+            
+            # Also check legacy jgrid files
             grid_log_pattern = os.path.join(CONFIG['BOT_DATA_DIR'], 'trades', 'jgrid_*.jsonl')
             for f in sorted(glob.glob(grid_log_pattern)):
                 with open(f) as fh:
@@ -503,12 +515,13 @@ def update_portfolio_strategies():
                         except:
                             pass
             
-            buys = [t for t in grid_trades if t.get('action') == 'buy']
-            sells_tp = [t for t in grid_trades if t.get('action') == 'sell_tp']
-            sells_sl = [t for t in grid_trades if t.get('action') == 'sell_sl']
+            buys = [t for t in grid_trades if t.get('direction', t.get('action', '')).lower() in ('buy', 'grid_buy')]
+            sells = [t for t in grid_trades if t.get('direction', t.get('action', '')).lower() in ('sell', 'sell_tp', 'sell_sl')]
+            sells_tp = [t for t in grid_trades if 'tp' in t.get('reason', t.get('action', '')).lower()]
+            sells_sl = [t for t in grid_trades if 'sl' in t.get('reason', t.get('action', '')).lower()]
             
             grid_strat["stats"] = {
-                "total_trades": len(buys) + len(sells_tp) + len(sells_sl),
+                "total_trades": len(buys) + len(sells),
                 "buys": len(buys),
                 "tp_exits": len(sells_tp),
                 "sl_exits": len(sells_sl),
