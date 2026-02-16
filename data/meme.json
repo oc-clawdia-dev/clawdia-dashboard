@@ -892,7 +892,7 @@
         "address": "51rGr8WCwFWe5K8H"
       }
     ],
-    "last_scan": "2026-02-17T00:10:53.802822"
+    "last_scan": "2026-02-17T00:11:55.287118"
   },
   "survey": [],
   "trades": [
@@ -5002,6 +5002,91 @@
           "volume": 84.18703683293063,
           "demand": 55
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T00:11:15.227307+09:00",
+      "unix_time": 1771254675,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "Ramadan/USDC",
+      "input_token": "USDC",
+      "output_token": "Ramadan",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 374919.782934,
+      "input_amount": 20.0,
+      "output_amount": 374919.782934,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 5.3344744423691164e-05,
+      "effective_price": 5.3344744423691164e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "3ukiJ9fjAi2u2xVxRxS4RRjpxeA7tkGGZ2HAvdck7ZAkQKaeeZ1A6yi38nDDF7wzAqSpgEGTJ7JdBda3rXUeAD4N",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=69 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "3wnZDQFu6fsEV6EMWd26mLrX578TwjegwBLuWftnxvEB",
+        "score_detail": {
+          "total": 68.67159862039067,
+          "momentum": 60.89045429889499,
+          "volume": 88.44634936590046,
+          "demand": 55
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T00:11:40.384353+09:00",
+      "unix_time": 1771254700,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "Ramadan/USDC",
+      "input_token": "Ramadan",
+      "output_token": "USDC",
+      "order_input_amount": 374919.782934,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 24.6054272485,
+      "input_amount": 374919.782934,
+      "output_amount": 24.6054272485,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 6.562851140034795e-05,
+      "effective_price": 6.562851140034795e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "4s7ZcHgNUL1fSnpP96TxnxdTbpk6gZMZ3SEAd43zN8cvKkbHPQEt87mdCL5CSNw72tE6CmpbUtoyys9kZhsYE3Gg",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "SL (-23.5%)",
+      "error": "",
+      "extra": {
+        "token_address": "3wnZDQFu6fsEV6EMWd26mLrX578TwjegwBLuWftnxvEB",
+        "entry_price": 5.3344744423691164e-05,
+        "pnl_usd": 4.6054,
+        "pnl_pct": 23.03,
+        "hold_minutes": 0.4,
+        "score_at_entry": 68.67159862039067
       }
     }
   ]
