@@ -1022,7 +1022,7 @@
         "address": "54rpB2bJpqfFNDG4"
       }
     ],
-    "last_scan": "2026-02-17T01:41:14.397146"
+    "last_scan": "2026-02-17T01:42:16.081897"
   },
   "survey": [],
   "trades": [
@@ -6051,6 +6051,49 @@
         "dexscreener_pnl_pct": 8.62,
         "actual_pnl_pct": 15.35,
         "price_divergence": true
+      }
+    },
+    {
+      "timestamp": "2026-02-17T01:41:54.278193+09:00",
+      "unix_time": 1771260114,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "Durag/USDC",
+      "input_token": "USDC",
+      "output_token": "Durag",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 279330.116333,
+      "input_amount": 20.0,
+      "output_amount": 279330.116333,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 7.159986994083102e-05,
+      "effective_price": 7.159986994083102e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "4ME2bGQmk37dx9KD8uHtVVGvpyagykgQ4kxbDqTA42x4eG253Wi3qZupP36GFRbhZgLMpkrPNCxpmvt6RotoNuvn",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=74 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "54rpB2bJpqfFNDG4sX1H8b7fLcAA3ftoQqCFCxQVpump",
+        "score_detail": {
+          "total": 74.07761262973241,
+          "momentum": 69.52233905724955,
+          "volume": 95.66534635579586,
+          "demand": 55
+        }
       }
     }
   ]
