@@ -6497,5 +6497,50 @@
         "demand": 55
       }
     }
+  },
+  {
+    "timestamp": "2026-02-17T02:25:35.271160+09:00",
+    "unix_time": 1771262735,
+    "strategy": "MEME",
+    "direction": "sell",
+    "pair": "QUANTIX/USDC",
+    "input_token": "QUANTIX",
+    "output_token": "USDC",
+    "order_input_amount": 1487866.178878,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 56.33093643471,
+    "input_amount": 1487866.178878,
+    "output_amount": 56.33093643471,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 3.786021702381135e-05,
+    "effective_price": 3.786021702381135e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "ETag9tK4Wr6C8KhKFc9yW8CmAA1NW6dGNbY1pab4ahr2hZkNZtPRcMHFMs8iqAfE9B9GwTfQUq4Tba2C5Z59XuC",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "TRAIL (-3.7%, peak +7.6%)",
+    "error": "",
+    "extra": {
+      "token_address": "CRNjUJn2xQoEwJj2N16WJSMcZ5Eti8xHuoSpW6r6pump",
+      "entry_price": 4.091704299305677e-05,
+      "pnl_usd": 36.3309,
+      "pnl_pct": 181.65,
+      "hold_minutes": 9.0,
+      "score_at_entry": 68.43302135443587,
+      "dexscreener_pnl_pct": -3.66,
+      "actual_pnl_pct": 181.65,
+      "price_divergence": true
+    }
   }
 ]
