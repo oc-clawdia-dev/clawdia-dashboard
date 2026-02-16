@@ -6982,5 +6982,48 @@
       "actual_pnl_pct": -25.98,
       "price_divergence": true
     }
+  },
+  {
+    "timestamp": "2026-02-17T03:11:49.460792+09:00",
+    "unix_time": 1771265509,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "MOMO/USDC",
+    "input_token": "USDC",
+    "output_token": "MOMO",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 56538.925572,
+    "input_amount": 20.0,
+    "output_amount": 56538.925572,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.0003537385933259524,
+    "effective_price": 0.0003537385933259524,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "22yt4momcQA3RAigWbQ2Se6QxwBqgXfMJBEDt3rA5XRmDAnoRsnT2ybfPrSrHeTPPgtdf4UKX6B7KWokZH3fNcd6",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=79 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "6VHXipL9pSV5MCYuB9tMR4xkwojhc1gQ51ku2GR7pump",
+      "score_detail": {
+        "total": 78.83086719287101,
+        "momentum": 83.85642941243051,
+        "volume": 99.11971561931665,
+        "demand": 55
+      }
+    }
   }
 ]
