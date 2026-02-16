@@ -272,7 +272,7 @@
         "address": "Gn5Yi8W7V9XuwSkZ"
       }
     ],
-    "last_scan": "2026-02-16T15:16:22.818473"
+    "last_scan": "2026-02-16T15:17:24.267459"
   },
   "survey": [],
   "trades": [
@@ -1277,6 +1277,49 @@
         "pnl_pct": 15.98,
         "hold_minutes": 2.6,
         "score_at_entry": 76.28966860216613
+      }
+    },
+    {
+      "timestamp": "2026-02-16T15:16:51.045253+09:00",
+      "unix_time": 1771222611,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "ANIMEPRO/USDC",
+      "input_token": "USDC",
+      "output_token": "ANIMEPRO",
+      "order_input_amount": 3.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 63604.833865,
+      "input_amount": 3.0,
+      "output_amount": 63604.833865,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 4.716622649101546e-05,
+      "effective_price": 4.716622649101546e-05,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "24f5yKPVjzSENmz9XJmUgEnf1pUHu15S1vZUhHJwtaCL8AfT6fLhVNaV9PU7Z2EtDpcEeRRqBcufunSMmKJ4T23H",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=74 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "8TWr6Z4UZjWSLcboQRTxKSRgrCWkMWwk2DKQZ6Qepump",
+        "score_detail": {
+          "total": 73.90578650730184,
+          "momentum": 63.619149120102804,
+          "volume": 91.82854580894502,
+          "demand": 55
+        }
       }
     }
   ]
