@@ -1746,5 +1746,48 @@
       "hold_minutes": 3.1,
       "score_at_entry": 75.39798592714627
     }
+  },
+  {
+    "timestamp": "2026-02-16T15:27:44.841189+09:00",
+    "unix_time": 1771223264,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "SLOPCOIN/USDC",
+    "input_token": "USDC",
+    "output_token": "SLOPCOIN",
+    "order_input_amount": 3.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 13197.982041048,
+    "input_amount": 3.0,
+    "output_amount": 13197.982041048,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.00022730747705743823,
+    "effective_price": 0.00022730747705743823,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "3PVB4r4R3oPmrPbvFfRT3ug8A9779WzyLdFMTyZtkSEHb299sbrjZyDN5f7C5HWXWUczXcvwi7VTN5oZiWoGnMDC",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=78 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "Gn5Yi8W7V9XuwSkZWWxFfqXpy42jfJWpsDsR98faBAGS",
+      "score_detail": {
+        "total": 77.97213541033341,
+        "momentum": 78.06728642609912,
+        "volume": 91.88894439308183,
+        "demand": 65
+      }
+    }
   }
 ]
