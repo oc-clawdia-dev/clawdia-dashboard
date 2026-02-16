@@ -1112,7 +1112,7 @@
         "address": "HEYKwDJRoSsiLNQ9"
       }
     ],
-    "last_scan": "2026-02-17T02:35:37.199752"
+    "last_scan": "2026-02-17T02:36:38.773258"
   },
   "survey": [],
   "trades": [
@@ -7105,6 +7105,51 @@
           "volume": 79.98252478605664,
           "demand": 55
         }
+      }
+    },
+    {
+      "timestamp": "2026-02-17T02:36:09.362423+09:00",
+      "unix_time": 1771263369,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "ClawTube/USDC",
+      "input_token": "ClawTube",
+      "output_token": "USDC",
+      "order_input_amount": 165460.418328,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 24.50322158066,
+      "input_amount": 165460.418328,
+      "output_amount": 24.50322158066,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.0001480911376162854,
+      "effective_price": 0.0001480911376162854,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "2VuyHfQUjWK5zUXUpAMR9ycDbGTgvAekXG8WZLeeTXxjxTxyVZjZGV74kED1TdojyfwxRJiF89rYS1aogfyuo2VS",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "TRAIL (+28.4%, peak +37.9%)",
+      "error": "",
+      "extra": {
+        "token_address": "9dG3e3bUcY3qecPrGWFqQSEGyUDW7unvC6ZaAfdMCLAW",
+        "entry_price": 0.0001208748303799949,
+        "pnl_usd": 4.5032,
+        "pnl_pct": 22.52,
+        "hold_minutes": 3.9,
+        "score_at_entry": 70.85690813610461,
+        "dexscreener_pnl_pct": 28.4,
+        "actual_pnl_pct": 22.52,
+        "price_divergence": true
       }
     }
   ]
