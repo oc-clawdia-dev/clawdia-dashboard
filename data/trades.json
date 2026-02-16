@@ -5713,5 +5713,48 @@
       "actual_pnl_pct": -24.79,
       "price_divergence": true
     }
+  },
+  {
+    "timestamp": "2026-02-17T01:43:47.700486+09:00",
+    "unix_time": 1771260227,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "STASH/USDC",
+    "input_token": "USDC",
+    "output_token": "STASH",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 547107.224895,
+    "input_amount": 20.0,
+    "output_amount": 547107.224895,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 3.655590547874481e-05,
+    "effective_price": 3.655590547874481e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "5Dz7A4bBHD6JwkU7aT8UXmuNoLsyfW8n7noerBCgQTRnkRZTobZiQ8xV3GoZcwddauhmyV6x5dhZFfbXbySnZ9Lo",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=70 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "EWMfSJgDCE7CXDAYz3hbCaA7NsFHTnddySXx3shco2Hs",
+      "score_detail": {
+        "total": 70.26734950692861,
+        "momentum": 54.66510148239484,
+        "volume": 84.27687607405366,
+        "demand": 85
+      }
+    }
   }
 ]
