@@ -1184,5 +1184,105 @@ origTabHandler.forEach(btn => {
         if (btn.dataset.tab === 'memories' && !memoryData) {
             loadMemories();
         }
+        if (btn.dataset.tab === 'meme' && !memeData) {
+            loadMemeData();
+        }
     });
 });
+
+// ─── Meme Tab ───
+let memeData = null;
+
+async function loadMemeData() {
+    try {
+        const resp = await fetch('data/meme.json?' + Date.now());
+        memeData = await resp.json();
+        renderMemeTab();
+    } catch (e) {
+        document.getElementById('meme-tracking-list').innerHTML = 'ミームデータ読み込み失敗: ' + e.message;
+    }
+}
+
+function renderMemeTab() {
+    if (!memeData) return;
+    
+    // Scanner tracking
+    const trackingEl = document.getElementById('meme-tracking-list');
+    const tracking = memeData.scanner?.tracking || [];
+    if (tracking.length === 0) {
+        trackingEl.innerHTML = '<p class="subtitle">追跡中のトークンなし</p>';
+    } else {
+        trackingEl.innerHTML = `
+            <p class="subtitle">${tracking.length}トークン追跡中</p>
+            <div class="meme-tracking-grid">
+                ${tracking.map(t => `
+                    <div class="meme-token-card">
+                        <div class="meme-token-header">
+                            <strong>${t.symbol}</strong>
+                            <span class="meme-snapshots">${t.snapshots}スナップショット</span>
+                        </div>
+                        <div class="meme-token-detail">
+                            <span>検出時 1h: <strong style="color:${t.detected_pc_1h > 0 ? '#22c55e' : '#ef4444'}">${t.detected_pc_1h > 0 ? '+' : ''}${(t.detected_pc_1h||0).toFixed(0)}%</strong></span>
+                            <span>24h: <strong style="color:${t.detected_pc_24h > 0 ? '#22c55e' : '#ef4444'}">${t.detected_pc_24h > 0 ? '+' : ''}${(t.detected_pc_24h||0).toFixed(0)}%</strong></span>
+                        </div>
+                        <div class="meme-token-detail">
+                            <span>検出価格: $${(t.detected_price||0).toFixed(6)}</span>
+                            <span>ピーク: $${(t.peak_price||0).toFixed(6)}</span>
+                        </div>
+                        <div class="meme-token-time">${t.detected_at ? new Date(t.detected_at).toLocaleString('ja-JP', {month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}) : ''}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+    
+    // Survey results (from micro trade data log)
+    const surveyEl = document.getElementById('meme-survey-results');
+    const survey = memeData.survey || [];
+    if (survey.length === 0) {
+        // Show summary from trades instead
+        const memeTrades = memeData.trades || [];
+        const surveyTrades = memeTrades.filter(t => (t.strategy||'').includes('SURVEY'));
+        surveyEl.innerHTML = `<p class="subtitle">リスク調査トレード: ${surveyTrades.length}件</p>`;
+    } else {
+        surveyEl.innerHTML = `
+            <p class="subtitle">${survey.length}トークン調査済み</p>
+            <table class="trade-table"><thead><tr>
+                <th>トークン</th><th>安全性</th><th>Micro RT</th><th>Full RT</th><th>リスク</th>
+            </tr></thead><tbody>
+            ${survey.map(s => `
+                <tr>
+                    <td><strong>${s.symbol}</strong></td>
+                    <td>${s.safety_score != null ? `${s.safety_score}/100` : '-'}</td>
+                    <td>${s.micro_rt_pct != null ? `${s.micro_rt_pct.toFixed(1)}%` : '-'}</td>
+                    <td>${s.full_rt_pct != null ? `${s.full_rt_pct.toFixed(1)}%` : '-'}</td>
+                    <td>${(s.full_risks||[]).join(', ') || '✅ なし'}</td>
+                </tr>
+            `).join('')}
+            </tbody></table>
+        `;
+    }
+    
+    // Meme trades
+    const tradeBody = document.getElementById('meme-trade-body');
+    const trades = memeData.trades || [];
+    if (trades.length === 0) {
+        tradeBody.innerHTML = '<tr><td colspan="6" class="subtitle">ミームトレードなし</td></tr>';
+    } else {
+        tradeBody.innerHTML = trades.sort((a,b) => (b.timestamp||'').localeCompare(a.timestamp||'')).map(t => {
+            const time = t.timestamp ? new Date(t.timestamp).toLocaleString('ja-JP', {month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
+            const token = t.output_token || t.input_token || '?';
+            const dir = t.direction || '?';
+            const amt = t.actual_output_amount || t.actual_input_amount || t.order_input_amount || '-';
+            const dirClass = dir.includes('buy') ? 'buy' : 'sell';
+            return `<tr>
+                <td>${time}</td>
+                <td><strong>${token}</strong></td>
+                <td class="${dirClass}">${dir}</td>
+                <td>$${typeof amt === 'number' ? amt.toFixed(2) : amt}</td>
+                <td>${t.reason || ''}</td>
+                <td>${t.status || ''}</td>
+            </tr>`;
+        }).join('');
+    }
+}

@@ -1,0 +1,41 @@
+
+/* Meme Tab */
+.meme-tracking-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+.meme-token-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 12px;
+}
+.meme-token-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.meme-token-header strong {
+    font-size: 1.1em;
+}
+.meme-snapshots {
+    font-size: 0.8em;
+    opacity: 0.6;
+}
+.meme-token-detail {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85em;
+    margin: 4px 0;
+}
+.meme-token-time {
+    font-size: 0.75em;
+    opacity: 0.5;
+    margin-top: 6px;
+}
+.meme-section {
+    margin-bottom: 16px;
+}

@@ -451,12 +451,18 @@ def update_portfolio_strategies():
         pair_id = state.get('pair', os.path.basename(state_file).replace('live_state_', '').replace('.json', ''))
         live_states[pair_id] = state
     
-    # Read grid state
-    grid_state = {}
-    grid_state_file = os.path.join(CONFIG['BOT_DATA_DIR'], 'grid_state.json')
-    if os.path.exists(grid_state_file):
-        with open(grid_state_file) as f:
-            grid_state = json.load(f)
+    # Read grid states (per-token)
+    grid_states = {}
+    for token in ['sol', 'eth', 'wbtc']:
+        gf = os.path.join(CONFIG['BOT_DATA_DIR'], f'grid_state_{token}.json')
+        if os.path.exists(gf):
+            with open(gf) as f:
+                grid_states[token.upper()] = json.load(f)
+    # Legacy fallback
+    gf_legacy = os.path.join(CONFIG['BOT_DATA_DIR'], 'grid_state.json')
+    if not grid_states and os.path.exists(gf_legacy):
+        with open(gf_legacy) as f:
+            grid_states['SOL'] = json.load(f)
     
     # Check running processes
     import subprocess
@@ -487,14 +493,17 @@ def update_portfolio_strategies():
                     }
                 else:
                     pair['position'] = {'in_position': False}
-            elif pair_id == 'SOL_GRID' and grid_state.get('position'):
-                pair['position'] = {
-                    'in_position': True,
-                    'entry_price': grid_state['position'].get('entry_price'),
-                    'usdc_spent': grid_state['position'].get('usdc_spent'),
-                    'token_amount': grid_state['position'].get('token_amount'),
-                    'ref_price': grid_state.get('ref_price'),
-                }
+            elif pair_id.endswith('_GRID'):
+                grid_token = symbol.upper()
+                gs = grid_states.get(grid_token, {})
+                if gs.get('position'):
+                    pair['position'] = {
+                        'in_position': True,
+                        'entry_price': gs['position'].get('entry_price'),
+                        'usdc_spent': gs['position'].get('usdc_spent'),
+                        'token_amount': gs['position'].get('token_amount'),
+                        'ref_price': gs.get('ref_price'),
+                    }
             
             # Trade stats per pair
             pair_trades = [t for t in all_trades 
@@ -745,6 +754,61 @@ def update_agent_memories():
     return result
 
 
+def update_meme_data(all_trades):
+    """ミームタブ用データを生成"""
+    meme = {
+        'scanner': {'tracking': [], 'last_scan': None},
+        'survey': [],
+        'trades': [],
+    }
+    
+    # Scanner tracking data
+    tracking_file = os.path.join(CONFIG['BOT_DATA_DIR'], 'meme_scans', 'tracking.json')
+    if os.path.exists(tracking_file):
+        try:
+            with open(tracking_file) as f:
+                tracking = json.load(f)
+            meme['scanner']['tracking'] = [
+                {
+                    'symbol': v.get('symbol', '?'),
+                    'detected_at': v.get('detected_at', ''),
+                    'detected_price': v.get('detected_price', 0),
+                    'detected_pc_1h': v.get('detected_pc_1h', 0),
+                    'detected_pc_24h': v.get('detected_pc_24h', 0),
+                    'peak_price': v.get('peak_price', 0),
+                    'snapshots': v.get('snapshots', 0),
+                    'address': k[:16],
+                }
+                for k, v in tracking.items()
+            ]
+            meme['scanner']['last_scan'] = datetime.now().isoformat()
+        except:
+            pass
+    
+    # Survey results
+    survey_file = os.path.join(CONFIG['BOT_DATA_DIR'], 'meme_risk_survey_v2.json')
+    if os.path.exists(survey_file):
+        try:
+            with open(survey_file) as f:
+                meme['survey'] = json.load(f)
+        except:
+            pass
+    
+    # Meme trades (filter from all trades)
+    meme['trades'] = [
+        t for t in all_trades
+        if t.get('strategy', '').startswith('MEME')
+    ]
+    
+    # Save
+    out = os.path.join(CONFIG['OUTPUT_DIR'], 'meme.json')
+    with open(out, 'w', encoding='utf-8') as f:
+        json.dump(meme, f, ensure_ascii=False, indent=2)
+    
+    print(f"Saved meme data: {len(meme['scanner']['tracking'])} tracking, {len(meme['trades'])} trades")
+    return meme
+
+
 def main():
     """メイン処理"""
     print("🤖 Clawdia Dashboard Data Updater")
@@ -763,6 +827,7 @@ def main():
         strategies = update_portfolio_strategies()
         portfolio_history = update_portfolio_history()
         memories = update_agent_memories()
+        meme_data = update_meme_data(trades)
         
         # サマリー作成
         summary = {
