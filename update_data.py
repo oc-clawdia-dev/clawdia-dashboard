@@ -263,6 +263,11 @@ def update_wallet_data():
     except:
         eth_price = 0
     
+    # Meme token holdings from snapshot
+    meme_holdings = {}
+    if os.path.exists(snapshot_path):
+        meme_holdings = snap.get('meme_holdings', {})
+    
     wallet_data = {
         'timestamp': datetime.now().isoformat(),
         'wallet_address': CONFIG['WALLET_ADDRESS'],
@@ -277,7 +282,8 @@ def update_wallet_data():
         'sol_value_usd': sol_value_usd,
         'wbtc_value_usd': wbtc_value_usd,
         'bnb_value_usd': bnb_value_usd,
-        'total_usd': total_usd
+        'total_usd': total_usd,
+        'meme_holdings': meme_holdings,
     }
     
     output_path = os.path.join(CONFIG['OUTPUT_DIR'], 'wallet.json')

@@ -137,6 +137,18 @@ function buildPortfolioPieChart(w) {
     if (w.wbtc_value_usd > 0.01) items.push({label: 'WBTC', value: w.wbtc_value_usd, color: '#f7931a'});
     if (w.bnb_value_usd > 0) items.push({label: 'BNB', value: w.bnb_value_usd, color: '#f0b90b'});
     if (w.sol_value_usd > 0) items.push({label: 'SOL', value: w.sol_value_usd, color: '#9945ff'});
+    // Meme tokens (individual)
+    const memeColors = ['#ff6b6b', '#ffa502', '#ff4757', '#e84393', '#fd79a8', '#fab1a0'];
+    if (w.meme_holdings) {
+        let ci = 0;
+        for (const [name, info] of Object.entries(w.meme_holdings)) {
+            const val = info.value || 0;
+            if (val > 0.01) {
+                items.push({label: '🟡 ' + name, value: val, color: memeColors[ci % memeColors.length]});
+                ci++;
+            }
+        }
+    }
     // Other tokens
     if (w.other_tokens_usd > 0) items.push({label: 'Other', value: w.other_tokens_usd, color: '#666'});
 
