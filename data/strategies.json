@@ -42,6 +42,7 @@
             "total_trades": 2,
             "buys": 1,
             "sells": 1,
+            "completed_trips": 1,
             "total_invested": 20.0,
             "total_returned": 19.67,
             "realized_pnl": -0.33
@@ -78,6 +79,7 @@
             "total_trades": 5,
             "buys": 3,
             "sells": 2,
+            "completed_trips": 2,
             "total_invested": 40.0,
             "total_returned": 39.23,
             "realized_pnl": -0.77
@@ -125,9 +127,10 @@
             "total_trades": 0,
             "buys": 0,
             "sells": 0,
+            "completed_trips": 0,
             "total_invested": 0.0,
             "total_returned": 0.0,
-            "realized_pnl": 0.0
+            "realized_pnl": null
           }
         }
       },
@@ -179,9 +182,10 @@
             "total_trades": 1,
             "buys": 1,
             "sells": 0,
+            "completed_trips": 0,
             "total_invested": 0.0,
             "total_returned": 0.0,
-            "realized_pnl": 0.0
+            "realized_pnl": null
           }
         }
       },

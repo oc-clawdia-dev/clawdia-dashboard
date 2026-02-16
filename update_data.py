@@ -504,17 +504,36 @@ def update_portfolio_strategies():
             buys = [t for t in pair_trades if t.get('direction', '').lower() == 'buy' or t.get('input_token') == 'USDC']
             sells = [t for t in pair_trades if t.get('direction', '').lower() == 'sell' or t.get('output_token') == 'USDC']
             
-            total_invested = sum(t.get('actual_input_amount', t.get('input_amount', 0)) for t in buys if t.get('input_token') == 'USDC')
-            total_returned = sum(t.get('actual_output_amount', t.get('output_amount', 0)) for t in sells if t.get('output_token') == 'USDC')
-            realized_pnl = total_returned - total_invested if total_invested > 0 and total_returned > 0 else None
+            # Calculate realized P&L from completed round-trips only (FIFO matching)
+            sorted_buys = sorted(buys, key=lambda t: t.get('timestamp', ''))
+            sorted_sells = sorted(sells, key=lambda t: t.get('timestamp', ''))
+            realized_pnl = 0.0
+            completed_trips = 0
+            total_invested = 0.0
+            total_returned = 0.0
+            used_sells = set()
+            for b in sorted_buys:
+                buy_usd = b.get('actual_input_amount', b.get('input_amount', 0)) if b.get('input_token') == 'USDC' else 0
+                for j, s in enumerate(sorted_sells):
+                    if j in used_sells: continue
+                    if s.get('timestamp', '') > b.get('timestamp', ''):
+                        sell_usd = s.get('actual_output_amount', s.get('output_amount', 0)) if s.get('output_token') == 'USDC' else 0
+                        if sell_usd > 0.01:
+                            realized_pnl += sell_usd - buy_usd
+                            total_invested += buy_usd
+                            total_returned += sell_usd
+                            completed_trips += 1
+                            used_sells.add(j)
+                            break
             
             pair['live_stats'] = {
                 'total_trades': len(pair_trades),
                 'buys': len(buys),
                 'sells': len(sells),
+                'completed_trips': completed_trips,
                 'total_invested': round(total_invested, 2),
                 'total_returned': round(total_returned, 2),
-                'realized_pnl': round(realized_pnl, 2) if realized_pnl is not None else None,
+                'realized_pnl': round(realized_pnl, 2) if completed_trips > 0 else None,
             }
         
         # Bot running status
