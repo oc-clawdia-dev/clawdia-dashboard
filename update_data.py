@@ -725,7 +725,7 @@ def update_agent_memories():
         'clawdia': {
             'name': 'Clawdia 🩶',
             'workspace': os.path.expanduser('~/.openclaw/workspace/'),
-            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md'],
+            'files': ['MEMORY.md', 'SOUL.md', 'HEARTBEAT.md', 'TOOLS.md', 'IDENTITY.md', 'dream.md'],
             'folders': ['recollection', 'emotion', 'persona']
         },
         'talon': {
