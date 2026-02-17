@@ -10127,5 +10127,52 @@
       "dexscreener_pnl_pct": 14.46,
       "actual_pnl_pct": 28.6
     }
+  },
+  {
+    "timestamp": "2026-02-17T21:16:56.570622+09:00",
+    "unix_time": 1771330616,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "HORZ/USDC",
+    "input_token": "USDC",
+    "output_token": "HORZ",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 69464.707597,
+    "input_amount": 20.0,
+    "output_amount": 69464.707597,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.0002879159891671918,
+    "effective_price": 0.0002879159891671918,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "5qsvHLuBQJ2ybxQv6rLeGpuUZ3xZDaumUT3rYLpVfBdfLDAKsLQ6GjwEKxRg7ZkVHB45JeunNV93Tc9DNEbWPG44",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=79 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "AvaNdWEApK2cELkYZg5w4HC84D5rThSevEo5Tba1pump",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.0002879159891671918,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 78.59784538673608,
+        "momentum": 83.22932457009401,
+        "volume": 88.94179922377015,
+        "demand": 55
+      },
+      "liquidity_usd": 0.0
+    }
   }
 ]
