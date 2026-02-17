@@ -10691,5 +10691,52 @@
       "dexscreener_pnl_pct": 12.42,
       "actual_pnl_pct": 18.72
     }
+  },
+  {
+    "timestamp": "2026-02-18T00:14:19.251256+09:00",
+    "unix_time": 1771341259,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "BLOODNUT/USDC",
+    "input_token": "USDC",
+    "output_token": "BLOODNUT",
+    "order_input_amount": 30.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 193785.206182,
+    "input_amount": 30.0,
+    "output_amount": 193785.206182,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.00015481057915135417,
+    "effective_price": 0.00015481057915135417,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "67ZjYatET2FJrSRCYGDmYtfQKZM3DWp4JxtboS2i4nS8STWG7ChsroKnYZjjaiPiJZkSfHbgSjfiJuHSpFBgdy9C",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=80 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "HBJUeugfgJ3zWYMMP4cULbZ9bjnZbb6WG9cBcWNxpump",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.00015481057915135417,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 79.53402538260386,
+        "momentum": 78.882651360938,
+        "volume": 87.92493868747249,
+        "demand": 75
+      },
+      "liquidity_usd": 0.0
+    }
   }
 ]
