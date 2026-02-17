@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-18T08:44:13.428700+09:00",
+  "updated": "2026-02-18T08:45:20.583969+09:00",
   "total_completed": 2,
-  "total_open": 9,
-  "today_entries": 11,
+  "total_open": 10,
+  "today_entries": 12,
   "param_summary": {
     "live": {
       "params": {
@@ -177,9 +177,9 @@
       "symbol": "OmegaX",
       "entry_time": "2026-02-18T08:26:50.407884+09:00",
       "entry_price": 0.0009937375,
-      "current_pnl_pct": -5.56,
+      "current_pnl_pct": -7.93,
       "peak_pnl_pct": 0.0,
-      "price_points": 81,
+      "price_points": 86,
       "active_params": [
         "live",
         "conservative",
@@ -197,9 +197,9 @@
       "symbol": "GOBAMA",
       "entry_time": "2026-02-18T08:26:50.408605+09:00",
       "entry_price": 0.004420825,
-      "current_pnl_pct": 24.28,
-      "peak_pnl_pct": 24.278273851600108,
-      "price_points": 81,
+      "current_pnl_pct": 26.22,
+      "peak_pnl_pct": 26.219088066141506,
+      "price_points": 86,
       "active_params": [
         "live",
         "conservative",
@@ -217,9 +217,9 @@
       "symbol": "TRENCH",
       "entry_time": "2026-02-18T08:26:50.409112+09:00",
       "entry_price": 0.0002627075,
-      "current_pnl_pct": -0.02,
+      "current_pnl_pct": 0.21,
       "peak_pnl_pct": 6.404461235404391,
-      "price_points": 81,
+      "price_points": 86,
       "active_params": [
         "conservative"
       ],
@@ -232,7 +232,7 @@
       "entry_price": 3.53625,
       "current_pnl_pct": -5.43,
       "peak_pnl_pct": 0.0,
-      "price_points": 81,
+      "price_points": 86,
       "active_params": [
         "live",
         "conservative",
@@ -250,9 +250,9 @@
       "symbol": "IF",
       "entry_time": "2026-02-18T08:26:50.410067+09:00",
       "entry_price": 0.00032133749999999994,
-      "current_pnl_pct": 1.55,
+      "current_pnl_pct": 2.74,
       "peak_pnl_pct": 2.8894853541836962,
-      "price_points": 81,
+      "price_points": 86,
       "active_params": [
         "wide_trail",
         "wide_sl15"
@@ -266,7 +266,7 @@
       "entry_price": 0.0003965725,
       "current_pnl_pct": -2.49,
       "peak_pnl_pct": 0.0,
-      "price_points": 81,
+      "price_points": 86,
       "active_params": [
         "live",
         "conservative",
@@ -284,9 +284,9 @@
       "symbol": "SAN",
       "entry_time": "2026-02-18T08:26:50.410965+09:00",
       "entry_price": 0.0014770249999999999,
-      "current_pnl_pct": -5.93,
+      "current_pnl_pct": -4.48,
       "peak_pnl_pct": 0.0,
-      "price_points": 81,
+      "price_points": 86,
       "active_params": [
         "live",
         "conservative",
@@ -306,7 +306,7 @@
       "entry_price": 0.00011807999999999998,
       "current_pnl_pct": -4.05,
       "peak_pnl_pct": 0.0,
-      "price_points": 71,
+      "price_points": 76,
       "active_params": [
         "live",
         "conservative",
@@ -326,7 +326,7 @@
       "entry_price": 0.00020776749999999999,
       "current_pnl_pct": -7.65,
       "peak_pnl_pct": 0.0,
-      "price_points": 66,
+      "price_points": 71,
       "active_params": [
         "live",
         "conservative",
@@ -339,6 +339,26 @@
       ],
       "score": 45.55073858151431,
       "grade": "C"
+    },
+    {
+      "symbol": "DEVLESS",
+      "entry_time": "2026-02-18T08:45:19.267557+09:00",
+      "entry_price": 0.0001325325,
+      "current_pnl_pct": -4.88,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 57.537782725986816,
+      "grade": "B"
     }
   ],
   "recent_completed": [
