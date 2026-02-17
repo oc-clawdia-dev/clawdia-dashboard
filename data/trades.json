@@ -10879,5 +10879,52 @@
       "dexscreener_pnl_pct": -35.29,
       "actual_pnl_pct": -29.0
     }
+  },
+  {
+    "timestamp": "2026-02-18T00:31:02.578253+09:00",
+    "unix_time": 1771342262,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "TST/USDC",
+    "input_token": "USDC",
+    "output_token": "TST",
+    "order_input_amount": 30.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 53002.988928,
+    "input_amount": 30.0,
+    "output_amount": 53002.988928,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.0005660058160258173,
+    "effective_price": 0.0005660058160258173,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "2CaFjadtViupWkFMbirJCEzXknBX3dMwxqiejR2keVwYYusMB4vz6wDPFYWQnontKdQERstL47fK29wvgzP64rNZ",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=79 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "HdvZF538TerjMWc1cmtWVKUaGkS8d77sGH5QaDCCpump",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.0005660058160258173,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 78.88685002447056,
+        "momentum": 88.30162132060082,
+        "volume": 100,
+        "demand": 40
+      },
+      "liquidity_usd": 0.0
+    }
   }
 ]
