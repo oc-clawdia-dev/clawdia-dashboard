@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-17T09:49:39.109454+09:00",
+  "updated": "2026-02-17T09:50:25.589189+09:00",
   "total_completed": 0,
-  "total_open": 0,
-  "today_entries": 0,
+  "total_open": 2,
+  "today_entries": 2,
   "param_summary": {
     "conservative": {
       "params": {
@@ -157,6 +157,47 @@
       }
     }
   },
-  "open_positions": [],
+  "open_positions": [
+    {
+      "symbol": "LUNAR",
+      "entry_time": "2026-02-17T09:49:17.960863+09:00",
+      "entry_price": 0.003847,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 0,
+      "active_params": [
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "low_act",
+        "micro"
+      ],
+      "score": 73.51977039922164,
+      "grade": "A"
+    },
+    {
+      "symbol": "MAYA",
+      "entry_time": "2026-02-17T09:49:17.962001+09:00",
+      "entry_price": 0.001849,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 0,
+      "active_params": [
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "low_act",
+        "micro"
+      ],
+      "score": 71.5720461691295,
+      "grade": "A"
+    }
+  ],
   "recent_completed": []
 }
