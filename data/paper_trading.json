@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-17T16:14:22.671080+09:00",
+  "updated": "2026-02-17T16:14:56.902837+09:00",
   "total_completed": 200,
-  "total_open": 26,
-  "today_entries": 222,
+  "total_open": 27,
+  "today_entries": 223,
   "param_summary": {
     "conservative": {
       "params": {
@@ -597,7 +597,7 @@
       "symbol": "WMM",
       "entry_time": "2026-02-17T15:50:22.454529+09:00",
       "entry_price": 0.0002292,
-      "current_pnl_pct": -3.88,
+      "current_pnl_pct": -3.58,
       "peak_pnl_pct": 7.59162303664922,
       "price_points": 82,
       "active_params": [
@@ -665,6 +665,26 @@
       ],
       "score": 19.0,
       "grade": "F"
+    },
+    {
+      "symbol": "DETACHED",
+      "entry_time": "2026-02-17T16:14:45.184374+09:00",
+      "entry_price": 1.486e-05,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 2,
+      "active_params": [
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "low_act",
+        "micro"
+      ],
+      "score": 47.11249446348074,
+      "grade": "C"
     }
   ],
   "recent_completed": [
