@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-17T13:18:36.461465+09:00",
+  "updated": "2026-02-17T13:19:44.483103+09:00",
   "total_completed": 25,
-  "total_open": 1,
-  "today_entries": 26,
+  "total_open": 2,
+  "today_entries": 27,
   "param_summary": {
     "conservative": {
       "params": {
@@ -162,15 +162,35 @@
       "symbol": "DONALDMINAJ",
       "entry_time": "2026-02-17T13:04:55.989110+09:00",
       "entry_price": 0.003883,
-      "current_pnl_pct": 2.19,
+      "current_pnl_pct": 3.45,
       "peak_pnl_pct": 4.944630440381137,
-      "price_points": 73,
+      "price_points": 79,
       "active_params": [
         "conservative",
         "current",
         "wide_trail"
       ],
       "score": 70.62769538863927,
+      "grade": "A"
+    },
+    {
+      "symbol": "GUPSTER",
+      "entry_time": "2026-02-17T13:19:43.718842+09:00",
+      "entry_price": 7.582e-05,
+      "current_pnl_pct": -1.2,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "low_act",
+        "micro"
+      ],
+      "score": 67.70521943032625,
       "grade": "A"
     }
   ],
