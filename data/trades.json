@@ -9845,5 +9845,52 @@
       },
       "liquidity_usd": 0.0
     }
+  },
+  {
+    "timestamp": "2026-02-17T20:48:34.030503+09:00",
+    "unix_time": 1771328914,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "APocket/USDC",
+    "input_token": "USDC",
+    "output_token": "APocket",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 14521.075882,
+    "input_amount": 20.0,
+    "output_amount": 14521.075882,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.0013773084145088418,
+    "effective_price": 0.0013773084145088418,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "3srkknj5uttbSZdJ2Uvju52eo5duyohkpX3SqQfcHoebCQGoEeCpXYgAHbJWW79WDipwkctxMsua7FmGTNRjttqf",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=87 grade=S",
+    "error": "",
+    "extra": {
+      "token_address": "uDVChrsuYffrvc8EHFiC46GcV8goWD5abDKMXrHpump",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.0013773084145088418,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 87.32778905724368,
+        "momentum": 91.17429558944845,
+        "volume": 100,
+        "demand": 95
+      },
+      "liquidity_usd": 0.0
+    }
   }
 ]
