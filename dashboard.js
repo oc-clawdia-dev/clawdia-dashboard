@@ -1491,3 +1491,119 @@ function renderMemeTab() {
         }).join('');
     }
 }
+
+// ─── Simulation Tab ───
+async function loadSimulationData() {
+    try {
+        const r = await fetch('./data/paper_trading.json?t=' + Date.now());
+        if (!r.ok) return;
+        const data = await r.json();
+        renderSimulation(data);
+    } catch(e) {
+        console.warn('Simulation data load failed:', e);
+    }
+}
+
+function renderSimulation(data) {
+    // Status
+    const status = document.getElementById('sim-status');
+    if (!data || !data.updated) {
+        status.innerHTML = '<p style="color:var(--text-secondary)">Paper Traderがまだ起動していないか、データがありません</p>';
+        return;
+    }
+    status.innerHTML = `
+        <div style="display:flex;gap:2rem;flex-wrap:wrap">
+            <div><strong>最終更新:</strong> ${new Date(data.updated).toLocaleString('ja-JP')}</div>
+            <div><strong>完了トレード:</strong> ${data.total_completed || 0}</div>
+            <div><strong>オープン:</strong> ${data.total_open || 0}</div>
+            <div><strong>本日エントリー:</strong> ${data.today_entries || 0}</div>
+        </div>`;
+
+    // Param comparison table
+    const paramBody = document.getElementById('sim-param-body');
+    const ps = data.param_summary || {};
+    const names = Object.keys(ps);
+    if (names.length === 0) {
+        paramBody.innerHTML = '<tr><td colspan="10" style="text-align:center">データなし</td></tr>';
+    } else {
+        // Sort by total P&L descending
+        names.sort((a, b) => (ps[b].total_pnl_usd || 0) - (ps[a].total_pnl_usd || 0));
+        paramBody.innerHTML = names.map(name => {
+            const s = ps[name];
+            const p = s.params || {};
+            const pnlClass = (s.total_pnl_usd || 0) >= 0 ? 'profit' : 'loss';
+            const r = s.reasons || {};
+            return `<tr>
+                <td><strong>${name}</strong></td>
+                <td>${p.act || '-'}%</td>
+                <td>${p.trail || '-'}%</td>
+                <td>${s.trades || 0}</td>
+                <td>${s.win_rate || 0}%</td>
+                <td class="${pnlClass}">${(s.avg_pnl_pct || 0) >= 0 ? '+' : ''}${(s.avg_pnl_pct || 0).toFixed(2)}%</td>
+                <td class="${pnlClass}"><strong>${(s.total_pnl_usd || 0) >= 0 ? '+' : ''}$${(s.total_pnl_usd || 0).toFixed(2)}</strong></td>
+                <td class="profit">+${(s.best_trade || 0).toFixed(1)}%</td>
+                <td class="loss">${(s.worst_trade || 0).toFixed(1)}%</td>
+                <td>${r.SL || 0}/${r.TRAIL || 0}/${r.TIMEOUT || 0}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    // Open positions
+    const openBody = document.getElementById('sim-open-body');
+    const ops = data.open_positions || [];
+    if (ops.length === 0) {
+        openBody.innerHTML = '<tr><td colspan="7" style="text-align:center">オープンポジションなし</td></tr>';
+    } else {
+        openBody.innerHTML = ops.map(o => {
+            const pnlClass = (o.current_pnl_pct || 0) >= 0 ? 'profit' : 'loss';
+            return `<tr>
+                <td><strong>${o.symbol}</strong></td>
+                <td>${new Date(o.entry_time).toLocaleTimeString('ja-JP')}</td>
+                <td class="${pnlClass}">${(o.current_pnl_pct || 0) >= 0 ? '+' : ''}${(o.current_pnl_pct || 0).toFixed(1)}%</td>
+                <td class="profit">+${(o.peak_pnl_pct || 0).toFixed(1)}%</td>
+                <td>${o.score || '-'}</td>
+                <td>${o.price_points || 0}</td>
+                <td>${(o.active_params || []).length}/${8}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    // Recent completed
+    const recentBody = document.getElementById('sim-recent-body');
+    const recent = (data.recent_completed || []).slice().reverse();
+    if (recent.length === 0) {
+        recentBody.innerHTML = '<tr><td colspan="7" style="text-align:center">完了トレードなし</td></tr>';
+    } else {
+        recentBody.innerHTML = recent.map(c => {
+            const results = c.results || {};
+            const fmtResult = (name) => {
+                const r = results[name];
+                if (!r) return '-';
+                const cls = (r.exit_pnl_pct || 0) >= 0 ? 'profit' : 'loss';
+                const icon = r.exit_reason === 'TRAIL' ? '🟢' : r.exit_reason === 'SL' ? '🔴' : '⏰';
+                return `<span class="${cls}">${icon}${(r.exit_pnl_pct || 0) >= 0 ? '+' : ''}${(r.exit_pnl_pct || 0).toFixed(1)}%</span>`;
+            };
+            return `<tr>
+                <td><strong>${c.symbol}</strong></td>
+                <td>${new Date(c.entry_time).toLocaleString('ja-JP', {month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})}</td>
+                <td class="profit">+${(c.peak_pnl_pct || 0).toFixed(1)}%</td>
+                <td>${fmtResult('conservative')}</td>
+                <td>${fmtResult('current')}</td>
+                <td>${fmtResult('tight')}</td>
+                <td>${fmtResult('aggressive')}</td>
+            </tr>`;
+        }).join('');
+    }
+}
+
+// Load simulation data when tab is shown
+document.addEventListener('DOMContentLoaded', () => {
+    const simTabBtn = document.querySelector('[data-tab="simulation"]');
+    if (simTabBtn) {
+        simTabBtn.addEventListener('click', () => loadSimulationData());
+    }
+    // Also load on initial page load if simulation tab is somehow active
+    if (document.getElementById('tab-simulation')?.classList.contains('active')) {
+        loadSimulationData();
+    }
+});

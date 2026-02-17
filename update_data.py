@@ -835,6 +835,44 @@ def update_meme_data(all_trades):
         if t.get('strategy', '').startswith('MEME')
     ]
     
+    # Onchain P&L summary
+    onchain_cache_dir = os.path.join(CONFIG['BOT_DATA_DIR'], 'onchain_tx_cache')
+    if os.path.exists(onchain_cache_dir):
+        meme_sells = [t for t in meme['trades'] if t.get('direction') == 'sell']
+        meme_buys = [t for t in meme['trades'] if t.get('direction') == 'buy']
+        total_bought = sum(float(t.get('input_amount', 0)) for t in meme_buys)
+        
+        onchain_total = 0
+        log_total = 0
+        sol_price = 84.5  # approximate
+        for t in meme_sells:
+            sig = t.get('signature', '')
+            log_out = float(t.get('output_amount', 0) or t.get('actual_output_amount', 0))
+            log_total += log_out
+            cache_file = os.path.join(onchain_cache_dir, f'{sig[:16]}.json')
+            if os.path.exists(cache_file):
+                try:
+                    with open(cache_file) as cf:
+                        c = json.load(cf)
+                    sol_chg = c.get('onchain_sol_change', 0)
+                    usdc_chg = c.get('onchain_usdc_change', 0)
+                    onchain_total += (sol_chg * sol_price + usdc_chg) if sol_chg > 0 else usdc_chg
+                except:
+                    onchain_total += log_out
+            else:
+                onchain_total += log_out
+        
+        meme['onchain_pnl'] = {
+            'total_bought': round(total_bought, 2),
+            'log_sold': round(log_total, 2),
+            'onchain_sold': round(onchain_total, 2),
+            'log_pnl': round(log_total - total_bought, 2),
+            'onchain_pnl': round(onchain_total - total_bought, 2),
+            'discrepancy': round(onchain_total - log_total, 2),
+            'cached_txs': len(os.listdir(onchain_cache_dir)),
+            'updated_at': datetime.now().isoformat(),
+        }
+    
     # Save
     out = os.path.join(CONFIG['OUTPUT_DIR'], 'meme.json')
     with open(out, 'w', encoding='utf-8') as f:
@@ -842,6 +880,30 @@ def update_meme_data(all_trades):
     
     print(f"Saved meme data: {len(meme['scanner']['tracking'])} tracking, {len(meme['trades'])} trades")
     return meme
+
+
+def update_paper_trading():
+    """Paper Trader シミュレーション結果をダッシュボード用に出力"""
+    paper_summary = os.path.join(CONFIG['BOT_DATA_DIR'], 'paper_trades', 'summary.json')
+    output_path = os.path.join(CONFIG['OUTPUT_DIR'], 'paper_trading.json')
+
+    if not os.path.exists(paper_summary):
+        print("  Paper trading: no data yet")
+        # Write empty placeholder
+        with open(output_path, 'w') as f:
+            json.dump({"updated": None, "total_completed": 0, "param_summary": {}, "open_positions": [], "recent_completed": []}, f)
+        return {}
+
+    with open(paper_summary) as f:
+        data = json.load(f)
+
+    # Pass through to dashboard (summary.json already has the right structure)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+    n = data.get("total_completed", 0)
+    print(f"  Paper trading: {n} completed, {data.get('total_open', 0)} open")
+    return data
 
 
 def main():
@@ -863,6 +925,7 @@ def main():
         portfolio_history = update_portfolio_history()
         memories = update_agent_memories()
         meme_data = update_meme_data(trades)
+        paper = update_paper_trading()
         
         # サマリー作成
         summary = {

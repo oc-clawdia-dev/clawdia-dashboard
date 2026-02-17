@@ -29,6 +29,7 @@
                 <button class="tab-btn" data-tab="signals">📈 シグナル</button>
                 <button class="tab-btn" data-tab="strategies">🎯 戦略</button>
                 <button class="tab-btn" data-tab="meme">🐸 ミーム</button>
+                <button class="tab-btn" data-tab="simulation">🧪 検証</button>
                 <button class="tab-btn" data-tab="reports">📝 日報</button>
                 <button class="tab-btn" data-tab="memories">🧠 メモリ</button>
             </div>
@@ -268,6 +269,75 @@
                                 </tr>
                             </thead>
                             <tbody id="meme-trade-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 検証タブ -->
+            <div id="tab-simulation" class="tab-panel">
+                <section class="card">
+                    <h2>🧪 仮想取引シミュレーション</h2>
+                    <p class="subtitle">複数パラメータを同時比較 — リアルタイムペーパートレード</p>
+                    <div id="sim-status" class="meme-section"></div>
+                </section>
+                <section class="card">
+                    <h3>📊 パラメータ比較</h3>
+                    <div id="sim-param-table-container">
+                        <table class="trade-table" id="sim-param-table">
+                            <thead>
+                                <tr>
+                                    <th>セット名</th>
+                                    <th>ACT%</th>
+                                    <th>TRAIL%</th>
+                                    <th>トレード数</th>
+                                    <th>勝率</th>
+                                    <th>平均P&L%</th>
+                                    <th>累計P&L$</th>
+                                    <th>最高</th>
+                                    <th>最低</th>
+                                    <th>SL/TRAIL/TO</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sim-param-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+                <section class="card">
+                    <h3>📈 オープンポジション</h3>
+                    <div id="sim-open-container">
+                        <table class="trade-table" id="sim-open-table">
+                            <thead>
+                                <tr>
+                                    <th>トークン</th>
+                                    <th>エントリー</th>
+                                    <th>現在P&L%</th>
+                                    <th>ピーク%</th>
+                                    <th>スコア</th>
+                                    <th>データ点数</th>
+                                    <th>アクティブ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sim-open-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+                <section class="card">
+                    <h3>📜 最近の完了トレード</h3>
+                    <div id="sim-recent-container">
+                        <table class="trade-table" id="sim-recent-table">
+                            <thead>
+                                <tr>
+                                    <th>トークン</th>
+                                    <th>時刻</th>
+                                    <th>ピーク%</th>
+                                    <th>conservative</th>
+                                    <th>current</th>
+                                    <th>tight</th>
+                                    <th>aggressive</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sim-recent-body"></tbody>
                         </table>
                     </div>
                 </section>
