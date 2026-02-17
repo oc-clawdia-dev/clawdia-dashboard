@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-17T09:52:50.510651+09:00",
+  "updated": "2026-02-17T09:53:58.683333+09:00",
   "total_completed": 2,
-  "total_open": 1,
-  "today_entries": 3,
+  "total_open": 2,
+  "today_entries": 4,
   "param_summary": {
     "conservative": {
       "params": {
@@ -162,9 +162,9 @@
       "symbol": "LUNAR",
       "entry_time": "2026-02-17T09:51:11.814321+09:00",
       "entry_price": 0.003914,
-      "current_pnl_pct": -1.41,
+      "current_pnl_pct": -2.66,
       "peak_pnl_pct": 0.35769034236075026,
-      "price_points": 3,
+      "price_points": 9,
       "active_params": [
         "conservative",
         "current",
@@ -176,6 +176,26 @@
         "micro"
       ],
       "score": 73.5680870039695,
+      "grade": "A"
+    },
+    {
+      "symbol": "TORTA",
+      "entry_time": "2026-02-17T09:53:57.853611+09:00",
+      "entry_price": 8.694e-05,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "low_act",
+        "micro"
+      ],
+      "score": 66.95470063140844,
       "grade": "A"
     }
   ],
