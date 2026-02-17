@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-17T10:50:08.354314+09:00",
+  "updated": "2026-02-17T10:51:16.854488+09:00",
   "total_completed": 11,
-  "total_open": 1,
-  "today_entries": 12,
+  "total_open": 2,
+  "today_entries": 13,
   "param_summary": {
     "conservative": {
       "params": {
@@ -162,13 +162,33 @@
       "symbol": "LUNAR",
       "entry_time": "2026-02-17T09:51:11.814321+09:00",
       "entry_price": 0.003914,
-      "current_pnl_pct": 2.3,
+      "current_pnl_pct": 1.58,
       "peak_pnl_pct": 6.796116504854366,
-      "price_points": 303,
+      "price_points": 309,
       "active_params": [
         "conservative"
       ],
       "score": 73.5680870039695,
+      "grade": "A"
+    },
+    {
+      "symbol": "FLOYDPUNCH",
+      "entry_time": "2026-02-17T10:51:15.751682+09:00",
+      "entry_price": 0.0001366,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "low_act",
+        "micro"
+      ],
+      "score": 72.61199433414494,
       "grade": "A"
     }
   ],
