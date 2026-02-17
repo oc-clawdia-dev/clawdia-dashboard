@@ -9444,5 +9444,50 @@
         "demand": 65
       }
     }
+  },
+  {
+    "timestamp": "2026-02-17T17:10:03.891261+09:00",
+    "unix_time": 1771315803,
+    "strategy": "MEME",
+    "direction": "sell",
+    "pair": "TRUMPIUS/USDC",
+    "input_token": "TRUMPIUS",
+    "output_token": "USDC",
+    "order_input_amount": 6044.449014,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 2.89248134272,
+    "input_amount": 6044.449014,
+    "output_amount": 2.89248134272,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.0004785351544897654,
+    "effective_price": 0.0004785351544897654,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "JD2ZWhhbxRyH3KThmNM2c4ayN175vsP5tvYM5JQnjbiXcsqBvqt6L1f5gMT16WrmsAwZ6AnQKWLZJJqiNjtvUyL",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "SL (-69.7%)",
+    "error": "",
+    "extra": {
+      "token_address": "HwEmKizrAr3pGXnzQSW1wGcueL7K99g2RokoEMHRpump",
+      "entry_price": 0.003308821027967397,
+      "pnl_usd": -17.1075,
+      "pnl_pct": -85.54,
+      "hold_minutes": 33.2,
+      "score_at_entry": 77.54895334472155,
+      "dexscreener_pnl_pct": -69.66,
+      "actual_pnl_pct": -85.54,
+      "price_divergence": true
+    }
   }
 ]
