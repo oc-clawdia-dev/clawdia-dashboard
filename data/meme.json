@@ -1572,7 +1572,7 @@
         "address": "CvHEvDvwPcu735Si"
       }
     ],
-    "last_scan": "2026-02-17T17:08:45.026877"
+    "last_scan": "2026-02-17T17:09:46.577149"
   },
   "survey": [],
   "trades": [
@@ -10339,16 +10339,59 @@
         "actual_pnl_pct": -8.05,
         "price_divergence": true
       }
+    },
+    {
+      "timestamp": "2026-02-17T17:09:32.115566+09:00",
+      "unix_time": 1771315772,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "Honke/USDC",
+      "input_token": "USDC",
+      "output_token": "Honke",
+      "order_input_amount": 20.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 130014.52933,
+      "input_amount": 20.0,
+      "output_amount": 130014.52933,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.00015382896129429076,
+      "effective_price": 0.00015382896129429076,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "2UADoyBqbR47Qvq4NB3Zs25g9KeaW3TKzGpGbGwG1xgujVHc3F1u5Qzn5E8qVgaBbJg15bpA65h9kDT2sHqDYSNq",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=64 grade=B",
+      "error": "",
+      "extra": {
+        "token_address": "7LustpLJaqq1DaA4UN9buCJGGK3HGrVSfYJmWJ7Kpump",
+        "score_detail": {
+          "total": 64.181593620983,
+          "momentum": 57.672747012099585,
+          "volume": 82.112123413895,
+          "demand": 65
+        }
+      }
     }
   ],
   "onchain_pnl": {
-    "total_bought": 1607.0,
+    "total_bought": 1627.0,
     "log_sold": 1517.32,
     "onchain_sold": 1503.6,
-    "log_pnl": -89.68,
-    "onchain_pnl": -103.4,
+    "log_pnl": -109.68,
+    "onchain_pnl": -123.4,
     "discrepancy": -13.71,
     "cached_txs": 427,
-    "updated_at": "2026-02-17T17:08:45.028883"
+    "updated_at": "2026-02-17T17:09:46.579161"
   }
 }
