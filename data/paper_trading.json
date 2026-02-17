@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-17T11:14:04.208906+09:00",
+  "updated": "2026-02-17T11:15:12.640787+09:00",
   "total_completed": 13,
-  "total_open": 1,
-  "today_entries": 14,
+  "total_open": 2,
+  "today_entries": 15,
   "param_summary": {
     "conservative": {
       "params": {
@@ -162,14 +162,34 @@
       "symbol": "LUNAR",
       "entry_time": "2026-02-17T09:51:11.814321+09:00",
       "entry_price": 0.003914,
-      "current_pnl_pct": 5.14,
+      "current_pnl_pct": 4.6,
       "peak_pnl_pct": 6.796116504854366,
-      "price_points": 429,
+      "price_points": 435,
       "active_params": [
         "conservative"
       ],
       "score": 73.5680870039695,
       "grade": "A"
+    },
+    {
+      "symbol": "CAMPBELL",
+      "entry_time": "2026-02-17T11:15:11.723333+09:00",
+      "entry_price": 0.000819,
+      "current_pnl_pct": -1.12,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "low_act",
+        "micro"
+      ],
+      "score": 60.03489897321667,
+      "grade": "B"
     }
   ],
   "recent_completed": [
