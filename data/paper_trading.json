@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-17T15:26:52.191830+09:00",
-  "total_completed": 100,
-  "total_open": 109,
-  "today_entries": 209,
+  "updated": "2026-02-17T15:28:09.259843+09:00",
+  "total_completed": 109,
+  "total_open": 101,
+  "today_entries": 210,
   "param_summary": {
     "conservative": {
       "params": {
@@ -10,17 +10,17 @@
         "trail": 3.0,
         "sl": -15.0
       },
-      "trades": 100,
-      "win_rate": 42.0,
-      "avg_pnl_pct": -2.33,
-      "total_pnl_pct": -233.19,
-      "total_pnl_usd": -46.64,
+      "trades": 109,
+      "win_rate": 38.5,
+      "avg_pnl_pct": -2.17,
+      "total_pnl_pct": -236.58,
+      "total_pnl_usd": -47.32,
       "best_trade": 147.12,
       "worst_trade": -63.1,
       "reasons": {
         "SL": 47,
         "TRAIL": 53,
-        "TIMEOUT": 0
+        "TIMEOUT": 9
       }
     },
     "current": {
@@ -29,17 +29,17 @@
         "trail": 3.0,
         "sl": -15.0
       },
-      "trades": 100,
-      "win_rate": 44.0,
-      "avg_pnl_pct": -1.95,
-      "total_pnl_pct": -194.75,
-      "total_pnl_usd": -38.95,
+      "trades": 109,
+      "win_rate": 40.4,
+      "avg_pnl_pct": -1.82,
+      "total_pnl_pct": -198.14,
+      "total_pnl_usd": -39.63,
       "best_trade": 147.12,
       "worst_trade": -63.1,
       "reasons": {
         "SL": 44,
         "TRAIL": 56,
-        "TIMEOUT": 0
+        "TIMEOUT": 9
       }
     },
     "moderate": {
@@ -48,17 +48,17 @@
         "trail": 2.0,
         "sl": -15.0
       },
-      "trades": 100,
-      "win_rate": 43.0,
-      "avg_pnl_pct": -1.95,
-      "total_pnl_pct": -195.46,
-      "total_pnl_usd": -39.09,
+      "trades": 109,
+      "win_rate": 40.4,
+      "avg_pnl_pct": -1.8,
+      "total_pnl_pct": -196.21,
+      "total_pnl_usd": -39.24,
       "best_trade": 147.12,
       "worst_trade": -63.1,
       "reasons": {
         "SL": 40,
-        "TRAIL": 60,
-        "TIMEOUT": 0
+        "TRAIL": 61,
+        "TIMEOUT": 8
       }
     },
     "tight": {
@@ -67,17 +67,17 @@
         "trail": 1.5,
         "sl": -15.0
       },
-      "trades": 100,
-      "win_rate": 43.0,
-      "avg_pnl_pct": -2.82,
-      "total_pnl_pct": -282.43,
-      "total_pnl_usd": -56.49,
+      "trades": 109,
+      "win_rate": 40.4,
+      "avg_pnl_pct": -2.6,
+      "total_pnl_pct": -283.18,
+      "total_pnl_usd": -56.64,
       "best_trade": 147.12,
       "worst_trade": -63.1,
       "reasons": {
         "SL": 40,
-        "TRAIL": 60,
-        "TIMEOUT": 0
+        "TRAIL": 61,
+        "TIMEOUT": 8
       }
     },
     "aggressive": {
@@ -86,17 +86,17 @@
         "trail": 1.0,
         "sl": -15.0
       },
-      "trades": 100,
-      "win_rate": 45.0,
-      "avg_pnl_pct": -2.62,
-      "total_pnl_pct": -262.25,
-      "total_pnl_usd": -52.45,
+      "trades": 109,
+      "win_rate": 42.2,
+      "avg_pnl_pct": -2.42,
+      "total_pnl_pct": -263.75,
+      "total_pnl_usd": -52.75,
       "best_trade": 147.12,
       "worst_trade": -63.1,
       "reasons": {
         "SL": 38,
-        "TRAIL": 62,
-        "TIMEOUT": 0
+        "TRAIL": 63,
+        "TIMEOUT": 8
       }
     },
     "wide_trail": {
@@ -105,17 +105,17 @@
         "trail": 2.0,
         "sl": -15.0
       },
-      "trades": 100,
-      "win_rate": 44.0,
-      "avg_pnl_pct": -2.43,
-      "total_pnl_pct": -243.13,
-      "total_pnl_usd": -48.63,
+      "trades": 109,
+      "win_rate": 40.4,
+      "avg_pnl_pct": -2.26,
+      "total_pnl_pct": -246.52,
+      "total_pnl_usd": -49.3,
       "best_trade": 147.12,
       "worst_trade": -63.1,
       "reasons": {
         "SL": 44,
         "TRAIL": 56,
-        "TIMEOUT": 0
+        "TIMEOUT": 9
       }
     },
     "low_act": {
@@ -124,17 +124,17 @@
         "trail": 1.5,
         "sl": -15.0
       },
-      "trades": 100,
-      "win_rate": 44.0,
-      "avg_pnl_pct": -2.68,
-      "total_pnl_pct": -267.63,
-      "total_pnl_usd": -53.53,
+      "trades": 109,
+      "win_rate": 41.3,
+      "avg_pnl_pct": -2.47,
+      "total_pnl_pct": -269.13,
+      "total_pnl_usd": -53.83,
       "best_trade": 147.12,
       "worst_trade": -63.1,
       "reasons": {
         "SL": 39,
-        "TRAIL": 61,
-        "TIMEOUT": 0
+        "TRAIL": 62,
+        "TIMEOUT": 8
       }
     },
     "micro": {
@@ -143,203 +143,28 @@
         "trail": 0.8,
         "sl": -15.0
       },
-      "trades": 100,
-      "win_rate": 44.0,
-      "avg_pnl_pct": -2.51,
-      "total_pnl_pct": -250.8,
-      "total_pnl_usd": -50.16,
+      "trades": 109,
+      "win_rate": 41.3,
+      "avg_pnl_pct": -2.31,
+      "total_pnl_pct": -252.14,
+      "total_pnl_usd": -50.43,
       "best_trade": 147.12,
       "worst_trade": -63.1,
       "reasons": {
         "SL": 37,
-        "TRAIL": 63,
-        "TIMEOUT": 0
+        "TRAIL": 64,
+        "TIMEOUT": 8
       }
     }
   },
   "open_positions": [
-    {
-      "symbol": "PEPE",
-      "entry_time": "2026-02-17T13:26:59.534114+09:00",
-      "entry_price": 1.009e-05,
-      "current_pnl_pct": 0.0,
-      "peak_pnl_pct": 0.0,
-      "price_points": 346,
-      "active_params": [
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "low_act",
-        "micro"
-      ],
-      "score": 29.0,
-      "grade": "D"
-    },
-    {
-      "symbol": "PEPE",
-      "entry_time": "2026-02-17T13:26:59.534638+09:00",
-      "entry_price": 1.247e-05,
-      "current_pnl_pct": 0.0,
-      "peak_pnl_pct": 0.0,
-      "price_points": 346,
-      "active_params": [
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "low_act",
-        "micro"
-      ],
-      "score": 29.0,
-      "grade": "D"
-    },
-    {
-      "symbol": "PEPE",
-      "entry_time": "2026-02-17T13:26:59.535560+09:00",
-      "entry_price": 0.001007,
-      "current_pnl_pct": 0.0,
-      "peak_pnl_pct": 0.0,
-      "price_points": 346,
-      "active_params": [
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "low_act",
-        "micro"
-      ],
-      "score": 29.0,
-      "grade": "D"
-    },
-    {
-      "symbol": "PEPE",
-      "entry_time": "2026-02-17T13:26:59.536165+09:00",
-      "entry_price": 6.004e-06,
-      "current_pnl_pct": 0.0,
-      "peak_pnl_pct": 0.0,
-      "price_points": 346,
-      "active_params": [
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "low_act",
-        "micro"
-      ],
-      "score": 26.860221749157432,
-      "grade": "D"
-    },
-    {
-      "symbol": "Pepe",
-      "entry_time": "2026-02-17T13:26:59.536638+09:00",
-      "entry_price": 0.0002794,
-      "current_pnl_pct": -1.0,
-      "peak_pnl_pct": 0.0,
-      "price_points": 346,
-      "active_params": [
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "low_act",
-        "micro"
-      ],
-      "score": 24.855046223030158,
-      "grade": "D"
-    },
-    {
-      "symbol": "PEPE",
-      "entry_time": "2026-02-17T13:26:59.537065+09:00",
-      "entry_price": 0.0001974,
-      "current_pnl_pct": 0.0,
-      "peak_pnl_pct": 0.0,
-      "price_points": 346,
-      "active_params": [
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "low_act",
-        "micro"
-      ],
-      "score": 24.09527284470598,
-      "grade": "D"
-    },
-    {
-      "symbol": "PEPE",
-      "entry_time": "2026-02-17T13:26:59.537528+09:00",
-      "entry_price": 0.0001472,
-      "current_pnl_pct": 0.0,
-      "peak_pnl_pct": 0.0,
-      "price_points": 346,
-      "active_params": [
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "low_act",
-        "micro"
-      ],
-      "score": 23.9342189251079,
-      "grade": "D"
-    },
-    {
-      "symbol": "PEPE",
-      "entry_time": "2026-02-17T13:26:59.537910+09:00",
-      "entry_price": 0.0001648,
-      "current_pnl_pct": -1.09,
-      "peak_pnl_pct": 0.0,
-      "price_points": 346,
-      "active_params": [
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "low_act",
-        "micro"
-      ],
-      "score": 23.359149484766395,
-      "grade": "D"
-    },
-    {
-      "symbol": "SOL",
-      "entry_time": "2026-02-17T13:28:08.286211+09:00",
-      "entry_price": 0.002539,
-      "current_pnl_pct": -1.3,
-      "peak_pnl_pct": 3.5053170539582457,
-      "price_points": 340,
-      "active_params": [
-        "conservative",
-        "current",
-        "wide_trail"
-      ],
-      "score": 39.16091629990341,
-      "grade": "C"
-    },
     {
       "symbol": "PUMP",
       "entry_time": "2026-02-17T13:29:17.310615+09:00",
       "entry_price": 0.002249,
       "current_pnl_pct": -2.13,
       "peak_pnl_pct": 0.0,
-      "price_points": 334,
+      "price_points": 338,
       "active_params": [
         "conservative",
         "current",
@@ -359,7 +184,7 @@
       "entry_price": 0.006877,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 334,
+      "price_points": 338,
       "active_params": [
         "conservative",
         "current",
@@ -379,7 +204,7 @@
       "entry_price": 0.006879,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 334,
+      "price_points": 338,
       "active_params": [
         "conservative",
         "current",
@@ -399,7 +224,7 @@
       "entry_price": 0.008352,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.047892720306519365,
-      "price_points": 314,
+      "price_points": 318,
       "active_params": [
         "conservative",
         "current",
@@ -417,9 +242,9 @@
       "symbol": "Epstein",
       "entry_time": "2026-02-17T13:38:21.096921+09:00",
       "entry_price": 0.0001365,
-      "current_pnl_pct": -4.91,
+      "current_pnl_pct": -5.27,
       "peak_pnl_pct": 0.73260073260073,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -439,7 +264,7 @@
       "entry_price": 1.982e-05,
       "current_pnl_pct": -1.56,
       "peak_pnl_pct": 7.265388496468206,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative"
       ],
@@ -450,9 +275,9 @@
       "symbol": "meme",
       "entry_time": "2026-02-17T13:38:21.097935+09:00",
       "entry_price": 8.525e-06,
-      "current_pnl_pct": -1.98,
+      "current_pnl_pct": -3.65,
       "peak_pnl_pct": 1.3958944281524888,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -472,7 +297,7 @@
       "entry_price": 3.35,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.29850746268655914,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -492,7 +317,7 @@
       "entry_price": 0.000259,
       "current_pnl_pct": 6.91,
       "peak_pnl_pct": 6.911196911196904,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current"
@@ -506,7 +331,7 @@
       "entry_price": 0.0009604,
       "current_pnl_pct": -0.89,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -526,7 +351,7 @@
       "entry_price": 2.361e-05,
       "current_pnl_pct": -7.58,
       "peak_pnl_pct": 3.2613299449385957,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -541,7 +366,7 @@
       "entry_price": 9.841e-07,
       "current_pnl_pct": -0.08,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -561,7 +386,7 @@
       "entry_price": 2.44e-06,
       "current_pnl_pct": 0.41,
       "peak_pnl_pct": 0.4098360655737654,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -581,7 +406,7 @@
       "entry_price": 7.78,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -601,7 +426,7 @@
       "entry_price": 2.79,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -621,7 +446,7 @@
       "entry_price": 3.16,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -641,7 +466,7 @@
       "entry_price": 0.0005056,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -661,7 +486,7 @@
       "entry_price": 0.004298,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -681,7 +506,7 @@
       "entry_price": 5.825e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -701,7 +526,7 @@
       "entry_price": 0.007196,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -721,7 +546,7 @@
       "entry_price": 0.004989,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -741,7 +566,7 @@
       "entry_price": 0.0006908,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -761,7 +586,7 @@
       "entry_price": 0.0005002,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -781,7 +606,7 @@
       "entry_price": 3.996e-05,
       "current_pnl_pct": 3.75,
       "peak_pnl_pct": 4.9049049049049165,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -796,7 +621,7 @@
       "entry_price": 0.003266,
       "current_pnl_pct": -0.4,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -816,7 +641,7 @@
       "entry_price": 3.732e-11,
       "current_pnl_pct": -0.21,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -836,7 +661,7 @@
       "entry_price": 0.0001056,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -856,7 +681,7 @@
       "entry_price": 0.0007768,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -876,7 +701,7 @@
       "entry_price": 0.0005192,
       "current_pnl_pct": 2.29,
       "peak_pnl_pct": 2.2919876733435984,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -896,7 +721,7 @@
       "entry_price": 0.0005786,
       "current_pnl_pct": 1.35,
       "peak_pnl_pct": 1.3480815762184628,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -916,7 +741,7 @@
       "entry_price": 0.0001037,
       "current_pnl_pct": -2.12,
       "peak_pnl_pct": 0.0,
-      "price_points": 327,
+      "price_points": 331,
       "active_params": [
         "conservative",
         "current",
@@ -936,7 +761,7 @@
       "entry_price": 3.812e-05,
       "current_pnl_pct": 1.84,
       "peak_pnl_pct": 1.8363064008394492,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -956,7 +781,7 @@
       "entry_price": 1.928e-06,
       "current_pnl_pct": -0.16,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -976,7 +801,7 @@
       "entry_price": 5.152e-05,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -996,7 +821,7 @@
       "entry_price": 2.525e-06,
       "current_pnl_pct": -1.11,
       "peak_pnl_pct": 0.6336633663366342,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1036,7 +861,7 @@
       "entry_price": 0.0001469,
       "current_pnl_pct": -11.71,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1056,7 +881,7 @@
       "entry_price": 0.000398,
       "current_pnl_pct": 2.29,
       "peak_pnl_pct": 2.2864321608039972,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1076,7 +901,7 @@
       "entry_price": 1.597e-05,
       "current_pnl_pct": -0.13,
       "peak_pnl_pct": 0.0,
-      "price_points": 204,
+      "price_points": 208,
       "active_params": [
         "conservative",
         "current",
@@ -1096,7 +921,7 @@
       "entry_price": 1.15e-05,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1116,7 +941,7 @@
       "entry_price": 7.781e-06,
       "current_pnl_pct": -1.82,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1136,7 +961,7 @@
       "entry_price": 8.525e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1156,7 +981,7 @@
       "entry_price": 1.438e-05,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1176,7 +1001,7 @@
       "entry_price": 0.04148,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1196,7 +1021,7 @@
       "entry_price": 2.419e-06,
       "current_pnl_pct": -0.66,
       "peak_pnl_pct": 0.7854485324514382,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1216,7 +1041,7 @@
       "entry_price": 1.718e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1236,7 +1061,7 @@
       "entry_price": 1.488e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1256,7 +1081,7 @@
       "entry_price": 1.664e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1276,7 +1101,7 @@
       "entry_price": 7.385e-05,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1296,7 +1121,7 @@
       "entry_price": 1.921e-06,
       "current_pnl_pct": 6.3,
       "peak_pnl_pct": 6.29880270692349,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1316,7 +1141,7 @@
       "entry_price": 2.485e-06,
       "current_pnl_pct": -10.54,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1336,7 +1161,7 @@
       "entry_price": 4.04e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1356,7 +1181,7 @@
       "entry_price": 2.598e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1376,7 +1201,7 @@
       "entry_price": 2.891e-06,
       "current_pnl_pct": -0.55,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1396,7 +1221,7 @@
       "entry_price": 2.561e-06,
       "current_pnl_pct": -0.62,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1416,7 +1241,7 @@
       "entry_price": 1.093e-05,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1436,7 +1261,7 @@
       "entry_price": 2.538e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1456,7 +1281,7 @@
       "entry_price": 2.44e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1476,7 +1301,7 @@
       "entry_price": 2.362e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1496,7 +1321,7 @@
       "entry_price": 8.687e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1516,7 +1341,7 @@
       "entry_price": 2.444e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1536,7 +1361,7 @@
       "entry_price": 6.668e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1556,7 +1381,7 @@
       "entry_price": 7.807e-06,
       "current_pnl_pct": -4.12,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1576,7 +1401,7 @@
       "entry_price": 2.902e-06,
       "current_pnl_pct": -5.86,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1596,7 +1421,7 @@
       "entry_price": 2.626e-06,
       "current_pnl_pct": -2.89,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1616,7 +1441,7 @@
       "entry_price": 2.968e-06,
       "current_pnl_pct": -7.11,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1636,7 +1461,7 @@
       "entry_price": 1.972e-06,
       "current_pnl_pct": -9.69,
       "peak_pnl_pct": 1.4705882352941124,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1656,7 +1481,7 @@
       "entry_price": 0.0004747,
       "current_pnl_pct": -8.26,
       "peak_pnl_pct": 0.0,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1676,7 +1501,7 @@
       "entry_price": 3.694e-06,
       "current_pnl_pct": -0.14,
       "peak_pnl_pct": 1.380617217108826,
-      "price_points": 325,
+      "price_points": 329,
       "active_params": [
         "conservative",
         "current",
@@ -1696,7 +1521,7 @@
       "entry_price": 2.74e-06,
       "current_pnl_pct": -0.15,
       "peak_pnl_pct": 0.03649635036495624,
-      "price_points": 323,
+      "price_points": 327,
       "active_params": [
         "conservative",
         "current",
@@ -1716,7 +1541,7 @@
       "entry_price": 2.435e-06,
       "current_pnl_pct": -0.74,
       "peak_pnl_pct": 0.1232032854209475,
-      "price_points": 321,
+      "price_points": 325,
       "active_params": [
         "conservative",
         "current",
@@ -1736,7 +1561,7 @@
       "entry_price": 2.412e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 319,
+      "price_points": 323,
       "active_params": [
         "conservative",
         "current",
@@ -1756,7 +1581,7 @@
       "entry_price": 2.418e-06,
       "current_pnl_pct": -0.17,
       "peak_pnl_pct": 0.0,
-      "price_points": 315,
+      "price_points": 319,
       "active_params": [
         "conservative",
         "current",
@@ -1776,7 +1601,7 @@
       "entry_price": 1.561e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 309,
+      "price_points": 313,
       "active_params": [
         "conservative",
         "current",
@@ -1796,7 +1621,7 @@
       "entry_price": 1.54e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 307,
+      "price_points": 311,
       "active_params": [
         "conservative",
         "current",
@@ -1816,7 +1641,7 @@
       "entry_price": 2.529e-06,
       "current_pnl_pct": -4.47,
       "peak_pnl_pct": 0.0,
-      "price_points": 295,
+      "price_points": 299,
       "active_params": [
         "conservative",
         "current",
@@ -1836,7 +1661,7 @@
       "entry_price": 2.417e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 285,
+      "price_points": 289,
       "active_params": [
         "conservative",
         "current",
@@ -1856,7 +1681,7 @@
       "entry_price": 2.816e-05,
       "current_pnl_pct": 25.96,
       "peak_pnl_pct": 25.958806818181813,
-      "price_points": 275,
+      "price_points": 279,
       "active_params": [
         "conservative",
         "current",
@@ -1876,7 +1701,7 @@
       "entry_price": 2.445e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 232,
+      "price_points": 236,
       "active_params": [
         "conservative",
         "current",
@@ -1896,7 +1721,7 @@
       "entry_price": 2.417e-06,
       "current_pnl_pct": -0.08,
       "peak_pnl_pct": 0.0,
-      "price_points": 228,
+      "price_points": 232,
       "active_params": [
         "conservative",
         "current",
@@ -1916,7 +1741,7 @@
       "entry_price": 2.526e-06,
       "current_pnl_pct": -4.87,
       "peak_pnl_pct": 0.0,
-      "price_points": 222,
+      "price_points": 226,
       "active_params": [
         "conservative",
         "current",
@@ -1936,7 +1761,7 @@
       "entry_price": 2.416e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 206,
+      "price_points": 210,
       "active_params": [
         "conservative",
         "current",
@@ -1956,7 +1781,7 @@
       "entry_price": 2.448e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 202,
+      "price_points": 206,
       "active_params": [
         "conservative",
         "current",
@@ -1976,7 +1801,7 @@
       "entry_price": 2.823e-05,
       "current_pnl_pct": 25.26,
       "peak_pnl_pct": 25.256818986893382,
-      "price_points": 198,
+      "price_points": 202,
       "active_params": [
         "conservative",
         "current",
@@ -1996,7 +1821,7 @@
       "entry_price": 2.404e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 196,
+      "price_points": 200,
       "active_params": [
         "conservative",
         "current",
@@ -2016,7 +1841,7 @@
       "entry_price": 2.415e-06,
       "current_pnl_pct": -0.08,
       "peak_pnl_pct": 0.0,
-      "price_points": 188,
+      "price_points": 192,
       "active_params": [
         "conservative",
         "current",
@@ -2036,7 +1861,7 @@
       "entry_price": 2.943e-06,
       "current_pnl_pct": -7.14,
       "peak_pnl_pct": 0.0,
-      "price_points": 170,
+      "price_points": 174,
       "active_params": [
         "conservative",
         "current",
@@ -2056,7 +1881,7 @@
       "entry_price": 2.394e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 146,
+      "price_points": 150,
       "active_params": [
         "conservative",
         "current",
@@ -2076,7 +1901,7 @@
       "entry_price": 2.402e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 144,
+      "price_points": 148,
       "active_params": [
         "conservative",
         "current",
@@ -2096,7 +1921,7 @@
       "entry_price": 1.227e-05,
       "current_pnl_pct": -2.85,
       "peak_pnl_pct": 2.3634881825590925,
-      "price_points": 100,
+      "price_points": 104,
       "active_params": [
         "conservative",
         "current",
@@ -2112,9 +1937,9 @@
       "symbol": "Seedance",
       "entry_time": "2026-02-17T14:54:22.334532+09:00",
       "entry_price": 0.0001403,
-      "current_pnl_pct": -8.55,
+      "current_pnl_pct": -9.05,
       "peak_pnl_pct": 0.0,
-      "price_points": 100,
+      "price_points": 104,
       "active_params": [
         "conservative",
         "current",
@@ -2134,7 +1959,7 @@
       "entry_price": 2.411e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 98,
+      "price_points": 102,
       "active_params": [
         "conservative",
         "current",
@@ -2154,7 +1979,7 @@
       "entry_price": 2.409e-06,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 90,
+      "price_points": 94,
       "active_params": [
         "conservative",
         "current",
@@ -2174,7 +1999,7 @@
       "entry_price": 2.63e-05,
       "current_pnl_pct": 34.75,
       "peak_pnl_pct": 34.75285171102662,
-      "price_points": 84,
+      "price_points": 88,
       "active_params": [
         "conservative",
         "current",
@@ -2194,7 +2019,7 @@
       "entry_price": 2.751e-05,
       "current_pnl_pct": 29.23,
       "peak_pnl_pct": 29.225736095965104,
-      "price_points": 62,
+      "price_points": 66,
       "active_params": [
         "conservative"
       ],
@@ -2205,9 +2030,9 @@
       "symbol": "HTC",
       "entry_time": "2026-02-17T15:06:59.540012+09:00",
       "entry_price": 8.449e-05,
-      "current_pnl_pct": 2.28,
+      "current_pnl_pct": 2.2,
       "peak_pnl_pct": 6.5451532725766315,
-      "price_points": 62,
+      "price_points": 66,
       "active_params": [
         "conservative"
       ],
@@ -2220,7 +2045,7 @@
       "entry_price": 0.0169,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 62,
+      "price_points": 66,
       "active_params": [
         "conservative",
         "current",
@@ -2240,7 +2065,7 @@
       "entry_price": 6.893e-06,
       "current_pnl_pct": -12.26,
       "peak_pnl_pct": 0.0,
-      "price_points": 58,
+      "price_points": 62,
       "active_params": [
         "conservative",
         "current",
@@ -2260,7 +2085,7 @@
       "entry_price": 2.436e-06,
       "current_pnl_pct": 0.21,
       "peak_pnl_pct": 0.20525451559934016,
-      "price_points": 14,
+      "price_points": 18,
       "active_params": [
         "conservative",
         "current",
@@ -2278,6 +2103,26 @@
       "symbol": "KITCHEN",
       "entry_time": "2026-02-17T15:26:34.794290+09:00",
       "entry_price": 1.389e-05,
+      "current_pnl_pct": 0.43,
+      "peak_pnl_pct": 1.0799136069114423,
+      "price_points": 6,
+      "active_params": [
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "low_act",
+        "micro"
+      ],
+      "score": 50.33714416789774,
+      "grade": "B"
+    },
+    {
+      "symbol": "house",
+      "entry_time": "2026-02-17T15:27:53.207850+09:00",
+      "entry_price": 0.0007343,
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
       "price_points": 2,
@@ -2291,1001 +2136,11 @@
         "low_act",
         "micro"
       ],
-      "score": 50.33714416789774,
-      "grade": "B"
+      "score": 32.78573585135803,
+      "grade": "D"
     }
   ],
   "recent_completed": [
-    {
-      "address": "GxggBxYiZXsPUcHvWqrmtm72FbMUepKrfqQ9ubtapump",
-      "symbol": "Robot",
-      "entry_time": "2026-02-17T14:27:14.150055+09:00",
-      "entry_price": 4.363e-05,
-      "amount_usd": 20.0,
-      "score": 45.6276893263914,
-      "grade": "C",
-      "liquidity": 16265.07,
-      "volume_24h": 33609.6,
-      "token_age_min": 1.6,
-      "peak_pnl_pct": 17.26,
-      "price_points": 6,
-      "pc_5m": 20.86,
-      "pc_1h": 20.86,
-      "buys_1h": 444,
-      "sells_1h": 363,
-      "bs_ratio": 0.0,
-      "completed_at": "2026-02-17T14:28:54.274633+09:00",
-      "results": {
-        "conservative": {
-          "act": 8.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 5.27,
-          "exit_pnl_usd": 1.05,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:28:54.274103+09:00",
-          "highest_pnl": 17.26,
-          "trail_activated": true
-        },
-        "current": {
-          "act": 5.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 5.27,
-          "exit_pnl_usd": 1.05,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:28:54.274103+09:00",
-          "highest_pnl": 17.26,
-          "trail_activated": true
-        },
-        "moderate": {
-          "act": 3.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 5.27,
-          "exit_pnl_usd": 1.05,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:28:54.274103+09:00",
-          "highest_pnl": 17.26,
-          "trail_activated": true
-        },
-        "tight": {
-          "act": 3.0,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": 5.27,
-          "exit_pnl_usd": 1.05,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:28:54.274103+09:00",
-          "highest_pnl": 17.26,
-          "trail_activated": true
-        },
-        "aggressive": {
-          "act": 2.0,
-          "trail": 1.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 5.27,
-          "exit_pnl_usd": 1.05,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:28:54.274103+09:00",
-          "highest_pnl": 17.26,
-          "trail_activated": true
-        },
-        "wide_trail": {
-          "act": 5.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 5.27,
-          "exit_pnl_usd": 1.05,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:28:54.274103+09:00",
-          "highest_pnl": 17.26,
-          "trail_activated": true
-        },
-        "low_act": {
-          "act": 2.5,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": 5.27,
-          "exit_pnl_usd": 1.05,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:28:54.274103+09:00",
-          "highest_pnl": 17.26,
-          "trail_activated": true
-        },
-        "micro": {
-          "act": 1.5,
-          "trail": 0.8,
-          "sl": -15.0,
-          "exit_pnl_pct": 5.27,
-          "exit_pnl_usd": 1.05,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:28:54.274103+09:00",
-          "highest_pnl": 17.26,
-          "trail_activated": true
-        }
-      }
-    },
-    {
-      "address": "BqJ8THReLvRNS6bpFkghQpf6qqwnLoZkxMXARqhWpump",
-      "symbol": "Orangutan",
-      "entry_time": "2026-02-17T13:22:55.012906+09:00",
-      "entry_price": 8.312e-05,
-      "amount_usd": 20.0,
-      "score": 47.20719732571337,
-      "grade": "C",
-      "liquidity": 23687.1,
-      "volume_24h": 358136.03,
-      "token_age_min": 28104.0,
-      "peak_pnl_pct": 2.53,
-      "price_points": 221,
-      "pc_5m": 8.12,
-      "pc_1h": 11.54,
-      "buys_1h": 62,
-      "sells_1h": 40,
-      "bs_ratio": 1.55,
-      "completed_at": "2026-02-17T14:40:33.362058+09:00",
-      "results": {
-        "conservative": {
-          "act": 8.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -15.22,
-          "exit_pnl_usd": -3.04,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.342241+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "current": {
-          "act": 5.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -15.22,
-          "exit_pnl_usd": -3.04,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.342241+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "moderate": {
-          "act": 3.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -15.22,
-          "exit_pnl_usd": -3.04,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.342241+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "tight": {
-          "act": 3.0,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -15.22,
-          "exit_pnl_usd": -3.04,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.342241+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "aggressive": {
-          "act": 2.0,
-          "trail": 1.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 1.23,
-          "exit_pnl_usd": 0.25,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T13:52:31.515397+09:00",
-          "highest_pnl": 2.53,
-          "trail_activated": true
-        },
-        "wide_trail": {
-          "act": 5.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -15.22,
-          "exit_pnl_usd": -3.04,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.342241+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "low_act": {
-          "act": 2.5,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": 0.2,
-          "exit_pnl_usd": 0.04,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T13:59:48.683133+09:00",
-          "highest_pnl": 2.53,
-          "trail_activated": true
-        },
-        "micro": {
-          "act": 1.5,
-          "trail": 0.8,
-          "sl": -15.0,
-          "exit_pnl_pct": -1.2,
-          "exit_pnl_usd": -0.24,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T13:38:24.207573+09:00",
-          "highest_pnl": 1.91,
-          "trail_activated": true
-        }
-      }
-    },
-    {
-      "address": "RFbfP9Gz2yC7GAV67suvnK2wqKz3XTUUEtc7KPnpump",
-      "symbol": "Minecat",
-      "entry_time": "2026-02-17T14:39:50.217774+09:00",
-      "entry_price": 9.748e-06,
-      "amount_usd": 20.0,
-      "score": 47.47919380309831,
-      "grade": "C",
-      "liquidity": 0.0,
-      "volume_24h": 39488.97,
-      "token_age_min": 6.9,
-      "peak_pnl_pct": 0.0,
-      "price_points": 3,
-      "pc_5m": 53.2,
-      "pc_1h": 248.0,
-      "buys_1h": 479,
-      "sells_1h": 320,
-      "bs_ratio": 0.0,
-      "completed_at": "2026-02-17T14:40:33.362325+09:00",
-      "results": {
-        "conservative": {
-          "act": 8.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.67,
-          "exit_pnl_usd": -4.33,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361044+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "current": {
-          "act": 5.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.67,
-          "exit_pnl_usd": -4.33,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361044+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "moderate": {
-          "act": 3.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.67,
-          "exit_pnl_usd": -4.33,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361044+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "tight": {
-          "act": 3.0,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.67,
-          "exit_pnl_usd": -4.33,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361044+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "aggressive": {
-          "act": 2.0,
-          "trail": 1.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.67,
-          "exit_pnl_usd": -4.33,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361044+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "wide_trail": {
-          "act": 5.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.67,
-          "exit_pnl_usd": -4.33,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361044+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "low_act": {
-          "act": 2.5,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.67,
-          "exit_pnl_usd": -4.33,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361044+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "micro": {
-          "act": 1.5,
-          "trail": 0.8,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.67,
-          "exit_pnl_usd": -4.33,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361044+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        }
-      }
-    },
-    {
-      "address": "HwqHoDeE7UmLXvrX5aMAnTkfUF1em3SgFt3Nv6Eqpump",
-      "symbol": "AI",
-      "entry_time": "2026-02-17T14:40:29.652946+09:00",
-      "entry_price": 7.873e-06,
-      "amount_usd": 20.0,
-      "score": 48.8832316759033,
-      "grade": "C",
-      "liquidity": 0.0,
-      "volume_24h": 8276.45,
-      "token_age_min": 1.2,
-      "peak_pnl_pct": 0.0,
-      "price_points": 1,
-      "pc_5m": 172.0,
-      "pc_1h": 172.0,
-      "buys_1h": 75,
-      "sells_1h": 42,
-      "bs_ratio": 0.0,
-      "completed_at": "2026-02-17T14:40:33.362506+09:00",
-      "results": {
-        "conservative": {
-          "act": 8.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -22.05,
-          "exit_pnl_usd": -4.41,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361729+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "current": {
-          "act": 5.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -22.05,
-          "exit_pnl_usd": -4.41,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361729+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "moderate": {
-          "act": 3.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -22.05,
-          "exit_pnl_usd": -4.41,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361729+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "tight": {
-          "act": 3.0,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -22.05,
-          "exit_pnl_usd": -4.41,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361729+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "aggressive": {
-          "act": 2.0,
-          "trail": 1.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -22.05,
-          "exit_pnl_usd": -4.41,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361729+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "wide_trail": {
-          "act": 5.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -22.05,
-          "exit_pnl_usd": -4.41,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361729+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "low_act": {
-          "act": 2.5,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -22.05,
-          "exit_pnl_usd": -4.41,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361729+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "micro": {
-          "act": 1.5,
-          "trail": 0.8,
-          "sl": -15.0,
-          "exit_pnl_pct": -22.05,
-          "exit_pnl_usd": -4.41,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:40:33.361729+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        }
-      }
-    },
-    {
-      "address": "2vTE2n6ifZsbFG8huCq4yQh4nCQjSNbzTVaa5qFZpump",
-      "symbol": "Milkify",
-      "entry_time": "2026-02-17T14:44:27.163328+09:00",
-      "entry_price": 1.754e-05,
-      "amount_usd": 20.0,
-      "score": 47.0280919347388,
-      "grade": "C",
-      "liquidity": 0.0,
-      "volume_24h": 75726.21,
-      "token_age_min": 12.0,
-      "peak_pnl_pct": 0.0,
-      "price_points": 3,
-      "pc_5m": 58.89,
-      "pc_1h": 188.0,
-      "buys_1h": 892,
-      "sells_1h": 618,
-      "bs_ratio": 0.0,
-      "completed_at": "2026-02-17T14:45:10.285731+09:00",
-      "results": {
-        "conservative": {
-          "act": 8.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.21,
-          "exit_pnl_usd": -4.24,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:45:10.285236+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "current": {
-          "act": 5.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.21,
-          "exit_pnl_usd": -4.24,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:45:10.285236+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "moderate": {
-          "act": 3.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.21,
-          "exit_pnl_usd": -4.24,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:45:10.285236+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "tight": {
-          "act": 3.0,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.21,
-          "exit_pnl_usd": -4.24,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:45:10.285236+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "aggressive": {
-          "act": 2.0,
-          "trail": 1.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.21,
-          "exit_pnl_usd": -4.24,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:45:10.285236+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "wide_trail": {
-          "act": 5.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.21,
-          "exit_pnl_usd": -4.24,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:45:10.285236+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "low_act": {
-          "act": 2.5,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.21,
-          "exit_pnl_usd": -4.24,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:45:10.285236+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "micro": {
-          "act": 1.5,
-          "trail": 0.8,
-          "sl": -15.0,
-          "exit_pnl_pct": -21.21,
-          "exit_pnl_usd": -4.24,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:45:10.285236+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        }
-      }
-    },
-    {
-      "address": "6ebqPywabVvhoXbJDvqWgYrMXX59R2MSrd1cBen9pump",
-      "symbol": "Sophia",
-      "entry_time": "2026-02-17T14:43:07.332656+09:00",
-      "entry_price": 1.012e-05,
-      "amount_usd": 20.0,
-      "score": 49.873826559819015,
-      "grade": "C",
-      "liquidity": 0.0,
-      "volume_24h": 117404.43,
-      "token_age_min": 1226.1,
-      "peak_pnl_pct": 1.58,
-      "price_points": 13,
-      "pc_5m": 27.18,
-      "pc_1h": 316.0,
-      "buys_1h": 203,
-      "sells_1h": 135,
-      "bs_ratio": 0.0,
-      "completed_at": "2026-02-17T14:47:09.600977+09:00",
-      "results": {
-        "conservative": {
-          "act": 8.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -19.1,
-          "exit_pnl_usd": -3.82,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:47:09.600380+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "current": {
-          "act": 5.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -19.1,
-          "exit_pnl_usd": -3.82,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:47:09.600380+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "moderate": {
-          "act": 3.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -19.1,
-          "exit_pnl_usd": -3.82,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:47:09.600380+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "tight": {
-          "act": 3.0,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -19.1,
-          "exit_pnl_usd": -3.82,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:47:09.600380+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "aggressive": {
-          "act": 2.0,
-          "trail": 1.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -19.1,
-          "exit_pnl_usd": -3.82,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:47:09.600380+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "wide_trail": {
-          "act": 5.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -19.1,
-          "exit_pnl_usd": -3.82,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:47:09.600380+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "low_act": {
-          "act": 2.5,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -19.1,
-          "exit_pnl_usd": -3.82,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:47:09.600380+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "micro": {
-          "act": 1.5,
-          "trail": 0.8,
-          "sl": -15.0,
-          "exit_pnl_pct": -6.18,
-          "exit_pnl_usd": -1.24,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:43:50.465826+09:00",
-          "highest_pnl": 1.58,
-          "trail_activated": true
-        }
-      }
-    },
-    {
-      "address": "CEmscq27sRDq9i5ComQVYiQuHBLdTA37PKQpWgWPpump",
-      "symbol": "Zoo",
-      "entry_time": "2026-02-17T14:46:27.249329+09:00",
-      "entry_price": 2.207e-05,
-      "amount_usd": 20.0,
-      "score": 33.315,
-      "grade": "D",
-      "liquidity": 0.0,
-      "volume_24h": 64981.65,
-      "token_age_min": 12.0,
-      "peak_pnl_pct": 0.0,
-      "price_points": 6,
-      "pc_5m": -8.74,
-      "pc_1h": 805.0,
-      "buys_1h": 1067,
-      "sells_1h": 644,
-      "bs_ratio": 0.0,
-      "completed_at": "2026-02-17T14:48:02.885412+09:00",
-      "results": {
-        "conservative": {
-          "act": 8.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -23.2,
-          "exit_pnl_usd": -4.64,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:48:02.884857+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "current": {
-          "act": 5.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -23.2,
-          "exit_pnl_usd": -4.64,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:48:02.884857+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "moderate": {
-          "act": 3.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -23.2,
-          "exit_pnl_usd": -4.64,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:48:02.884857+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "tight": {
-          "act": 3.0,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -23.2,
-          "exit_pnl_usd": -4.64,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:48:02.884857+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "aggressive": {
-          "act": 2.0,
-          "trail": 1.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -23.2,
-          "exit_pnl_usd": -4.64,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:48:02.884857+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "wide_trail": {
-          "act": 5.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -23.2,
-          "exit_pnl_usd": -4.64,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:48:02.884857+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "low_act": {
-          "act": 2.5,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -23.2,
-          "exit_pnl_usd": -4.64,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:48:02.884857+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "micro": {
-          "act": 1.5,
-          "trail": 0.8,
-          "sl": -15.0,
-          "exit_pnl_pct": -23.2,
-          "exit_pnl_usd": -4.64,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:48:02.884857+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        }
-      }
-    },
-    {
-      "address": "BirJWqKdHnh1LpEm9E3WF1DVLzx1dsEsbkdkb55yBAGS",
-      "symbol": "SNAKE",
-      "entry_time": "2026-02-17T13:38:58.226579+09:00",
-      "entry_price": 0.0001055,
-      "amount_usd": 20.0,
-      "score": 23.234990143355407,
-      "grade": "D",
-      "liquidity": 22893.74,
-      "volume_24h": 13100.23,
-      "token_age_min": 39387.9,
-      "peak_pnl_pct": 13.55,
-      "price_points": 209,
-      "pc_5m": 0.0,
-      "pc_1h": -0.85,
-      "buys_1h": 1,
-      "sells_1h": 1,
-      "bs_ratio": 0.0,
-      "completed_at": "2026-02-17T14:48:41.751058+09:00",
-      "results": {
-        "conservative": {
-          "act": 8.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 8.82,
-          "exit_pnl_usd": 1.76,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:48:41.744251+09:00",
-          "highest_pnl": 13.55,
-          "trail_activated": true
-        },
-        "current": {
-          "act": 5.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 8.82,
-          "exit_pnl_usd": 1.76,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:48:41.744251+09:00",
-          "highest_pnl": 13.55,
-          "trail_activated": true
-        },
-        "moderate": {
-          "act": 3.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 11.09,
-          "exit_pnl_usd": 2.22,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:45:24.790864+09:00",
-          "highest_pnl": 13.55,
-          "trail_activated": true
-        },
-        "tight": {
-          "act": 3.0,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": 11.09,
-          "exit_pnl_usd": 2.22,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:45:24.790864+09:00",
-          "highest_pnl": 13.55,
-          "trail_activated": true
-        },
-        "aggressive": {
-          "act": 2.0,
-          "trail": 1.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 11.09,
-          "exit_pnl_usd": 2.22,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:45:24.790864+09:00",
-          "highest_pnl": 13.55,
-          "trail_activated": true
-        },
-        "wide_trail": {
-          "act": 5.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": 11.09,
-          "exit_pnl_usd": 2.22,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:45:24.790864+09:00",
-          "highest_pnl": 13.55,
-          "trail_activated": true
-        },
-        "low_act": {
-          "act": 2.5,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": 11.09,
-          "exit_pnl_usd": 2.22,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:45:24.790864+09:00",
-          "highest_pnl": 13.55,
-          "trail_activated": true
-        },
-        "micro": {
-          "act": 1.5,
-          "trail": 0.8,
-          "sl": -15.0,
-          "exit_pnl_pct": 11.09,
-          "exit_pnl_usd": 2.22,
-          "exit_reason": "TRAIL",
-          "exit_time": "2026-02-17T14:45:24.790864+09:00",
-          "highest_pnl": 13.55,
-          "trail_activated": true
-        }
-      }
-    },
-    {
-      "address": "DugrjFQL4F8dj2FRdf7K3XyM8nDQn4kDxvbYqyHBpump",
-      "symbol": "TWICLAW",
-      "entry_time": "2026-02-17T14:49:44.999387+09:00",
-      "entry_price": 1.586e-05,
-      "amount_usd": 20.0,
-      "score": 50.3980743347572,
-      "grade": "B",
-      "liquidity": 0.0,
-      "volume_24h": 18911.12,
-      "token_age_min": 2.2,
-      "peak_pnl_pct": 0.0,
-      "price_points": 3,
-      "pc_5m": 436.0,
-      "pc_1h": 436.0,
-      "buys_1h": 261,
-      "sells_1h": 131,
-      "bs_ratio": 0.0,
-      "completed_at": "2026-02-17T14:50:28.735113+09:00",
-      "results": {
-        "conservative": {
-          "act": 8.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -16.77,
-          "exit_pnl_usd": -3.35,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:50:28.734605+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "current": {
-          "act": 5.0,
-          "trail": 3.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -16.77,
-          "exit_pnl_usd": -3.35,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:50:28.734605+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "moderate": {
-          "act": 3.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -16.77,
-          "exit_pnl_usd": -3.35,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:50:28.734605+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "tight": {
-          "act": 3.0,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -16.77,
-          "exit_pnl_usd": -3.35,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:50:28.734605+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "aggressive": {
-          "act": 2.0,
-          "trail": 1.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -16.77,
-          "exit_pnl_usd": -3.35,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:50:28.734605+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "wide_trail": {
-          "act": 5.0,
-          "trail": 2.0,
-          "sl": -15.0,
-          "exit_pnl_pct": -16.77,
-          "exit_pnl_usd": -3.35,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:50:28.734605+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "low_act": {
-          "act": 2.5,
-          "trail": 1.5,
-          "sl": -15.0,
-          "exit_pnl_pct": -16.77,
-          "exit_pnl_usd": -3.35,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:50:28.734605+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        },
-        "micro": {
-          "act": 1.5,
-          "trail": 0.8,
-          "sl": -15.0,
-          "exit_pnl_pct": -16.77,
-          "exit_pnl_usd": -3.35,
-          "exit_reason": "SL",
-          "exit_time": "2026-02-17T14:50:28.734605+09:00",
-          "highest_pnl": 0.0,
-          "trail_activated": false
-        }
-      }
-    },
     {
       "address": "EvtPZRQv9Um5U35TM128bYf4JeH9bfL2HBYfcUHipump",
       "symbol": "Materials",
@@ -4492,6 +3347,996 @@
           "exit_reason": "TRAIL",
           "exit_time": "2026-02-17T15:19:26.594568+09:00",
           "highest_pnl": 10.0,
+          "trail_activated": true
+        }
+      }
+    },
+    {
+      "address": "2ebCEh2WtdmN4oET6Xvp5DTjPTocCjvurYviTb5UcUTb",
+      "symbol": "PEPE",
+      "entry_time": "2026-02-17T13:26:59.534114+09:00",
+      "entry_price": 1.009e-05,
+      "amount_usd": 20.0,
+      "score": 29.0,
+      "grade": "D",
+      "liquidity": 89867546.07,
+      "volume_24h": 3.99,
+      "token_age_min": 198401.4,
+      "peak_pnl_pct": 0.0,
+      "price_points": 347,
+      "pc_5m": 0.0,
+      "pc_1h": 0.0,
+      "buys_1h": 0,
+      "sells_1h": 0,
+      "bs_ratio": 0.0,
+      "completed_at": "2026-02-17T15:27:16.762471+09:00",
+      "results": {
+        "conservative": {
+          "act": 8.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.743164+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "current": {
+          "act": 5.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.743164+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "moderate": {
+          "act": 3.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.743164+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "tight": {
+          "act": 3.0,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.743164+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "aggressive": {
+          "act": 2.0,
+          "trail": 1.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.743164+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "wide_trail": {
+          "act": 5.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.743164+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "low_act": {
+          "act": 2.5,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.743164+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "micro": {
+          "act": 1.5,
+          "trail": 0.8,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.743164+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        }
+      }
+    },
+    {
+      "address": "Ej47F4UxHb78mWaHRtLGuFGRvAmR4sXjEHeZvZbWNn53",
+      "symbol": "PEPE",
+      "entry_time": "2026-02-17T13:26:59.534638+09:00",
+      "entry_price": 1.247e-05,
+      "amount_usd": 20.0,
+      "score": 29.0,
+      "grade": "D",
+      "liquidity": 111231543.56,
+      "volume_24h": 3.99,
+      "token_age_min": 275108.1,
+      "peak_pnl_pct": 0.0,
+      "price_points": 347,
+      "pc_5m": 0.0,
+      "pc_1h": 0.0,
+      "buys_1h": 0,
+      "sells_1h": 0,
+      "bs_ratio": 0.0,
+      "completed_at": "2026-02-17T15:27:16.762729+09:00",
+      "results": {
+        "conservative": {
+          "act": 8.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.744368+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "current": {
+          "act": 5.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.744368+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "moderate": {
+          "act": 3.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.744368+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "tight": {
+          "act": 3.0,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.744368+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "aggressive": {
+          "act": 2.0,
+          "trail": 1.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.744368+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "wide_trail": {
+          "act": 5.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.744368+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "low_act": {
+          "act": 2.5,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.744368+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "micro": {
+          "act": 1.5,
+          "trail": 0.8,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.744368+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        }
+      }
+    },
+    {
+      "address": "4Bskt3gjpvZetH1xKpH67qMDbypSFc58rt7NLRADYqWL",
+      "symbol": "PEPE",
+      "entry_time": "2026-02-17T13:26:59.535560+09:00",
+      "entry_price": 0.001007,
+      "amount_usd": 20.0,
+      "score": 29.0,
+      "grade": "D",
+      "liquidity": 9070790851.25,
+      "volume_24h": 3.99,
+      "token_age_min": 324670.1,
+      "peak_pnl_pct": 0.0,
+      "price_points": 347,
+      "pc_5m": 0.0,
+      "pc_1h": 0.0,
+      "buys_1h": 0,
+      "sells_1h": 0,
+      "bs_ratio": 0.0,
+      "completed_at": "2026-02-17T15:27:16.762898+09:00",
+      "results": {
+        "conservative": {
+          "act": 8.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.745212+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "current": {
+          "act": 5.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.745212+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "moderate": {
+          "act": 3.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.745212+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "tight": {
+          "act": 3.0,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.745212+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "aggressive": {
+          "act": 2.0,
+          "trail": 1.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.745212+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "wide_trail": {
+          "act": 5.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.745212+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "low_act": {
+          "act": 2.5,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.745212+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "micro": {
+          "act": 1.5,
+          "trail": 0.8,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.745212+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        }
+      }
+    },
+    {
+      "address": "PE85tFDe19MhGLE7FrJEEEiFWPFsD2Zr16dGkhWgmQh",
+      "symbol": "PEPE",
+      "entry_time": "2026-02-17T13:26:59.536165+09:00",
+      "entry_price": 6.004e-06,
+      "amount_usd": 20.0,
+      "score": 26.860221749157432,
+      "grade": "D",
+      "liquidity": 1801684.53,
+      "volume_24h": 163629.99,
+      "token_age_min": 49734.3,
+      "peak_pnl_pct": 0.0,
+      "price_points": 347,
+      "pc_5m": 0.0,
+      "pc_1h": 0.0,
+      "buys_1h": 0,
+      "sells_1h": 0,
+      "bs_ratio": 0.0,
+      "completed_at": "2026-02-17T15:27:16.763058+09:00",
+      "results": {
+        "conservative": {
+          "act": 8.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746009+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "current": {
+          "act": 5.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746009+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "moderate": {
+          "act": 3.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746009+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "tight": {
+          "act": 3.0,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746009+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "aggressive": {
+          "act": 2.0,
+          "trail": 1.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746009+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "wide_trail": {
+          "act": 5.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746009+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "low_act": {
+          "act": 2.5,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746009+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "micro": {
+          "act": 1.5,
+          "trail": 0.8,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746009+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        }
+      }
+    },
+    {
+      "address": "B5WTLaRwaUQpKk7ir1wniNB6m5o8GgMrimhKMYan2R6B",
+      "symbol": "Pepe",
+      "entry_time": "2026-02-17T13:26:59.536638+09:00",
+      "entry_price": 0.0002794,
+      "amount_usd": 20.0,
+      "score": 24.855046223030158,
+      "grade": "D",
+      "liquidity": 138577.38,
+      "volume_24h": 708.66,
+      "token_age_min": 910728.5,
+      "peak_pnl_pct": 0.0,
+      "price_points": 347,
+      "pc_5m": 0.0,
+      "pc_1h": 0.0,
+      "buys_1h": 0,
+      "sells_1h": 0,
+      "bs_ratio": 0.0,
+      "completed_at": "2026-02-17T15:27:16.763222+09:00",
+      "results": {
+        "conservative": {
+          "act": 8.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.0,
+          "exit_pnl_usd": -0.2,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746788+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "current": {
+          "act": 5.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.0,
+          "exit_pnl_usd": -0.2,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746788+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "moderate": {
+          "act": 3.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.0,
+          "exit_pnl_usd": -0.2,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746788+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "tight": {
+          "act": 3.0,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.0,
+          "exit_pnl_usd": -0.2,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746788+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "aggressive": {
+          "act": 2.0,
+          "trail": 1.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.0,
+          "exit_pnl_usd": -0.2,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746788+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "wide_trail": {
+          "act": 5.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.0,
+          "exit_pnl_usd": -0.2,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746788+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "low_act": {
+          "act": 2.5,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.0,
+          "exit_pnl_usd": -0.2,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746788+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "micro": {
+          "act": 1.5,
+          "trail": 0.8,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.0,
+          "exit_pnl_usd": -0.2,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.746788+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        }
+      }
+    },
+    {
+      "address": "F9CpWoyeBJfoRB8f2pBe2ZNPbPsEE76mWZWme3StsvHK",
+      "symbol": "PEPE",
+      "entry_time": "2026-02-17T13:26:59.537065+09:00",
+      "entry_price": 0.0001974,
+      "amount_usd": 20.0,
+      "score": 24.09527284470598,
+      "grade": "D",
+      "liquidity": 61523.42,
+      "volume_24h": 313.1,
+      "token_age_min": 1616516.9,
+      "peak_pnl_pct": 0.0,
+      "price_points": 347,
+      "pc_5m": 0.0,
+      "pc_1h": -0.5,
+      "buys_1h": 0,
+      "sells_1h": 0,
+      "bs_ratio": 0.0,
+      "completed_at": "2026-02-17T15:27:16.763386+09:00",
+      "results": {
+        "conservative": {
+          "act": 8.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.747602+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "current": {
+          "act": 5.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.747602+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "moderate": {
+          "act": 3.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.747602+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "tight": {
+          "act": 3.0,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.747602+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "aggressive": {
+          "act": 2.0,
+          "trail": 1.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.747602+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "wide_trail": {
+          "act": 5.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.747602+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "low_act": {
+          "act": 2.5,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.747602+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "micro": {
+          "act": 1.5,
+          "trail": 0.8,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.747602+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        }
+      }
+    },
+    {
+      "address": "2Zaq3WyDJj2ZkMcuqUiTBfAXCjqZtqihxcwUdwv9dyHA",
+      "symbol": "PEPE",
+      "entry_time": "2026-02-17T13:26:59.537528+09:00",
+      "entry_price": 0.0001472,
+      "amount_usd": 20.0,
+      "score": 23.9342189251079,
+      "grade": "D",
+      "liquidity": 42669.9,
+      "volume_24h": 1229.8,
+      "token_age_min": 971250.6,
+      "peak_pnl_pct": 0.0,
+      "price_points": 347,
+      "pc_5m": 0.0,
+      "pc_1h": 0.0,
+      "buys_1h": 0,
+      "sells_1h": 0,
+      "bs_ratio": 0.0,
+      "completed_at": "2026-02-17T15:27:16.763544+09:00",
+      "results": {
+        "conservative": {
+          "act": 8.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.748415+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "current": {
+          "act": 5.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.748415+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "moderate": {
+          "act": 3.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.748415+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "tight": {
+          "act": 3.0,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.748415+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "aggressive": {
+          "act": 2.0,
+          "trail": 1.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.748415+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "wide_trail": {
+          "act": 5.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.748415+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "low_act": {
+          "act": 2.5,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.748415+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "micro": {
+          "act": 1.5,
+          "trail": 0.8,
+          "sl": -15.0,
+          "exit_pnl_pct": 0,
+          "exit_pnl_usd": 0.0,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.748415+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        }
+      }
+    },
+    {
+      "address": "EkJuyYyD3to61CHVPJn6wHb7xANxvqApnVJ4o2SdBAGS",
+      "symbol": "PEPE",
+      "entry_time": "2026-02-17T13:26:59.537910+09:00",
+      "entry_price": 0.0001648,
+      "amount_usd": 20.0,
+      "score": 23.359149484766395,
+      "grade": "D",
+      "liquidity": 28975.27,
+      "volume_24h": 5243.41,
+      "token_age_min": 279720.8,
+      "peak_pnl_pct": 0.0,
+      "price_points": 347,
+      "pc_5m": 0.0,
+      "pc_1h": -1.09,
+      "buys_1h": 0,
+      "sells_1h": 0,
+      "bs_ratio": 0.0,
+      "completed_at": "2026-02-17T15:27:16.763695+09:00",
+      "results": {
+        "conservative": {
+          "act": 8.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.09,
+          "exit_pnl_usd": -0.22,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.749188+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "current": {
+          "act": 5.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.09,
+          "exit_pnl_usd": -0.22,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.749188+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "moderate": {
+          "act": 3.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.09,
+          "exit_pnl_usd": -0.22,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.749188+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "tight": {
+          "act": 3.0,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.09,
+          "exit_pnl_usd": -0.22,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.749188+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "aggressive": {
+          "act": 2.0,
+          "trail": 1.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.09,
+          "exit_pnl_usd": -0.22,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.749188+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "wide_trail": {
+          "act": 5.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.09,
+          "exit_pnl_usd": -0.22,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.749188+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "low_act": {
+          "act": 2.5,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.09,
+          "exit_pnl_usd": -0.22,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.749188+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "micro": {
+          "act": 1.5,
+          "trail": 0.8,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.09,
+          "exit_pnl_usd": -0.22,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:27:16.749188+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        }
+      }
+    },
+    {
+      "address": "jk1T35eWK41MBMM8AWoYVaNbjHEEQzMDetTsfnqpump",
+      "symbol": "SOL",
+      "entry_time": "2026-02-17T13:28:08.286211+09:00",
+      "entry_price": 0.002539,
+      "amount_usd": 20.0,
+      "score": 39.16091629990341,
+      "grade": "C",
+      "liquidity": 226778.56,
+      "volume_24h": 237606.51,
+      "token_age_min": 70975.7,
+      "peak_pnl_pct": 3.51,
+      "price_points": 344,
+      "pc_5m": 0.0,
+      "pc_1h": 8.17,
+      "buys_1h": 0,
+      "sells_1h": 0,
+      "bs_ratio": 0.0,
+      "completed_at": "2026-02-17T15:28:09.241646+09:00",
+      "results": {
+        "conservative": {
+          "act": 8.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.3,
+          "exit_pnl_usd": -0.26,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:28:09.226698+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "current": {
+          "act": 5.0,
+          "trail": 3.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.3,
+          "exit_pnl_usd": -0.26,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:28:09.226698+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "moderate": {
+          "act": 3.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 1.34,
+          "exit_pnl_usd": 0.27,
+          "exit_reason": "TRAIL",
+          "exit_time": "2026-02-17T15:22:18.562319+09:00",
+          "highest_pnl": 3.51,
+          "trail_activated": true
+        },
+        "tight": {
+          "act": 3.0,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 1.34,
+          "exit_pnl_usd": 0.27,
+          "exit_reason": "TRAIL",
+          "exit_time": "2026-02-17T15:22:18.562319+09:00",
+          "highest_pnl": 3.51,
+          "trail_activated": true
+        },
+        "aggressive": {
+          "act": 2.0,
+          "trail": 1.0,
+          "sl": -15.0,
+          "exit_pnl_pct": 0.59,
+          "exit_pnl_usd": 0.12,
+          "exit_reason": "TRAIL",
+          "exit_time": "2026-02-17T14:25:17.894947+09:00",
+          "highest_pnl": 2.68,
+          "trail_activated": true
+        },
+        "wide_trail": {
+          "act": 5.0,
+          "trail": 2.0,
+          "sl": -15.0,
+          "exit_pnl_pct": -1.3,
+          "exit_pnl_usd": -0.26,
+          "exit_reason": "TIMEOUT",
+          "exit_time": "2026-02-17T15:28:09.226698+09:00",
+          "highest_pnl": 0.0,
+          "trail_activated": false
+        },
+        "low_act": {
+          "act": 2.5,
+          "trail": 1.5,
+          "sl": -15.0,
+          "exit_pnl_pct": 0.59,
+          "exit_pnl_usd": 0.12,
+          "exit_reason": "TRAIL",
+          "exit_time": "2026-02-17T14:25:17.894947+09:00",
+          "highest_pnl": 2.68,
+          "trail_activated": true
+        },
+        "micro": {
+          "act": 1.5,
+          "trail": 0.8,
+          "sl": -15.0,
+          "exit_pnl_pct": 0.75,
+          "exit_pnl_usd": 0.15,
+          "exit_reason": "TRAIL",
+          "exit_time": "2026-02-17T14:11:28.519402+09:00",
+          "highest_pnl": 1.69,
           "trail_activated": true
         }
       }
