@@ -11210,5 +11210,54 @@
       "bs_5m": 1.64,
       "liquidity_usd": 0.0
     }
+  },
+  {
+    "timestamp": "2026-02-18T08:47:52.936415+09:00",
+    "unix_time": 1771372072,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "Jwan/USDC",
+    "input_token": "USDC",
+    "output_token": "Jwan",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 122894.477998,
+    "input_amount": 20.0,
+    "output_amount": 122894.477998,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.00016274124212745737,
+    "effective_price": 0.00016274124212745737,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "3dQmBfez1nbRRk3ZEgi2srvq9m4kZrNtMUk2hxs1dM5h4ttHGJt9TdjjhWhvR9DUbiza4xbzWG624c7cx6DJqrnh",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=80 grade=S",
+    "error": "",
+    "extra": {
+      "token_address": "Gv5SW3JJam65NURPf8ViTrek14JghccjZRA3ypid6vbN",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.00016274124212745737,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 80.38786740381727,
+        "momentum": 78.79880957007633,
+        "volume": 96.37335620514176,
+        "demand": 65
+      },
+      "pc_5m": 7.76,
+      "bs_5m": 1.03,
+      "liquidity_usd": 0.0
+    }
   }
 ]
