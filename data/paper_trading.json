@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-17T12:31:43.396292+09:00",
+  "updated": "2026-02-17T12:32:52.249266+09:00",
   "total_completed": 19,
-  "total_open": 1,
-  "today_entries": 20,
+  "total_open": 2,
+  "today_entries": 21,
   "param_summary": {
     "conservative": {
       "params": {
@@ -162,17 +162,35 @@
       "symbol": "TRUMPIUS",
       "entry_time": "2026-02-17T11:58:32.928858+09:00",
       "entry_price": 0.005229,
-      "current_pnl_pct": 32.09,
+      "current_pnl_pct": 31.11,
       "peak_pnl_pct": 32.759609868043604,
-      "price_points": 171,
+      "price_points": 177,
+      "active_params": [
+        "conservative",
+        "current"
+      ],
+      "score": 71.3320785402125,
+      "grade": "A"
+    },
+    {
+      "symbol": "Community",
+      "entry_time": "2026-02-17T12:32:51.218625+09:00",
+      "entry_price": 5.18e-05,
+      "current_pnl_pct": -2.49,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
       "active_params": [
         "conservative",
         "current",
         "moderate",
-        "wide_trail"
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "low_act",
+        "micro"
       ],
-      "score": 71.3320785402125,
-      "grade": "A"
+      "score": 61.13436394792549,
+      "grade": "B"
     }
   ],
   "recent_completed": [
