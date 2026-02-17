@@ -1020,9 +1020,13 @@ function updateStrategiesSection() {
 // ─── Daily Reports Tab ───
 function updateDailyReportsSection() {
     const container = document.getElementById('daily-reports-container');
-    const today = new Date().toISOString().split('T')[0];
+    // Use JST (UTC+9) for date comparison
+    const now = new Date();
+    const jstOffset = 9 * 60;
+    const jstDate = new Date(now.getTime() + (jstOffset + now.getTimezoneOffset()) * 60000);
+    const today = jstDate.toISOString().split('T')[0];
 
-    // Filter out future dates
+    // Filter out future dates (JST-based)
     const reports = dashboardData.dailyReports.filter(r => r.date <= today);
 
     if (!reports.length) {

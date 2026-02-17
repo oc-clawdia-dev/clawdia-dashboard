@@ -372,12 +372,42 @@ def update_tasks_data():
     print(f"Saved {len(tasks_data.get('projects', []))} projects with {total_all_tasks} total tasks to {output_path}")
     return tasks_data
 
+def _get_live_trade_summary(date_str):
+    """当日のトレードJSONLからリアルタイムサマリーを生成"""
+    trades_file = os.path.join(os.path.dirname(__file__), '..', 'bot', 'data', 'trades', f'trades_{date_str}.jsonl')
+    if not os.path.exists(trades_file):
+        return ""
+    trades = []
+    with open(trades_file) as f:
+        for line in f:
+            try:
+                trades.append(json.loads(line.strip()))
+            except:
+                pass
+    if not trades:
+        return ""
+    
+    # Group by strategy
+    by_strat = {}
+    for t in trades:
+        s = t.get('strategy', 'unknown')
+        by_strat.setdefault(s, []).append(t)
+    
+    lines = [f"\n---\n**リアルタイム集計** ({len(trades)}件)\n"]
+    for strat, strades in by_strat.items():
+        sells = [t for t in strades if t.get('side') == 'sell' or t.get('direction') == 'sell']
+        buys = [t for t in strades if t.get('side') == 'buy' or t.get('direction') == 'buy']
+        pnl = sum(t.get('pnl_usd', 0) for t in sells if t.get('pnl_usd'))
+        lines.append(f"- **{strat}**: {len(buys)}買/{len(sells)}売, P&L: ${pnl:+.2f}")
+    return '\n'.join(lines)
+
 def update_daily_reports_data():
     """日報データを更新"""
     print("Updating daily reports data...")
     
     memory_dir = '../memory'  # ワークスペースルートのmemoryディレクトリ
     reports = []
+    today_str = datetime.now().strftime('%Y-%m-%d')
     
     try:
         if os.path.exists(memory_dir):
@@ -407,6 +437,13 @@ def update_daily_reports_data():
                         content = re.sub(r'MTQ3[A-Za-z0-9._\-]{50,}', '[REDACTED]', content)
                         content = re.sub(r'sk-ant-[A-Za-z0-9\-]{50,}', '[REDACTED]', content)
                         content = re.sub(r'MATON_API_KEY[^\n]*', '[REDACTED]', content)
+                        
+                        # 当日の日報にリアルタイムトレードサマリーを追加
+                        if date_str == today_str:
+                            live_summary = _get_live_trade_summary(date_str)
+                            if live_summary:
+                                content += live_summary
+                        
                         reports.append({
                             'date': date_str,
                             'content': content
