@@ -10973,5 +10973,52 @@
       "dexscreener_pnl_pct": -20.8,
       "actual_pnl_pct": -32.46
     }
+  },
+  {
+    "timestamp": "2026-02-18T00:57:07.517947+09:00",
+    "unix_time": 1771343827,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "Cash/USDC",
+    "input_token": "USDC",
+    "output_token": "Cash",
+    "order_input_amount": 30.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 254659.974778,
+    "input_amount": 30.0,
+    "output_amount": 254659.974778,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.00011780414266573505,
+    "effective_price": 0.00011780414266573505,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "317i5mdRGhoXRkzn2g23BnAw74ArFDrDC7uu2JaRJF1mFw52EqSuGA3qJp26RiVUgJi1emmdtm542kDvaJuRqCnF",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=76 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "7KEdt8JYScnDDMm1JAEjEaS5cyCXUgqAVNhsXANSoek5",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.00011780414266573505,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 76.39895696317689,
+        "momentum": 75.10666172260179,
+        "volume": 100,
+        "demand": 55
+      },
+      "liquidity_usd": 0.0
+    }
   }
 ]
