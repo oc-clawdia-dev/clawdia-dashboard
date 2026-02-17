@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-18T08:48:39.280196+09:00",
+  "updated": "2026-02-18T08:49:44.878412+09:00",
   "total_completed": 2,
-  "total_open": 10,
-  "today_entries": 12,
+  "total_open": 11,
+  "today_entries": 13,
   "param_summary": {
     "live": {
       "params": {
@@ -177,9 +177,9 @@
       "symbol": "OmegaX",
       "entry_time": "2026-02-18T08:26:50.407884+09:00",
       "entry_price": 0.0009937375,
-      "current_pnl_pct": -4.19,
+      "current_pnl_pct": -5.02,
       "peak_pnl_pct": 0.0,
-      "price_points": 101,
+      "price_points": 106,
       "active_params": [
         "live",
         "conservative",
@@ -197,9 +197,9 @@
       "symbol": "GOBAMA",
       "entry_time": "2026-02-18T08:26:50.408605+09:00",
       "entry_price": 0.004420825,
-      "current_pnl_pct": 28.07,
-      "peak_pnl_pct": 28.31428522956689,
-      "price_points": 101,
+      "current_pnl_pct": 29.66,
+      "peak_pnl_pct": 30.23304473712485,
+      "price_points": 106,
       "active_params": [
         "live",
         "conservative",
@@ -217,9 +217,9 @@
       "symbol": "TRENCH",
       "entry_time": "2026-02-18T08:26:50.409112+09:00",
       "entry_price": 0.0002627075,
-      "current_pnl_pct": 0.28,
+      "current_pnl_pct": 1.8,
       "peak_pnl_pct": 6.404461235404391,
-      "price_points": 101,
+      "price_points": 106,
       "active_params": [
         "conservative"
       ],
@@ -232,7 +232,7 @@
       "entry_price": 3.53625,
       "current_pnl_pct": -5.43,
       "peak_pnl_pct": 0.0,
-      "price_points": 101,
+      "price_points": 106,
       "active_params": [
         "live",
         "conservative",
@@ -250,9 +250,9 @@
       "symbol": "IF",
       "entry_time": "2026-02-18T08:26:50.410067+09:00",
       "entry_price": 0.00032133749999999994,
-      "current_pnl_pct": -2.12,
+      "current_pnl_pct": -2.51,
       "peak_pnl_pct": 2.8894853541836962,
-      "price_points": 101,
+      "price_points": 106,
       "active_params": [
         "wide_trail",
         "wide_sl15"
@@ -264,9 +264,9 @@
       "symbol": "SOULGUY",
       "entry_time": "2026-02-18T08:26:50.410518+09:00",
       "entry_price": 0.0003965725,
-      "current_pnl_pct": -1.36,
+      "current_pnl_pct": -1.63,
       "peak_pnl_pct": 0.0,
-      "price_points": 101,
+      "price_points": 106,
       "active_params": [
         "live",
         "conservative",
@@ -286,7 +286,7 @@
       "entry_price": 0.0014770249999999999,
       "current_pnl_pct": -5.74,
       "peak_pnl_pct": 0.0,
-      "price_points": 101,
+      "price_points": 106,
       "active_params": [
         "live",
         "conservative",
@@ -306,7 +306,7 @@
       "entry_price": 0.00011807999999999998,
       "current_pnl_pct": -3.64,
       "peak_pnl_pct": 0.0,
-      "price_points": 91,
+      "price_points": 96,
       "active_params": [
         "live",
         "conservative",
@@ -326,7 +326,7 @@
       "entry_price": 0.00020776749999999999,
       "current_pnl_pct": -7.18,
       "peak_pnl_pct": 0.0,
-      "price_points": 86,
+      "price_points": 91,
       "active_params": [
         "live",
         "conservative",
@@ -344,9 +344,9 @@
       "symbol": "DEVLESS",
       "entry_time": "2026-02-18T08:45:19.267557+09:00",
       "entry_price": 0.0001325325,
-      "current_pnl_pct": -4.22,
+      "current_pnl_pct": -9.0,
       "peak_pnl_pct": 0.0,
-      "price_points": 16,
+      "price_points": 21,
       "active_params": [
         "live",
         "conservative",
@@ -358,6 +358,26 @@
         "wide_sl15"
       ],
       "score": 57.537782725986816,
+      "grade": "B"
+    },
+    {
+      "symbol": "WILSON",
+      "entry_time": "2026-02-18T08:49:44.012396+09:00",
+      "entry_price": 0.00032584749999999994,
+      "current_pnl_pct": -4.88,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 52.6065953266196,
       "grade": "B"
     }
   ],
