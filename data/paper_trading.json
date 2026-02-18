@@ -1,7 +1,7 @@
 {
-  "updated": "2026-02-18T12:22:22.618104+09:00",
+  "updated": "2026-02-18T12:23:27.118377+09:00",
   "total_completed": 46,
-  "total_open": 7,
+  "total_open": 10,
   "today_entries": 43,
   "param_summary": {
     "live": {
@@ -174,12 +174,52 @@
   },
   "open_positions": [
     {
+      "symbol": "Pixel",
+      "entry_time": "2026-02-18T10:45:56.019098+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 396,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 62.15239325846407,
+      "grade": "B"
+    },
+    {
+      "symbol": "palantir",
+      "entry_time": "2026-02-18T10:51:18.577979+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 375,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 49.9812284610591,
+      "grade": "C"
+    },
+    {
       "symbol": "PUMP",
-      "entry_time": "2026-02-18T11:17:22.896817+09:00",
+      "entry_time": "2026-02-18T11:17:22.584022+09:00",
       "entry_price": 0.00222835,
       "current_pnl_pct": -4.48,
       "peak_pnl_pct": 0.0,
-      "price_points": 265,
+      "price_points": 272,
       "active_params": [
         "live",
         "conservative",
@@ -195,11 +235,11 @@
     },
     {
       "symbol": "Benham",
-      "entry_time": "2026-02-18T11:24:50.308270+09:00",
+      "entry_time": "2026-02-18T11:24:50.274901+09:00",
       "entry_price": 8.369125e-05,
       "current_pnl_pct": -3.54,
       "peak_pnl_pct": 0.0,
-      "price_points": 234,
+      "price_points": 241,
       "active_params": [
         "live",
         "conservative",
@@ -215,11 +255,11 @@
     },
     {
       "symbol": "TULSA",
-      "entry_time": "2026-02-18T11:28:23.042291+09:00",
+      "entry_time": "2026-02-18T11:28:23.025007+09:00",
       "entry_price": 0.00038704,
-      "current_pnl_pct": 6.28,
+      "current_pnl_pct": 5.7,
       "peak_pnl_pct": 6.483180033071512,
-      "price_points": 219,
+      "price_points": 226,
       "active_params": [
         "live",
         "conservative",
@@ -234,12 +274,32 @@
       "grade": "C"
     },
     {
-      "symbol": "WUBOT",
-      "entry_time": "2026-02-18T11:51:50.682350+09:00",
+      "symbol": "automaton",
+      "entry_time": "2026-02-18T11:37:26.510326+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 124,
+      "price_points": 189,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 70.56892856194975,
+      "grade": "A"
+    },
+    {
+      "symbol": "WUBOT",
+      "entry_time": "2026-02-18T11:51:33.029930+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 131,
       "active_params": [
         "live",
         "conservative",
@@ -255,11 +315,11 @@
     },
     {
       "symbol": "G2E",
-      "entry_time": "2026-02-18T11:59:21.523029+09:00",
+      "entry_time": "2026-02-18T11:59:21.508781+09:00",
       "entry_price": 0.00448745,
-      "current_pnl_pct": -3.07,
+      "current_pnl_pct": -2.31,
       "peak_pnl_pct": 0.0,
-      "price_points": 93,
+      "price_points": 98,
       "active_params": [
         "live",
         "conservative",
@@ -275,11 +335,11 @@
     },
     {
       "symbol": "PEPE",
-      "entry_time": "2026-02-18T12:20:17.514596+09:00",
+      "entry_time": "2026-02-18T12:20:17.627081+09:00",
       "entry_price": 0.000146165,
-      "current_pnl_pct": 3.86,
-      "peak_pnl_pct": 3.8603632880648497,
-      "price_points": 7,
+      "current_pnl_pct": 49.75,
+      "peak_pnl_pct": 49.7537030068758,
+      "price_points": 12,
       "active_params": [
         "live",
         "conservative",
@@ -295,11 +355,11 @@
     },
     {
       "symbol": "TRUMP2",
-      "entry_time": "2026-02-18T12:22:02.972909+09:00",
+      "entry_time": "2026-02-18T12:22:02.843070+09:00",
       "entry_price": 0.047939249999999996,
-      "current_pnl_pct": -4.88,
+      "current_pnl_pct": -5.1,
       "peak_pnl_pct": 0.0,
-      "price_points": 2,
+      "price_points": 7,
       "active_params": [
         "live",
         "conservative",
