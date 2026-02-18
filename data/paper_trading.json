@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T02:53:47.090076+09:00",
+  "updated": "2026-02-19T02:54:53.436984+09:00",
   "total_completed": 134,
   "total_open": 4,
-  "today_entries": 6,
+  "today_entries": 5,
   "param_summary": {
     "live": {
       "params": {
@@ -176,48 +176,48 @@
     "am_re_optimal": {
       "name": "am_re_optimal",
       "size": 20,
-      "consec_losses": 2,
-      "pause_until": "2026-02-19T05:34:33.618571+09:00",
-      "total_pnl": -5.68,
-      "trades_taken": 2,
+      "consec_losses": 1,
+      "pause_until": null,
+      "total_pnl": -2.03,
+      "trades_taken": 1,
       "trades_skipped": 0,
       "wins": 0,
       "win_rate": 0.0,
-      "ev_per_trade": -2.84
+      "ev_per_trade": -2.03
     },
     "am_conservative": {
       "name": "am_conservative",
       "size": 20,
-      "consec_losses": 2,
+      "consec_losses": 1,
       "pause_until": null,
-      "total_pnl": -5.68,
-      "trades_taken": 2,
+      "total_pnl": -2.03,
+      "trades_taken": 1,
       "trades_skipped": 0,
       "wins": 0,
       "win_rate": 0.0,
-      "ev_per_trade": -2.84
+      "ev_per_trade": -2.03
     },
     "am_no_sizing": {
       "name": "am_no_sizing",
       "size": 20,
-      "consec_losses": 2,
-      "pause_until": "2026-02-19T05:34:33.618571+09:00",
-      "total_pnl": -5.68,
-      "trades_taken": 2,
+      "consec_losses": 1,
+      "pause_until": null,
+      "total_pnl": -2.03,
+      "trades_taken": 1,
       "trades_skipped": 0,
       "wins": 0,
       "win_rate": 0.0,
-      "ev_per_trade": -2.84
+      "ev_per_trade": -2.03
     }
   },
   "open_positions": [
     {
       "symbol": "Buttcoin",
-      "entry_time": "2026-02-19T02:22:42.441327+09:00",
-      "entry_price": 0.01704575,
-      "current_pnl_pct": -8.31,
+      "entry_time": "2026-02-19T02:23:14.975360+09:00",
+      "entry_price": 0.017148249999999997,
+      "current_pnl_pct": -9.6,
       "peak_pnl_pct": 0.0,
-      "price_points": 141,
+      "price_points": 146,
       "active_params": [
         "live",
         "conservative",
@@ -228,16 +228,16 @@
         "wide_trail",
         "wide_sl15"
       ],
-      "score": 43.95946270468927,
+      "score": 44.92154961003075,
       "grade": "C"
     },
     {
       "symbol": "EMCC",
-      "entry_time": "2026-02-19T02:24:53.798811+09:00",
+      "entry_time": "2026-02-19T02:25:28.139674+09:00",
       "entry_price": 0.00021053499999999998,
       "current_pnl_pct": -9.51,
       "peak_pnl_pct": 0.0,
-      "price_points": 131,
+      "price_points": 136,
       "active_params": [
         "wide_trail",
         "wide_sl15"
@@ -247,11 +247,11 @@
     },
     {
       "symbol": "Hosico",
-      "entry_time": "2026-02-19T02:34:00.296908+09:00",
+      "entry_time": "2026-02-19T02:33:22.774080+09:00",
       "entry_price": 6.654299999999999e-05,
-      "current_pnl_pct": -8.42,
+      "current_pnl_pct": -8.88,
       "peak_pnl_pct": 0.0,
-      "price_points": 91,
+      "price_points": 101,
       "active_params": [
         "live",
         "conservative",
@@ -267,11 +267,11 @@
     },
     {
       "symbol": "HYPERSKIDS",
-      "entry_time": "2026-02-19T02:39:28.684415+09:00",
+      "entry_time": "2026-02-19T02:39:42.179868+09:00",
       "entry_price": 0.0006262749999999999,
       "current_pnl_pct": -5.03,
       "peak_pnl_pct": 0.0,
-      "price_points": 66,
+      "price_points": 71,
       "active_params": [
         "live",
         "conservative",
