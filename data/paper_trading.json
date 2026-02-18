@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T07:10:29.054157+09:00",
+  "updated": "2026-02-19T07:11:34.071672+09:00",
   "total_completed": 162,
   "total_open": 7,
-  "today_entries": 23,
+  "today_entries": 22,
   "param_summary": {
     "live": {
       "params": {
@@ -176,48 +176,48 @@
     "am_re_optimal": {
       "name": "am_re_optimal",
       "size": 20,
-      "consec_losses": 2,
-      "pause_until": "2026-02-19T09:51:57.744703+09:00",
-      "total_pnl": -8.75,
-      "trades_taken": 4,
-      "trades_skipped": 12,
-      "wins": 0,
-      "win_rate": 0.0,
-      "ev_per_trade": -2.19
+      "consec_losses": 1,
+      "pause_until": null,
+      "total_pnl": -13.13,
+      "trades_taken": 7,
+      "trades_skipped": 8,
+      "wins": 2,
+      "win_rate": 28.6,
+      "ev_per_trade": -1.88
     },
     "am_conservative": {
       "name": "am_conservative",
       "size": 20,
       "consec_losses": 2,
       "pause_until": null,
-      "total_pnl": -22.64,
-      "trades_taken": 13,
+      "total_pnl": -19.15,
+      "trades_taken": 12,
       "trades_skipped": 3,
       "wins": 3,
-      "win_rate": 23.1,
-      "ev_per_trade": -1.74
+      "win_rate": 25.0,
+      "ev_per_trade": -1.6
     },
     "am_no_sizing": {
       "name": "am_no_sizing",
       "size": 20,
-      "consec_losses": 2,
-      "pause_until": "2026-02-19T09:51:57.744703+09:00",
-      "total_pnl": -8.75,
-      "trades_taken": 4,
-      "trades_skipped": 12,
-      "wins": 0,
-      "win_rate": 0.0,
-      "ev_per_trade": -2.19
+      "consec_losses": 1,
+      "pause_until": null,
+      "total_pnl": -6.93,
+      "trades_taken": 7,
+      "trades_skipped": 8,
+      "wins": 2,
+      "win_rate": 28.6,
+      "ev_per_trade": -0.99
     }
   },
   "open_positions": [
     {
       "symbol": "WhiteKim",
-      "entry_time": "2026-02-19T05:15:44.668086+09:00",
+      "entry_time": "2026-02-19T05:15:44.696424+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 526,
+      "price_points": 531,
       "active_params": [
         "live",
         "conservative",
@@ -233,11 +233,11 @@
     },
     {
       "symbol": "CWIF",
-      "entry_time": "2026-02-19T05:21:13.084114+09:00",
+      "entry_time": "2026-02-19T05:21:12.942349+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 501,
+      "price_points": 506,
       "active_params": [
         "live",
         "conservative",
@@ -253,11 +253,11 @@
     },
     {
       "symbol": "PANTHEISM",
-      "entry_time": "2026-02-19T05:28:50.945136+09:00",
+      "entry_time": "2026-02-19T05:28:50.974245+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 466,
+      "price_points": 471,
       "active_params": [
         "live",
         "conservative",
@@ -273,11 +273,11 @@
     },
     {
       "symbol": "Kmch",
-      "entry_time": "2026-02-19T06:13:45.715815+09:00",
+      "entry_time": "2026-02-19T06:13:45.886386+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 261,
+      "price_points": 266,
       "active_params": [
         "live",
         "conservative",
@@ -293,11 +293,11 @@
     },
     {
       "symbol": "Punch",
-      "entry_time": "2026-02-19T06:40:59.678902+09:00",
+      "entry_time": "2026-02-19T06:40:59.693036+09:00",
       "entry_price": 0.007519399999999999,
-      "current_pnl_pct": -4.79,
+      "current_pnl_pct": -4.16,
       "peak_pnl_pct": 0.0,
-      "price_points": 136,
+      "price_points": 141,
       "active_params": [
         "live",
         "conservative",
@@ -313,11 +313,11 @@
     },
     {
       "symbol": "TOTO",
-      "entry_time": "2026-02-19T06:44:17.280970+09:00",
+      "entry_time": "2026-02-19T06:44:17.403899+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 121,
+      "price_points": 126,
       "active_params": [
         "live",
         "conservative",
@@ -333,11 +333,11 @@
     },
     {
       "symbol": "Henry",
-      "entry_time": "2026-02-19T07:06:08.311206+09:00",
+      "entry_time": "2026-02-19T07:06:08.182371+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 21,
+      "price_points": 26,
       "active_params": [
         "live",
         "conservative",
