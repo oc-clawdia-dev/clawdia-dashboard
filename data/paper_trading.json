@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-18T21:11:35.507142+09:00",
+  "updated": "2026-02-18T21:12:41.543027+09:00",
   "total_completed": 111,
-  "total_open": 2,
-  "today_entries": 69,
+  "total_open": 3,
+  "today_entries": 70,
   "param_summary": {
     "live": {
       "params": {
@@ -175,11 +175,11 @@
   "open_positions": [
     {
       "symbol": "soluna",
-      "entry_time": "2026-02-18T20:49:32.458739+09:00",
+      "entry_time": "2026-02-18T20:49:32.350416+09:00",
       "entry_price": 0.00017158499999999998,
-      "current_pnl_pct": -13.34,
+      "current_pnl_pct": -11.24,
       "peak_pnl_pct": 0.3496809161640302,
-      "price_points": 101,
+      "price_points": 106,
       "active_params": [
         "wide_trail",
         "wide_sl15"
@@ -189,11 +189,11 @@
     },
     {
       "symbol": "MAYA",
-      "entry_time": "2026-02-18T21:08:15.625877+09:00",
+      "entry_time": "2026-02-18T21:08:15.567063+09:00",
       "entry_price": 0.0002010025,
-      "current_pnl_pct": -4.3,
+      "current_pnl_pct": -4.44,
       "peak_pnl_pct": 0.0,
-      "price_points": 16,
+      "price_points": 21,
       "active_params": [
         "live",
         "conservative",
@@ -206,6 +206,26 @@
       ],
       "score": 38.85714809373367,
       "grade": "C"
+    },
+    {
+      "symbol": "Shark",
+      "entry_time": "2026-02-18T21:12:40.872061+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 70.04281846177938,
+      "grade": "A"
     }
   ],
   "recent_completed": [
