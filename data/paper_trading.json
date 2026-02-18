@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-18T11:24:51.177867+09:00",
+  "updated": "2026-02-18T11:26:15.748558+09:00",
   "total_completed": 33,
-  "total_open": 8,
-  "today_entries": 34,
+  "total_open": 5,
+  "today_entries": 35,
   "param_summary": {
     "live": {
       "params": {
@@ -174,32 +174,12 @@
   },
   "open_positions": [
     {
-      "symbol": "GAS",
-      "entry_time": "2026-02-18T09:30:45.850078+09:00",
-      "entry_price": 3.6622412549858156e-05,
-      "current_pnl_pct": -4.66,
-      "peak_pnl_pct": 0.0,
-      "price_points": 445,
-      "active_params": [
-        "live",
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "wide_sl15"
-      ],
-      "score": 50.21585266903129,
-      "grade": "B"
-    },
-    {
       "symbol": "丙午",
       "entry_time": "2026-02-18T09:59:24.383492+09:00",
       "entry_price": 0.0004490525,
-      "current_pnl_pct": -14.19,
+      "current_pnl_pct": -14.24,
       "peak_pnl_pct": 0.0,
-      "price_points": 331,
+      "price_points": 334,
       "active_params": [
         "wide_trail",
         "wide_sl15"
@@ -213,7 +193,7 @@
       "entry_price": 0.0030729499999999996,
       "current_pnl_pct": -5.32,
       "peak_pnl_pct": 0.0,
-      "price_points": 324,
+      "price_points": 327,
       "active_params": [
         "live",
         "conservative",
@@ -228,72 +208,12 @@
       "grade": "C"
     },
     {
-      "symbol": "CHIMP",
-      "entry_time": "2026-02-18T10:12:53.395974+09:00",
-      "entry_price": 3.6622412549858156e-05,
-      "current_pnl_pct": -4.66,
-      "peak_pnl_pct": 0.0,
-      "price_points": 278,
-      "active_params": [
-        "live",
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "wide_sl15"
-      ],
-      "score": 67.85250666987602,
-      "grade": "A"
-    },
-    {
-      "symbol": "Pixel",
-      "entry_time": "2026-02-18T10:45:56.019098+09:00",
-      "entry_price": 3.6622412549858156e-05,
-      "current_pnl_pct": -4.66,
-      "peak_pnl_pct": 0.0,
-      "price_points": 156,
-      "active_params": [
-        "live",
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "wide_sl15"
-      ],
-      "score": 62.15239325846407,
-      "grade": "B"
-    },
-    {
-      "symbol": "palantir",
-      "entry_time": "2026-02-18T10:51:18.577979+09:00",
-      "entry_price": 3.6622412549858156e-05,
-      "current_pnl_pct": -4.66,
-      "peak_pnl_pct": 0.0,
-      "price_points": 135,
-      "active_params": [
-        "live",
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
-        "wide_trail",
-        "wide_sl15"
-      ],
-      "score": 49.9812284610591,
-      "grade": "C"
-    },
-    {
       "symbol": "PUMP",
-      "entry_time": "2026-02-18T11:17:22.584022+09:00",
+      "entry_time": "2026-02-18T11:17:22.896817+09:00",
       "entry_price": 0.00222835,
       "current_pnl_pct": -5.36,
       "peak_pnl_pct": 0.0,
-      "price_points": 32,
+      "price_points": 37,
       "active_params": [
         "live",
         "conservative",
@@ -309,11 +229,11 @@
     },
     {
       "symbol": "Benham",
-      "entry_time": "2026-02-18T11:24:50.274901+09:00",
+      "entry_time": "2026-02-18T11:24:50.308270+09:00",
       "entry_price": 8.369125e-05,
-      "current_pnl_pct": -4.88,
+      "current_pnl_pct": -4.3,
       "peak_pnl_pct": 0.0,
-      "price_points": 1,
+      "price_points": 6,
       "active_params": [
         "live",
         "conservative",
@@ -326,6 +246,26 @@
       ],
       "score": 40.78376997642936,
       "grade": "C"
+    },
+    {
+      "symbol": "house",
+      "entry_time": "2026-02-18T11:26:15.000279+09:00",
+      "entry_price": 0.00035752,
+      "current_pnl_pct": -8.12,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 61.03985716423563,
+      "grade": "B"
     }
   ],
   "recent_completed": [
