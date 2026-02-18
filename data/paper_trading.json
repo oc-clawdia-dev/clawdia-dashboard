@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T02:23:48.727641+09:00",
+  "updated": "2026-02-19T02:24:54.626295+09:00",
   "total_completed": 131,
-  "total_open": 2,
-  "today_entries": 2,
+  "total_open": 3,
+  "today_entries": 3,
   "param_summary": {
     "live": {
       "params": {
@@ -215,9 +215,9 @@
       "symbol": "Buttcoin",
       "entry_time": "2026-02-19T02:22:42.441327+09:00",
       "entry_price": 0.01704575,
-      "current_pnl_pct": -4.19,
+      "current_pnl_pct": -4.76,
       "peak_pnl_pct": 0.0,
-      "price_points": 6,
+      "price_points": 11,
       "active_params": [
         "live",
         "conservative",
@@ -235,9 +235,9 @@
       "symbol": "PUSH",
       "entry_time": "2026-02-19T02:23:47.821389+09:00",
       "entry_price": 0.0002721375,
-      "current_pnl_pct": -6.45,
+      "current_pnl_pct": -3.44,
       "peak_pnl_pct": 0.0,
-      "price_points": 1,
+      "price_points": 6,
       "active_params": [
         "live",
         "conservative",
@@ -250,6 +250,26 @@
       ],
       "score": 70.5491317134939,
       "grade": "A"
+    },
+    {
+      "symbol": "EMCC",
+      "entry_time": "2026-02-19T02:24:53.798811+09:00",
+      "entry_price": 0.00021053499999999998,
+      "current_pnl_pct": -4.88,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 50.11095482842772,
+      "grade": "B"
     }
   ],
   "recent_completed": [
