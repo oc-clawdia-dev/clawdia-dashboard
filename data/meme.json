@@ -1762,7 +1762,7 @@
         "address": "BVfcaYqsTpD1XF9w"
       }
     ],
-    "last_scan": "2026-02-18T12:42:08.822540"
+    "last_scan": "2026-02-18T12:43:10.208654"
   },
   "survey": [],
   "trades": [
@@ -13394,16 +13394,112 @@
         "dexscreener_pnl_pct": -1.81,
         "actual_pnl_pct": -24.94
       }
+    },
+    {
+      "timestamp": "2026-02-18T12:42:39.409247+09:00",
+      "unix_time": 1771386159,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "红包/USDC",
+      "input_token": "USDC",
+      "output_token": "红包",
+      "order_input_amount": 20,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 159208.843657,
+      "input_amount": 20,
+      "output_amount": 159208.843657,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.00012562116237140733,
+      "effective_price": 0.00012562116237140733,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "5n4MkX3FXCXZCTZrZmFjLJGo3j4rYNqPGeXFyfb11Wcdk6Lvdaos73U1yhftVDHfGtUeVdPj5zmRdSvPXCicXAiv",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=77 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "BVfcaYqsTpD1XF9wSSQDvfv66BoMxzEzz8YyCadpump",
+        "dexscreener_price": 0.0,
+        "onchain_price": 0.00012562116237140733,
+        "entry_slippage_pct": null,
+        "score_detail": {
+          "total": 77.26030141309673,
+          "momentum": 77.30707563215779,
+          "volume": 88.5826463726785,
+          "demand": 55
+        },
+        "pc_5m": 49.21,
+        "bs_5m": 1.54,
+        "liquidity_usd": 0.0
+      }
+    },
+    {
+      "timestamp": "2026-02-18T12:43:08.819597+09:00",
+      "unix_time": 1771386188,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "红包/USDC",
+      "input_token": "红包",
+      "output_token": "USDC",
+      "order_input_amount": 159208.843657,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 16.16835,
+      "input_amount": 159208.843657,
+      "output_amount": 16.16835,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.0001231,
+      "effective_price": 0.00010155434603138719,
+      "slippage_pct": -17.5026,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "55QVkw24aZfrbrCvEieWQum2Y6WrymQJADTmUGUYoHJYP5eiouwXrF2FmCgRZbUMdHBNHthES1Vmd9NWxGTqRMqT",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "TRAIL (-2.0%, peak +7.1%)",
+      "error": "",
+      "extra": {
+        "token_address": "BVfcaYqsTpD1XF9wSSQDvfv66BoMxzEzz8YyCadpump",
+        "entry_price": 0.00012562116237140733,
+        "pnl_usd": -3.8316,
+        "pnl_pct": -19.16,
+        "hold_minutes": 0.5,
+        "score_at_entry": 77.26030141309673,
+        "dexscreener_sell_price": 0.0001231,
+        "onchain_sell_price": 0.00010155434603138719,
+        "sell_slippage_pct": -17.5,
+        "dexscreener_pnl_pct": -2.01,
+        "actual_pnl_pct": -19.16
+      }
     }
   ],
   "onchain_pnl": {
-    "total_bought": 2337.0,
-    "log_sold": 2206.8,
-    "onchain_sold": 2193.08,
-    "log_pnl": -130.2,
-    "onchain_pnl": -143.92,
+    "total_bought": 2357.0,
+    "log_sold": 2222.97,
+    "onchain_sold": 2209.25,
+    "log_pnl": -134.03,
+    "onchain_pnl": -147.75,
     "discrepancy": -13.71,
     "cached_txs": 427,
-    "updated_at": "2026-02-18T12:42:08.824610"
+    "updated_at": "2026-02-18T12:43:10.210711"
   }
 }
