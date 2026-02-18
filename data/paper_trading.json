@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-18T22:43:11.471860+09:00",
+  "updated": "2026-02-18T22:44:12.724674+09:00",
   "total_completed": 117,
-  "total_open": 4,
-  "today_entries": 74,
+  "total_open": 5,
+  "today_entries": 75,
   "param_summary": {
     "live": {
       "params": {
@@ -175,11 +175,11 @@
   "open_positions": [
     {
       "symbol": "Shark",
-      "entry_time": "2026-02-18T21:12:40.872061+09:00",
+      "entry_time": "2026-02-18T21:12:40.884017+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 426,
+      "price_points": 431,
       "active_params": [
         "live",
         "conservative",
@@ -195,11 +195,11 @@
     },
     {
       "symbol": "VAMP",
-      "entry_time": "2026-02-18T22:19:36.832472+09:00",
+      "entry_time": "2026-02-18T22:19:36.388892+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 116,
+      "price_points": 121,
       "active_params": [
         "live",
         "conservative",
@@ -215,11 +215,11 @@
     },
     {
       "symbol": "cow",
-      "entry_time": "2026-02-18T22:20:38.008481+09:00",
+      "entry_time": "2026-02-18T22:20:38.075431+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 111,
+      "price_points": 116,
       "active_params": [
         "live",
         "conservative",
@@ -235,11 +235,11 @@
     },
     {
       "symbol": "Nazgul",
-      "entry_time": "2026-02-18T22:37:03.614834+09:00",
+      "entry_time": "2026-02-18T22:37:03.511880+09:00",
       "entry_price": 2.985943840615863e-05,
       "current_pnl_pct": -4.7,
       "peak_pnl_pct": 0.0,
-      "price_points": 31,
+      "price_points": 36,
       "active_params": [
         "live",
         "conservative",
@@ -252,6 +252,26 @@
       ],
       "score": 69.33593047072007,
       "grade": "A"
+    },
+    {
+      "symbol": "RARE",
+      "entry_time": "2026-02-18T22:44:12.715161+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 54.26959396549684,
+      "grade": "B"
     }
   ],
   "recent_completed": [
