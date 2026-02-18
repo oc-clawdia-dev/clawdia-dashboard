@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T03:39:36.587607+09:00",
+  "updated": "2026-02-19T03:40:41.643131+09:00",
   "total_completed": 140,
   "total_open": 5,
-  "today_entries": 10,
+  "today_entries": 9,
   "param_summary": {
     "live": {
       "params": {
@@ -175,49 +175,49 @@
   "anti_martingale": {
     "am_re_optimal": {
       "name": "am_re_optimal",
-      "size": 20,
-      "consec_losses": 2,
-      "pause_until": "2026-02-19T05:34:33.618571+09:00",
-      "total_pnl": -5.68,
-      "trades_taken": 2,
-      "trades_skipped": 3,
-      "wins": 0,
-      "win_rate": 0.0,
-      "ev_per_trade": -2.84
+      "size": 40,
+      "consec_losses": 0,
+      "pause_until": null,
+      "total_pnl": -2.04,
+      "trades_taken": 4,
+      "trades_skipped": 0,
+      "wins": 2,
+      "win_rate": 50.0,
+      "ev_per_trade": -0.51
     },
     "am_conservative": {
       "name": "am_conservative",
       "size": 30,
       "consec_losses": 0,
       "pause_until": null,
-      "total_pnl": -4.6,
-      "trades_taken": 5,
+      "total_pnl": -0.95,
+      "trades_taken": 4,
       "trades_skipped": 0,
       "wins": 2,
-      "win_rate": 40.0,
-      "ev_per_trade": -0.92
+      "win_rate": 50.0,
+      "ev_per_trade": -0.24
     },
     "am_no_sizing": {
       "name": "am_no_sizing",
       "size": 20,
-      "consec_losses": 2,
-      "pause_until": "2026-02-19T05:34:33.618571+09:00",
-      "total_pnl": -5.68,
-      "trades_taken": 2,
-      "trades_skipped": 3,
-      "wins": 0,
-      "win_rate": 0.0,
-      "ev_per_trade": -2.84
+      "consec_losses": 0,
+      "pause_until": null,
+      "total_pnl": 0.13,
+      "trades_taken": 4,
+      "trades_skipped": 0,
+      "wins": 2,
+      "win_rate": 50.0,
+      "ev_per_trade": 0.03
     }
   },
   "open_positions": [
     {
       "symbol": "Buttcoin",
-      "entry_time": "2026-02-19T02:22:42.441327+09:00",
-      "entry_price": 0.01704575,
-      "current_pnl_pct": -7.91,
+      "entry_time": "2026-02-19T02:23:14.975360+09:00",
+      "entry_price": 0.017148249999999997,
+      "current_pnl_pct": -8.46,
       "peak_pnl_pct": 0.0,
-      "price_points": 351,
+      "price_points": 355,
       "active_params": [
         "live",
         "conservative",
@@ -228,16 +228,16 @@
         "wide_trail",
         "wide_sl15"
       ],
-      "score": 43.95946270468927,
+      "score": 44.92154961003075,
       "grade": "C"
     },
     {
       "symbol": "EMCC",
-      "entry_time": "2026-02-19T02:24:53.798811+09:00",
+      "entry_time": "2026-02-19T02:25:28.139674+09:00",
       "entry_price": 0.00021053499999999998,
-      "current_pnl_pct": -1.82,
+      "current_pnl_pct": -2.98,
       "peak_pnl_pct": 0.0,
-      "price_points": 341,
+      "price_points": 345,
       "active_params": [
         "wide_trail",
         "wide_sl15"
@@ -247,11 +247,11 @@
     },
     {
       "symbol": "HYPERSKIDS",
-      "entry_time": "2026-02-19T02:39:28.684415+09:00",
+      "entry_time": "2026-02-19T02:39:42.179868+09:00",
       "entry_price": 0.0006262749999999999,
       "current_pnl_pct": -7.43,
       "peak_pnl_pct": 0.0,
-      "price_points": 276,
+      "price_points": 280,
       "active_params": [
         "live",
         "conservative",
@@ -267,11 +267,11 @@
     },
     {
       "symbol": "Bank",
-      "entry_time": "2026-02-19T03:34:08.277080+09:00",
+      "entry_time": "2026-02-19T03:34:08.275809+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 26,
+      "price_points": 31,
       "active_params": [
         "live",
         "conservative",
@@ -287,18 +287,12 @@
     },
     {
       "symbol": "$PMT",
-      "entry_time": "2026-02-19T03:39:36.068358+09:00",
+      "entry_time": "2026-02-19T03:39:35.684647+09:00",
       "entry_price": 0.0001520075,
-      "current_pnl_pct": -5.07,
+      "current_pnl_pct": -10.07,
       "peak_pnl_pct": 0.0,
-      "price_points": 1,
+      "price_points": 6,
       "active_params": [
-        "live",
-        "conservative",
-        "current",
-        "moderate",
-        "tight",
-        "aggressive",
         "wide_trail",
         "wide_sl15"
       ],
