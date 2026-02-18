@@ -204,21 +204,14 @@
             "wr": "62-82%"
           },
           "pair_id": "ETH_GRID",
-          "position": {
-            "in_position": true,
-            "entry_price": 1983.52,
-            "usdc_spent": 100.0,
-            "token_amount": 0.05039855,
-            "ref_price": 2014.06
-          },
           "live_stats": {
-            "total_trades": 1,
+            "total_trades": 2,
             "buys": 1,
-            "sells": 0,
-            "completed_trips": 0,
-            "total_invested": 0.0,
-            "total_returned": 0.0,
-            "realized_pnl": null
+            "sells": 1,
+            "completed_trips": 1,
+            "total_invested": 100.0,
+            "total_returned": 101.23,
+            "realized_pnl": 1.23
           }
         }
       },
@@ -252,8 +245,8 @@
         "allocated_usd": 200,
         "position_value": 0,
         "dry_powder": 200,
-        "realized_pnl": 0.3,
-        "effective_value": 200.3,
+        "realized_pnl": 1.53,
+        "effective_value": 201.53,
         "note": "SOL$100 + ETH$100。各1ポジション分"
       }
     }
