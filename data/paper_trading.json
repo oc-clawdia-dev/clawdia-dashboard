@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-18T16:29:40.778069+09:00",
+  "updated": "2026-02-18T16:31:42.934743+09:00",
   "total_completed": 91,
-  "total_open": 0,
-  "today_entries": 57,
+  "total_open": 1,
+  "today_entries": 58,
   "param_summary": {
     "live": {
       "params": {
@@ -172,7 +172,28 @@
       "momentum_avg": 28.61
     }
   },
-  "open_positions": [],
+  "open_positions": [
+    {
+      "symbol": "OPUS",
+      "entry_time": "2026-02-18T16:31:41.917280+09:00",
+      "entry_price": 0.00032851249999999994,
+      "current_pnl_pct": -1.52,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 38.49664948656341,
+      "grade": "C"
+    }
+  ],
   "recent_completed": [
     {
       "address": "BVfcaYqsTpD1XF9wSSQDvfv66BoMxzEzz8YyCadpump",
