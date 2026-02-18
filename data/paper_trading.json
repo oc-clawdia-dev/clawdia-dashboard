@@ -1,7 +1,7 @@
 {
-  "updated": "2026-02-18T17:19:00.017437+09:00",
+  "updated": "2026-02-18T17:19:00.421829+09:00",
   "total_completed": 92,
-  "total_open": 2,
+  "total_open": 1,
   "today_entries": 59,
   "param_summary": {
     "live": {
@@ -175,11 +175,11 @@
   "open_positions": [
     {
       "symbol": "OPUS",
-      "entry_time": "2026-02-18T16:31:41.917280+09:00",
+      "entry_time": "2026-02-18T16:31:41.926747+09:00",
       "entry_price": 0.00032851249999999994,
       "current_pnl_pct": 0.43,
       "peak_pnl_pct": 0.43453445454892936,
-      "price_points": 196,
+      "price_points": 194,
       "active_params": [
         "live",
         "conservative",
@@ -191,19 +191,6 @@
         "wide_sl15"
       ],
       "score": 38.49664948656341,
-      "grade": "C"
-    },
-    {
-      "symbol": "Hitler",
-      "entry_time": "2026-02-18T16:53:53.821861+09:00",
-      "entry_price": 8.282e-05,
-      "current_pnl_pct": 10.89,
-      "peak_pnl_pct": 10.885353779280372,
-      "price_points": 105,
-      "active_params": [
-        "conservative"
-      ],
-      "score": 46.073098525721285,
       "grade": "C"
     }
   ],
