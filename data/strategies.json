@@ -204,9 +204,16 @@
             "wr": "62-82%"
           },
           "pair_id": "ETH_GRID",
+          "position": {
+            "in_position": true,
+            "entry_price": 2005.24,
+            "usdc_spent": 100.0,
+            "token_amount": 0.04988613,
+            "ref_price": 2037.27
+          },
           "live_stats": {
-            "total_trades": 2,
-            "buys": 1,
+            "total_trades": 3,
+            "buys": 2,
             "sells": 1,
             "completed_trips": 1,
             "total_invested": 100.0,
