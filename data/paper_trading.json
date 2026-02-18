@@ -1,7 +1,7 @@
 {
-  "updated": "2026-02-18T13:31:34.633494+09:00",
+  "updated": "2026-02-18T13:32:57.840158+09:00",
   "total_completed": 63,
-  "total_open": 5,
+  "total_open": 7,
   "today_entries": 49,
   "param_summary": {
     "live": {
@@ -174,12 +174,32 @@
   },
   "open_positions": [
     {
-      "symbol": "WUBOT",
-      "entry_time": "2026-02-18T11:51:50.682350+09:00",
+      "symbol": "automaton",
+      "entry_time": "2026-02-18T11:37:26.510326+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 407,
+      "price_points": 468,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 70.56892856194975,
+      "grade": "A"
+    },
+    {
+      "symbol": "WUBOT",
+      "entry_time": "2026-02-18T11:51:33.029930+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 410,
       "active_params": [
         "live",
         "conservative",
@@ -195,11 +215,11 @@
     },
     {
       "symbol": "红包",
-      "entry_time": "2026-02-18T12:42:18.879862+09:00",
+      "entry_time": "2026-02-18T12:42:18.880454+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 204,
+      "price_points": 207,
       "active_params": [
         "live",
         "conservative",
@@ -215,11 +235,11 @@
     },
     {
       "symbol": "TORANPU",
-      "entry_time": "2026-02-18T12:52:04.992888+09:00",
-      "entry_price": 0.0390525,
-      "current_pnl_pct": 1.19,
-      "peak_pnl_pct": 1.1887843287881728,
-      "price_points": 164,
+      "entry_time": "2026-02-18T12:52:05.088048+09:00",
+      "entry_price": 0.039021749999999994,
+      "current_pnl_pct": 1.07,
+      "peak_pnl_pct": 1.2685233235311122,
+      "price_points": 167,
       "active_params": [
         "live",
         "conservative",
@@ -230,16 +250,16 @@
         "wide_trail",
         "wide_sl15"
       ],
-      "score": 54.07950326395951,
+      "score": 54.07153941390816,
       "grade": "B"
     },
     {
       "symbol": "bp",
-      "entry_time": "2026-02-18T12:54:14.219160+09:00",
+      "entry_time": "2026-02-18T12:54:14.247180+09:00",
       "entry_price": 0.00030319499999999997,
-      "current_pnl_pct": -6.78,
+      "current_pnl_pct": -4.81,
       "peak_pnl_pct": 0.0,
-      "price_points": 154,
+      "price_points": 157,
       "active_params": [
         "live",
         "conservative",
@@ -255,11 +275,11 @@
     },
     {
       "symbol": "WEB4.0",
-      "entry_time": "2026-02-18T13:09:35.351527+09:00",
+      "entry_time": "2026-02-18T13:09:35.317813+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 92,
+      "price_points": 95,
       "active_params": [
         "live",
         "conservative",
@@ -272,6 +292,26 @@
       ],
       "score": 68.84096487639802,
       "grade": "A"
+    },
+    {
+      "symbol": "KIMCHI",
+      "entry_time": "2026-02-18T13:22:17.977096+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 43,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 57.00432141115031,
+      "grade": "B"
     }
   ],
   "recent_completed": [
