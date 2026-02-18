@@ -13793,5 +13793,54 @@
       "dexscreener_pnl_pct": 8.03,
       "actual_pnl_pct": -2.45
     }
+  },
+  {
+    "timestamp": "2026-02-19T07:18:33.473180+09:00",
+    "unix_time": 1771453113,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "TOTOBIDET/USDC",
+    "input_token": "USDC",
+    "output_token": "TOTOBIDET",
+    "order_input_amount": 20,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 240052.547185,
+    "input_amount": 20,
+    "output_amount": 240052.547185,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 8.331509177691294e-05,
+    "effective_price": 8.331509177691294e-05,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "hJCDE9phkcJYeNG5EX66WocuaMpP7HGw2Hn84caWZXAQXckQJJ1qapF94ThFzZWqJC91MkNP7YHiJSqvr7F6yP3",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=84 grade=S",
+    "error": "",
+    "extra": {
+      "token_address": "DZ9VGwUBuoHjqi84vU9wqeuVGc7pCnzvaZmmLQDyzora",
+      "dexscreener_price": 0.0,
+      "onchain_price": 8.331509177691294e-05,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 83.93388935381778,
+        "momentum": 91.81123406096634,
+        "volume": 81.98146391924601,
+        "demand": 85
+      },
+      "pc_5m": 47.03,
+      "bs_5m": 1.92,
+      "liquidity_usd": 0.0
+    }
   }
 ]
