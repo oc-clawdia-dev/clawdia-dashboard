@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T08:02:46.686797+09:00",
+  "updated": "2026-02-19T08:02:47.413897+09:00",
   "total_completed": 172,
   "total_open": 6,
-  "today_entries": 26,
+  "today_entries": 27,
   "param_summary": {
     "live": {
       "params": {
@@ -177,43 +177,43 @@
       "name": "am_re_optimal",
       "size": 20,
       "consec_losses": 2,
-      "pause_until": "2026-02-19T10:15:54.780699+09:00",
-      "total_pnl": -14.06,
-      "trades_taken": 8,
-      "trades_skipped": 12,
-      "wins": 2,
-      "win_rate": 25.0,
-      "ev_per_trade": -1.76
+      "pause_until": "2026-02-19T09:51:57.744703+09:00",
+      "total_pnl": -8.75,
+      "trades_taken": 4,
+      "trades_skipped": 17,
+      "wins": 0,
+      "win_rate": 0.0,
+      "ev_per_trade": -2.19
     },
     "am_conservative": {
       "name": "am_conservative",
       "size": 20,
       "consec_losses": 3,
-      "pause_until": "2026-02-19T08:45:54.780699+09:00",
-      "total_pnl": -20.08,
-      "trades_taken": 13,
+      "pause_until": "2026-02-19T08:45:54.684327+09:00",
+      "total_pnl": -23.57,
+      "trades_taken": 14,
       "trades_skipped": 7,
       "wins": 3,
-      "win_rate": 23.1,
-      "ev_per_trade": -1.54
+      "win_rate": 21.4,
+      "ev_per_trade": -1.68
     },
     "am_no_sizing": {
       "name": "am_no_sizing",
       "size": 20,
       "consec_losses": 2,
-      "pause_until": "2026-02-19T10:15:54.780699+09:00",
-      "total_pnl": -7.86,
-      "trades_taken": 8,
-      "trades_skipped": 12,
-      "wins": 2,
-      "win_rate": 25.0,
-      "ev_per_trade": -0.98
+      "pause_until": "2026-02-19T09:51:57.744703+09:00",
+      "total_pnl": -8.75,
+      "trades_taken": 4,
+      "trades_skipped": 17,
+      "wins": 0,
+      "win_rate": 0.0,
+      "ev_per_trade": -2.19
     }
   },
   "open_positions": [
     {
       "symbol": "Kmch",
-      "entry_time": "2026-02-19T06:13:45.886386+09:00",
+      "entry_time": "2026-02-19T06:13:45.715815+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
@@ -233,7 +233,7 @@
     },
     {
       "symbol": "Punch",
-      "entry_time": "2026-02-19T06:40:59.693036+09:00",
+      "entry_time": "2026-02-19T06:40:59.678902+09:00",
       "entry_price": 0.007519399999999999,
       "current_pnl_pct": -8.4,
       "peak_pnl_pct": 0.0,
@@ -247,7 +247,7 @@
     },
     {
       "symbol": "TOTO",
-      "entry_time": "2026-02-19T06:44:17.403899+09:00",
+      "entry_time": "2026-02-19T06:44:17.280970+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
@@ -267,7 +267,7 @@
     },
     {
       "symbol": "Henry",
-      "entry_time": "2026-02-19T07:06:08.182371+09:00",
+      "entry_time": "2026-02-19T07:06:08.311206+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
@@ -287,7 +287,7 @@
     },
     {
       "symbol": "Tsuncoin",
-      "entry_time": "2026-02-19T07:41:00.702537+09:00",
+      "entry_time": "2026-02-19T07:41:00.702859+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
@@ -307,7 +307,7 @@
     },
     {
       "symbol": "IMG",
-      "entry_time": "2026-02-19T07:47:30.421316+09:00",
+      "entry_time": "2026-02-19T07:47:30.348166+09:00",
       "entry_price": 0.0005642624999999999,
       "current_pnl_pct": -9.06,
       "peak_pnl_pct": 0.0,
