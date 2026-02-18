@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T02:32:49.991382+09:00",
+  "updated": "2026-02-19T02:34:01.344057+09:00",
   "total_completed": 133,
-  "total_open": 2,
-  "today_entries": 3,
+  "total_open": 4,
+  "today_entries": 5,
   "param_summary": {
     "live": {
       "params": {
@@ -215,9 +215,9 @@
       "symbol": "Buttcoin",
       "entry_time": "2026-02-19T02:22:42.441327+09:00",
       "entry_price": 0.01704575,
-      "current_pnl_pct": -5.79,
+      "current_pnl_pct": -5.91,
       "peak_pnl_pct": 0.0,
-      "price_points": 46,
+      "price_points": 51,
       "active_params": [
         "live",
         "conservative",
@@ -237,7 +237,7 @@
       "entry_price": 0.00021053499999999998,
       "current_pnl_pct": -9.83,
       "peak_pnl_pct": 0.0,
-      "price_points": 36,
+      "price_points": 41,
       "active_params": [
         "live",
         "conservative",
@@ -250,6 +250,46 @@
       ],
       "score": 50.11095482842772,
       "grade": "B"
+    },
+    {
+      "symbol": "Grace",
+      "entry_time": "2026-02-19T02:34:00.295627+09:00",
+      "entry_price": 0.0001452425,
+      "current_pnl_pct": -8.17,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 67.34481356627703,
+      "grade": "A"
+    },
+    {
+      "symbol": "Hosico",
+      "entry_time": "2026-02-19T02:34:00.296908+09:00",
+      "entry_price": 6.654299999999999e-05,
+      "current_pnl_pct": -4.88,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 42.91524658562314,
+      "grade": "C"
     }
   ],
   "recent_completed": [
