@@ -13985,5 +13985,54 @@
       "dexscreener_pnl_pct": 1.05,
       "actual_pnl_pct": -2.92
     }
+  },
+  {
+    "timestamp": "2026-02-19T07:40:56.557311+09:00",
+    "unix_time": 1771454456,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "Tsuncoin/USDC",
+    "input_token": "USDC",
+    "output_token": "Tsuncoin",
+    "order_input_amount": 20,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 99005.455207,
+    "input_amount": 20,
+    "output_amount": 99005.455207,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.0002020090706939746,
+    "effective_price": 0.0002020090706939746,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "3Uz8LvV8ZxNcr19Bvswbrcv8vPgiYQrf3fC78HZUwu6KXDrDM8LVYGFH9zsYoRzbec6JoY3xSaq2EmhfU5sbtNAv",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=77 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "6M8sWsmxTdRaX8sMeHXKDrRe3sbAaGC3KyMgwvTSWfju",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.0002020090706939746,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 76.73013243444029,
+        "momentum": 81.48502832138522,
+        "volume": 100,
+        "demand": 40
+      },
+      "pc_5m": 3.22,
+      "bs_5m": 1.14,
+      "liquidity_usd": 0.0
+    }
   }
 ]
