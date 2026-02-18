@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-18T16:12:17.746866+09:00",
+  "updated": "2026-02-18T16:13:22.912780+09:00",
   "total_completed": 87,
-  "total_open": 1,
-  "today_entries": 56,
+  "total_open": 2,
+  "today_entries": 57,
   "param_summary": {
     "live": {
       "params": {
@@ -175,15 +175,35 @@
   "open_positions": [
     {
       "symbol": "Seedance",
-      "entry_time": "2026-02-18T14:15:28.228058+09:00",
+      "entry_time": "2026-02-18T14:15:28.217515+09:00",
       "entry_price": 0.00010383249999999999,
       "current_pnl_pct": -2.25,
       "peak_pnl_pct": 6.577901909325123,
-      "price_points": 472,
+      "price_points": 481,
       "active_params": [
         "conservative"
       ],
       "score": 47.526131947159314,
+      "grade": "C"
+    },
+    {
+      "symbol": "DARKTRUMP",
+      "entry_time": "2026-02-18T16:13:21.927310+09:00",
+      "entry_price": 0.0021904249999999998,
+      "current_pnl_pct": -5.28,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 47.63709692590699,
       "grade": "C"
     }
   ],
