@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-18T14:58:27.648912+09:00",
+  "updated": "2026-02-18T14:59:33.495207+09:00",
   "total_completed": 76,
-  "total_open": 4,
-  "today_entries": 54,
+  "total_open": 6,
+  "today_entries": 55,
   "param_summary": {
     "live": {
       "params": {
@@ -175,11 +175,11 @@
   "open_positions": [
     {
       "symbol": "WEB4.0",
-      "entry_time": "2026-02-18T13:09:35.351527+09:00",
+      "entry_time": "2026-02-18T13:09:35.317813+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 448,
+      "price_points": 454,
       "active_params": [
         "live",
         "conservative",
@@ -194,12 +194,32 @@
       "grade": "A"
     },
     {
-      "symbol": "LISA",
-      "entry_time": "2026-02-18T13:37:46.190712+09:00",
+      "symbol": "KIMCHI",
+      "entry_time": "2026-02-18T13:22:17.977096+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 335,
+      "price_points": 402,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 57.00432141115031,
+      "grade": "B"
+    },
+    {
+      "symbol": "LISA",
+      "entry_time": "2026-02-18T13:37:46.109996+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 341,
       "active_params": [
         "live",
         "conservative",
@@ -215,11 +235,11 @@
     },
     {
       "symbol": "Seedance",
-      "entry_time": "2026-02-18T14:15:28.228058+09:00",
+      "entry_time": "2026-02-18T14:15:28.217515+09:00",
       "entry_price": 0.00010383249999999999,
-      "current_pnl_pct": 1.32,
+      "current_pnl_pct": -3.09,
       "peak_pnl_pct": 6.577901909325123,
-      "price_points": 177,
+      "price_points": 184,
       "active_params": [
         "conservative"
       ],
@@ -228,11 +248,11 @@
     },
     {
       "symbol": "PERPZ",
-      "entry_time": "2026-02-18T14:50:34.884434+09:00",
+      "entry_time": "2026-02-18T14:50:34.881310+09:00",
       "entry_price": 0.00012976499999999997,
-      "current_pnl_pct": -5.18,
+      "current_pnl_pct": -5.25,
       "peak_pnl_pct": 0.0,
-      "price_points": 33,
+      "price_points": 38,
       "active_params": [
         "live",
         "conservative",
@@ -245,6 +265,26 @@
       ],
       "score": 61.10692837218238,
       "grade": "B"
+    },
+    {
+      "symbol": "BLOODNUT",
+      "entry_time": "2026-02-18T14:59:32.506707+09:00",
+      "entry_price": 0.00021924749999999998,
+      "current_pnl_pct": -6.08,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 42.060557481507566,
+      "grade": "C"
     }
   ],
   "recent_completed": [
