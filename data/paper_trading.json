@@ -1,7 +1,7 @@
 {
-  "updated": "2026-02-18T13:59:22.245448+09:00",
+  "updated": "2026-02-18T14:01:33.040626+09:00",
   "total_completed": 68,
-  "total_open": 6,
+  "total_open": 7,
   "today_entries": 52,
   "param_summary": {
     "live": {
@@ -175,11 +175,11 @@
   "open_positions": [
     {
       "symbol": "红包",
-      "entry_time": "2026-02-18T12:42:18.879862+09:00",
+      "entry_time": "2026-02-18T12:42:18.880454+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 317,
+      "price_points": 326,
       "active_params": [
         "live",
         "conservative",
@@ -195,29 +195,30 @@
     },
     {
       "symbol": "TORANPU",
-      "entry_time": "2026-02-18T12:52:04.992888+09:00",
-      "entry_price": 0.0390525,
-      "current_pnl_pct": 6.53,
-      "peak_pnl_pct": 6.731323218744012,
-      "price_points": 277,
+      "entry_time": "2026-02-18T12:52:05.088048+09:00",
+      "entry_price": 0.039021749999999994,
+      "current_pnl_pct": 6.72,
+      "peak_pnl_pct": 6.815429856426247,
+      "price_points": 285,
       "active_params": [
         "live",
         "conservative",
         "current",
         "moderate",
+        "tight",
         "wide_trail",
         "wide_sl15"
       ],
-      "score": 54.07950326395951,
+      "score": 54.07153941390816,
       "grade": "B"
     },
     {
       "symbol": "bp",
-      "entry_time": "2026-02-18T12:54:14.219160+09:00",
+      "entry_time": "2026-02-18T12:54:14.247180+09:00",
       "entry_price": 0.00030319499999999997,
-      "current_pnl_pct": -4.81,
+      "current_pnl_pct": -5.71,
       "peak_pnl_pct": 0.0,
-      "price_points": 267,
+      "price_points": 275,
       "active_params": [
         "live",
         "conservative",
@@ -233,11 +234,11 @@
     },
     {
       "symbol": "WEB4.0",
-      "entry_time": "2026-02-18T13:09:35.351527+09:00",
+      "entry_time": "2026-02-18T13:09:35.317813+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 205,
+      "price_points": 214,
       "active_params": [
         "live",
         "conservative",
@@ -252,12 +253,32 @@
       "grade": "A"
     },
     {
-      "symbol": "LISA",
-      "entry_time": "2026-02-18T13:37:46.190712+09:00",
+      "symbol": "KIMCHI",
+      "entry_time": "2026-02-18T13:22:17.977096+09:00",
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 92,
+      "price_points": 162,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 57.00432141115031,
+      "grade": "B"
+    },
+    {
+      "symbol": "LISA",
+      "entry_time": "2026-02-18T13:37:46.109996+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 101,
       "active_params": [
         "live",
         "conservative",
@@ -273,11 +294,11 @@
     },
     {
       "symbol": "Orangutan",
-      "entry_time": "2026-02-18T13:53:57.465228+09:00",
+      "entry_time": "2026-02-18T13:53:57.465216+09:00",
       "entry_price": 0.00016615249999999999,
-      "current_pnl_pct": -8.46,
+      "current_pnl_pct": -7.28,
       "peak_pnl_pct": 0.0,
-      "price_points": 23,
+      "price_points": 33,
       "active_params": [
         "live",
         "conservative",
