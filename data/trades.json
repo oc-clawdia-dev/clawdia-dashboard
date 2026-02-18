@@ -12588,5 +12588,54 @@
       "dexscreener_pnl_pct": -13.36,
       "actual_pnl_pct": -24.85
     }
+  },
+  {
+    "timestamp": "2026-02-18T13:40:58.644523+09:00",
+    "unix_time": 1771389658,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "LISA/USDC",
+    "input_token": "USDC",
+    "output_token": "LISA",
+    "order_input_amount": 20,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 95194.92417,
+    "input_amount": 20,
+    "output_amount": 95194.92417,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.000210095235374985,
+    "effective_price": 0.000210095235374985,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "2fmKtsoSCrvVmAGcZiKWoft4FDv7w6m23GQCscePS5kMjnPEmES8zgwZdcqYwdH7k5viCGoHo2B4Bz8toLe1984y",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=79 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "EehwFP4EDzfXkz4Sz4wzHd4ydCJ2V7vCMEsh43iopump",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.000210095235374985,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 78.98501723388284,
+        "momentum": 79.5020268336938,
+        "volume": 95.57815083873001,
+        "demand": 65
+      },
+      "pc_5m": 32.83,
+      "bs_5m": 1.33,
+      "liquidity_usd": 0.0
+    }
   }
 ]
