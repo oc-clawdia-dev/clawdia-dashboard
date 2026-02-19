@@ -14369,5 +14369,54 @@
       "dexscreener_pnl_pct": 10.31,
       "actual_pnl_pct": 4.02
     }
+  },
+  {
+    "timestamp": "2026-02-19T10:21:37.115034+09:00",
+    "unix_time": 1771464097,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "fartbutt/USDC",
+    "input_token": "USDC",
+    "output_token": "fartbutt",
+    "order_input_amount": 30.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 192598.807275,
+    "input_amount": 30.0,
+    "output_amount": 192598.807275,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.00015576420448525853,
+    "effective_price": 0.00015576420448525853,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "2KFiRCkX1dSLzWAQiZtEGoUDvvVbSVYjXyH4ofyfnnrGnByvNRZ2dUSHot7fGcWzE1x6jjF2CTbuB2MHSgGJoFKc",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=70 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "9r1U43rsLHYNng9mZQ7jxLXAzdhXfmecwoQzjXhzpump",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.00015576420448525853,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 70.30243379538246,
+        "momentum": 63.34074706721375,
+        "volume": 91.2463991494707,
+        "demand": 65
+      },
+      "pc_5m": 20.72,
+      "bs_5m": 1.22,
+      "liquidity_usd": 0.0
+    }
   }
 ]
