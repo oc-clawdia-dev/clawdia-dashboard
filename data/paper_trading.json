@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T12:26:36.023906+09:00",
+  "updated": "2026-02-19T12:27:35.523347+09:00",
   "total_completed": 191,
-  "total_open": 0,
-  "today_entries": 37,
+  "total_open": 1,
+  "today_entries": 38,
   "param_summary": {
     "live": {
       "params": {
@@ -210,7 +210,28 @@
       "ev_per_trade": -0.69
     }
   },
-  "open_positions": [],
+  "open_positions": [
+    {
+      "symbol": "T1",
+      "entry_time": "2026-02-19T12:27:13.602664+09:00",
+      "entry_price": 0.005246975,
+      "current_pnl_pct": -4.12,
+      "peak_pnl_pct": 0.0,
+      "price_points": 3,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 50.52619913883389,
+      "grade": "B"
+    }
+  ],
   "recent_completed": [
     {
       "address": "865GVDdESzXiNvygSUt7yFeJLrXDyn5UpGNfYuxfpump",
