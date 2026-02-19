@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T23:24:39.379430+09:00",
+  "updated": "2026-02-19T23:25:50.581319+09:00",
   "total_completed": 301,
-  "total_open": 0,
-  "today_entries": 147,
+  "total_open": 1,
+  "today_entries": 148,
   "param_summary": {
     "live": {
       "params": {
@@ -234,7 +234,28 @@
       "ev_per_trade": 9.69
     }
   },
-  "open_positions": [],
+  "open_positions": [
+    {
+      "symbol": "GRAD_AiEUdR",
+      "entry_time": "2026-02-19T23:25:41.515427+09:00",
+      "entry_price": 3.65925e-05,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 0,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
+    }
+  ],
   "recent_completed": [
     {
       "address": "jRjb5UTxMaYN14DvwffiMqQtBYbAam5QZbuesdWrAiz",
