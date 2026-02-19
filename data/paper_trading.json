@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T19:01:51.628492+09:00",
+  "updated": "2026-02-19T19:02:51.418899+09:00",
   "total_completed": 204,
-  "total_open": 1,
-  "today_entries": 51,
+  "total_open": 2,
+  "today_entries": 52,
   "param_summary": {
     "live": {
       "params": {
@@ -217,7 +217,7 @@
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 419,
+      "price_points": 424,
       "active_params": [
         "live",
         "conservative",
@@ -230,6 +230,26 @@
       ],
       "score": 66.34594055218906,
       "grade": "A"
+    },
+    {
+      "symbol": "TOTOPUNCH",
+      "entry_time": "2026-02-19T19:02:31.142024+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 3,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 50.517068259411076,
+      "grade": "B"
     }
   ],
   "recent_completed": [
