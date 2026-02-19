@@ -88,7 +88,7 @@
         "detected_pc_1h": 77.17,
         "detected_pc_24h": -16.38,
         "peak_price": 0.0008883,
-        "snapshots": 123,
+        "snapshots": 124,
         "address": "4emphm93JtuF9skV"
       },
       {
@@ -188,7 +188,7 @@
         "detected_pc_1h": 33.84,
         "detected_pc_24h": -12.59,
         "peak_price": 0.001514,
-        "snapshots": 230,
+        "snapshots": 231,
         "address": "32CdQdBUxbCsLy5A"
       },
       {
@@ -208,7 +208,7 @@
         "detected_pc_1h": 179,
         "detected_pc_24h": 179,
         "peak_price": 0.0001016,
-        "snapshots": 132,
+        "snapshots": 133,
         "address": "DmJJUcfyBwV79Vim"
       },
       {
@@ -308,7 +308,7 @@
         "detected_pc_1h": -14.89,
         "detected_pc_24h": 103,
         "peak_price": 0.0002558,
-        "snapshots": 52,
+        "snapshots": 53,
         "address": "3We1AmjjZvNqvcL9"
       },
       {
@@ -358,7 +358,7 @@
         "detected_pc_1h": 213,
         "detected_pc_24h": 213,
         "peak_price": 0.0002065,
-        "snapshots": 179,
+        "snapshots": 180,
         "address": "44mKvQrcLpJLYL5Z"
       },
       {
@@ -388,7 +388,7 @@
         "detected_pc_1h": 973,
         "detected_pc_24h": 973,
         "peak_price": 0.0003661,
-        "snapshots": 50,
+        "snapshots": 51,
         "address": "EE7SWKvFa9zPETA6"
       },
       {
@@ -398,7 +398,7 @@
         "detected_pc_1h": 49.48,
         "detected_pc_24h": 33.52,
         "peak_price": 0.000211,
-        "snapshots": 170,
+        "snapshots": 171,
         "address": "CLD7wRUSwM68q51a"
       },
       {
@@ -428,7 +428,7 @@
         "detected_pc_1h": 14.74,
         "detected_pc_24h": 119,
         "peak_price": 0.0004852,
-        "snapshots": 160,
+        "snapshots": 161,
         "address": "HBJUeugfgJ3zWYMM"
       },
       {
@@ -438,7 +438,7 @@
         "detected_pc_1h": 30.46,
         "detected_pc_24h": 12.18,
         "peak_price": 0.0006417,
-        "snapshots": 158,
+        "snapshots": 159,
         "address": "84yCF7hyUuRNAra9"
       },
       {
@@ -528,7 +528,7 @@
         "detected_pc_1h": 289,
         "detected_pc_24h": 289,
         "peak_price": 0.0002743,
-        "snapshots": 141,
+        "snapshots": 142,
         "address": "F5RyYFSXMuTXPjcL"
       },
       {
@@ -758,7 +758,7 @@
         "detected_pc_1h": 461,
         "detected_pc_24h": 461,
         "peak_price": 0.0002243,
-        "snapshots": 95,
+        "snapshots": 96,
         "address": "GjAVDGJs2gP4QzaK"
       },
       {
@@ -1008,7 +1008,7 @@
         "detected_pc_1h": 291,
         "detected_pc_24h": 291,
         "peak_price": 0.0002492,
-        "snapshots": 51,
+        "snapshots": 52,
         "address": "9r1U43rsLHYNng9m"
       },
       {
@@ -1058,7 +1058,7 @@
         "detected_pc_1h": 127,
         "detected_pc_24h": 127,
         "peak_price": 9.652e-05,
-        "snapshots": 44,
+        "snapshots": 45,
         "address": "6ydMmFRaNt4AHBjg"
       },
       {
@@ -1177,8 +1177,8 @@
         "detected_price": 0.002976,
         "detected_pc_1h": 5948,
         "detected_pc_24h": 5948,
-        "peak_price": 0.004041,
-        "snapshots": 20,
+        "peak_price": 0.004076,
+        "snapshots": 21,
         "address": "AdrZw5K2WgFPSfsH"
       },
       {
@@ -1208,7 +1208,7 @@
         "detected_pc_1h": 52.14,
         "detected_pc_24h": -24.79,
         "peak_price": 3.869e-05,
-        "snapshots": 19,
+        "snapshots": 20,
         "address": "22zJdK8qvCTWCit1"
       },
       {
@@ -1228,11 +1228,21 @@
         "detected_pc_1h": 75.03,
         "detected_pc_24h": 75.03,
         "peak_price": 0.0001399,
-        "snapshots": 10,
+        "snapshots": 11,
         "address": "7usWgvKjHRrSi9df"
+      },
+      {
+        "symbol": "KURO",
+        "detected_at": "2026-02-19T13:23:32.762121",
+        "detected_price": 5.516e-05,
+        "detected_pc_1h": 31.65,
+        "detected_pc_24h": 31.65,
+        "peak_price": 5.516e-05,
+        "snapshots": 1,
+        "address": "25TSapzsyrSH12e3"
       }
     ],
-    "last_scan": "2026-02-19T13:22:43.676993"
+    "last_scan": "2026-02-19T13:23:45.184828"
   },
   "survey": [],
   "trades": [
@@ -15513,6 +15523,6 @@
     "onchain_pnl": -142.37,
     "discrepancy": -13.71,
     "cached_txs": 427,
-    "updated_at": "2026-02-19T13:22:43.679126"
+    "updated_at": "2026-02-19T13:23:45.186969"
   }
 }
