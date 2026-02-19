@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-20T00:36:57.885239+09:00",
+  "updated": "2026-02-20T00:38:01.708923+09:00",
   "total_completed": 390,
-  "total_open": 4,
-  "today_entries": 46,
+  "total_open": 5,
+  "today_entries": 47,
   "param_summary": {
     "live": {
       "params": {
@@ -241,7 +241,7 @@
       "entry_price": 0.00016953499999999998,
       "current_pnl_pct": 1.39,
       "peak_pnl_pct": 1.3905683192261264,
-      "price_points": 245,
+      "price_points": 250,
       "active_params": [
         "live",
         "conservative",
@@ -281,7 +281,7 @@
       "entry_price": 0.00019290499999999997,
       "current_pnl_pct": -8.52,
       "peak_pnl_pct": 0.0,
-      "price_points": 99,
+      "price_points": 104,
       "active_params": [
         "wide_trail",
         "wide_sl15"
@@ -293,7 +293,21 @@
       "symbol": "GRAD_DfKfb2",
       "entry_time": "2026-02-20T00:36:14.489269+09:00",
       "entry_price": 1.9864499980135498e-05,
-      "current_pnl_pct": -5.71,
+      "current_pnl_pct": 5.97,
+      "peak_pnl_pct": 5.969191376829275,
+      "price_points": 6,
+      "active_params": [
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
+    },
+    {
+      "symbol": "GRAD_7VsShT",
+      "entry_time": "2026-02-20T00:37:19.296965+09:00",
+      "entry_price": 1.5334e-05,
+      "current_pnl_pct": -2.65,
       "peak_pnl_pct": 0.0,
       "price_points": 1,
       "active_params": [
