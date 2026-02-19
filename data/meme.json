@@ -1202,7 +1202,7 @@
         "address": "Fw29q1bj4LLTEYL7"
       }
     ],
-    "last_scan": "2026-02-19T15:01:14.016562"
+    "last_scan": "2026-02-19T15:02:15.566682"
   },
   "survey": [],
   "trades": [
@@ -15618,16 +15618,63 @@
         "bs_5m": 1.17,
         "liquidity_usd": 0.0
       }
+    },
+    {
+      "timestamp": "2026-02-19T15:01:40.797613+09:00",
+      "unix_time": 1771480900,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "MOM/USDC",
+      "input_token": "MOM",
+      "output_token": "USDC",
+      "order_input_amount": 112441.245205,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 22.38545205318,
+      "input_amount": 112441.245205,
+      "output_amount": 22.38545205318,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.0001839,
+      "effective_price": 0.0001990857715277647,
+      "slippage_pct": 8.2576,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "2mZEhzxnUgNqfTdqT5qdymqNXc5STH4h2LkUseo5B3LpKSGJJqYiqMqSv7q5kdHnbQBDbbcJfBATgRBPybP8svYC",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "TRAIL (+3.4%, peak +9.4%)",
+      "error": "",
+      "extra": {
+        "token_address": "5ZKReikksB41nnq2zNBk6YDquiEfLRt8PvqGCYCppump",
+        "entry_price": 0.00017787067337734044,
+        "pnl_usd": 2.3855,
+        "pnl_pct": 11.93,
+        "hold_minutes": 1.5,
+        "score_at_entry": 80.0016777457272,
+        "dexscreener_sell_price": 0.0001839,
+        "onchain_sell_price": 0.0001990857715277647,
+        "sell_slippage_pct": 8.26,
+        "dexscreener_pnl_pct": 3.39,
+        "actual_pnl_pct": 11.93
+      }
     }
   ],
   "onchain_pnl": {
     "total_bought": 2937.0,
-    "log_sold": 2788.77,
-    "onchain_sold": 2775.06,
-    "log_pnl": -148.23,
-    "onchain_pnl": -161.94,
+    "log_sold": 2811.16,
+    "onchain_sold": 2797.44,
+    "log_pnl": -125.84,
+    "onchain_pnl": -139.56,
     "discrepancy": -13.71,
     "cached_txs": 427,
-    "updated_at": "2026-02-19T15:01:14.018746"
+    "updated_at": "2026-02-19T15:02:15.568847"
   }
 }
