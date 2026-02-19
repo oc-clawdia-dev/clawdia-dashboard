@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T19:22:33.086937+09:00",
+  "updated": "2026-02-19T19:23:40.911143+09:00",
   "total_completed": 205,
-  "total_open": 1,
-  "today_entries": 52,
+  "total_open": 2,
+  "today_entries": 53,
   "param_summary": {
     "live": {
       "params": {
@@ -217,7 +217,7 @@
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 89,
+      "price_points": 94,
       "active_params": [
         "live",
         "conservative",
@@ -230,6 +230,26 @@
       ],
       "score": 50.517068259411076,
       "grade": "B"
+    },
+    {
+      "symbol": "ANDREW",
+      "entry_time": "2026-02-19T19:22:51.625896+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 5,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 65.6856241862049,
+      "grade": "A"
     }
   ],
   "recent_completed": [
