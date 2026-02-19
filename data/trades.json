@@ -14561,5 +14561,54 @@
       "dexscreener_pnl_pct": -21.79,
       "actual_pnl_pct": -23.48
     }
+  },
+  {
+    "timestamp": "2026-02-19T11:28:44.353493+09:00",
+    "unix_time": 1771468124,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "DJT/USDC",
+    "input_token": "USDC",
+    "output_token": "DJT",
+    "order_input_amount": 10.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 2045.29438,
+    "input_amount": 10.0,
+    "output_amount": 2045.29438,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.004889271734076735,
+    "effective_price": 0.004889271734076735,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "JdSrYzJvfFymYKf438BEeoqpQHrA5Q4xRvNrSit8Erwb5WMJwqdNUYozUiR7ECDnd9eyaC7WSx3xpUateWqM2XM",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=60 grade=B",
+    "error": "",
+    "extra": {
+      "token_address": "5jrzJ24Kbokskr8bcKuwiWLDg7M8Dm7ime4f5bdxpump",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.004889271734076735,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 59.86814447076966,
+        "momentum": 45.071267333865016,
+        "volume": 80.54995592935816,
+        "demand": 65
+      },
+      "pc_5m": 1.12,
+      "bs_5m": 1.44,
+      "liquidity_usd": 0.0
+    }
   }
 ]
