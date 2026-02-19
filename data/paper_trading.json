@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T22:18:45.497074+09:00",
+  "updated": "2026-02-19T22:20:03.956757+09:00",
   "total_completed": 211,
-  "total_open": 0,
-  "today_entries": 57,
+  "total_open": 1,
+  "today_entries": 58,
   "param_summary": {
     "live": {
       "params": {
@@ -210,7 +210,28 @@
       "ev_per_trade": -0.8
     }
   },
-  "open_positions": [],
+  "open_positions": [
+    {
+      "symbol": "UVI",
+      "entry_time": "2026-02-19T22:20:03.095260+09:00",
+      "entry_price": 0.0001544675,
+      "current_pnl_pct": -4.88,
+      "peak_pnl_pct": 0.0,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 47.799831103691794,
+      "grade": "C"
+    }
+  ],
   "recent_completed": [
     {
       "address": "BbR5pQ5cWpUqxQTnCmDhQuScBB4KFA4ALbgc4EcKpump",
