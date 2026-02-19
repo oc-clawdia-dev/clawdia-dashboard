@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T11:45:46.927010+09:00",
+  "updated": "2026-02-19T11:46:59.656291+09:00",
   "total_completed": 187,
-  "total_open": 3,
-  "today_entries": 36,
+  "total_open": 4,
+  "today_entries": 37,
   "param_summary": {
     "live": {
       "params": {
@@ -217,7 +217,7 @@
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 518,
+      "price_points": 523,
       "active_params": [
         "live",
         "conservative",
@@ -235,13 +235,11 @@
       "symbol": "DARKTRUMP",
       "entry_time": "2026-02-19T11:26:51.250103+09:00",
       "entry_price": 0.002573775,
-      "current_pnl_pct": 5.01,
+      "current_pnl_pct": 3.8,
       "peak_pnl_pct": 7.774572369379595,
-      "price_points": 76,
+      "price_points": 81,
       "active_params": [
-        "conservative",
-        "current",
-        "wide_sl15"
+        "conservative"
       ],
       "score": 46.99317029239178,
       "grade": "C"
@@ -250,9 +248,9 @@
       "symbol": "DJT",
       "entry_time": "2026-02-19T11:27:58.416387+09:00",
       "entry_price": 0.005008149999999999,
-      "current_pnl_pct": -0.23,
+      "current_pnl_pct": 0.07,
       "peak_pnl_pct": 0.981899503808803,
-      "price_points": 71,
+      "price_points": 76,
       "active_params": [
         "live",
         "conservative",
@@ -265,6 +263,26 @@
       ],
       "score": 51.86814447076966,
       "grade": "B"
+    },
+    {
+      "symbol": "TrumpLan",
+      "entry_time": "2026-02-19T11:46:16.649774+09:00",
+      "entry_price": 0.002912025,
+      "current_pnl_pct": -4.17,
+      "peak_pnl_pct": 0.0,
+      "price_points": 4,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 47.04794768930421,
+      "grade": "C"
     }
   ],
   "recent_completed": [
