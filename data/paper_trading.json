@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-20T00:44:42.855561+09:00",
+  "updated": "2026-02-20T00:45:52.416794+09:00",
   "total_completed": 399,
-  "total_open": 4,
-  "today_entries": 55,
+  "total_open": 5,
+  "today_entries": 56,
   "param_summary": {
     "live": {
       "params": {
@@ -241,7 +241,7 @@
       "entry_price": 0.00016953499999999998,
       "current_pnl_pct": 1.45,
       "peak_pnl_pct": 1.4480785678473662,
-      "price_points": 280,
+      "price_points": 285,
       "active_params": [
         "live",
         "conservative",
@@ -281,7 +281,7 @@
       "entry_price": 0.00019290499999999997,
       "current_pnl_pct": -6.7,
       "peak_pnl_pct": 0.0,
-      "price_points": 134,
+      "price_points": 139,
       "active_params": [
         "wide_trail",
         "wide_sl15"
@@ -293,9 +293,9 @@
       "symbol": "ADA",
       "entry_time": "2026-02-20T00:41:23.440223+09:00",
       "entry_price": 0.000169945,
-      "current_pnl_pct": -3.16,
+      "current_pnl_pct": -4.65,
       "peak_pnl_pct": 0.0,
-      "price_points": 16,
+      "price_points": 21,
       "active_params": [
         "live",
         "conservative",
@@ -308,6 +308,26 @@
       ],
       "score": 43.843348196995144,
       "grade": "C"
+    },
+    {
+      "symbol": "GRAD_7rFSWt",
+      "entry_time": "2026-02-20T00:45:26.556808+09:00",
+      "entry_price": 1.4809507499999997e-05,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 0,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
     }
   ],
   "recent_completed": [
