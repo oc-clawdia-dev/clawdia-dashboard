@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T23:22:12.236997+09:00",
+  "updated": "2026-02-19T23:23:15.029907+09:00",
   "total_completed": 300,
-  "total_open": 0,
-  "today_entries": 146,
+  "total_open": 1,
+  "today_entries": 147,
   "param_summary": {
     "live": {
       "params": {
@@ -234,7 +234,28 @@
       "ev_per_trade": 9.69
     }
   },
-  "open_positions": [],
+  "open_positions": [
+    {
+      "symbol": "GRAD_Cseqfs",
+      "entry_time": "2026-02-19T23:22:43.082876+09:00",
+      "entry_price": 5.2100749999999986e-06,
+      "current_pnl_pct": 339.77,
+      "peak_pnl_pct": 339.77293992888787,
+      "price_points": 2,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
+    }
+  ],
   "recent_completed": [
     {
       "address": "54Cc5K1SsxQJPDvUqWbqLiqoRDgTywHsbvtz57rkwztc",
