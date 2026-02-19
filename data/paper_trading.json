@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-20T00:58:05.613119+09:00",
+  "updated": "2026-02-20T00:59:15.828486+09:00",
   "total_completed": 411,
-  "total_open": 3,
-  "today_entries": 66,
+  "total_open": 4,
+  "today_entries": 67,
   "param_summary": {
     "live": {
       "params": {
@@ -239,9 +239,9 @@
       "symbol": "ARTEMIS",
       "entry_time": "2026-02-19T23:39:27.649119+09:00",
       "entry_price": 0.00016953499999999998,
-      "current_pnl_pct": 0.82,
+      "current_pnl_pct": 1.97,
       "peak_pnl_pct": 2.0806913026808704,
-      "price_points": 339,
+      "price_points": 344,
       "active_params": [
         "live",
         "conservative",
@@ -278,15 +278,35 @@
       "symbol": "PUP",
       "entry_time": "2026-02-20T00:14:33.205152+09:00",
       "entry_price": 0.00019290499999999997,
-      "current_pnl_pct": -5.08,
+      "current_pnl_pct": -3.56,
       "peak_pnl_pct": 0.0,
-      "price_points": 193,
+      "price_points": 198,
       "active_params": [
         "wide_trail",
         "wide_sl15"
       ],
       "score": 46.44579442152619,
       "grade": "C"
+    },
+    {
+      "symbol": "GRAD_9pAQNF",
+      "entry_time": "2026-02-20T00:59:02.797421+09:00",
+      "entry_price": 2.0909999999999995e-05,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 0,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
     }
   ],
   "recent_completed": [
