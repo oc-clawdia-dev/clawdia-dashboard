@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T09:01:53.068457+09:00",
+  "updated": "2026-02-19T09:02:54.892161+09:00",
   "total_completed": 180,
-  "total_open": 1,
-  "today_entries": 27,
+  "total_open": 2,
+  "today_entries": 28,
   "param_summary": {
     "live": {
       "params": {
@@ -217,7 +217,7 @@
       "entry_price": 0.00105575,
       "current_pnl_pct": -8.48,
       "peak_pnl_pct": 0.0,
-      "price_points": 190,
+      "price_points": 195,
       "active_params": [
         "live",
         "conservative",
@@ -229,6 +229,26 @@
         "wide_sl15"
       ],
       "score": 38.222689092934054,
+      "grade": "C"
+    },
+    {
+      "symbol": "CHARLIE",
+      "entry_time": "2026-02-19T09:02:32.812092+09:00",
+      "entry_price": 0.00018449999999999999,
+      "current_pnl_pct": 12.61,
+      "peak_pnl_pct": 12.613821138211389,
+      "price_points": 3,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 48.658979315076465,
       "grade": "C"
     }
   ],
