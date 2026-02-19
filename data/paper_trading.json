@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-20T01:33:25.318743+09:00",
+  "updated": "2026-02-20T01:34:30.156766+09:00",
   "total_completed": 454,
-  "total_open": 8,
-  "today_entries": 114,
+  "total_open": 10,
+  "today_entries": 116,
   "param_summary": {
     "live": {
       "params": {
@@ -241,7 +241,7 @@
       "entry_price": 0.00016953499999999998,
       "current_pnl_pct": 0.18,
       "peak_pnl_pct": 2.0806913026808704,
-      "price_points": 494,
+      "price_points": 499,
       "active_params": [
         "live",
         "conservative",
@@ -280,7 +280,7 @@
       "entry_price": 0.00019290499999999997,
       "current_pnl_pct": -11.25,
       "peak_pnl_pct": 0.0,
-      "price_points": 348,
+      "price_points": 353,
       "active_params": [
         "wide_trail",
         "wide_sl15"
@@ -294,7 +294,7 @@
       "entry_price": 0.00012545999999999998,
       "current_pnl_pct": -4.02,
       "peak_pnl_pct": 2.349354375896695,
-      "price_points": 122,
+      "price_points": 127,
       "active_params": [
         "live",
         "conservative",
@@ -313,7 +313,7 @@
       "entry_price": 7.1425075e-06,
       "current_pnl_pct": 15834675.11,
       "peak_pnl_pct": 15834675.112241743,
-      "price_points": 67,
+      "price_points": 72,
       "active_params": [
         "live",
         "conservative",
@@ -333,7 +333,7 @@
       "entry_price": 7.1425075e-06,
       "current_pnl_pct": 551523.5,
       "peak_pnl_pct": 551523.5019704214,
-      "price_points": 59,
+      "price_points": 64,
       "active_params": [
         "live",
         "conservative",
@@ -353,7 +353,7 @@
       "entry_price": 7.1425075e-06,
       "current_pnl_pct": 207.69,
       "peak_pnl_pct": 207.68606123269734,
-      "price_points": 54,
+      "price_points": 59,
       "active_params": [
         "live",
         "conservative",
@@ -369,9 +369,9 @@
       "symbol": "BRITAIN",
       "entry_time": "2026-02-20T01:32:20.783026+09:00",
       "entry_price": 0.0013735,
-      "current_pnl_pct": -1.4,
-      "peak_pnl_pct": 0.0,
-      "price_points": 6,
+      "current_pnl_pct": 0.45,
+      "peak_pnl_pct": 0.4459410265744479,
+      "price_points": 11,
       "active_params": [
         "live",
         "conservative",
@@ -384,6 +384,46 @@
       ],
       "score": 44.72358404361464,
       "grade": "C"
+    },
+    {
+      "symbol": "GRAD_B75G1i",
+      "entry_time": "2026-02-20T01:33:57.864290+09:00",
+      "entry_price": 1.4809507499999997e-05,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 0,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
+    },
+    {
+      "symbol": "GRAD_HhfZzc",
+      "entry_time": "2026-02-20T01:34:09.729276+09:00",
+      "entry_price": 2.143275e-05,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 0,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
     }
   ],
   "recent_completed": [
