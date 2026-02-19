@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T20:06:05.278591+09:00",
+  "updated": "2026-02-19T20:07:11.789442+09:00",
   "total_completed": 205,
-  "total_open": 3,
-  "today_entries": 54,
+  "total_open": 4,
+  "today_entries": 55,
   "param_summary": {
     "live": {
       "params": {
@@ -217,7 +217,7 @@
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 286,
+      "price_points": 291,
       "active_params": [
         "live",
         "conservative",
@@ -237,7 +237,7 @@
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 197,
+      "price_points": 202,
       "active_params": [
         "live",
         "conservative",
@@ -257,7 +257,7 @@
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 7,
+      "price_points": 12,
       "active_params": [
         "live",
         "conservative",
@@ -269,6 +269,26 @@
         "wide_sl15"
       ],
       "score": 70.50316146276603,
+      "grade": "A"
+    },
+    {
+      "symbol": "USTC",
+      "entry_time": "2026-02-19T20:07:01.722971+09:00",
+      "entry_price": 3.6622412549858156e-05,
+      "current_pnl_pct": -4.66,
+      "peak_pnl_pct": 0.0,
+      "price_points": 2,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 70.18136152607545,
       "grade": "A"
     }
   ],
