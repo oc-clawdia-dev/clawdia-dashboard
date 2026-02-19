@@ -1222,7 +1222,7 @@
         "address": "8f9NCNw6JbrajqfA"
       }
     ],
-    "last_scan": "2026-02-19T17:03:29.222933"
+    "last_scan": "2026-02-19T17:04:30.740239"
   },
   "survey": [],
   "trades": [
@@ -15877,16 +15877,112 @@
         "dexscreener_pnl_pct": -2.97,
         "actual_pnl_pct": -7.79
       }
+    },
+    {
+      "timestamp": "2026-02-19T17:03:55.141165+09:00",
+      "unix_time": 1771488235,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "MetalPunch/USDC",
+      "input_token": "USDC",
+      "output_token": "MetalPunch",
+      "order_input_amount": 10.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 73867.71145,
+      "input_amount": 10.0,
+      "output_amount": 73867.71145,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.00013537714657328807,
+      "effective_price": 0.00013537714657328807,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "64NKB63V7RDg5XMj1mgYeQWKm7qnTK9ywtxRoyJukRRAfAYgkroJypEkXCT1jEbp8d75m9CTx8VmsdPNzj2nS4da",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=69 grade=A",
+      "error": "",
+      "extra": {
+        "token_address": "JDB6UnJfc3caqiGh5DjPfhJz9dvWDCVVTqPCZYMGpump",
+        "dexscreener_price": 0.0,
+        "onchain_price": 0.00013537714657328807,
+        "entry_slippage_pct": null,
+        "score_detail": {
+          "total": 69.44184164293571,
+          "momentum": 61.75906943483646,
+          "volume": 100,
+          "demand": 65
+        },
+        "pc_5m": 48.84,
+        "bs_5m": 1.36,
+        "liquidity_usd": 0.0
+      }
+    },
+    {
+      "timestamp": "2026-02-19T17:04:17.464620+09:00",
+      "unix_time": 1771488257,
+      "strategy": "MEME",
+      "direction": "sell",
+      "pair": "MetalPunch/USDC",
+      "input_token": "MetalPunch",
+      "output_token": "USDC",
+      "order_input_amount": 73867.71145,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 8.39337938712,
+      "input_amount": 73867.71145,
+      "output_amount": 8.39337938712,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.0001257,
+      "effective_price": 0.0001136271751535359,
+      "slippage_pct": -9.6045,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "4sBQ4NKdjnZdedwdEjRdZYVtbx3Gz2KGnBM7Ub3HSSnaQHYEWxzBSACWGVzhNRVHVHF72ne6zeNBVi4sbKYG7g8x",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "SL (-15.9%)",
+      "error": "",
+      "extra": {
+        "token_address": "JDB6UnJfc3caqiGh5DjPfhJz9dvWDCVVTqPCZYMGpump",
+        "entry_price": 0.00013537714657328807,
+        "pnl_usd": -1.6066,
+        "pnl_pct": -16.07,
+        "hold_minutes": 0.4,
+        "score_at_entry": 69.44184164293571,
+        "dexscreener_sell_price": 0.0001257,
+        "onchain_sell_price": 0.0001136271751535359,
+        "sell_slippage_pct": -9.6,
+        "dexscreener_pnl_pct": -7.15,
+        "actual_pnl_pct": -16.07
+      }
     }
   ],
   "onchain_pnl": {
-    "total_bought": 2977.0,
-    "log_sold": 2850.51,
-    "onchain_sold": 2836.8,
-    "log_pnl": -126.49,
-    "onchain_pnl": -140.2,
+    "total_bought": 2987.0,
+    "log_sold": 2858.91,
+    "onchain_sold": 2845.19,
+    "log_pnl": -128.09,
+    "onchain_pnl": -141.81,
     "discrepancy": -13.71,
     "cached_txs": 427,
-    "updated_at": "2026-02-19T17:03:29.225121"
+    "updated_at": "2026-02-19T17:04:30.741980"
   }
 }
