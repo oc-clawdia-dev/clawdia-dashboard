@@ -15762,5 +15762,54 @@
       "bs_5m": 0,
       "liquidity_usd": 0.0
     }
+  },
+  {
+    "timestamp": "2026-02-20T01:10:52.389880+09:00",
+    "unix_time": 1771517452,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "GRAD_3ELy7M/USDC",
+    "input_token": "USDC",
+    "output_token": "GRAD_3ELy7M",
+    "order_input_amount": 20.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 645528.471243,
+    "input_amount": 20.0,
+    "output_amount": 645528.471243,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 1.6857068999999998e-06,
+    "effective_price": 3.098236699225507e-05,
+    "slippage_pct": 1737.9451,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "2ADCiUmbYKf7VzCYikjg4NiNAzXD8nwYBwiN8MqYxFvo1MXT1vH76D5cQSxwpDjmG7Tt2dpHQfrshLKBfEeyARsD",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=28 grade=D",
+    "error": "",
+    "extra": {
+      "token_address": "3ELy7MjEs8UCKcmPZJaGBxTDmb4zkFcKcb61xuDZAgbA",
+      "dexscreener_price": 1.6857068999999998e-06,
+      "onchain_price": 3.098236699225507e-05,
+      "entry_slippage_pct": 1737.95,
+      "score_detail": {
+        "total": 27.5,
+        "momentum": 20,
+        "volume": 0,
+        "demand": 20
+      },
+      "pc_5m": 0,
+      "bs_5m": 0,
+      "liquidity_usd": 0.0
+    }
   }
 ]
