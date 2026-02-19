@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-20T01:18:03.800788+09:00",
+  "updated": "2026-02-20T01:19:14.076631+09:00",
   "total_completed": 441,
-  "total_open": 4,
-  "today_entries": 97,
+  "total_open": 6,
+  "today_entries": 99,
   "param_summary": {
     "live": {
       "params": {
@@ -241,7 +241,7 @@
       "entry_price": 0.00016953499999999998,
       "current_pnl_pct": -0.62,
       "peak_pnl_pct": 2.0806913026808704,
-      "price_points": 425,
+      "price_points": 430,
       "active_params": [
         "live",
         "conservative",
@@ -280,7 +280,7 @@
       "entry_price": 0.00019290499999999997,
       "current_pnl_pct": -5.33,
       "peak_pnl_pct": 0.0,
-      "price_points": 279,
+      "price_points": 284,
       "active_params": [
         "wide_trail",
         "wide_sl15"
@@ -294,7 +294,7 @@
       "entry_price": 0.00012545999999999998,
       "current_pnl_pct": 2.35,
       "peak_pnl_pct": 2.349354375896695,
-      "price_points": 53,
+      "price_points": 58,
       "active_params": [
         "live",
         "conservative",
@@ -307,6 +307,46 @@
       ],
       "score": 45.622774576847775,
       "grade": "C"
+    },
+    {
+      "symbol": "GRAD_HcmfPq",
+      "entry_time": "2026-02-20T01:18:25.552891+09:00",
+      "entry_price": 7.1425075e-06,
+      "current_pnl_pct": 11272621.8,
+      "peak_pnl_pct": 11272621.799732096,
+      "price_points": 3,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
+    },
+    {
+      "symbol": "GRAD_8ULKF6",
+      "entry_time": "2026-02-20T01:18:37.205210+09:00",
+      "entry_price": 3.1364999999999995e-05,
+      "current_pnl_pct": 74.86,
+      "peak_pnl_pct": 74.8565279770445,
+      "price_points": 1,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
     }
   ],
   "recent_completed": [
