@@ -1272,7 +1272,7 @@
         "address": "22zJdK8qvCTWCit1"
       }
     ],
-    "last_scan": "2026-02-19T12:07:50.093619"
+    "last_scan": "2026-02-19T12:08:51.838276"
   },
   "survey": [],
   "trades": [
@@ -15159,16 +15159,65 @@
         "dexscreener_pnl_pct": 3.68,
         "actual_pnl_pct": -0.84
       }
+    },
+    {
+      "timestamp": "2026-02-19T12:08:51.381934+09:00",
+      "unix_time": 1771470531,
+      "strategy": "MEME",
+      "direction": "buy",
+      "pair": "DARKTRUMP/USDC",
+      "input_token": "USDC",
+      "output_token": "DARKTRUMP",
+      "order_input_amount": 10.0,
+      "order_output_amount": 0,
+      "actual_input_amount": 0,
+      "actual_output_amount": 3103.100962,
+      "input_amount": 10.0,
+      "output_amount": 3103.100962,
+      "order_input_raw": 0,
+      "order_output_raw": 0,
+      "price_at_signal": 0.003222582868703967,
+      "effective_price": 0.003222582868703967,
+      "slippage_pct": 0.0,
+      "fee_lamports": 0,
+      "fee_sol": 0,
+      "swap_type": "",
+      "signature": "vgqWiznHPRhRBmQTjhmb2SFvhYgusyg9f4114HEhNVp7CKLhCxcaMZVzWro7KMsez5uegsakgC1W4WZ6vMX2NkH",
+      "status": "Success",
+      "latency_ms": 0,
+      "pre_balance_input": 0,
+      "post_balance_input": 0,
+      "pre_balance_output": 0,
+      "post_balance_output": 0,
+      "pre_balance_sol": 0,
+      "post_balance_sol": 0,
+      "reason": "score=60 grade=B",
+      "error": "",
+      "extra": {
+        "token_address": "9ZmkJqCEqMxhg3yvdzGSimixxdhPELb9PUsUQuSRpump",
+        "dexscreener_price": 0.0,
+        "onchain_price": 0.003222582868703967,
+        "entry_slippage_pct": null,
+        "score_detail": {
+          "total": 59.757210551287436,
+          "momentum": 54.14871615128996,
+          "volume": 78.82420134694924,
+          "demand": 55
+        },
+        "pc_5m": 2.51,
+        "bs_5m": 1.64,
+        "liquidity_usd": 0.0
+      }
     }
   ],
   "onchain_pnl": {
-    "total_bought": 2807.0,
+    "total_bought": 2817.0,
     "log_sold": 2674.76,
     "onchain_sold": 2661.05,
-    "log_pnl": -132.24,
-    "onchain_pnl": -145.95,
+    "log_pnl": -142.24,
+    "onchain_pnl": -155.95,
     "discrepancy": -13.71,
     "cached_txs": 427,
-    "updated_at": "2026-02-19T12:07:50.105063"
+    "updated_at": "2026-02-19T12:08:51.840003"
   }
 }
