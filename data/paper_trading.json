@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-20T00:10:13.252032+09:00",
+  "updated": "2026-02-20T00:11:17.845944+09:00",
   "total_completed": 355,
-  "total_open": 2,
-  "today_entries": 9,
+  "total_open": 3,
+  "today_entries": 10,
   "param_summary": {
     "live": {
       "params": {
@@ -241,7 +241,7 @@
       "entry_price": 0.00016953499999999998,
       "current_pnl_pct": -4.19,
       "peak_pnl_pct": 0.0,
-      "price_points": 128,
+      "price_points": 133,
       "active_params": [
         "live",
         "conservative",
@@ -262,6 +262,26 @@
       "current_pnl_pct": 0.0,
       "peak_pnl_pct": 0.0,
       "price_points": 0,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
+    },
+    {
+      "symbol": "GRAD_Hx1iAU",
+      "entry_time": "2026-02-20T00:10:24.097627+09:00",
+      "entry_price": 1.849914383561644e-05,
+      "current_pnl_pct": 412.5,
+      "peak_pnl_pct": 412.5047993705743,
+      "price_points": 2,
       "active_params": [
         "live",
         "conservative",
