@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T22:29:40.871246+09:00",
+  "updated": "2026-02-19T22:30:48.231755+09:00",
   "total_completed": 217,
-  "total_open": 1,
-  "today_entries": 64,
+  "total_open": 2,
+  "today_entries": 65,
   "param_summary": {
     "live": {
       "params": {
@@ -215,9 +215,9 @@
       "symbol": "UVI",
       "entry_time": "2026-02-19T22:20:03.095260+09:00",
       "entry_price": 0.0001544675,
-      "current_pnl_pct": 7.05,
-      "peak_pnl_pct": 7.051645168077436,
-      "price_points": 43,
+      "current_pnl_pct": 7.11,
+      "peak_pnl_pct": 7.1147652418793506,
+      "price_points": 48,
       "active_params": [
         "live",
         "conservative",
@@ -229,6 +229,26 @@
       ],
       "score": 47.799831103691794,
       "grade": "C"
+    },
+    {
+      "symbol": "GRAD_6kJGox",
+      "entry_time": "2026-02-19T22:30:36.783213+09:00",
+      "entry_price": 1.5334e-05,
+      "current_pnl_pct": 0.0,
+      "peak_pnl_pct": 0.0,
+      "price_points": 0,
+      "active_params": [
+        "live",
+        "conservative",
+        "current",
+        "moderate",
+        "tight",
+        "aggressive",
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 0,
+      "grade": "?"
     }
   ],
   "recent_completed": [
