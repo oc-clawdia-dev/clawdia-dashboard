@@ -1,8 +1,8 @@
 {
-  "updated": "2026-02-19T16:55:21.757324+09:00",
+  "updated": "2026-02-19T16:56:27.765801+09:00",
   "total_completed": 198,
-  "total_open": 5,
-  "today_entries": 49,
+  "total_open": 6,
+  "today_entries": 50,
   "param_summary": {
     "live": {
       "params": {
@@ -217,7 +217,7 @@
       "entry_price": 7.337974999999999e-05,
       "current_pnl_pct": -3.84,
       "peak_pnl_pct": 3.3067706008810482,
-      "price_points": 424,
+      "price_points": 428,
       "active_params": [
         "live",
         "conservative",
@@ -234,7 +234,7 @@
       "entry_price": 2.8413124777960272e-06,
       "current_pnl_pct": -5.63,
       "peak_pnl_pct": 0.0,
-      "price_points": 404,
+      "price_points": 408,
       "active_params": [
         "live",
         "conservative",
@@ -254,7 +254,7 @@
       "entry_price": 0.0005091175,
       "current_pnl_pct": -4.88,
       "peak_pnl_pct": 0.0,
-      "price_points": 262,
+      "price_points": 266,
       "active_params": [
         "live",
         "conservative",
@@ -274,7 +274,7 @@
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 188,
+      "price_points": 192,
       "active_params": [
         "live",
         "conservative",
@@ -294,7 +294,7 @@
       "entry_price": 3.6622412549858156e-05,
       "current_pnl_pct": -4.66,
       "peak_pnl_pct": 0.0,
-      "price_points": 146,
+      "price_points": 150,
       "active_params": [
         "live",
         "conservative",
@@ -307,6 +307,20 @@
       ],
       "score": 68.1023170384965,
       "grade": "A"
+    },
+    {
+      "symbol": "KURO",
+      "entry_time": "2026-02-19T16:55:42.193116+09:00",
+      "entry_price": 0.00013407,
+      "current_pnl_pct": -10.55,
+      "peak_pnl_pct": 0.0,
+      "price_points": 4,
+      "active_params": [
+        "wide_trail",
+        "wide_sl15"
+      ],
+      "score": 53.359684089500156,
+      "grade": "B"
     }
   ],
   "recent_completed": [
