@@ -14226,5 +14226,54 @@
       "bs_5m": 2.09,
       "liquidity_usd": 0.0
     }
+  },
+  {
+    "timestamp": "2026-02-19T09:50:50.840168+09:00",
+    "unix_time": 1771462250,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "TRUMPEDO/USDC",
+    "input_token": "USDC",
+    "output_token": "TRUMPEDO",
+    "order_input_amount": 10.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 2608.485698,
+    "input_amount": 10.0,
+    "output_amount": 2608.485698,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.0038336418741598943,
+    "effective_price": 0.0038336418741598943,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "2jGZVie3psKrsAnRsqsEkwXLzu8SvBjeyK6t9bRWNxrLygwQ7Hb4cF2ERtXDXEn3MCTBfCqTogF9S3X59awkcQtN",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=57 grade=B",
+    "error": "",
+    "extra": {
+      "token_address": "5svYfiX5XimQVdHWDC44nU8dKdnPLpLXbK2Nj73Gpump",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.0038336418741598943,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 57.18057867000511,
+        "momentum": 47.2012202044596,
+        "volume": 73.02680505673725,
+        "demand": 55
+      },
+      "pc_5m": 1.22,
+      "bs_5m": 1.46,
+      "liquidity_usd": 0.0
+    }
   }
 ]
