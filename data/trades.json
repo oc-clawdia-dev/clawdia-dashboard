@@ -15521,5 +15521,54 @@
       "dexscreener_pnl_pct": -7.15,
       "actual_pnl_pct": -16.07
     }
+  },
+  {
+    "timestamp": "2026-02-19T19:28:50.617324+09:00",
+    "unix_time": 1771496930,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "ANDREW/USDC",
+    "input_token": "USDC",
+    "output_token": "ANDREW",
+    "order_input_amount": 10.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 51804.831381,
+    "input_amount": 10.0,
+    "output_amount": 51804.831381,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.00019303218895656152,
+    "effective_price": 0.00019303218895656152,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "2ru2cVnjHsVe6UJiqufc3bdr4bQaSAfpNohZFVXb41ujGrwi6Y5s2YUi1qxUFSweqbUfW5tGPEww3Upi14Kp76Zw",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=75 grade=A",
+    "error": "",
+    "extra": {
+      "token_address": "ASDvJ3koPUMqx8e4mdYi7r5mhBPZbJe4GEtfNaRVpump",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.00019303218895656152,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 74.65003311222196,
+        "momentum": 80.70235814640914,
+        "volume": 97.87325604268415,
+        "demand": 40
+      },
+      "pc_5m": 17.63,
+      "bs_5m": 1.02,
+      "liquidity_usd": 0.0
+    }
   }
 ]
