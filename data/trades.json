@@ -15041,5 +15041,54 @@
       "dexscreener_pnl_pct": 14.2,
       "actual_pnl_pct": 7.03
     }
+  },
+  {
+    "timestamp": "2026-02-19T14:42:59.951579+09:00",
+    "unix_time": 1771479779,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "TRUMP/USDC",
+    "input_token": "USDC",
+    "output_token": "TRUMP",
+    "order_input_amount": 40.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 18011.649718,
+    "input_amount": 40.0,
+    "output_amount": 18011.649718,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.002220784915666324,
+    "effective_price": 0.002220784915666324,
+    "slippage_pct": 0.0,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "5HdCvP8QfGFUafsjYUHM3tESygFVQKZpP9JrWZmgPi6sEPhKhb5yVJL5rNvKFr1HgRjLWbLNtc621yHEMD7Bou66",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=60 grade=B",
+    "error": "",
+    "extra": {
+      "token_address": "9c7B7HnSWVMQLPaS8zfXXT1ct9wpb2jqkJmJbaVWpump",
+      "dexscreener_price": 0.0,
+      "onchain_price": 0.002220784915666324,
+      "entry_slippage_pct": null,
+      "score_detail": {
+        "total": 60.35833520033849,
+        "momentum": 54.29735250685917,
+        "volume": 76.62255151316762,
+        "demand": 55
+      },
+      "pc_5m": 5.7,
+      "bs_5m": 1.71,
+      "liquidity_usd": 0.0
+    }
   }
 ]
