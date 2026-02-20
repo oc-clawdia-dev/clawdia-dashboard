@@ -175,9 +175,16 @@
             "bear_2022_ema50": "-1.4% (BTC) ← 提案中"
           },
           "pair_id": "SOL_GRID",
+          "position": {
+            "in_position": true,
+            "entry_price": 83.55,
+            "usdc_spent": 47.955189649999994,
+            "token_amount": 0.574380189,
+            "ref_price": 84.87
+          },
           "live_stats": {
-            "total_trades": 4,
-            "buys": 2,
+            "total_trades": 5,
+            "buys": 3,
             "sells": 2,
             "completed_trips": 2,
             "total_invested": 68.77,
@@ -222,7 +229,7 @@
   "allocation": {
     "total_portfolio": 134.17,
     "total_allocated": 280,
-    "total_in_positions": 30.3,
+    "total_in_positions": 78.54,
     "cash_unallocated": 0,
     "strategies": {
       "CCI": {
@@ -243,8 +250,8 @@
       },
       "GRID": {
         "allocated_usd": 200,
-        "position_value": 0,
-        "dry_powder": 200,
+        "position_value": 48.24,
+        "dry_powder": 151.76,
         "realized_pnl": -1.03,
         "effective_value": 198.97,
         "note": "SOL$100 + ETH$100。各1ポジション分"
