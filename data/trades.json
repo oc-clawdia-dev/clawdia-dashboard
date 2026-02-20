@@ -16340,5 +16340,54 @@
       "dexscreener_pnl_pct": 1.36,
       "actual_pnl_pct": -42.56
     }
+  },
+  {
+    "timestamp": "2026-02-20T19:17:29.832979+09:00",
+    "unix_time": 1771582649,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "GRAD_ECdtMd/USDC",
+    "input_token": "USDC",
+    "output_token": "GRAD_ECdtMd",
+    "order_input_amount": 1.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 572.527329,
+    "input_amount": 1.0,
+    "output_amount": 572.527329,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 0.0017377582329705,
+    "effective_price": 0.0017466415127233167,
+    "slippage_pct": 0.5112,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "4gdVrkRGDNZL6YEgVEJA3CsN6HdtfC2n1pmYR9V1GtpCsJ4QUHc1fBf2B39531rrKq6NKLsBHvoCJj466QWMK2o9",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=28 grade=D",
+    "error": "",
+    "extra": {
+      "token_address": "ECdtMdek1rj47bXuzJ7hoWBso6otsHkteVM9MgpBpump",
+      "dexscreener_price": 0.0017377582329705,
+      "onchain_price": 0.0017466415127233167,
+      "entry_slippage_pct": 0.51,
+      "score_detail": {
+        "total": 27.5,
+        "momentum": 20,
+        "volume": 0,
+        "demand": 20
+      },
+      "pc_5m": 0,
+      "bs_5m": 0,
+      "liquidity_usd": 0.0
+    }
   }
 ]
