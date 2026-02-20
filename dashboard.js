@@ -1695,6 +1695,24 @@ function renderCreativeTab() {
     } else {
         diaryEl.innerHTML = '<p style="color:#888">まだ日記がありません</p>';
     }
+
+    // Note drafts
+    const draftsEl = document.getElementById('creative-note-drafts');
+    if (draftsEl && creativeData.note_drafts && creativeData.note_drafts.length > 0) {
+        draftsEl.innerHTML = creativeData.note_drafts.map((item, i) => {
+            return `<div class="creative-essay-item" onclick="toggleCreativeContent('notedraft', ${i})">
+                <div class="essay-title">${item.title}</div>
+                <div class="essay-preview">${item.preview || ''}</div>
+                <div class="essay-date">${item.date} · ${item.filename}</div>
+            </div>
+            <div id="notedraft-content-${i}" class="creative-full-content" style="display:none">
+                <span class="back-btn" onclick="event.stopPropagation();document.getElementById('notedraft-content-${i}').style.display='none'">← 閉じる</span>
+                <div class="essay-full-text">${marked.parse(item.content)}</div>
+            </div>`;
+        }).join('');
+    } else if (draftsEl) {
+        draftsEl.innerHTML = '<p style="color:#888">下書きなし</p>';
+    }
 }
 
 function toggleNoteContent(index) {
@@ -1770,6 +1788,30 @@ function updateNoteSection() {
                 <span class="note-schedule-date">${date} ${time}</span>
             </div>`;
         }).join('');
+    }
+
+    // Drafts (from creative data)
+    const noteDraftsEl = document.getElementById('note-drafts-list');
+    if (noteDraftsEl) {
+        fetch('data/creative.json?t=' + Date.now()).then(r=>r.json()).then(cd => {
+            const drafts = cd.note_drafts || [];
+            if (drafts.length === 0) {
+                noteDraftsEl.innerHTML = '<p style="color:#888">下書きなし</p>';
+                return;
+            }
+            noteDraftsEl.innerHTML = drafts.map((item, i) => {
+                const content = (item.content || '').replace(/^#[^\n]*\n+/, '');
+                return `<div class="creative-essay-item" onclick="toggleCreativeContent('nd', ${i})">
+                    <div class="creative-essay-title">${esc(item.title)}</div>
+                    <div class="creative-essay-preview">${esc(item.preview)}</div>
+                    <div class="creative-essay-date">${item.date || ''} · ${item.filename || ''}</div>
+                </div>
+                <div id="nd-content-${i}" class="creative-full-content" style="display:none">
+                    <span class="back-btn" onclick="event.stopPropagation();document.getElementById('nd-content-${i}').style.display='none'">← 閉じる</span>
+                    <div class="creative-essay-body">${marked ? marked.parse(content) : content.replace(/\n/g,'<br>')}</div>
+                </div>`;
+            }).join('');
+        }).catch(() => { noteDraftsEl.innerHTML = '<p style="color:#888">読み込みエラー</p>'; });
     }
 
     // Strategy
