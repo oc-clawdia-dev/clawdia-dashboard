@@ -716,3 +716,105 @@ header h1 {
     font-size: 0.85em;
 }
 .creative-full-content .back-btn:hover { text-decoration: underline; }
+
+/* ─── note Tab ─── */
+.note-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.note-stat {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(159, 122, 234, 0.1);
+    border-radius: 8px;
+}
+.note-stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #9f7aea;
+}
+.note-stat-label {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 0.3rem;
+}
+.note-article-row {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #2d2d2d;
+    gap: 1rem;
+}
+.note-article-row:last-child { border-bottom: none; }
+.note-article-num {
+    font-size: 0.9rem;
+    color: #666;
+    min-width: 2rem;
+}
+.note-article-info { flex: 1; }
+.note-article-title {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+.note-article-meta {
+    font-size: 0.8rem;
+    color: #888;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.note-badge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+.note-badge.published { background: rgba(72, 187, 120, 0.2); color: #48bb78; }
+.note-badge.draft { background: rgba(237, 137, 54, 0.2); color: #ed8936; }
+.note-badge.planned { background: rgba(159, 122, 234, 0.2); color: #9f7aea; }
+.note-article-stats {
+    text-align: right;
+    min-width: 6rem;
+}
+.note-article-likes {
+    color: #e53e6b;
+    font-weight: 600;
+}
+.note-article-date {
+    font-size: 0.75rem;
+    color: #666;
+}
+.note-schedule-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #2d2d2d;
+}
+.note-schedule-row:last-child { border-bottom: none; }
+.note-schedule-icon { font-size: 1.1rem; }
+.note-schedule-title { flex: 1; }
+.note-schedule-date { color: #888; font-size: 0.85rem; }
+.note-strategy-item {
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+}
+.note-strategy-goals {
+    margin: 0.5rem 0 0.5rem 1rem;
+}
+.note-goal {
+    padding: 0.3rem 0;
+    color: #aaa;
+}
+.note-goal-phase {
+    display: inline-block;
+    min-width: 4rem;
+    color: #9f7aea;
+    font-weight: 600;
+}
+@media (max-width: 600px) {
+    .note-stats-grid { grid-template-columns: repeat(2, 1fr); }
+}

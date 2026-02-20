@@ -54,6 +54,7 @@ async function loadAllData() {
         ['dailyReports', './data/daily_reports.json'],
         ['strategies', './data/strategies.json'],
         ['portfolioHistory', './data/portfolio_history.json'],
+        ['note', './data/note.json'],
     ];
 
     const bust = '?t=' + Date.now();
@@ -69,6 +70,7 @@ async function loadAllData() {
             else if (key === 'wallet') dashboardData[key] = null;
             else if (key === 'dailyReports') dashboardData[key] = [];
             else if (key === 'portfolioHistory') dashboardData[key] = {portfolio_history:[], price_history:[]};
+            else if (key === 'note') dashboardData[key] = null;
             else dashboardData[key] = [];
         }
     }));
@@ -81,6 +83,7 @@ async function loadAllData() {
         updateSignalSection,
         updateStrategiesSection,
         updateDailyReportsSection,
+        updateNoteSection,
     ];
     for (const fn of sections) {
         try { fn(); } catch(e) { console.warn('Section error:', e); errors++; }
@@ -1697,4 +1700,79 @@ function renderCreativeTab() {
 function toggleCreativeContent(type, index) {
     const el = document.getElementById(`${type}-content-${index}`);
     if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+// ─── note Tab ───
+function updateNoteSection() {
+    const d = dashboardData.note;
+    if (!d) return;
+
+    // Stats
+    const published = d.articles.filter(a => a.status === 'published');
+    const totalLikes = published.reduce((s, a) => s + (a.likes || 0), 0);
+    const setEl = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+    setEl('note-articles', published.length);
+    setEl('note-followers', d.profile?.followers ?? '-');
+    setEl('note-total-likes', totalLikes);
+    setEl('note-phase', d.phase || '-');
+
+    // Articles list
+    const listEl = document.getElementById('note-articles-list');
+    if (listEl && d.articles.length) {
+        listEl.innerHTML = d.articles.map(a => {
+            const statusBadge = a.status === 'published'
+                ? '<span class="note-badge published">公開中</span>'
+                : a.status === 'draft'
+                ? '<span class="note-badge draft">下書き</span>'
+                : '<span class="note-badge planned">予定</span>';
+            const date = a.publishedAt
+                ? new Date(a.publishedAt).toLocaleDateString('ja-JP', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})
+                : a.scheduledFor
+                ? '予定: ' + new Date(a.scheduledFor).toLocaleDateString('ja-JP', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})
+                : '';
+            const likes = a.status === 'published' ? `♥ ${a.likes || 0}` : '';
+            const link = a.url ? `<a href="${a.url}" target="_blank" style="color:#9f7aea;text-decoration:none">↗</a>` : '';
+            return `<div class="note-article-row">
+                <div class="note-article-num">#${a.number}</div>
+                <div class="note-article-info">
+                    <div class="note-article-title">${esc(a.title)} ${link}</div>
+                    <div class="note-article-meta">${statusBadge} ${a.chars}字 ${a.tags?.map(t=>'#'+t).join(' ')||''}</div>
+                </div>
+                <div class="note-article-stats">
+                    <div class="note-article-likes">${likes}</div>
+                    <div class="note-article-date">${date}</div>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // Schedule
+    const schedEl = document.getElementById('note-schedule');
+    if (schedEl && d.schedule?.length) {
+        schedEl.innerHTML = d.schedule.map(s => {
+            const statusIcon = s.status === 'draft_ready' ? '✅' : s.status === 'planned' ? '📋' : '⏳';
+            const date = s.targetDate || '未定';
+            const time = s.targetTime || '';
+            return `<div class="note-schedule-row">
+                <span class="note-schedule-icon">${statusIcon}</span>
+                <span class="note-schedule-title">#${s.number} ${esc(s.title)}</span>
+                <span class="note-schedule-date">${date} ${time}</span>
+            </div>`;
+        }).join('');
+    }
+
+    // Strategy
+    const stratEl = document.getElementById('note-strategy');
+    if (stratEl && d.strategy) {
+        const s = d.strategy;
+        stratEl.innerHTML = `
+            <div class="note-strategy-item"><strong>ポジショニング:</strong> ${esc(s.positioning)}</div>
+            <div class="note-strategy-item"><strong>収益モデル:</strong> ${esc(s.revenue)}</div>
+            <div class="note-strategy-item"><strong>収益目標:</strong></div>
+            <div class="note-strategy-goals">
+                ${Object.entries(s.revenueGoals||{}).map(([k,v])=>`<div class="note-goal"><span class="note-goal-phase">${k}</span> ${esc(v)}</div>`).join('')}
+            </div>
+            <div class="note-strategy-item"><strong>原則:</strong> ${esc(s.keyPrinciple)}</div>
+        `;
+    }
 }

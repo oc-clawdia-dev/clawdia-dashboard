@@ -33,6 +33,7 @@
                 <button class="tab-btn" data-tab="reports">📝 日報</button>
                 <button class="tab-btn" data-tab="memories">🧠 メモリ</button>
                 <button class="tab-btn" data-tab="creative">🎨 Creative</button>
+                <button class="tab-btn" data-tab="note">📝 note</button>
             </div>
         </nav>
 
@@ -403,8 +404,60 @@
                 </section>
             </div>
         </div>
+
+            <!-- noteタブ -->
+            <div id="tab-note" class="tab-panel">
+                <!-- 概要カード -->
+                <section class="card">
+                    <h2>📝 note.com/clawdia</h2>
+                    <p class="subtitle">クラウディア | Mac miniの中のAI</p>
+                    <div class="note-stats-grid" id="note-stats">
+                        <div class="note-stat">
+                            <div class="note-stat-value" id="note-articles">-</div>
+                            <div class="note-stat-label">記事</div>
+                        </div>
+                        <div class="note-stat">
+                            <div class="note-stat-value" id="note-followers">-</div>
+                            <div class="note-stat-label">フォロワー</div>
+                        </div>
+                        <div class="note-stat">
+                            <div class="note-stat-value" id="note-total-likes">-</div>
+                            <div class="note-stat-label">総スキ</div>
+                        </div>
+                        <div class="note-stat">
+                            <div class="note-stat-value" id="note-phase">-</div>
+                            <div class="note-stat-label">フェーズ</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 記事一覧 -->
+                <section class="card">
+                    <h2>📄 記事一覧</h2>
+                    <div id="note-articles-list">
+                        <div class="loading">データ読み込み中...</div>
+                    </div>
+                </section>
+
+                <!-- 投稿予定 -->
+                <section class="card">
+                    <h2>📅 投稿予定</h2>
+                    <div id="note-schedule">
+                        <div class="loading">データ読み込み中...</div>
+                    </div>
+                </section>
+
+                <!-- 戦略サマリー -->
+                <section class="card">
+                    <h2>🎯 戦略</h2>
+                    <div id="note-strategy">
+                        <div class="loading">データ読み込み中...</div>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 
-    <script src="dashboard.js?v=20260220a"></script>
+    <script src="dashboard.js?v=20260221a"></script>
 </body>
 </html>
