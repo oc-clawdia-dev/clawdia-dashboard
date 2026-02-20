@@ -637,3 +637,82 @@ header h1 {
 .alloc-row { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 0.85em; }
 .alloc-name { min-width: 120px; color: #ccc; }
 .alloc-vals { color: #999; }
+
+/* Creative tab */
+.creative-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+.gallery-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+.gallery-item:hover { transform: scale(1.02); }
+.gallery-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+}
+.gallery-item .gallery-caption {
+    padding: 10px 12px;
+    font-size: 0.85em;
+    color: #ccc;
+}
+.gallery-item .gallery-date {
+    font-size: 0.75em;
+    color: #888;
+    margin-top: 4px;
+}
+.creative-essay-item, .creative-diary-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+.creative-essay-item:hover, .creative-diary-item:hover {
+    border-color: #9b59b6;
+}
+.creative-essay-item h3, .creative-diary-item h3 {
+    margin: 0 0 8px 0;
+    color: #e0e0e0;
+    font-size: 1em;
+}
+.creative-essay-item .preview, .creative-diary-item .preview {
+    color: #999;
+    font-size: 0.85em;
+    line-height: 1.5;
+    max-height: 4.5em;
+    overflow: hidden;
+}
+.creative-essay-item .date, .creative-diary-item .date {
+    color: #888;
+    font-size: 0.75em;
+    margin-top: 8px;
+}
+.creative-full-content {
+    background: var(--bg-secondary);
+    border: 1px solid #9b59b6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 12px;
+    color: #ddd;
+    font-size: 0.9em;
+    line-height: 1.8;
+    white-space: pre-wrap;
+}
+.creative-full-content .back-btn {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #9b59b6;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+.creative-full-content .back-btn:hover { text-decoration: underline; }

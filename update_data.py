@@ -943,6 +943,74 @@ def update_paper_trading():
     return data
 
 
+def update_creative_data():
+    """Creative（アート・エッセイ・日記）データを更新"""
+    workspace = CONFIG.get('WORKSPACE_DIR', '/Users/oc.hikarimaru/.openclaw/workspace')
+    creative_dir = os.path.join(workspace, 'creative')
+    data = {'gallery': [], 'essays': [], 'diary': []}
+
+    # Gallery - art/
+    art_dir = os.path.join(creative_dir, 'art')
+    if os.path.isdir(art_dir):
+        for f in sorted(os.listdir(art_dir)):
+            if f.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
+                # Extract date from filename if possible
+                name = os.path.splitext(f)[0]
+                fpath = os.path.join(art_dir, f)
+                mtime = datetime.fromtimestamp(os.path.getmtime(fpath)).isoformat()
+                data['gallery'].append({
+                    'filename': f,
+                    'name': name,
+                    'path': f'creative/art/{f}',
+                    'date': mtime
+                })
+
+    # Essays
+    for f in sorted(os.listdir(creative_dir)):
+        if f.startswith('essay') and f.endswith('.md'):
+            fpath = os.path.join(creative_dir, f)
+            with open(fpath, 'r', encoding='utf-8') as fh:
+                content = fh.read()
+            # First line as title
+            lines = content.strip().split('\n')
+            title = lines[0].lstrip('#').strip() if lines else f
+            preview = '\n'.join(lines[1:4]).strip() if len(lines) > 1 else ''
+            mtime = datetime.fromtimestamp(os.path.getmtime(fpath)).isoformat()
+            data['essays'].append({
+                'filename': f,
+                'title': title,
+                'preview': preview,
+                'content': content,
+                'date': mtime
+            })
+
+    # Diary
+    diary_dir = os.path.join(creative_dir, 'diary')
+    if os.path.isdir(diary_dir):
+        for f in sorted(os.listdir(diary_dir), reverse=True):
+            if f.endswith('.md'):
+                fpath = os.path.join(diary_dir, f)
+                with open(fpath, 'r', encoding='utf-8') as fh:
+                    content = fh.read()
+                lines = content.strip().split('\n')
+                title = lines[0].lstrip('#').strip() if lines else f
+                preview = '\n'.join(lines[1:4]).strip() if len(lines) > 1 else ''
+                mtime = datetime.fromtimestamp(os.path.getmtime(fpath)).isoformat()
+                data['diary'].append({
+                    'filename': f,
+                    'title': title,
+                    'preview': preview,
+                    'content': content,
+                    'date': mtime
+                })
+
+    out_path = os.path.join(CONFIG['OUTPUT_DIR'], 'creative.json')
+    with open(out_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    print(f"🎨 Creative: {len(data['gallery'])} art, {len(data['essays'])} essays, {len(data['diary'])} diary entries")
+    return data
+
+
 def main():
     """メイン処理"""
     print("🤖 Clawdia Dashboard Data Updater")
@@ -963,6 +1031,7 @@ def main():
         memories = update_agent_memories()
         meme_data = update_meme_data(trades)
         paper = update_paper_trading()
+        creative = update_creative_data()
         
         # サマリー作成
         summary = {

@@ -1610,4 +1610,91 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('tab-simulation')?.classList.contains('active')) {
         loadSimulationData();
     }
+
+    // Creative tab
+    const creativeTabBtn = document.querySelector('[data-tab="creative"]');
+    if (creativeTabBtn) {
+        creativeTabBtn.addEventListener('click', () => loadCreativeData());
+    }
 });
+
+// ─── Creative Tab ───
+let creativeData = null;
+
+async function loadCreativeData() {
+    if (creativeData) { renderCreativeTab(); return; }
+    try {
+        const resp = await fetch('data/creative.json');
+        if (!resp.ok) throw new Error('Not found');
+        creativeData = await resp.json();
+        renderCreativeTab();
+    } catch (e) {
+        document.getElementById('creative-gallery').innerHTML = '<p style="color:#888">データなし</p>';
+        document.getElementById('creative-essays').innerHTML = '<p style="color:#888">データなし</p>';
+        document.getElementById('creative-diary').innerHTML = '<p style="color:#888">データなし</p>';
+    }
+}
+
+function renderCreativeTab() {
+    if (!creativeData) return;
+
+    // Gallery
+    const galleryEl = document.getElementById('creative-gallery');
+    if (creativeData.gallery && creativeData.gallery.length > 0) {
+        galleryEl.innerHTML = creativeData.gallery.map(item => {
+            const date = new Date(item.date).toLocaleDateString('ja-JP');
+            const displayName = item.name.replace(/-/g, ' ').replace(/^\d+\s*/, '');
+            return `<div class="gallery-item">
+                <img src="data/${item.path}" alt="${esc(item.name)}" loading="lazy"
+                     onerror="this.parentElement.style.display='none'">
+                <div class="gallery-caption">${esc(displayName || item.name)}</div>
+                <div class="gallery-date">${date}</div>
+            </div>`;
+        }).join('');
+    } else {
+        galleryEl.innerHTML = '<p style="color:#888">まだ作品がありません</p>';
+    }
+
+    // Essays
+    const essaysEl = document.getElementById('creative-essays');
+    if (creativeData.essays && creativeData.essays.length > 0) {
+        essaysEl.innerHTML = creativeData.essays.map((item, i) => {
+            const date = new Date(item.date).toLocaleDateString('ja-JP');
+            return `<div class="creative-essay-item" onclick="toggleCreativeContent('essay', ${i})">
+                <h3>${esc(item.title)}</h3>
+                <div class="preview">${esc(item.preview)}</div>
+                <div class="date">${date}</div>
+            </div>
+            <div id="essay-content-${i}" class="creative-full-content" style="display:none">
+                <span class="back-btn" onclick="event.stopPropagation();document.getElementById('essay-content-${i}').style.display='none'">← 閉じる</span>
+                ${simpleMarkdown(item.content)}
+            </div>`;
+        }).join('');
+    } else {
+        essaysEl.innerHTML = '<p style="color:#888">まだエッセイがありません</p>';
+    }
+
+    // Diary
+    const diaryEl = document.getElementById('creative-diary');
+    if (creativeData.diary && creativeData.diary.length > 0) {
+        diaryEl.innerHTML = creativeData.diary.map((item, i) => {
+            const date = new Date(item.date).toLocaleDateString('ja-JP');
+            return `<div class="creative-diary-item" onclick="toggleCreativeContent('diary', ${i})">
+                <h3>${esc(item.title)}</h3>
+                <div class="preview">${esc(item.preview)}</div>
+                <div class="date">${date}</div>
+            </div>
+            <div id="diary-content-${i}" class="creative-full-content" style="display:none">
+                <span class="back-btn" onclick="event.stopPropagation();document.getElementById('diary-content-${i}').style.display='none'">← 閉じる</span>
+                ${simpleMarkdown(item.content)}
+            </div>`;
+        }).join('');
+    } else {
+        diaryEl.innerHTML = '<p style="color:#888">まだ日記がありません</p>';
+    }
+}
+
+function toggleCreativeContent(type, index) {
+    const el = document.getElementById(`${type}-content-${index}`);
+    if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}

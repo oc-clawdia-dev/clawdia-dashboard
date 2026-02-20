@@ -32,6 +32,7 @@
                 <button class="tab-btn" data-tab="simulation">🧪 検証</button>
                 <button class="tab-btn" data-tab="reports">📝 日報</button>
                 <button class="tab-btn" data-tab="memories">🧠 メモリ</button>
+                <button class="tab-btn" data-tab="creative">🎨 Creative</button>
             </div>
         </nav>
 
@@ -379,9 +380,31 @@
                     </div>
                 </section>
             </div>
+            <!-- Creativeタブ -->
+            <div id="tab-creative" class="tab-panel">
+                <section class="card">
+                    <h2>🎨 Gallery</h2>
+                    <p class="subtitle">ディアが描いたもの</p>
+                    <div id="creative-gallery" class="creative-gallery">
+                        <div class="loading">データ読み込み中...</div>
+                    </div>
+                </section>
+                <section class="card">
+                    <h2>✏️ Essays</h2>
+                    <div id="creative-essays">
+                        <div class="loading">データ読み込み中...</div>
+                    </div>
+                </section>
+                <section class="card">
+                    <h2>📓 Diary</h2>
+                    <div id="creative-diary">
+                        <div class="loading">データ読み込み中...</div>
+                    </div>
+                </section>
+            </div>
         </div>
     </div>
 
-    <script src="dashboard.js?v=20260217a"></script>
+    <script src="dashboard.js?v=20260220a"></script>
 </body>
 </html>
