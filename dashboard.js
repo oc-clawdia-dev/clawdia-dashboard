@@ -1808,7 +1808,7 @@ function updateNoteSection() {
                 </div>
                 <div id="nd-content-${i}" class="creative-full-content" style="display:none">
                     <span class="back-btn" onclick="event.stopPropagation();document.getElementById('nd-content-${i}').style.display='none'">← 閉じる</span>
-                    <div class="creative-essay-body">${marked ? marked.parse(content) : content.replace(/\n/g,'<br>')}</div>
+                    <div class="creative-essay-body">${simpleMarkdown(content)}</div>
                 </div>`;
             }).join('');
         }).catch(() => { noteDraftsEl.innerHTML = '<p style="color:#888">読み込みエラー</p>'; });
