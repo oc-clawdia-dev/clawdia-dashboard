@@ -16052,5 +16052,54 @@
       "dexscreener_pnl_pct": 4.24,
       "actual_pnl_pct": -99.66
     }
+  },
+  {
+    "timestamp": "2026-02-20T18:58:59.122817+09:00",
+    "unix_time": 1771581539,
+    "strategy": "MEME",
+    "direction": "buy",
+    "pair": "GRAD_69bTZa/USDC",
+    "input_token": "USDC",
+    "output_token": "GRAD_69bTZa",
+    "order_input_amount": 10.0,
+    "order_output_amount": 0,
+    "actual_input_amount": 0,
+    "actual_output_amount": 476350.317345,
+    "input_amount": 10.0,
+    "output_amount": 476350.317345,
+    "order_input_raw": 0,
+    "order_output_raw": 0,
+    "price_at_signal": 3.4513580000000006e-06,
+    "effective_price": 2.099295337040246e-05,
+    "slippage_pct": 508.252,
+    "fee_lamports": 0,
+    "fee_sol": 0,
+    "swap_type": "",
+    "signature": "4oYucCaJkRn6DWM7aDsjGw9BXNKx7bb7Tj3EF72mZPQLChS97qu4ts6pymJhZ2aSVQyAjKd4psuZPBAaphKEwPJV",
+    "status": "Success",
+    "latency_ms": 0,
+    "pre_balance_input": 0,
+    "post_balance_input": 0,
+    "pre_balance_output": 0,
+    "post_balance_output": 0,
+    "pre_balance_sol": 0,
+    "post_balance_sol": 0,
+    "reason": "score=29 grade=D",
+    "error": "",
+    "extra": {
+      "token_address": "69bTZaBE5nBbiXgYBL6ys82o5o7iXEswap34w8ncoMoU",
+      "dexscreener_price": 3.4513580000000006e-06,
+      "onchain_price": 2.099295337040246e-05,
+      "entry_slippage_pct": 508.25,
+      "score_detail": {
+        "total": 29.010236009864236,
+        "momentum": 20,
+        "volume": 0,
+        "demand": 20
+      },
+      "pc_5m": 0,
+      "bs_5m": 0,
+      "liquidity_usd": 0.0
+    }
   }
 ]
