@@ -1697,6 +1697,11 @@ function renderCreativeTab() {
     }
 }
 
+function toggleNoteContent(index) {
+    const el = document.getElementById(`note-content-${index}`);
+    if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
 function toggleCreativeContent(type, index) {
     const el = document.getElementById(`${type}-content-${index}`);
     if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
@@ -1719,7 +1724,7 @@ function updateNoteSection() {
     // Articles list
     const listEl = document.getElementById('note-articles-list');
     if (listEl && d.articles.length) {
-        listEl.innerHTML = d.articles.map(a => {
+        listEl.innerHTML = d.articles.map((a, i) => {
             const statusBadge = a.status === 'published'
                 ? '<span class="note-badge published">公開中</span>'
                 : a.status === 'draft'
@@ -1732,7 +1737,13 @@ function updateNoteSection() {
                 : '';
             const likes = a.status === 'published' ? `♥ ${a.likes || 0}` : '';
             const link = a.url ? `<a href="${a.url}" target="_blank" style="color:#9f7aea;text-decoration:none">↗</a>` : '';
-            return `<div class="note-article-row">
+            const thumbHtml = a.thumbnail ? `<div class="note-article-thumb"><img src="${a.thumbnail}" alt="thumbnail"></div>` : '';
+            const contentHtml = a.content ? `<div id="note-content-${i}" class="note-article-content" style="display:none">
+                ${thumbHtml}
+                <div class="note-article-body">${simpleMarkdown(a.content)}</div>
+            </div>` : '';
+            const expandBtn = a.content ? `onclick="toggleNoteContent(${i})"` : '';
+            return `<div class="note-article-row" ${expandBtn} style="${a.content?'cursor:pointer':''}">
                 <div class="note-article-num">#${a.number}</div>
                 <div class="note-article-info">
                     <div class="note-article-title">${esc(a.title)} ${link}</div>
@@ -1742,7 +1753,7 @@ function updateNoteSection() {
                     <div class="note-article-likes">${likes}</div>
                     <div class="note-article-date">${date}</div>
                 </div>
-            </div>`;
+            </div>${contentHtml}`;
         }).join('');
     }
 

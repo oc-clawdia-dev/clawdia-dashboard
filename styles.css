@@ -818,3 +818,35 @@ header h1 {
 @media (max-width: 600px) {
     .note-stats-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* note article content expand */
+.note-article-content {
+    padding: 1.5rem;
+    margin: 0.5rem 0 1rem;
+    background: rgba(159, 122, 234, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid #9f7aea;
+}
+.note-article-thumb {
+    margin-bottom: 1rem;
+}
+.note-article-thumb img {
+    max-width: 100%;
+    border-radius: 6px;
+}
+.note-article-body {
+    line-height: 1.9;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+.note-article-body p {
+    margin-bottom: 1rem;
+}
+.note-article-body hr {
+    border: none;
+    border-top: 1px solid #444;
+    margin: 1.5rem 0;
+}
+.note-article-body strong {
+    color: #e2e8f0;
+}
