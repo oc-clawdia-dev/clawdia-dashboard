@@ -1,49 +1,5 @@
 [
   {
-    "checked_at": "2026-02-15T08:12:53.477147+09:00",
-    "btc_price": 0.2827,
-    "cci": -109.70464135021653,
-    "donchian_low": 0.2821,
-    "in_position": false,
-    "action": "BUY",
-    "entry_condition_met": true,
-    "sl_triggered": false,
-    "donchian_triggered": false
-  },
-  {
-    "checked_at": "2026-02-15T08:12:53.735910+09:00",
-    "btc_price": 632.39,
-    "cci": 57.86520502555372,
-    "donchian_low": 628.58,
-    "in_position": false,
-    "action": "NONE",
-    "entry_condition_met": false,
-    "sl_triggered": false,
-    "donchian_triggered": false
-  },
-  {
-    "checked_at": "2026-02-15T08:12:53.909233+09:00",
-    "btc_price": 563.7,
-    "cci": -10.013831258643044,
-    "donchian_low": 560.2,
-    "in_position": false,
-    "action": "NONE",
-    "entry_condition_met": false,
-    "sl_triggered": false,
-    "donchian_triggered": false
-  },
-  {
-    "checked_at": "2026-02-15T08:12:54.109311+09:00",
-    "btc_price": 324.89,
-    "cci": 165.1463380855232,
-    "donchian_low": 280.81,
-    "in_position": false,
-    "action": "NONE",
-    "entry_condition_met": false,
-    "sl_triggered": false,
-    "donchian_triggered": false
-  },
-  {
     "checked_at": "2026-02-15T08:20:54.780097+09:00",
     "btc_price": 69890.0,
     "cci": 53.64193905331965,
@@ -48119,6 +48075,30 @@
     "pair": "BNBUSDT",
     "price": 625.45,
     "cci": -92.73598820059193,
+    "donchian_low": 624.02,
+    "in_position": true,
+    "action": "NONE",
+    "entry_condition_met": false,
+    "sl_triggered": false,
+    "donchian_triggered": false
+  },
+  {
+    "checked_at": "2026-02-22T08:12:54.633196+09:00",
+    "pair": "BTCUSDT",
+    "price": 67999.64,
+    "cci": -140.26419020253317,
+    "donchian_low": 67900.0,
+    "in_position": true,
+    "action": "ADD_BUY_FAILED",
+    "entry_condition_met": true,
+    "sl_triggered": false,
+    "donchian_triggered": false
+  },
+  {
+    "checked_at": "2026-02-22T08:12:54.779645+09:00",
+    "pair": "BNBUSDT",
+    "price": 625.67,
+    "cci": -90.39194662855112,
     "donchian_low": 624.02,
     "in_position": true,
     "action": "NONE",
