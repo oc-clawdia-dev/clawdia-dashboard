@@ -38,11 +38,16 @@
           },
           "pair_id": "BTCUSDT",
           "position": {
-            "in_position": false
+            "in_position": true,
+            "entry_price": 68003.46,
+            "entry_time": "2026-02-21T23:02:53.279948+00:00",
+            "stop_loss_price": 67391.42886,
+            "position_amount": 1.876e-05,
+            "position_token": "WBTC"
           },
           "live_stats": {
-            "total_trades": 2,
-            "buys": 1,
+            "total_trades": 3,
+            "buys": 2,
             "sells": 1,
             "completed_trips": 1,
             "total_invested": 20.0,

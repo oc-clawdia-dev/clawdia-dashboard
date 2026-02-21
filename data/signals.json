@@ -48363,5 +48363,29 @@
     "entry_condition_met": false,
     "sl_triggered": false,
     "donchian_triggered": false
+  },
+  {
+    "checked_at": "2026-02-22T08:02:53.283253+09:00",
+    "pair": "BTCUSDT",
+    "price": 68003.46,
+    "cci": -139.22358995920445,
+    "donchian_low": 67900.0,
+    "in_position": false,
+    "action": "BUY",
+    "entry_condition_met": true,
+    "sl_triggered": false,
+    "donchian_triggered": false
+  },
+  {
+    "checked_at": "2026-02-22T08:02:53.539560+09:00",
+    "pair": "BNBUSDT",
+    "price": 626.12,
+    "cci": -73.12002892263807,
+    "donchian_low": 624.02,
+    "in_position": true,
+    "action": "NONE",
+    "entry_condition_met": false,
+    "sl_triggered": false,
+    "donchian_triggered": false
   }
 ]
